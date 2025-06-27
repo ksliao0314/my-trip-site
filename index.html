@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>F&S飛翔旅行 | 加東 & 芝加哥</title>
+    <title>F&S飛翔旅行 | 加拿大東岸 & 芝加哥探索之旅 (修訂版)</title>
     
     <!-- PWA Manifest and Theme Color -->
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -189,16 +189,36 @@
         }
         
         @media print {
-            @page { size: A4 portrait; margin: 1.5cm; }
-            body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-            .no-print, .sticky-nav, #today-btn, #mobile-menu-btn { display: none !important; }
-            .trip-card, .trip-card.is-visible { box-shadow: none !important; border: 1px solid #e5e7eb !important; page-break-inside: avoid; opacity: 1 !important; transform: none !important; }
-            main { border-left: none !important; padding-left: 0 !important; margin-left: 0 !important; }
-            details { page-break-inside: avoid; }
-            details[open] { display: block; }
-            details > div { display: block !important; }
-            details summary { display: flex !important; }
-            details > summary .summary-arrow { display: none !important; }
+            @page { 
+                size: A4 portrait; 
+                margin: 1cm; /* Reduced margin to hide browser headers/footers */
+            }
+            body { 
+                -webkit-print-color-adjust: exact; 
+                print-color-adjust: exact; 
+            }
+            .no-print, .sticky-nav, #today-btn, #mobile-menu-btn { 
+                display: none !important; 
+            }
+            .trip-card, .trip-card.is-visible { 
+                box-shadow: none !important; 
+                border: 1px solid #e5e7eb !important; 
+                page-break-inside: avoid; 
+                opacity: 1 !important; 
+                transform: none !important; 
+            }
+            main { 
+                border-left: none !important; 
+                padding-left: 0 !important; 
+                margin-left: 0 !important; 
+            }
+            details { 
+                page-break-inside: avoid; 
+                /* Ensures details are open for printing, handled by JS */
+            }
+            details summary .summary-arrow { 
+                display: none !important; 
+            }
         }
     </style>
 </head>
@@ -1238,7 +1258,24 @@
 
             // --- Feature: Print Buttons (Desktop and Mobile) ---
             function triggerPrint() {
-                window.print();
+                const allDetails = document.querySelectorAll('details');
+                // Store the original open state
+                const originallyOpen = new WeakMap();
+                allDetails.forEach(detail => {
+                    originallyOpen.set(detail, detail.open);
+                    // Open all details for printing
+                    detail.open = true;
+                });
+
+                // Use a timeout to allow the browser to render the open details before printing
+                setTimeout(() => {
+                    window.print();
+
+                    // Restore the original state after printing
+                    allDetails.forEach(detail => {
+                        detail.open = originallyOpen.get(detail);
+                    });
+                }, 100);
             }
             document.getElementById('print-btn').addEventListener('click', triggerPrint);
             document.getElementById('mobile-print-btn').addEventListener('click', triggerPrint);
@@ -1299,7 +1336,7 @@
             // --- Feature: PWA Service Worker Registration & Weather ---
             if ('serviceWorker' in navigator) {
                 const swCode = `
-                    const CACHE_NAME = 'trip-cache-v27-fs-map-visuals';
+                    const CACHE_NAME = 'trip-cache-v28-fs-full-details';
                     const urlsToCache = [
                         './',
                         'https://cdn.tailwindcss.com',
@@ -1354,7 +1391,7 @@
                 '2025-07-02': { temp: '18°', rain: '10%', icon: '🌙' }, // Vancouver
                 '2025-07-03': { temp: '23°', rain: '20%', icon: '⛅️' }, // Montreal
                 '2025-07-04': { temp: '24°', rain: '10%', icon: '☀️' }, // Montreal
-                '2025-07-05': { temp: '22°', rain: '30%', icon: '�️' }, // Quebec
+                '2025-07-05': { temp: '22°', rain: '30%', icon: '🌦️' }, // Quebec
                 '2025-07-06': { temp: '21°', rain: '40%', icon: '🌦️' }, // Quebec
                 '2025-07-07': { temp: '25°', rain: '20%', icon: '⛅️' }, // Niagara
                 '2025-07-08': { temp: '26°', rain: '50%', icon: '⛈️' }, // Niagara
