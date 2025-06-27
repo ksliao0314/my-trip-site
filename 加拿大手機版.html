@@ -1,0 +1,1360 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>F&S飛翔旅行 | 加拿大東岸 & 芝加哥探索之旅</title>
+    
+    <!-- PWA Manifest and Theme Color -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="F&S飛翔旅行">
+    <meta name="theme-color" content="#4f46e5">
+    <link rel="manifest" href="data:application/manifest+json;base64,ew0KICAic2hvcnRfbmFtZSI6ICJGJlPkvZXlvLpUSEsiLA0KICAibmFtZSI6ICJGJlPkvZXlvLpUSEsiLCANCiAgImljb25zIjogWw0KICAgIHsNCiAgICAgICJzcmMiOiAiaHR0cHM6Ly9wbGFjZWhvbGQuY28vMTkyeDE5Mi80ZjQ2ZTUvZmZmZmZmP3RleHQ9RlMlMjZTIiwNCiAgICAgICJ0eXBlIjogImltYWdlL3BuZyIsDQogICAgICAic2l6ZXMiOiAiMTkyeDE5MiINCiAgICB9LA0KICAgIHsNCiAgICAgICJzcmMiOiAiaHR0cHM6Ly9wbGFjZWhvbGQuY28vNTEyeDUxMi80ZjQ2ZTUvZmZmZmZmP3RleHQ9RlMlMjZTIiwNCiAgICAgICJ0eXBlIjogImltYWdlL3BuZyIsDQogICAgICAic2l6ZXMiOiAiNTEyeDUxMiINCiAgICB9DQogIF0sDQogICJzdGFydF91cmwiOiAiLiIsDQogICJkaXNwbGF5IjogInN0YW5kYWxvbmUiLA0KICAidGhlbZV9jb2xvciI6ICIjNGY0NmU1IiwNCiAgImJhY2tncm91bmRfY29sb3IiOiAiI2Y4ZjlmYSIgDQp9">
+    <link rel="apple-touch-icon" href="https://placehold.co/180x180/4f46e5/ffffff?text=F%26S">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --brand-color: #4f46e5;
+            --brand-color-light: #eef2ff;
+        }
+        html { scroll-behavior: smooth; }
+        body { 
+            font-family: 'Noto Sans TC', sans-serif; 
+            background-color: #f8f9fa;
+            padding-top: env(safe-area-inset-top);
+            padding-bottom: env(safe-area-inset-bottom);
+            padding-left: env(safe-area-inset-left);
+            padding-right: env(safe-area-inset-right);
+        }
+        h1, h2, h3 { font-family: 'Noto Sans TC', sans-serif; font-weight: 900; }
+        
+        .trip-card {
+            border: 1px solid #e5e7eb;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .trip-card.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .trip-card:hover {
+            transform: translateY(-5px) !important;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.08), 0 6px 6px rgba(0,0,0,0.1);
+        }
+        
+        .sticky-nav {
+            position: sticky;
+            top: env(safe-area-inset-top);
+            z-index: 50;
+            transition: box-shadow 0.3s;
+        }
+        .sticky-nav.scrolled {
+             box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+
+        .tag { display: inline-block; background-color: var(--brand-color-light); color: #4338ca; padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.8rem; font-weight: 500; margin-right: 0.5rem; margin-bottom: 0.5rem; }
+        .activity-block { border-left-width: 4px; padding: 1rem; border-radius: 0 0.5rem 0.5rem 0; }
+        .activity-block a {
+            font-weight: 600; /* semibold */
+            color: #4338ca; /* indigo-700 */
+        }
+        
+        details > summary { 
+            list-style: none; 
+            cursor: pointer; 
+            padding: 1rem 1.25rem;
+            transition: background-color 0.3s ease;
+        }
+        details > summary::-webkit-details-marker { display: none; }
+        details .summary-arrow { transition: transform 0.3s; }
+        details[open] > summary .summary-arrow { transform: rotate(90deg); }
+
+        summary.summary-travel-day {
+            background-color: #fffbeb;
+            border-radius: 1rem;
+            border: 1px solid #fef3c7;
+        }
+        summary.summary-travel-day h3 {
+            color: #92400e;
+        }
+        
+        summary.summary-today {
+            background-color: #f0fdf4;
+            border-radius: 1rem;
+            border: 2px solid #4ade80;
+            position: relative;
+        }
+        summary.summary-today h3::before {
+             content: '⭐';
+             margin-right: 0.5rem;
+        }
+
+        /* --- Map Interaction Styles --- */
+        .map-city-link:hover g .map-city-dot, .map-city-link:active g .map-city-dot {
+            r: 7;
+            fill: #ef4444;
+        }
+        .map-city-link:hover g text, .map-city-link:active g text {
+            font-weight: bold;
+        }
+        .route-line {
+            stroke: #fb923c;
+            stroke-width: 2.5px;
+            stroke-dasharray: 5 3;
+            fill: none;
+            stroke-linecap: round;
+            transition: all 0.2s ease-in-out;
+        }
+        .route-line.highlight {
+            stroke: #ef4444;
+            stroke-width: 4px;
+            stroke-dasharray: none;
+        }
+
+        .nav-pill-group {
+            display: inline-flex;
+            align-items: center;
+            background-color: #e5e7eb;
+            border-radius: 9999px;
+            padding: 0.25rem;
+        }
+        .nav-pill {
+            padding: 0.375rem 1rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #4b5563;
+            border-radius: 9999px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .nav-pill.active {
+            background-color: white;
+            color: var(--brand-color);
+            box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+        }
+        .nav-link {
+            transition: all 0.2s;
+            border-bottom: 2px solid transparent;
+        }
+        .nav-link.nav-link-active {
+            color: var(--brand-color);
+            border-bottom-color: var(--brand-color);
+        }
+        
+        @media print {
+            @page { size: A4 portrait; margin: 1.5cm; }
+            body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .no-print, .sticky-nav, #today-btn, #mobile-menu-btn { display: none !important; }
+            .trip-card, .trip-card.is-visible { box-shadow: none !important; border: 1px solid #e5e7eb !important; page-break-inside: avoid; opacity: 1 !important; transform: none !important; }
+            main { border-left: none !important; padding-left: 0 !important; margin-left: 0 !important; }
+            details { page-break-inside: avoid; }
+            details[open] { display: block; }
+            details > div { display: block !important; }
+            details summary { display: flex !important; }
+            details > summary .summary-arrow { display: none !important; }
+        }
+    </style>
+</head>
+<body class="text-gray-800 leading-relaxed">
+
+    <!-- Sticky Navigation Bar -->
+    <nav id="main-nav" class="sticky-nav bg-white/80 backdrop-blur-lg no-print">
+        <div class="container mx-auto max-w-6xl px-4">
+            <div class="flex justify-between items-center py-3">
+                <span class="font-bold text-base sm:text-lg text-indigo-700">F＆S飛翔旅行</span>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex flex-grow justify-center items-center space-x-6 text-sm font-medium">
+                    <div id="desktop-nav-pills" class="nav-pill-group">
+                        <div class="nav-pill active" data-tab="days">按天數</div>
+                        <div class="nav-pill" data-tab="cities">按城市</div>
+                    </div>
+                    <div id="desktop-nav-content-days" class="flex items-center space-x-4">
+                        <a href="#day1" data-navlink-day="1" class="py-2 nav-link">Day 1-3</a>
+                        <a href="#day4" data-navlink-day="4" class="py-2 nav-link">Day 4-5</a>
+                        <a href="#day6" data-navlink-day="6" class="py-2 nav-link">Day 6-8</a>
+                        <a href="#day9" data-navlink-day="9" class="py-2 nav-link">Day 9-12</a>
+                    </div>
+                    <div id="desktop-nav-content-cities" class="hidden space-x-4">
+                        <a href="#montreal-section" data-navlink-city="montreal-section" class="py-2 nav-link">蒙特婁</a>
+                        <a href="#quebec-section" data-navlink-city="quebec-section" class="py-2 nav-link">魁北克市</a>
+                        <a href="#niagara-section" data-navlink-city="niagara-section" class="py-2 nav-link">尼加拉瓜</a>
+                        <a href="#chicago-section" data-navlink-city="chicago-section" class="py-2 nav-link">芝加哥</a>
+                    </div>
+                </div>
+                 <div class="hidden md:flex items-center space-x-4 text-sm">
+                    <a href="#tip-calculator-section" class="nav-utils py-2 text-gray-600 hover:text-indigo-700 transition-colors">🧮 小費計算</a>
+                    <a href="#links-dashboard" class="nav-utils py-2 text-gray-600 hover:text-indigo-700 transition-colors">🔗 常用連結</a>
+                    <button id="print-btn" class="no-print inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" /></svg>
+                        列印行程
+                    </button>
+                </div>
+
+                <!-- Mobile Navigation: Hamburger Button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="p-2 rounded-md text-gray-500 hover:text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Panel -->
+        <div id="mobile-menu-panel" class="md:hidden hidden bg-white shadow-lg">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#day1" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">Day 1-3 (蒙特婁)</a>
+                <a href="#day4" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">Day 4-5 (魁北克)</a>
+                <a href="#day6" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">Day 6-8 (尼加拉瓜)</a>
+                <a href="#day9" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">Day 9-12 (芝加哥)</a>
+            </div>
+            <div class="pt-4 pb-3 border-t border-gray-200">
+                <div class="px-2 space-y-1">
+                    <a href="#tip-calculator-section" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">🧮 小費計算機</a>
+                    <a href="#links-dashboard" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">🔗 常用連結</a>
+                    <button id="mobile-print-btn" class="w-full text-left mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">📄 列印行程</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="container mx-auto p-4 sm:p-6 md:p-8 max-w-6xl">
+
+        <!-- Header -->
+        <header class="text-center mb-12">
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-black text-gray-900 mb-4">加拿大東岸 & 芝加哥探索之旅</h1>
+            <p class="text-base sm:text-lg md:text-xl text-gray-500 bg-gray-100 rounded-full inline-block px-4 py-2">AI排行程，不要起爭議</p>
+            <div id="pwa-install-section" class="mt-6 space-y-3">
+                 <button id="install-btn" class="no-print hidden inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-teal-600 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM6.293 6.707a1 1 0 010-1.414l3-3a1 1 0 011.414 0l3 3a1 1 0 01-1.414 1.414L11 5.414V13a1 1 0 11-2 0V5.414L7.707 6.707a1 1 0 01-1.414 0z" clip-rule="evenodd" /></svg>
+                    安裝到主畫面
+                </button>
+             </div>
+        </header>
+
+        <!-- Itinerary Overview Map -->
+        <section class="mb-12 sm:mb-16 bg-white rounded-2xl shadow-lg p-4 sm:p-6 md:p-8 ring-1 ring-gray-200 trip-card">
+            <h2 class="text-2xl sm:text-3xl font-bold mb-6 text-gray-900 flex items-center">
+                 <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 mr-3 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l5.447 2.724A1 1 0 0021 16.382V5.618a1 1 0 00-1.447-.894L15 7m0 13V7m0 13L9 7" /></svg>
+                行程總覽地圖
+            </h2>
+            <div class="w-full bg-gray-50 rounded-lg p-2 sm:p-4 border">
+                 <svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto">
+                    <!-- Background paths -->
+                    <path d="M 20 170 Q 150 180 250 130 T 380 110" stroke="#e0e0e0" stroke-width="8" fill="none" stroke-linecap="round" />
+                    <text x="25" y="185" font-size="8" fill="#a0a0a0">St. Lawrence River</text>
+                    <path d="M 240 135 C 200 110, 150 100, 100 115" stroke="#e0e0e0" stroke-width="12" fill="none" stroke-linecap="round" />
+                    <text x="140" y="105" font-size="8" fill="#a0a0a0">Lake Ontario</text>
+                    
+                    <!-- Route Lines -->
+                    <path id="path-qc-mtl" class="route-line" d="M350 115 L 290 125" />
+                    <path id="path-mtl-to" class="route-line" d="M290 125 L 230 120" />
+                    <path id="path-to-nf" class="route-line" d="M230 120 L 200 110" />
+                    <path id="path-nf-chi" class="route-line" d="M200 110 L 80 100" />
+                    
+                    <!-- City Points -->
+                    <a href="#quebec-section" class="map-city-link" data-path-id="path-qc-mtl"><g class="cursor-pointer"><circle cx="350" cy="115" r="5" fill="#1d4ed8" class="map-city-dot"/><text x="355" y="110" font-size="10" fill="#333">魁北克市</text><text x="355" y="122" font-size="7" fill="#666">Day 4-5</text></g></a>
+                    <a href="#montreal-section" class="map-city-link" data-path-id="path-qc-mtl,path-mtl-to"><g class="cursor-pointer"><circle cx="290" cy="125" r="5" fill="#1d4ed8" class="map-city-dot"/><text x="295" y="138" font-size="10" fill="#333">蒙特婁</text><text x="295" y="150" font-size="7" fill="#666">Day 1-3</text></g></a>
+                    <a href="#niagara-section" class="map-city-link" data-path-id="path-mtl-to,path-to-nf"><g class="cursor-pointer"><circle cx="230" cy="120" r="5" fill="#1d4ed8" class="map-city-dot"/><text x="235" y="115" font-size="10" fill="#333">多倫多</text><text x="235" y="127" font-size="7" fill="#666">Day 6</text></g></a>
+                    <a href="#niagara-section" class="map-city-link" data-path-id="path-to-nf,path-nf-chi"><g class="cursor-pointer"><circle cx="200" cy="110" r="5" fill="#1d4ed8" class="map-city-dot"/><text x="145" y="95" font-size="10" fill="#333">尼加拉瓜瀑布</text><text x="175" y="122" font-size="7" fill="#666">Day 7</text></g></a>
+                    <a href="#chicago-section" class="map-city-link" data-path-id="path-nf-chi"><g class="cursor-pointer"><circle cx="80" cy="100" r="5" fill="#1d4ed8" class="map-city-dot"/><text x="25" y="105" font-size="10" fill="#333">芝加哥</text><text x="25" y="117" font-size="7" fill="#666">Day 9-12</text></g></a>
+                </svg>
+            </div>
+        </section>
+
+        <!-- Itinerary Cards -->
+        <main class="space-y-8">
+            
+            <section id="montreal-section" data-city-section="montreal-section"></section>
+            <div data-day="1" data-date="2025-07-04" data-day-group="1">
+                <details class="trip-card bg-white rounded-2xl shadow-lg ring-1 ring-gray-200 overflow-hidden" open>
+                    <summary class="flex justify-between items-center">
+                        <div>
+                            <p class="text-sm font-medium text-indigo-600">Day 1-2 | 7月4日（週五）</p>
+                            <h3 id="day1" class="text-xl sm:text-2xl font-bold mt-1 text-gray-900">落地蒙特婁首日</h3>
+                        </div>
+                        <div class="summary-arrow">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                        </div>
+                    </summary>
+                    <div class="p-4 sm:p-6 border-t border-gray-200">
+                        <div class="my-3"><span class="tag">#歐風街道</span><span class="tag">#初次見面</span><span class="tag">#調整時差</span></div>
+                        <div class="space-y-6">
+                        <div class="activity-block border-blue-400 bg-blue-50/70">
+                             <h4 class="font-bold text-lg text-blue-800">14:30 – 16:30 : 抵達 → 入住飯店 → 稍作休息</h4>
+                            <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
+                                <li>航班抵達 YUL 蒙特婁機場，海關入境 + 行李領取預估 45–60 分鐘。</li>
+                                <li><strong>機場交通建議：747 Express Bus</strong>
+                                    <ul class="list-circle list-inside pl-4 text-sm">
+                                        <li>費用約 CA$11，約 45–60 分鐘抵市中心。</li>
+                                        <li>建議購買 OPUS 24hr 交通卡（含747、地鐵、公車），一票多用。</li>
+                                    </ul>
+                                </li>
+                                <li>入住飯店並稍作休息 (30–60 分鐘)。若住在<a href="https://maps.apple.com/?q=Old+Montreal" target="_blank" class="hover:underline">舊城區</a>或 <a href="https://maps.apple.com/?q=Berri-UQAM,Montreal" target="_blank" class="hover:underline">Berri-UQAM</a> 一帶，將非常方便散步。</li>
+                            </ul>
+                        </div>
+                        <div class="activity-block border-green-400 bg-green-50/70">
+                            <h4 class="font-bold text-lg text-green-800">16:30 – 18:30 : 初步認識舊城區 (Vieux-Montréal)</h4>
+                             <p class="mt-2 text-gray-600">不進景點、不排行程，只散步 + 感受街景。</p>
+                            <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
+                                <li><strong>推薦步行路線：</strong>飯店 → <a href="https://maps.apple.com/?q=Place+d'Armes,Montreal" target="_blank" class="hover:underline">Place d'Armes</a> → <a href="https://maps.apple.com/?q=Rue+Saint-Paul,Montreal" target="_blank" class="hover:underline">Rue Saint-Paul</a> → <a href="https://maps.apple.com/?q=Place+Jacques-Cartier,Montreal" target="_blank" class="hover:underline">雅克·卡蒂亞廣場</a> → 往<a href="https://maps.apple.com/?q=Old+Port+of+Montreal" target="_blank" class="hover:underline">舊港區</a>方向。</li>
+                                <li>沿途可欣賞聖母聖殿外觀、蒙特婁最古老的街道、街頭藝人，並在港邊吹風看日落。</li>
+                            </ul>
+                        </div>
+                         <div class="activity-block border-red-400 bg-red-50/70">
+                            <h4 class="font-bold text-lg text-red-800">18:30 – 20:30 : 晚餐 + 第一餐的選擇</h4>
+                            <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
+                                <li><strong>法式入門：</strong><a href="https://maps.apple.com/?q=Modavie,Montreal" target="_blank" class="hover:underline">Modavie</a> (含爵士樂)、<a href="https://maps.apple.com/?q=Jardin+Nelson,Montreal" target="_blank" class="hover:underline">Jardin Nelson</a> (有露天庭院)。</li>
+                                <li><strong>地中海：</strong><a href="https://maps.apple.com/?q=Damas+Restaurant,Montreal" target="_blank" class="hover:underline">Damas</a> (敘利亞高級餐廳)、<a href="https://maps.apple.com/?q=Dolcetto+&+Co,Montreal" target="_blank" class="hover:underline">Dolcetto & Co</a> (義大利小酒館)。</li>
+                                 <li><strong>輕食簡餐：</strong><a href="https://maps.apple.com/?q=Olive+et+Gourmando,Montreal" target="_blank" class="hover:underline">Olive et Gourmando</a> (人氣咖啡+沙拉)。</li>
+                            </ul>
+                        </div>
+                         <div class="activity-block border-gray-400 bg-gray-100/70">
+                            <h4 class="font-bold text-lg text-gray-800">20:30 – 21:30 : 睡前散步 or 早點休息</h4>
+                            <p class="mt-2">若體力許可，建議回到 <a href="https://maps.apple.com/?q=Place+Jacques-Cartier,Montreal" target="_blank" class="hover:underline">Place Jacques-Cartier</a> 附近，夜晚打光非常漂亮。若時差來襲，直接回飯店洗澡早點入睡，為 7/5 的完整行程養精蓄銳。</p>
+                        </div>
+                        <div class="mt-4 p-4 bg-amber-100/60 rounded-lg border-l-4 border-amber-400">
+                            <h4 class="font-bold text-amber-800 flex items-center mb-2">⭐ 新手提示 : 首日實用小提醒</h4>
+                            <ul class="list-disc list-inside mt-2 text-amber-900/80 space-y-1">
+                                <li><strong>時差調整：</strong>建議「不午睡」，直接撐到晚上9點入睡最佳。</li>
+                                <li><strong>小費文化：</strong>餐廳、計程車都需付小費 (15–20%)。</li>
+                                <li><strong>語言使用：</strong>蒙特婁雖以法語為主，但英文非常通行，用 "Bonjour" / "Merci" 開場更得人好感。</li>
+                                <li><strong>治安提醒：</strong>舊城區與市中心白天皆相對安全，但夜間仍避免獨自走偏僻巷弄。</li>
+                                <li><strong>地鐵乘坐小提醒：</strong>各城市的捷運 App 很實用，請下載當地的交通 App (如 STM, TTC, CTA)。</li>
+                            </ul>
+                        </div>
+                    </div>
+                    </div>
+                </details>
+            </div>
+            
+            <div data-day="3" data-date="2025-07-05" data-day-group="1">
+                <details class="trip-card bg-white rounded-2xl shadow-lg ring-1 ring-gray-200 overflow-hidden">
+                    <summary class="flex justify-between items-center">
+                        <div>
+                            <p class="text-sm font-medium text-indigo-600">Day 3 | 7月5日（週六）</p>
+                            <h3 id="day3" class="text-xl sm:text-2xl font-bold mt-1 text-gray-900">蒙特婁舊城漫步日</h3>
+                        </div>
+                        <div class="summary-arrow">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                        </div>
+                    </summary>
+                    <div class="p-4 sm:p-6 border-t border-gray-200">
+                         <div class="my-3"><span class="tag">#教堂巡禮</span><span class="tag">#港灣風情</span><span class="tag">#摩天輪</span></div>
+                         <div class="space-y-6">
+                        <div class="activity-block border-blue-400 bg-blue-50/70">
+                            <h4 class="font-bold text-lg text-blue-800">上午 (9:00 AM – 12:30 PM): 舊城探索</h4>
+                            <p class="mt-2">✅ <strong>9:00</strong> 抵達<a href="https://maps.apple.com/?q=Notre-Dame+Basilica+of+Montreal" target="_blank" class="font-semibold hover:underline">諾特丹聖母大教堂</a> (建議提前訂票)，預計參觀 45-60 分鐘。</p>
+                            <p class="mt-2">✅ <strong>10:15</strong> 舊城自由散步，可經過<a href="https://maps.apple.com/?q=Place+d'Armes,Montreal" target="_blank" class="hover:underline">武器廣場</a>、<a href="https://maps.apple.com/?q=Rue+Saint-Paul,Montreal" target="_blank" class="hover:underline">聖保羅街</a>、<a href="https://maps.apple.com/?q=Bonsecours+Market,Montreal" target="_blank" class="hover:underline">波那瑟克市場</a>，並在<a href="https://maps.apple.com/?q=Place+Jacques-Cartier,Montreal" target="_blank" class="hover:underline">雅克·卡蒂亞廣場</a>看街頭藝人表演。</p>
+                        </div>
+                         <div class="activity-block border-green-400 bg-green-50/70">
+                            <h4 class="font-bold text-lg text-green-800">午餐 (12:30 PM – 2:00 PM): 舊城輕食</h4>
+                            <p class="mt-2">推薦地點：<a href="https://maps.apple.com/?q=Maison+Christian+Faure,Montreal" target="_blank" class="hover:underline">Maison Christian Faure</a> (法式塔派) 或 <a href="https://maps.apple.com/?q=Rue+Saint-Paul,Montreal" target="_blank" class="hover:underline">聖保羅街</a>上的小酒館 (Bistro)。</p>
+                             <p class="text-sm text-gray-600 mt-1">⭐ 提示：可稍早入座以避開人潮高峰。</p>
+                        </div>
+                        <div class="activity-block border-purple-400 bg-purple-50/70">
+                            <h4 class="font-bold text-lg text-purple-800">下午 (2:00 PM – 5:00 PM): 港邊散步＋摩天輪</h4>
+                            <p class="mt-2">✅ <strong>14:00</strong> 沿著<a href="https://maps.apple.com/?q=Old+Port+of+Montreal" target="_blank" class="hover:underline">舊港區 (Vieux-Port)</a> 的河岸步道散步。</p>
+                            <p class="mt-2">✅ <strong>15:00</strong> 搭乘 <a href="https://maps.apple.com/?q=La+Grande+Roue+de+Montréal" target="_blank" class="font-semibold hover:underline">La Grande Roue de Montréal (蒙特婁大摩天輪)</a>，體驗60公尺高的城市景觀。</p>
+                             <p class="mt-2">✅ <strong>15:45</strong> 自由活動，可在港邊喝咖啡或逛逛藝術工坊。</p>
+                        </div>
+                        <div class="activity-block border-gray-400 bg-gray-100/70">
+                            <h4 class="font-bold text-lg text-gray-800">晚餐與晚間 (18:00 PM 後)</h4>
+                            <p class="mt-2">可選擇 <a href="https://maps.apple.com/?q=Modavie,Montreal" target="_blank" class="hover:underline">Modavie</a> (爵士餐廳)、<a href="https://maps.apple.com/?q=Vieux-Port+Steakhouse,Montreal" target="_blank" class="hover:underline">Vieux-Port Steakhouse</a> (牛排館)，或簡單的漢堡、餐車小吃。</p>
+                            <p class="mt-2">� 晚間可選：夜遊舊城拍照，或前往<a href="https://maps.apple.com/?q=Place+des+Arts,Montreal" target="_blank" class="hover:underline">藝術廣場 (Place des Arts)</a> 感受夏日戶外氛圍。</p>
+                        </div>
+                    </div>
+                    </div>
+                </details>
+            </div>
+
+            <section id="quebec-section" data-city-section="quebec-section"></section>
+            <div data-day="4" data-date="2025-07-06" data-day-group="4">
+                <details class="trip-card bg-white rounded-2xl shadow-lg ring-1 ring-gray-200 overflow-hidden">
+                     <summary class="flex justify-between items-center">
+                        <div>
+                            <p class="text-sm font-medium text-indigo-600">Day 4 | 7月6日（週日）</p>
+                            <h3 id="day4" class="text-xl sm:text-2xl font-bold mt-1 text-gray-900">小義大利 → 魁北克市</h3>
+                        </div>
+                        <div class="summary-arrow">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                        </div>
+                    </summary>
+                    <div class="p-4 sm:p-6 border-t border-gray-200">
+                        <div class="my-3"><span class="tag">#市場尋寶</span><span class="tag">#告別蒙特婁</span><span class="tag">#火車之旅</span><span class="tag">#夜間瀑布</span></div>
+                        <div class="space-y-6">
+                        <div class="activity-block border-green-400 bg-green-50/70">
+                            <h4 class="font-bold text-lg text-green-800">上午 (8:30 AM – 12:30 PM): 小義大利慢步 + 午餐</h4>
+                            <p class="mt-2">✅ <strong>8:30</strong> 從飯店出發，搭橘線地鐵至 <a href="https://maps.apple.com/?q=Jean-Talon+Station,Montreal" target="_blank" class="hover:underline"><strong>Jean-Talon 站</strong></a> (約 20-25 分鐘)。</p>
+                            <p class="mt-2">✅ <strong>9:00 – 10:30</strong> 逛 <a href="https://maps.apple.com/?q=Jean-Talon+Market,Montreal" target="_blank" class="hover:underline"><strong>Jean-Talon Market</strong></a>，感受道地市場氛圍，可買水果、香料、伴手禮。</p>
+                            <p class="mt-2">✅ <strong>10:30 – 11:45</strong> 在小義大利享用午餐。推薦：<a href="https://maps.apple.com/?q=Pizzeria+Napoletana,Montreal" target="_blank" class="hover:underline">Pizzeria Napoletana</a>、<a href="https://maps.apple.com/?q=Impasto+Restaurant,Montreal" target="_blank" class="hover:underline">Impasto</a> 等。</p>
+                             <p class="mt-2">✅ <strong>11:45 – 12:30</strong> 可選擇散步至 <a href="https://maps.apple.com/?q=Church+of+the+Madonna+della+Difesa,Montreal" target="_blank" class="hover:underline">Church of the Madonna della Difesa</a> 教堂拍照，或在咖啡館小憩。</p>
+                        </div>
+                        <div class="activity-block border-blue-400 bg-blue-50/70">
+                            <h4 class="font-bold text-lg text-blue-800">中午～下午: 取行李 → 前往中央車站 → 搭火車</h4>
+                             <p class="mt-2">✅ <strong>12:30 – 13:15</strong> 搭地鐵橘線返回飯店拿行李。</p>
+                             <p class="mt-2">✅ <strong>13:15 – 13:45</strong> 前往<a href="https://maps.apple.com/?q=Gare+Centrale+de+Montréal" target="_blank" class="hover:underline">蒙特婁中央車站 (Gare Centrale)</a>，可搭地鐵橘線至 <strong>Bonaventure 站</strong>下車。</p>
+                             <p class="mt-2">✅ <strong>14:00 – 14:15</strong> 抵達火車站，進站候車 (建議提前30分鐘進站檢票)。</p>
+                             <p class="mt-2">✅ <strong>14:45 或 15:00</strong> 搭乘 VIA Rail 前往魁北克市 (車程約3小時)。</p>
+                        </div>
+                        <div class="activity-block border-purple-400 bg-purple-50/70">
+                             <h4 class="font-bold text-lg text-purple-800">Day 4 晚間行程 (18:00 以後)</h4>
+                             <p class="mt-2">✅ <strong>18:00 – 18:30</strong> 從舊城區 (Old Quebec) 搭乘 RTC 公車 800 (或 801) 前往 Montmorency 瀑布公園。</p>
+                             <p class="mt-2">✅ <strong>18:30 – 19:30</strong> 欣賞 Montmorency 瀑布夜間燈光秀，打卡絢麗光影下的湍流壯觀。</p>
+                             <p class="mt-2">✅ <strong>19:30 – 20:00</strong> 原路搭公車返回舊城，可選擇在 Dufferin Terrace 或 Place Royale 下車。</p>
+                             <p class="mt-2">✅ <strong>20:00 – 21:30</strong> 參加舊城「幽靈步行」(Ghost Tour)，由專業導遊帶你穿越城牆祕境，聆聽魁北克城的神秘傳說。</p>
+                        </div>
+                         <div class="mt-4 p-4 bg-amber-100/60 rounded-lg border-l-4 border-amber-400">
+                            <h4 class="font-bold text-amber-800 flex items-center mb-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                                </svg>
+                                關鍵提醒
+                            </h4>
+                            <ul class="list-disc list-inside mt-2 text-amber-900/80 space-y-1 pl-2">
+                                <li><strong>公車時刻：</strong> 800/801 公車晚間末班約 23:30，建議提前查詢 RTC App 或官網。</li>
+                                <li><strong>燈光秀時間：</strong> 夏季夜間約 19:00-22:00，每週可能略有調整，請先確認當日場次。</li>
+                                <li><strong>幽靈導覽：</strong> Ghost Tour 須線上預約，語言可選英/法文，建議至少提前一天訂票。</li>
+                                <li><strong>保暖準備：</strong> 夜晚風大且溫度較低，請攜帶薄羽絨或風衣。</li>
+                                <li><strong>安全注意：</strong> 舊城治安良好，但夜間街道較暗，請留意濕滑路面並保管好隨身物品。</li>
+                                <li><strong>購票提示：</strong> 火車票建議提前於 <a href="https://www.viarail.ca/" target="_blank" class="font-semibold hover:underline">VIA Rail 官網</a> 訂票，選擇「Escape fare」最優惠。</li>
+                            </ul>
+                        </div>
+                    </div>
+                    </div>
+                </details>
+            </div>
+            
+            <div data-day="5" data-date="2025-07-07" data-day-group="4">
+                <details class="trip-card bg-white rounded-2xl shadow-lg ring-1 ring-gray-200 overflow-hidden">
+                     <summary class="flex justify-between items-center">
+                        <div>
+                            <p class="text-sm font-medium text-indigo-600">Day 5 | 7月7日（週一）</p>
+                            <h3 id="day5" class="text-xl sm:text-2xl font-bold mt-1 text-gray-900">魁北克市舊城一日遊</h3>
+                        </div>
+                        <div class="summary-arrow">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                        </div>
+                    </summary>
+                    <div class="p-4 sm:p-6 border-t border-gray-200">
+                        <div class="my-3"><span class="tag">#童話世界</span><span class="tag">#法式薄餅</span><span class="tag">#古城漫遊</span></div>
+                        <div class="space-y-6">
+                        <div class="activity-block border-blue-400 bg-blue-50/70">
+                            <h4 class="font-bold text-lg text-blue-800">上午 (9:00 AM – 12:30 PM): 小香普蘭街深度遊</h4>
+                            <p class="mt-2">✅ <strong>9:00</strong> 從飯店出發 (建議住舊城區)，步行至<a href="https://maps.apple.com/?q=Dufferin+Terrace,Quebec+City" target="_blank" class="hover:underline">都芬林台地 (Dufferin Terrace)</a>。</p>
+                            <p class="mt-2">✅ <strong>9:30</strong> 搭乘<a href="https://maps.apple.com/?q=Funiculaire+du+Vieux-Québec" target="_blank" class="hover:underline">纜車 (Funiculaire)</a>或走「斷頸階梯」下城。</p>
+                            <p class="mt-2">✅ <strong>9:45 – 12:15</strong> 探索 <a href="https://maps.apple.com/?q=Rue+du+Petit-Champlain,Quebec+City" target="_blank" class="hover:underline">Rue du Petit-Champlain</a>，必拍彩色店面、吊燈巷、古典招牌。可延伸至<a href="https://maps.apple.com/?q=Place+Royale,Quebec+City" target="_blank" class="hover:underline">皇家廣場 (Place Royale)</a>與魁北克人壁畫。</p>
+                        </div>
+                        <div class="activity-block border-green-400 bg-green-50/70">
+                            <h4 class="font-bold text-lg text-green-800">午餐 (12:30 PM – 2:00 PM): 下城享用法式薄餅或當地餐廳</h4>
+                            <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
+                                <li><strong><a href="https://maps.apple.com/?q=Le+Casse-Crêpe+Breton,Quebec+City" target="_blank" class="hover:underline">Le Casse-Crêpe Breton</a>:</strong> 最受歡迎的法式薄餅餐廳之一。</li>
+                                <li><strong><a href="https://maps.apple.com/?q=Bistro+Le+Pape+Georges,Quebec+City" target="_blank" class="hover:underline">Bistro Le Pape Georges</a>:</strong> 氣氛復古，有地窖牆面與葡萄酒。</li>
+                                <li><strong><a href="https://maps.apple.com/?q=Crêperie+Chez+Jules,Quebec+City" target="_blank" class="hover:underline">Crêperie Chez Jules</a>:</strong> 靠近纜車站，風味純正且份量適中。</li>
+                            </ul>
+                        </div>
+                        <div class="activity-block border-purple-400 bg-purple-50/70">
+                             <h4 class="font-bold text-lg text-purple-800">下午 (2:00 PM – 5:30 PM): 上城區歷史與文化散策</h4>
+                            <p class="mt-2">✅ <strong>14:00</strong> 再次搭乘纜車返回上城。</p>
+                            <p class="mt-2">✅ <strong>14:15 – 15:00</strong> 參觀<a href="https://maps.apple.com/?q=Château+Frontenac,Quebec+City" target="_blank" class="hover:underline">芳堤娜城堡 (Château Frontenac)</a> 周邊。</p>
+                            <p class="mt-2">✅ <strong>15:00 – 16:00</strong> <a href="https://maps.apple.com/?q=Parliament+Building,Quebec+City" target="_blank" class="hover:underline">國會大廈</a> + 城牆一帶散步 (如 St. Louis Gate)。</p>
+                            <p class="mt-2">✅ <strong>16:00 – 17:30</strong> 在 <a href="https://maps.apple.com/?q=Rue+Saint-Jean,Quebec+City" target="_blank" class="hover:underline">Rue Saint-Jean</a> 的 Café La Maison Smith 或書店/精品店自由活動。</p>
+                        </div>
+                        <div class="activity-block border-gray-400 bg-gray-100/70">
+                            <h4 class="font-bold text-lg text-gray-800">晚餐與晚間 (18:00 PM 後)</h4>
+                            <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
+                                <li><strong><a href="https://maps.apple.com/?q=Aux+Anciens+Canadiens,Quebec+City" target="_blank" class="hover:underline">Aux Anciens Canadiens</a>:</strong> 最具代表性的魁北克傳統料理。</li>
+                                <li><strong><a href="https://maps.apple.com/?q=Le+Continental,Quebec+City" target="_blank" class="hover:underline">Le Continental</a>:</strong> 高級法式桌邊烹飪，體驗老派服務。</li>
+                                <li><strong><a href="https://maps.apple.com/?q=La+Buche,Quebec+City" target="_blank" class="hover:underline">La Buche</a>:</strong> 傳統魁北克鄉村風味料理，氣氛活潑。</li>
+                            </ul>
+                            <p class="mt-2">🌙 若尚有體力，建議再走回 Dufferin Terrace 看夜間城堡打燈景色。</p>
+                        </div>
+                         <div class="mt-4 p-4 bg-amber-100/60 rounded-lg border-l-4 border-amber-400">
+                            <h4 class="font-bold text-amber-800 flex items-center mb-2">⭐ 小提醒與建議</h4>
+                            <ul class="list-disc list-inside mt-2 text-amber-900/80 space-y-1">
+                                <li><strong>鞋子：</strong>鵝卵石路多、上下坡，請穿防滑好走鞋。</li>
+                                <li><strong>拍照建議：</strong>小香普蘭街建議清晨或傍晚二拍，光線柔和人較少。</li>
+                                <li><strong>購物：</strong>小香普蘭街與 Rue Saint-Jean 有許多有質感的設計店與手工藝品。</li>
+                                <li><strong>下雨備案：</strong>小香普蘭街也很美，建議帶傘 + 可改進<a href="https://maps.apple.com/?q=Musée+de+la+civilisation,Quebec+City" target="_blank" class="hover:underline">文明博物館</a>。</li>
+                            </ul>
+                        </div>
+                    </div>
+                    </div>
+                </details>
+            </div>
+            
+            <section id="niagara-section" data-city-section="niagara-section"></section>
+            <div data-day="6" data-date="2025-07-08" data-day-group="6">
+                 <details class="trip-card bg-white rounded-2xl shadow-lg ring-1 ring-gray-200 overflow-hidden">
+                    <summary class="summary-travel-day flex justify-between items-center">
+                        <div>
+                            <p class="text-sm font-medium text-amber-700">Day 6 | 7月8日（週二）</p>
+                            <h3 id="day6" class="text-xl sm:text-2xl font-bold mt-1 text-gray-900">✈️ 大轉運日：魁北克 → 多倫多</h3>
+                        </div>
+                        <div class="summary-arrow">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                        </div>
+                    </summary>
+                     <div class="p-4 sm:p-6 border-t border-gray-200">
+                        <div class="my-3"><span class="tag">#多重轉乘</span><span class="tag">#國內飛行</span><span class="tag">#行程銜接</span></div>
+                         <div class="space-y-6">
+                        <div class="activity-block border-blue-400 bg-blue-50/70">
+                            <h4 class="font-bold text-lg text-blue-800">上午 (7:30 AM – 11:30 AM): 退房 → 火車前往蒙特婁</h4>
+                            <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
+                                <li><strong>7:30</strong> 飯店退房（建議提前收拾）。</li>
+                                <li><strong>7:50</strong> 搭車前往<a href="https://maps.apple.com/?q=Gare+du+Palais,Quebec+City" target="_blank" class="hover:underline">魁北克市火車站 (Gare du Palais)</a>。</li>
+                                <li><strong>8:15 - 8:30</strong> 抵達火車站、取票/驗票。</li>
+                                <li><strong>8:45</strong> 搭乘 VIA Rail 火車出發，約3小時後抵達蒙特婁。</li>
+                            </ul>
+                        </div>
+                        <div class="activity-block border-purple-400 bg-purple-50/70">
+                             <h4 class="font-bold text-lg text-purple-800">中午～下午 (12:00 PM – 5:00 PM): 蒙特婁轉機 → 飛往多倫多</h4>
+                            <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
+                                <li><strong>12:00</strong> 從中央車站前往 YUL 蒙特婁機場 (搭747快線或Uber)。</li>
+                                <li><strong>13:00 – 13:30</strong> 抵達機場、辦理登機。</li>
+                                <li><strong>15:00 或 16:00</strong> 搭機飛往多倫多 YYZ 機場 (航程約1小時15分)。</li>
+                                <li><strong>16:30 – 17:00</strong> 抵達多倫多皮爾遜機場 (YYZ)。</li>
+                            </ul>
+                        </div>
+                        <div class="activity-block border-green-400 bg-green-50/70">
+                             <h4 class="font-bold text-lg text-green-800">傍晚 (5:00 PM – 8:00 PM): 前往尼加拉瓜瀑布</h4>
+                             <p class="mt-2 text-gray-600">總車程預留約 3 小時（含轉車等候）。</p>
+                            <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
+                                <li><strong>GO Transit 方案 (推薦):</strong> 機場搭 UP Express → Union Station (25分) → 轉乘 GO Train + Bus 至 Niagara Falls Bus Terminal (約2.5小時)。安全穩定，有指標指引。</li>
+                                <li><strong>包車接送:</strong> 可預約私人接駁，從 YYZ 機場直送飯店。最省力但價格較高 (約$200 CAD起)。</li>
+                                <li><strong>Megabus (次選):</strong> 需先搭 UP Express 至市區再搭巴士。</li>
+                            </ul>
+                        </div>
+                         <div class="activity-block border-gray-400 bg-gray-100/70">
+                             <h4 class="font-bold text-lg text-gray-800">晚上 (8:00 PM 後): 抵達尼加拉瓜瀑布城</h4>
+                            <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
+                                <li>入住瀑布景觀飯店 (建議選擇靠近 <a href="https://maps.apple.com/?q=Table+Rock+Welcome+Centre,Niagara+Falls" target="_blank" class="hover:underline">Table Rock</a> 或 <a href="https://maps.apple.com/?q=Clifton+Hill,Niagara+Falls" target="_blank" class="hover:underline">Clifton Hill</a> 區域)。</li>
+                                <li>晚餐選擇：飯店內或瀑布區餐廳，建議簡餐為主，避免疲累。</li>
+                                <li>若體力尚可：可到瀑布夜間打光區走走 (免費，夏季約9:00 PM開始)。</li>
+                            </ul>
+                        </div>
+                         <div class="mt-4 p-4 bg-amber-100/60 rounded-lg border-l-4 border-amber-400">
+                            <h4 class="font-bold text-amber-800 flex items-center mb-2">⭐ 建議備案 (若班機延誤或天氣不佳)</h4>
+                            <ul class="list-disc list-inside mt-2 text-amber-900/80 space-y-1">
+                                <li><strong>飛機延誤 → 抵達 YYZ 時已晚上:</strong> 改為當晚住在多倫多機場附近，次日早上搭 GO Transit 去瀑布。</li>
+                                <li><strong>火車延誤 → 錯過航班:</strong> 改搭 VIA Rail 從蒙特婁直達多倫多 (約5小時)，轉車。</li>
+                            </ul>
+                        </div>
+                    </div>
+                     </div>
+                </details>
+            </div>
+
+            <div data-day="7" data-date="2025-07-09" data-day-group="6">
+                 <details class="trip-card bg-white rounded-2xl shadow-lg ring-1 ring-gray-200 overflow-hidden">
+                    <summary class="flex justify-between items-center">
+                        <div>
+                            <p class="text-sm font-medium text-indigo-600">Day 7 | 7月9日（週三）</p>
+                            <h3 id="day7" class="text-xl sm:text-2xl font-bold mt-1 text-gray-900">尼加拉瓜瀑布一日遊</h3>
+                        </div>
+                        <div class="summary-arrow">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                        </div>
+                    </summary>
+                    <div class="p-4 sm:p-6 border-t border-gray-200">
+                        <div class="my-3"><span class="tag">#世界奇景</span><span class="tag">#水霧繚繞</span><span class="tag">#震撼體驗</span></div>
+                        <div class="space-y-6">
+                        <div class="activity-block border-blue-400 bg-blue-50/70">
+                            <h4 class="font-bold text-lg text-blue-800">上午 (9:00 AM – 12:00 PM): 瀑布核心體驗</h4>
+                             <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
+                                <li><strong>9:00</strong> 飯店出發 (建議步行或搭 WEGO 巴士，車票建議前一晚購買)。</li>
+                                <li><strong>9:15 – 10:15</strong> 搭乘 <strong><a href="https://maps.apple.com/?q=Niagara+City+Cruises" target="_blank" class="hover:underline">Niagara City Cruises 遊船</a></strong> (建議提前上網預約最早班次，票價約 CA$34 含雨衣)。</li>
+                                <li><strong>10:15 – 11:30</strong> 瀑布前步道自由拍照，欣賞馬蹄瀑布全貌 (<a href="https://maps.apple.com/?q=Table+Rock+Welcome+Centre,Niagara+Falls" target="_blank" class="hover:underline">Table Rock Centre</a> 前觀景台最佳)。</li>
+                                <li><strong>11:30 – 12:00</strong> 可參觀 <a href="https://maps.apple.com/?q=Table+Rock+Welcome+Centre,Niagara+Falls" target="_blank" class="hover:underline">Table Rock Welcome Centre</a> 商店。</li>
+                            </ul>
+                        </div>
+                        <div class="activity-block border-green-400 bg-green-50/70">
+                            <h4 class="font-bold text-lg text-green-800">午餐 (12:00 PM – 1:30 PM): 瀑布景觀午餐</h4>
+                            <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
+                                <li><strong>簡餐選擇:</strong> <a href="https://maps.apple.com/?q=Table+Rock+Food+Court,Niagara+Falls" target="_blank" class="hover:underline">Table Rock Food Court</a> (窗邊可看瀑布)。</li>
+                                <li><strong>餐廳選擇:</strong> <a href="https://maps.apple.com/?q=Queen+Victoria+Place+Restaurant,Niagara+Falls" target="_blank" class="hover:underline">Queen Victoria Place Restaurant</a> 或 <a href="https://maps.apple.com/?q=Elements+on+the+Falls+Restaurant,Niagara+Falls" target="_blank" class="hover:underline">Elements on the Falls</a> (景觀佳，建議提前訂位)。</li>
+                            </ul>
+                        </div>
+                        <div class="activity-block border-purple-400 bg-purple-50/70">
+                            <h4 class="font-bold text-lg text-purple-800">下午 (1:30 PM – 5:30 PM): 探尋幕後 & 空中鳥瞰</h4>
+                            <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
+                                <li><strong>13:30 – 14:30</strong> 參加 <strong><a href="https://maps.apple.com/?q=Journey+Behind+the+Falls,Niagara+Falls" target="_blank" class="hover:underline">Journey Behind the Falls (瀑布後之旅)</a></strong>，可從 Table Rock 直接進入。</li>
+                                <li><strong>14:30 – 15:30</strong> 體驗 <strong><a href="https://maps.apple.com/?q=Niagara's+Fury,Niagara+Falls" target="_blank" class="hover:underline">Niagara's Fury</a></strong> (多媒體劇場，可選)。</li>
+                                <li><strong>16:00 – 17:30</strong> 搭乘 <strong><a href="https://maps.apple.com/?q=Niagara+SkyWheel,Niagara+Falls" target="_blank" class="hover:underline">Niagara SkyWheel (摩天輪)</a></strong> 俯瞰瀑布全景，或探索 <a href="https://maps.apple.com/?q=Clifton+Hill,Niagara+Falls" target="_blank" class="hover:underline">Clifton Hill</a> 娛樂街。</li>
+                            </ul>
+                        </div>
+                        <div class="activity-block border-gray-400 bg-gray-100/70">
+                             <h4 class="font-bold text-lg text-gray-800">晚餐與晚間 (6:00 PM – 10:00 PM)</h4>
+                             <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
+                                <li><strong>晚餐選擇:</strong> <a href="https://maps.apple.com/?q=Skylon+Tower,Niagara+Falls" target="_blank" class="hover:underline">Skylon Tower</a> 旋轉餐廳、<a href="https://maps.apple.com/?q=Massimo's+Italian+Fallsview+Restaurant,Niagara+Falls" target="_blank" class="hover:underline">Massimo's Italian Fallsview</a> 等景觀餐廳。</li>
+                                <li><strong>夜間活動:</strong> 欣賞夜間瀑布打光 (約 9:00 PM 開始)，及特定日子的煙火秀 (約 10:00 PM 施放)。</li>
+                            </ul>
+                        </div>
+                         <div class="mt-4 p-4 bg-teal-100/60 rounded-lg border-l-4 border-teal-400">
+                            <h4 class="font-bold text-teal-800 flex items-center mb-2">🎟️ 建議票券方案：Niagara Parks Adventure Pass Classic (套票)</h4>
+                            <p class="mt-2 text-teal-900/80">包含遊船、瀑布後之旅、Niagara's Fury 及 WEGO 巴士全天券，約 CA$69 (含稅)。可至<a href="https://www.niagaraparks.com/visit/attractions/adventure-pass-classic" target="_blank" class="font-semibold hover:underline">官網票券網頁</a>查詢。</p>
+                        </div>
+                        <div class="mt-4 p-4 bg-amber-100/60 rounded-lg border-l-4 border-amber-400">
+                            <h4 class="font-bold text-amber-800 flex items-center mb-2">⭐ 小提醒與建議</h4>
+                            <ul class="list-disc list-inside mt-2 text-amber-900/80 space-y-1">
+                                <li><strong>穿著：</strong>瀑布附近濕氣重，建議穿涼鞋+防水外套/雨衣及快乾衣物。</li>
+                                <li><strong>電子設備：</strong>請準備手機防水套或夾鏈袋保護相機。</li>
+                                <li><strong>餐飲：</strong>熱門景觀餐廳 (Skylon Tower, Elements on the Falls) 建議提前線上預約。</li>
+                                <li><strong>拍照建議：</strong>黃昏與打光後的瀑布，拍起來顏色最夢幻。</li>
+                            </ul>
+                        </div>
+                    </div>
+                    </div>
+                </details>
+            </div>
+            
+            <div data-day="8" data-date="2025-07-10" data-day-group="6">
+                 <details class="trip-card bg-white rounded-2xl shadow-lg ring-1 ring-gray-200 overflow-hidden">
+                    <summary class="summary-travel-day flex justify-between items-center">
+                        <div>
+                            <p class="text-sm font-medium text-amber-700">Day 8 | 7月10日（週四）</p>
+                            <h3 id="day8" class="text-xl sm:text-2xl font-bold mt-1 text-gray-900">✈️ 尼加拉瓜瀑布 → 芝加哥</h3>
+                        </div>
+                        <div class="summary-arrow">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                        </div>
+                    </summary>
+                    <div class="p-4 sm:p-6 border-t border-gray-200">
+                        <div class="my-3"><span class="tag">#跨境飛行</span><span class="tag">#初見芝加哥</span><span class="tag">#大豆子</span></div>
+                        <div class="space-y-6">
+                        <div class="activity-block border-blue-400 bg-blue-50/70">
+                            <h4 class="font-bold text-lg text-blue-800">上午 (8:00 AM – 11:00 AM): 早餐與清晨最後觀景</h4>
+                             <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
+                                <li><strong>8:00</strong> 飯店早餐 / 收拾行李退房 (可請飯店幫忙叫車或放行李)。</li>
+                                <li><strong>8:30 – 9:30</strong> 最後自由活動：再拍一次瀑布日景 / 購買紀念品 / 欣賞晨曦彩虹。</li>
+                                <li><strong>9:30 – 11:00</strong> 準備跨境前往美國水牛城機場 (BUF)。</li>
+                            </ul>
+                        </div>
+                        <div class="activity-block border-green-400 bg-green-50/70">
+                            <h4 class="font-bold text-lg text-green-800">交通建議：從加拿大端 → 美國水牛城機場 (BUF)</h4>
+                            <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
+                                <li><strong>預約跨境接駁車 (最推薦):</strong>
+                                    <ul class="list-circle list-inside pl-4 text-sm">
+                                        <li>像 <strong>Niagara Airbus</strong> 或 <strong>Buffalo Airport Shuttle</strong> 提供 Door-to-Door 接送。</li>
+                                        <li>約 1 小時，費用每人約 US$35–50，請務必提前上網預約。</li>
+                                    </ul>
+                                </li>
+                                <li><strong>過境時記得：</strong>備妥護照、ESTA；從容回答邊境官員問題；美加邊境可能排隊等待。</li>
+                            </ul>
+                        </div>
+                        <div class="activity-block border-purple-400 bg-purple-50/70">
+                             <h4 class="font-bold text-lg text-purple-800">下午 (12:00 PM – 3:00 PM): 飛往芝加哥</h4>
+                            <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
+                                <li>建議搭乘中午 12:00–14:00 的班機，航程約 1.5 小時。</li>
+                                <li>航空公司：American Airlines / United / Delta 均有班次。</li>
+                                <li>機場：BUF → ORD (O'Hare) 或 MDW (Midway)。</li>
+                                <li>抵達芝加哥後，前往飯店放行李。建議入住市中心 Loop 或 River North 區域，交通便利。</li>
+                            </ul>
+                        </div>
+                        <div class="activity-block border-gray-400 bg-gray-100/70">
+                            <h4 class="font-bold text-lg text-gray-800">晚上 (4:30 PM – 8:30 PM): 芝加哥初印象 & 千禧公園</h4>
+                            <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
+                                <li><strong>16:30 – 18:30</strong> 漫步芝加哥市中心，前往<a href="https://maps.apple.com/?q=Millennium+Park,Chicago" target="_blank" class="hover:underline">千禧公園</a>打卡名景「大豆子」(<a href="https://maps.apple.com/?q=Cloud+Gate,Chicago" target="_blank" class="hover:underline">Cloud Gate</a>)。夏季午後光線絕佳，建議先拍照。</li>
+                                <li><strong>18:30 – 20:30</strong> 在 Millennium Park 附近晚餐。可選擇 <a href="https://maps.apple.com/?q=Lou+Malnati's,Chicago" target="_blank" class="hover:underline">Lou Malnati's</a> (芝加哥深盤披薩) 或 <a href="https://maps.apple.com/?q=Cindy's+Rooftop,Chicago" target="_blank" class="hover:underline">Cindy's Rooftop</a> (高空景觀酒吧)。</li>
+                                <li>結束後可回飯店早點休息，隔天起早搭乘芝加哥遊船！</li>
+                            </ul>
+                        </div>
+                        <div class="mt-4 p-4 bg-amber-100/60 rounded-lg border-l-4 border-amber-400">
+                            <h4 class="font-bold text-amber-800 flex items-center mb-2">⭐ 小提醒</h4>
+                            <ul class="list-disc list-inside mt-2 text-amber-900/80 space-y-1">
+                                <li><strong>跨境接駁：</strong>Niagara Airbus 跨境專車含協助入關、門到門服務，最省心安全。</li>
+                                <li><strong>行李限制：</strong>美國國內線大多只含一件手提行李，托運需加購 (建議提早線上買)。</li>
+                                <li><strong>時差：</strong>芝加哥 (中部時間) 比尼加拉瓜 (東部時間) 晚1小時，別忘了調時鐘！</li>
+                            </ul>
+                        </div>
+                    </div>
+                    </div>
+                </details>
+            </div>
+            
+            <section id="chicago-section" data-city-section="chicago-section"></section>
+             <div data-day="9" data-date="2025-07-11" data-day-group="9">
+                 <details class="trip-card bg-white rounded-2xl shadow-lg ring-1 ring-gray-200 overflow-hidden">
+                    <summary class="flex justify-between items-center">
+                        <div>
+                            <p class="text-sm font-medium text-indigo-600">Day 9 | 7月11日（週五）</p>
+                            <h3 id="day9" class="text-xl sm:text-2xl font-bold mt-1 text-gray-900">芝加哥建築美學與湖濱魅力</h3>
+                        </div>
+                        <div class="summary-arrow">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                        </div>
+                    </summary>
+                    <div class="p-4 sm:p-6 border-t border-gray-200">
+                         <div class="my-3"><span class="tag">#建築遊船</span><span class="tag">#深盤披薩</span><span class="tag">#藝術饗宴</span></div>
+                        <div class="space-y-6">
+                        <div class="activity-block border-blue-400 bg-blue-50/70">
+                            <h4 class="font-bold text-lg text-blue-800">上午 (9:00 AM – 12:00 PM): 千禧公園 + 建築遊船</h4>
+                            <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
+                                <li><strong>9:00</strong> 早餐後步行前往<a href="https://maps.apple.com/?q=Millennium+Park,Chicago" target="_blank" class="hover:underline">千禧公園</a>，此時光線最柔和，適合拍照。</li>
+                                <li><strong>9:15 – 9:45</strong> 拍照打卡 <a href="https://maps.apple.com/?q=Cloud+Gate,Chicago" target="_blank" class="hover:underline">Cloud Gate (大豆子)</a> + <a href="https://maps.apple.com/?q=Crown+Fountain,Chicago" target="_blank" class="hover:underline">Crown Fountain</a>。</li>
+                                <li><strong>10:00 – 11:15</strong> 參加<a href="https://maps.apple.com/?q=Chicago+Architecture+River+Cruise" target="_blank" class="hover:underline">芝加哥建築河遊船</a>。</li>
+                                <li><strong>11:15 – 12:00</strong> 結束後沿 <a href="https://maps.apple.com/?q=Chicago+Riverwalk" target="_blank" class="hover:underline">Riverwalk</a> 漫步，前往午餐地點。</li>
+                            </ul>
+                        </div>
+                        <div class="activity-block border-green-400 bg-green-50/70">
+                             <h4 class="font-bold text-lg text-green-800">午餐 (12:00 PM – 1:30 PM): 經典芝加哥深盤披薩</h4>
+                            <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
+                                <li><strong><a href="https://maps.apple.com/?q=Lou+Malnati's,Chicago" target="_blank" class="hover:underline">Lou Malnati's</a>:</strong> 最著名的深盤披薩之一，番茄醬濃郁，兩人點一個小號就很足。</li>
+                                <li><strong><a href="https://maps.apple.com/?q=Giordano's,Chicago" target="_blank" class="hover:underline">Giordano's</a>:</strong> 另一家代表，喜歡起司多的可選這家。</li>
+                            </ul>
+                        </div>
+                        <div class="activity-block border-purple-400 bg-purple-50/70">
+                            <h4 class="font-bold text-lg text-purple-800">下午 (1:30 PM – 5:30 PM): 美術館 or 湖濱散策</h4>
+                            <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
+                                <li><strong>A. <a href="https://maps.apple.com/?q=Art+Institute+of+Chicago" target="_blank" class="hover:underline">芝加哥藝術學院 (Art Institute of Chicago)</a>:</strong>
+                                    <ul class="list-circle list-inside pl-4 text-sm">
+                                        <li>世界級美術館，必看莫內《睡蓮》、梵谷《自畫像》。</li>
+                                        <li>門票約 US$32 (建議線上預訂)，預留至少 2–2.5 小時。</li>
+                                    </ul>
+                                </li>
+                                <li><strong>B. 如果不進館，建議湖濱散步：</strong>
+                                    <ul class="list-circle list-inside pl-4 text-sm">
+                                        <li>步行至 <a href="https://maps.apple.com/?q=Lakefront+Trail,Chicago" target="_blank" class="hover:underline">Lakefront Trail</a>、<a href="https://maps.apple.com/?q=Buckingham+Fountain,Chicago" target="_blank" class="hover:underline">白金漢噴泉</a>。</li>
+                                        <li>可租 Divvy 公共單車或搭計程車到 <a href="https://maps.apple.com/?q=Navy+Pier,Chicago" target="_blank" class="hover:underline">Navy Pier</a> 看摩天輪。</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="activity-block border-gray-400 bg-gray-100/70">
+                            <h4 class="font-bold text-lg text-gray-800">晚餐與晚間 (6:00 PM – 10:00 PM)</h4>
+                             <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
+                                <li><strong>晚餐選擇:</strong> <a href="https://maps.apple.com/?q=Cindy's+Rooftop,Chicago" target="_blank" class="hover:underline">Cindy's Rooftop</a> (景觀超棒，建議預約)、<a href="https://maps.apple.com/?q=The+Gage,Chicago" target="_blank" class="hover:underline">The Gage</a> (高品質美式料理)、<a href="https://maps.apple.com/?q=Au+Cheval,Chicago" target="_blank" class="hover:underline">Au Cheval</a> (漢堡神店，但排隊久)。</li>
+                                <li><strong>夜間可選活動:</strong> 漫步河畔夜景 (<a href="https://maps.apple.com/?q=Chicago+Riverwalk" target="_blank" class="hover:underline">Riverwalk</a>)、補去海軍碼頭 (<a href="https://maps.apple.com/?q=Navy+Pier,Chicago" target="_blank" class="hover:underline">Navy Pier</a>)。</li>
+                            </ul>
+                        </div>
+                         <div class="mt-4 p-4 bg-amber-100/60 rounded-lg border-l-4 border-amber-400">
+                            <h4 class="font-bold text-amber-800 flex items-center mb-2">⭐ 小提醒</h4>
+                            <ul class="list-disc list-inside mt-2 text-amber-900/80 space-y-1">
+                                <li><strong>建築遊船：</strong>提前上網訂票，可選靠窗座位，記得帶太陽眼鏡與外套 (河面風大)。</li>
+                                <li><strong>深盤披薩：</strong>製作時間長 (約30–40分鐘)，建議入座先點餐。</li>
+                                <li><strong>芝加哥藝術學院：</strong>可租語音導覽、也有中文介紹 App 版本，體驗更佳。</li>
+                            </ul>
+                        </div>
+                    </div>
+                    </div>
+                </details>
+            </div>
+            
+             <div data-day="10" data-date="2025-07-12" data-day-group="9">
+                 <details class="trip-card bg-white rounded-2xl shadow-lg ring-1 ring-gray-200 overflow-hidden">
+                    <summary class="flex justify-between items-center">
+                        <div>
+                            <p class="text-sm font-medium text-indigo-600">Day 10 | 7月12日（週六）</p>
+                            <h3 id="day10" class="text-xl sm:text-2xl font-bold mt-1 text-gray-900">芝加哥高空挑戰 + 博物館探索</h3>
+                        </div>
+                        <div class="summary-arrow">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                        </div>
+                    </summary>
+                    <div class="p-4 sm:p-6 border-t border-gray-200">
+                         <div class="my-3"><span class="tag">#城市之巔</span><span class="tag">#博物館日</span><span class="tag">#多元文化</span></div>
+                        <div class="space-y-6">
+                        <div class="activity-block border-blue-400 bg-blue-50/70">
+                            <h4 class="font-bold text-lg text-blue-800">上午 (8:30 AM – 11:30 AM): 芝加哥之巔 & 環城散策</h4>
+                             <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
+                                <li><strong>8:30</strong> 搭乘地鐵/步行前往 <a href="https://maps.apple.com/?q=Willis+Tower,Chicago" target="_blank" class="hover:underline">Willis Tower (威利斯大樓)</a>。建議預約最早第一時段門票，可避開人潮。</li>
+                                <li><strong>9:00 – 10:30</strong> 參觀 <a href="https://maps.apple.com/?q=Skydeck+Chicago" target="_blank" class="hover:underline">Skydeck Chicago</a> + 透明懸空玻璃平台體驗。</li>
+                                <li><strong>10:30 – 11:30</strong> 沿著芝加哥河畔或金融區漫步，觀察建築細節，可走至 <a href="https://maps.apple.com/?q=Chicago+Board+of+Trade+Building" target="_blank" class="hover:underline">Board of Trade</a>、<a href="https://maps.apple.com/?q=Union+Station,Chicago" target="_blank" class="hover:underline">Union Station</a> 一帶的老建築群。</li>
+                            </ul>
+                        </div>
+                        <div class="activity-block border-green-400 bg-green-50/70">
+                            <h4 class="font-bold text-lg text-green-800">午餐 (11:30 AM – 1:00 PM): 中西部風味或人氣美食</h4>
+                            <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
+                                <li><strong><a href="https://maps.apple.com/?q=Revival+Food+Hall,Chicago" target="_blank" class="hover:underline">Revival Food Hall</a> (在 Willis Tower 附近):</strong> 美食廣場型態，結合多間在地名店，有座位空間。</li>
+                                <li><strong>或 <a href="https://maps.apple.com/?q=Wildberry+Pancakes+and+Cafe,Chicago" target="_blank" class="hover:underline">Wildberry Pancakes</a> (早餐名店):</strong> 靠近千禧公園，份量大，鬆餅超人氣，但熱門時段會排隊。</li>
+                            </ul>
+                        </div>
+                         <div class="activity-block border-purple-400 bg-purple-50/70">
+                            <h4 class="font-bold text-lg text-purple-800">下午 (1:30 PM – 5:30 PM): 博物館之旅 (推薦二選一)</h4>
+                            <p class="text-sm text-gray-600 mt-1">兩館都位於湖濱 <a href="https://maps.apple.com/?q=Museum+Campus,Chicago" target="_blank" class="hover:underline">Museum Campus</a>，彼此可步行互達。</p>
+                            <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
+                                <li><strong>A. <a href="https://maps.apple.com/?q=Field+Museum,Chicago" target="_blank" class="hover:underline">芝加哥自然歷史博物館 (Field Museum)</a>:</strong> 適合喜歡歷史、生物、恐龍、文化展覽者。必看點：世界最大暴龍「Sue」、埃及木乃伊、美洲原住民展。</li>
+                                <li><strong>B. <a href="https://maps.apple.com/?q=Shedd+Aquarium,Chicago" target="_blank" class="hover:underline">Shedd Aquarium (水族館)</a>:</strong> 適合想休息、喜歡海洋主題或有小孩同行者。必看點：海豚、企鵝、加勒比海隧道、水母展。</li>
+                            </ul>
+                        </div>
+                         <div class="activity-block border-gray-400 bg-gray-100/70">
+                            <h4 class="font-bold text-lg text-gray-800">晚餐與晚間 (6:00 PM 後)</h4>
+                             <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
+                                <li><strong>晚餐選擇:</strong> <a href="https://maps.apple.com/?q=The+Purple+Pig,Chicago" target="_blank" class="hover:underline">The Purple Pig</a> (精緻小份 tapas)、<a href="https://maps.apple.com/?q=RPM+Italian,Chicago" target="_blank" class="hover:underline">RPM Italian</a> (現代高級義式餐廳)、<a href="https://maps.apple.com/?q=Girl+&+the+Goat,Chicago" target="_blank" class="hover:underline">Girl & the Goat</a> (預算較高但口碑極好)。</li>
+                                <li><strong>夜間可選活動:</strong> 補去 <a href="https://maps.apple.com/?q=Navy+Pier,Chicago" target="_blank" class="hover:underline">Navy Pier</a> 夜景+摩天輪、<a href="https://maps.apple.com/?q=Chicago+Riverwalk" target="_blank" class="hover:underline">Riverwalk</a> 河畔酒吧、或飯店休息。</li>
+                            </ul>
+                        </div>
+                        <div class="mt-4 p-4 bg-amber-100/60 rounded-lg border-l-4 border-amber-400">
+                            <h4 class="font-bold text-amber-800 flex items-center mb-2">⭐ 小提醒</h4>
+                            <ul class="list-disc list-inside mt-2 text-amber-900/80 space-y-1">
+                                <li><strong>Skydeck 玻璃盒：</strong>拍照建議穿深色衣服，更能凸顯效果。</li>
+                                <li><strong>博物館門票：</strong>建議提前上網購買，避開現場排隊。</li>
+                                <li><strong>芝加哥交通：</strong>可買 CTA 1-Day Pass，一日內搭地鐵與公車不限次數 ($5)。</li>
+                            </ul>
+                        </div>
+                    </div>
+                    </div>
+                </details>
+            </div>
+            
+             <div data-day="11" data-date="2025-07-13" data-day-group="9">
+                 <details class="trip-card bg-white rounded-2xl shadow-lg ring-1 ring-gray-200 overflow-hidden">
+                    <summary class="flex justify-between items-center">
+                        <div>
+                            <p class="text-sm font-medium text-indigo-600">Day 11 | 7月13日（週日）</p>
+                            <h3 id="day11" class="text-xl sm:text-2xl font-bold mt-1 text-gray-900">芝加哥的生活感與收尾採購</h3>
+                        </div>
+                         <div class="summary-arrow">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                        </div>
+                    </summary>
+                    <div class="p-4 sm:p-6 border-t border-gray-200">
+                         <div class="my-3"><span class="tag">#悠閒漫步</span><span class="tag">#公園時光</span><span class="tag">#最後採買</span></div>
+                        <div class="space-y-6">
+                        <div class="activity-block border-blue-400 bg-blue-50/70">
+                            <h4 class="font-bold text-lg text-blue-800">上午 (9:30 AM – 12:30 PM): 街區散策 + 文青市集</h4>
+                             <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
+                                <li><strong>9:30 – 10:00</strong> 早餐 (推薦 <a href="https://maps.apple.com/?q=Wildberry+Pancakes+and+Cafe,Chicago" target="_blank" class="hover:underline">Wildberry Pancakes</a> 或 <a href="https://maps.apple.com/?q=Do-Rite+Donuts,Chicago" target="_blank" class="hover:underline">Do-Rite Donuts</a>)。</li>
+                                <li><strong>10:30 – 12:30</strong> 探索<a href="https://maps.apple.com/?q=Lincoln+Park,Chicago" target="_blank" class="hover:underline">林肯公園 (Lincoln Park)</a> 街區：搭 CTA 紅線至 Fullerton 站下車，散步到 Lincoln Ave 一帶，沿途有文青小店、咖啡館。可散步到 <a href="https://maps.apple.com/?q=Lincoln+Park+Conservatory" target="_blank" class="hover:underline">Lincoln Park Conservatory</a> (溫室植物園) 和 <a href="https://maps.apple.com/?q=Lincoln+Park+Zoo" target="_blank" class="hover:underline">Lincoln Park Zoo</a> (免費動物園)。</li>
+                            </ul>
+                        </div>
+                        <div class="activity-block border-green-400 bg-green-50/70">
+                            <h4 class="font-bold text-lg text-green-800">午餐 (12:30 PM – 2:00 PM): 特色街區餐廳體驗</h4>
+                             <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
+                                <li><strong><a href="https://maps.apple.com/?q=Summer+House+Santa+Monica,Chicago" target="_blank" class="hover:underline">Summer House Santa Monica</a> (Lincoln Park):</strong> 明亮海灘風，菜單有美式+地中海料理。</li>
+                                <li><strong><a href="https://maps.apple.com/?q=Blue+Door+Farm+Stand,Chicago" target="_blank" class="hover:underline">Blue Door Farm Stand</a>:</strong> 當地有機食材，氣氛佳、風格溫馨。</li>
+                                <li>若您前往<a href="https://maps.apple.com/?q=Ukrainian+Village,Chicago" target="_blank" class="hover:underline">烏克蘭村 (Ukrainian Village)</a>，可嘗試 Bohemian House、Heritage Restaurant & Caviar Bar。</li>
+                            </ul>
+                        </div>
+                        <div class="activity-block border-purple-400 bg-purple-50/70">
+                            <h4 class="font-bold text-lg text-purple-800">下午 (2:30 PM – 5:00 PM): 採購與紀念品時光</h4>
+                            <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
+                                <li><strong><a href="https://maps.apple.com/?q=The+Magnificent+Mile,Chicago" target="_blank" class="hover:underline">密西根大道購物街 (Magnificent Mile)</a>:</strong> 各大品牌 (Apple, Nordstrom, Uniqlo, Nike 等) 齊全，可做最後補貨。</li>
+                                <li><strong><a href="https://maps.apple.com/?q=Water+Tower+Place,Chicago" target="_blank" class="hover:underline">Water Tower Place 購物中心</a>:</strong> 室內空調佳，夏天逛起來不累。</li>
+                                <li><strong><a href="https://maps.apple.com/?q=Garrett+Popcorn+Shops,Chicago" target="_blank" class="hover:underline">Garrett Popcorn Shops</a>:</strong> 芝加哥必買伴手禮，推薦「芝加哥混搭 (起司+焦糖)」。</li>
+                            </ul>
+                        </div>
+                        <div class="activity-block border-gray-400 bg-gray-100/70">
+                            <h4 class="font-bold text-lg text-gray-800">晚餐與晚間 (6:00 PM – 10:00 PM)</h4>
+                            <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
+                                <li><strong>晚餐選擇:</strong> <a href="https://maps.apple.com/?q=Beacon+Tavern,Chicago" target="_blank" class="hover:underline">Beacon Tavern</a> (靠近河邊，食物與氣氛都佳)、<a href="https://maps.apple.com/?q=The+Gage,Chicago" target="_blank" class="hover:underline">The Gage</a> (地理方便、評價好)、<a href="https://maps.apple.com/?q=RPM+Steak,Chicago" target="_blank" class="hover:underline">RPM Steak</a> / <a href="https://maps.apple.com/?q=RPM+Italian,Chicago" target="_blank" class="hover:underline">RPM Italian</a> (若想升級高檔一點)。</li>
+                                <li><strong>夜間可選活動:</strong> 沿芝加哥河 <a href="https://maps.apple.com/?q=Chicago+Riverwalk" target="_blank" class="hover:underline">Riverwalk</a> 散步，是最棒的回憶背景。或去 <a href="https://maps.apple.com/?q=Navy+Pier,Chicago" target="_blank" class="hover:underline">Navy Pier</a> 夜景 (若前兩天未去，今晚是最後機會)。</li>
+                            </ul>
+                        </div>
+                        <div class="mt-4 p-4 bg-amber-100/60 rounded-lg border-l-4 border-amber-400">
+                            <h4 class="font-bold text-amber-800 flex items-center mb-2">⭐ 小提醒</h4>
+                            <ul class="list-disc list-inside mt-2 text-amber-900/80 space-y-1">
+                                <li><strong>行李整理：</strong>晚間回飯店後記得打包行李，將易碎品妥善保護。</li>
+                                <li><strong>出發準備：</strong>隔天前往 O'Hare 機場，建議 3–3.5 小時前抵達。若搭 CTA 藍線約需 45–60 分鐘。</li>
+                                <li><strong>稅金退稅：</strong>美國不提供外國人退稅，購物稅直接內含，無需額外手續。</li>
+                            </ul>
+                        </div>
+                    </div>
+                    </div>
+                </details>
+            </div>
+            
+             <div data-day="12" data-date="2025-07-14" data-day-group="9">
+                 <details class="trip-card bg-white rounded-2xl shadow-lg ring-1 ring-gray-200 overflow-hidden">
+                    <summary class="flex justify-between items-center">
+                        <div>
+                            <p class="text-sm font-medium text-indigo-600">Day 12 | 7月14日（週一）</p>
+                            <h3 id="day12" class="text-xl sm:text-2xl font-bold mt-1 text-gray-900">芝加哥 → 台北：踏上返鄉之路</h3>
+                        </div>
+                         <div class="summary-arrow">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                        </div>
+                    </summary>
+                    <div class="p-4 sm:p-6 border-t border-gray-200">
+                         <div class="my-3"><span class="tag">#旅程結束</span><span class="tag">#機場準備</span><span class="tag">#滿載而歸</span></div>
+                        <div class="space-y-6">
+                        <div class="activity-block border-blue-400 bg-blue-50/70">
+                            <h4 class="font-bold text-lg text-blue-800">出發前的重點確認清單</h4>
+                            <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
+                                <li><strong>航班時間:</strong> 請確認從芝加哥 O'Hare 機場 (ORD) 起飛的時間。</li>
+                                <li><strong>抵達機場時間:</strong> 建議至少提前 3–3.5 小時抵達機場 (國際線)。</li>
+                                <li><strong>行李重量:</strong> 確認託運行李與手提行李的重量限制。</li>
+                                <li><strong>線上報到:</strong> 若航空公司支援，提前網路報到並下載登機證。</li>
+                                <li><strong>護照/ESTA:</strong> 備妥護照、登機證與返台資料。</li>
+                            </ul>
+                        </div>
+                         <div class="activity-block border-green-400 bg-green-50/70">
+                            <h4 class="font-bold text-lg text-green-800">建議行程安排 (以航班 15:00 起飛為例，可調整)</h4>
+                            <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
+                                <li><strong>7:00</strong> 起床、飯店簡單早餐 (可提前與飯店確認是否提供早餐打包服務)。</li>
+                                <li><strong>8:00</strong> 確認行李整理完畢、退房。</li>
+                                <li><strong>8:30 – 9:30</strong> 搭乘 CTA 藍線前往 O'Hare 機場 (ORD)。</li>
+                                <li><strong>9:30 – 10:00</strong> 抵達 O'Hare 國際航廈 (T5)。</li>
+                                <li><strong>10:00 – 12:30</strong> 辦理報到/托運行李/安檢/候機。</li>
+                                <li><strong>約 15:00</strong> 芝加哥起飛，返回台北。</li>
+                            </ul>
+                        </div>
+                        <div class="activity-block border-purple-400 bg-purple-50/70">
+                            <h4 class="font-bold text-lg text-purple-800">如果班機是晚間起飛 (例如 19:00)</h4>
+                            <p class="mt-2 text-gray-600">若您搭乘的是晚班機，您可以這樣安排上午：</p>
+                            <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
+                                <li><strong>9:00 – 11:00</strong> 前往密西根湖邊最後散步，或逛 Loop 區建築拍照補景。</li>
+                                <li><strong>11:00 – 12:30</strong> 午餐 (推薦 <a href="https://maps.apple.com/?q=Lou+Malnati's,Chicago" target="_blank" class="hover:underline">Lou Malnati's</a> 或 <a href="https://maps.apple.com/?q=Giordano's,Chicago" target="_blank" class="hover:underline">Giordano's</a> 的芝加哥披薩)。</li>
+                                <li><strong>13:00 – 14:00</strong> 搭 CTA 藍線前往 O'Hare 機場。</li>
+                            </ul>
+                        </div>
+                         <div class="mt-4 p-4 bg-amber-100/60 rounded-lg border-l-4 border-amber-400">
+                            <h4 class="font-bold text-amber-800 flex items-center mb-2">⭐ 小提醒</h4>
+                            <ul class="list-disc list-inside mt-2 text-amber-900/80 space-y-1">
+                                <li>芝加哥機場大，安檢也可能塞人，切勿壓線抵達。</li>
+                                <li>O'Hare 國際航廈 (T5) 重新整建後更加現代化，但仍建議提前熟悉航廈配置。</li>
+                                <li>美國出境不蓋章，但會查票證件，請妥善保管 ESTA/入境資料。</li>
+                            </ul>
+                        </div>
+                    </div>
+                    </div>
+                </details>
+            </div>
+
+            <div id="tip-calculator-section">
+                <section class="trip-card bg-white rounded-2xl shadow-lg p-6 md:p-8 ring-1 ring-gray-200">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-4 flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 7h6m0 10v-3.251l-4.71-4.71a1 1 0 00-1.415 0L3 16.251V21h4.75L12 17.25m0 0l6-6m-6 6l-3-3" />
+                        </svg>
+                        小費計算機 (Tip Calculator)
+                    </h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-end">
+                        <div class="col-span-1">
+                            <label for="bill-amount" class="block text-sm font-medium text-gray-700">帳單金額 (CAD/USD)</label>
+                            <input type="number" id="bill-amount" placeholder="例如 85.50" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                        </div>
+                        <div class="col-span-1">
+                            <label for="tip-rate" class="block text-sm font-medium text-gray-700">小費比例 (%)</label>
+                            <select id="tip-rate" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                <option value="15">15% (標準)</option>
+                                <option value="18" selected>18% (推薦)</option>
+                                <option value="20">20% (優質服務)</option>
+                                <option value="10">10% (基本)</option>
+                            </select>
+                        </div>
+                        <div class="text-center bg-indigo-50 p-4 rounded-lg mt-4 md:mt-0">
+                            <label class="block text-sm font-medium text-gray-700">小費金額</label>
+                            <p id="tip-result" class="text-xl font-bold text-indigo-700">-</p>
+                        </div>
+                         <div class="text-center bg-green-50 p-4 rounded-lg mt-4 md:mt-0">
+                            <label class="block text-sm font-medium text-gray-700">含小費總額</label>
+                            <p id="total-result" class="text-xl font-bold text-green-700">-</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <div id="links-dashboard">
+                <div class="trip-card bg-white rounded-2xl shadow-lg p-6 md:p-8 ring-1 ring-gray-200">
+                     <h2 class="text-2xl sm:text-3xl font-bold mb-6 text-gray-900 flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 mr-3 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        實用連結儀表板
+                    </h2>
+                     <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 text-gray-700">
+                        <a href="https://www.canada.ca/en/immigration-refugees-citizenship/services/visit-canada/eta/apply-zh-tw.html" target="_blank" class="hover:underline">加拿大eTA官網</a>
+                        <a href="https://esta.cbp.dhs.gov/" target="_blank" class="hover:underline">美國ESTA官網</a>
+                        <a href="https://www.viarail.ca/en" target="_blank" class="hover:underline">VIA Rail 火車</a>
+                        <a href="https://www.basiliquenotredame.ca/en" target="_blank" class="hover:underline">蒙特婁聖母大教堂</a>
+                        <a href="https://www.lagranderouedemontreal.com/en" target="_blank" class="hover:underline">蒙特婁摩天輪</a>
+                        <a href="https://www.mcq.org/en/" target="_blank" class="hover:underline">魁北克文明博物館</a>
+                        <a href="https://www.niagaraparks.com/visit/attractions/adventure-pass-classic" target="_blank" class="hover:underline">尼加拉瓜瀑布套票</a>
+                        <a href="https://www.theskydeck.com/" target="_blank" class="hover:underline">芝加哥Skydeck</a>
+                        <a href="https://www.artic.edu/" target="_blank" class="hover:underline">芝加哥藝術學院</a>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <footer class="text-center mt-16 py-8">
+            <p class="text-gray-500">祝您旅途愉快！Bon Voyage!</p>
+        </footer>
+    </div>
+    
+    <!-- Toast Notification -->
+    <div id="toast-notification" class="no-print hidden opacity-0 fixed bottom-24 right-4 bg-gray-800 text-white px-5 py-3 rounded-lg shadow-xl transition-all duration-300 z-[100]">
+        <p id="toast-message"></p>
+    </div>
+
+    <!-- "Today's Itinerary" Button -->
+    <div class="no-print fixed bottom-4 right-4 z-50">
+        <button id="today-btn" onclick="scrollToToday(false)" class="bg-amber-500 text-white font-semibold px-4 py-3 rounded-full shadow-lg hover:bg-amber-600 transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-400 flex items-center justify-center">
+            📅 今天行程
+        </button>
+    </div>
+    
+    <script>
+        // --- Global Functions (callable from HTML onclick) ---
+
+        /**
+         * Shows a toast notification with a message.
+         * @param {string} message The message to display.
+         */
+        let toastTimeout;
+        function showToast(message) {
+            const toastEl = document.getElementById('toast-notification');
+            const toastMessageEl = document.getElementById('toast-message');
+            if (!toastEl || !toastMessageEl) return;
+            
+            toastMessageEl.textContent = message;
+            toastEl.classList.remove('hidden', 'opacity-0');
+            
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toastEl.classList.add('opacity-0');
+                // Wait for the fade-out animation to finish before hiding
+                setTimeout(() => toastEl.classList.add('hidden'), 300);
+            }, 3000); // Hide after 3 seconds
+        }
+
+        /**
+         * Finds today's itinerary item, scrolls to it, and expands it.
+         * @param {boolean} isAuto - True if called automatically on page load.
+         */
+        function scrollToToday(isAuto = false) {
+            const today = new Date();
+            const year = today.getFullYear();
+            const mm = String(today.getMonth() + 1).padStart(2, '0'); // Months are 0-based
+            const dd = String(today.getDate()).padStart(2, '0');
+            const todayString = `${year}-${mm}-${dd}`;
+            
+            const todayElement = document.querySelector(`[data-date="${todayString}"]`);
+            
+            if (todayElement) {
+                const details = todayElement.querySelector('details');
+                if (details && !details.open) {
+                    details.open = true;
+                }
+
+                const mainNav = document.getElementById('main-nav');
+                const offset = mainNav ? mainNav.offsetHeight : 60;
+                const bodyRect = document.body.getBoundingClientRect().top;
+                const elementRect = todayElement.getBoundingClientRect().top;
+                const elementPosition = elementRect - bodyRect;
+                const offsetPosition = elementPosition - offset - 20; // Extra padding
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+                if (!isAuto) {
+                    showToast(`已為您跳轉至 ${mm}/${dd} 的行程！`);
+                }
+            } else {
+                 if (!isAuto) {
+                    showToast('今天不在行程日期範圍內喔！');
+                 }
+            }
+        }
+
+
+        // --- Main script execution after DOM is loaded ---
+        document.addEventListener('DOMContentLoaded', () => {
+
+            const mainNav = document.getElementById('main-nav');
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenuPanel = document.getElementById('mobile-menu-panel');
+            
+            // --- Feature: Mobile Menu Toggle ---
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenuPanel.classList.toggle('hidden');
+            });
+            
+            // --- Feature: Sticky Nav Shadow ---
+            window.addEventListener('scroll', () => {
+                mainNav.classList.toggle('scrolled', window.scrollY > 0);
+            });
+
+            // --- Feature: Fade-in on Scroll Animation ---
+            const tripCards = document.querySelectorAll('.trip-card');
+            const cardObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            tripCards.forEach(card => cardObserver.observe(card));
+
+            // --- Feature: Smart Navigation Tabs (Desktop) ---
+            const desktopNavPills = document.querySelectorAll('#desktop-nav-pills .nav-pill');
+            const daysContent = document.getElementById('desktop-nav-content-days');
+            const citiesContent = document.getElementById('desktop-nav-content-cities');
+            
+            desktopNavPills.forEach(pill => {
+                pill.addEventListener('click', () => {
+                    desktopNavPills.forEach(p => p.classList.remove('active'));
+                    pill.classList.add('active');
+                    const isCityTab = pill.dataset.tab === 'cities';
+                    daysContent.classList.toggle('hidden', isCityTab);
+                    citiesContent.classList.toggle('hidden', !isCityTab);
+                    citiesContent.classList.toggle('flex', isCityTab);
+                });
+            });
+
+            // --- Feature: Unified Navigation and Auto-Expanding Details ---
+            function handleNavigation(hash) {
+                if (!hash || hash === '#') return;
+                try {
+                    const targetElement = document.querySelector(hash);
+                    if (!targetElement) return;
+
+                    const offset = mainNav.offsetHeight;
+                    const bodyRect = document.body.getBoundingClientRect().top;
+                    const elementRect = targetElement.getBoundingClientRect().top;
+                    const elementPosition = elementRect - bodyRect;
+                    const offsetPosition = elementPosition - offset - 20; // Extra padding
+
+                    window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+
+                    if (targetElement.hasAttribute('data-city-section')) {
+                        let nextElement = targetElement.nextElementSibling;
+                        while (nextElement) {
+                             if (nextElement.hasAttribute('data-city-section')) break;
+                            if (nextElement.hasAttribute('data-day')) {
+                                const details = nextElement.querySelector('details');
+                                if (details && !details.open) details.open = true;
+                            }
+                            nextElement = nextElement.nextElementSibling;
+                        }
+                    } else {
+                        const details = targetElement.closest('details');
+                        if (details && !details.open) details.open = true;
+                    }
+                } catch (e) {
+                    console.error("Navigation error:", e);
+                }
+            }
+            
+            // --- Add click listeners to ALL navigation links (Desktop, Mobile, Utils) ---
+            document.querySelectorAll('a[href^="#"], .nav-utils').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const hash = this.getAttribute('href');
+                    handleNavigation(hash);
+                    if (history.pushState) {
+                        history.pushState(null, null, hash);
+                    } else {
+                        location.hash = hash;
+                    }
+                    // Close mobile menu after clicking a link
+                    if (mobileMenuPanel.classList.contains('block')) {
+                        mobileMenuPanel.classList.add('hidden');
+                    }
+                });
+            });
+
+            // Handle page load with a hash in the URL
+            if (window.location.hash) {
+                setTimeout(() => handleNavigation(window.location.hash), 100);
+            }
+            
+            // Handle links inside the mobile panel
+            document.querySelectorAll('.mobile-nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                     mobileMenuPanel.classList.add('hidden');
+                });
+            });
+
+            // --- Feature: Scroll-spy for active link highlighting ---
+            const allNavLinks = document.querySelectorAll('[data-navlink-day], [data-navlink-city]');
+            const allSections = document.querySelectorAll('[data-day], section[data-city-section]');
+
+            const scrollSpyObserver = new IntersectionObserver((entries) => {
+                let activeSection = null;
+                 entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        activeSection = entry.target;
+                    }
+                });
+
+                if (!activeSection) {
+                    for(let i = entries.length - 1; i >= 0; i--) {
+                        if (entries[i].boundingClientRect.top < mainNav.offsetHeight) {
+                            activeSection = entries[i].target;
+                            break;
+                        }
+                    }
+                }
+                
+                if (activeSection) {
+                    let activeDayGroup = activeSection.dataset.dayGroup;
+                    let activeCityId = activeSection.dataset.citySection;
+
+                    if (activeSection.dataset.day) {
+                        let current = activeSection;
+                        while(current) {
+                            if (current.previousElementSibling && current.previousElementSibling.hasAttribute('data-city-section')) {
+                                activeCityId = current.previousElementSibling.id;
+                                break;
+                            }
+                            current = current.previousElementSibling;
+                        }
+                    }
+
+                    allNavLinks.forEach(link => {
+                        const isDayLinkActive = link.dataset.navlinkDay && link.dataset.navlinkDay === activeDayGroup;
+                        const isCityLinkActive = link.dataset.navlinkCity && link.dataset.navlinkCity === activeCityId;
+                        link.classList.toggle('nav-link-active', isDayLinkActive || isCityLinkActive);
+                    });
+
+                    const dayTabPill = document.querySelector('.nav-pill[data-tab="days"]');
+                    const cityTabPill = document.querySelector('.nav-pill[data-tab="cities"]');
+                    const isAnyCityLinkActive = [...allNavLinks].some(link => link.dataset.navlinkCity && link.classList.contains('nav-link-active'));
+
+                    if(isAnyCityLinkActive && !cityTabPill.classList.contains('active')){
+                        cityTabPill.click();
+                    } else if (!isAnyCityLinkActive && !dayTabPill.classList.contains('active')) {
+                        dayTabPill.click();
+                    }
+                }
+            }, { rootMargin: `-${mainNav.offsetHeight}px 0px -75% 0px`});
+
+            allSections.forEach(section => scrollSpyObserver.observe(section));
+
+            // --- Feature: Interactive Map ---
+            const cityLinks = document.querySelectorAll('.map-city-link');
+            cityLinks.forEach(link => {
+                if (!link.dataset.pathId) return;
+                
+                const pathIds = link.dataset.pathId.split(',');
+                
+                const highlightPaths = () => {
+                    pathIds.forEach(id => {
+                        const path = document.getElementById(id);
+                        if(path) path.classList.add('highlight');
+                    });
+                };
+                
+                const unhighlightPaths = () => {
+                     pathIds.forEach(id => {
+                        const path = document.getElementById(id);
+                        if(path) path.classList.remove('highlight');
+                    });
+                };
+
+                link.addEventListener('mouseenter', highlightPaths);
+                link.addEventListener('mouseleave', unhighlightPaths);
+                link.addEventListener('touchstart', highlightPaths, { passive: true });
+                link.addEventListener('touchend', unhighlightPaths);
+            });
+
+            // --- Feature: Print Buttons (Desktop and Mobile) ---
+            function triggerPrint() {
+                window.print();
+            }
+            document.getElementById('print-btn').addEventListener('click', triggerPrint);
+            document.getElementById('mobile-print-btn').addEventListener('click', triggerPrint);
+
+
+            // --- Feature: Tip Calculator ---
+            const billInput = document.getElementById('bill-amount');
+            const tipSelect = document.getElementById('tip-rate');
+            const tipResultEl = document.getElementById('tip-result');
+            const totalResultEl = document.getElementById('total-result');
+
+            function calculateTip() {
+                const bill = parseFloat(billInput.value);
+                const tipPercent = parseFloat(tipSelect.value);
+                
+                if (!isNaN(bill) && bill > 0 && !isNaN(tipPercent)) {
+                    const tip = bill * (tipPercent / 100);
+                    const total = bill + tip;
+                    tipResultEl.textContent = `$${tip.toFixed(2)}`;
+                    totalResultEl.textContent = `$${total.toFixed(2)}`;
+                } else {
+                    tipResultEl.textContent = '-';
+                    totalResultEl.textContent = '-';
+                }
+            }
+            billInput.addEventListener('input', calculateTip);
+            tipSelect.addEventListener('change', calculateTip);
+
+
+            // --- Feature: PWA Installation ---
+            const installBtn = document.getElementById('install-btn');
+            let deferredPrompt;
+
+            window.addEventListener('beforeinstallprompt', (e) => {
+                e.preventDefault();
+                deferredPrompt = e;
+                const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+                // Only show install button if it's not iOS
+                if (!isIOS) {
+                    installBtn.classList.remove('hidden');
+                }
+            });
+
+            installBtn.addEventListener('click', async () => {
+                if (deferredPrompt) {
+                    installBtn.classList.add('hidden');
+                    deferredPrompt.prompt();
+                    await deferredPrompt.userChoice;
+                    deferredPrompt = null;
+                }
+            });
+
+            window.addEventListener('appinstalled', () => {
+                installBtn.classList.add('hidden');
+                deferredPrompt = null;
+            });
+
+            
+            // --- Feature: PWA Service Worker Registration ---
+            if ('serviceWorker' in navigator) {
+                const swCode = `
+                    const CACHE_NAME = 'trip-cache-v24-fs'; // Updated cache version
+                    const urlsToCache = ['./', 'https://cdn.tailwindcss.com'];
+                    self.addEventListener('install', e => e.waitUntil(caches.open(CACHE_NAME).then(c => c.addAll(urlsToCache))));
+                    self.addEventListener('fetch', e => e.respondWith(caches.match(e.request).then(r => r || fetch(e.request))));
+                    self.addEventListener('activate', e => {
+                        const cacheWhitelist = [CACHE_NAME];
+                        e.waitUntil(caches.keys().then(names => Promise.all(names.map(name => {
+                        if (cacheWhitelist.indexOf(name) === -1) return caches.delete(name);
+                        }))));
+                    });`;
+                const swBlob = new Blob([swCode], { type: 'application/javascript' });
+                const swUrl = URL.createObjectURL(swBlob);
+                window.addEventListener('load', () => {
+                    navigator.serviceWorker.register(swUrl)
+                    .then(reg => console.log('ServiceWorker registration successful'))
+                    .catch(err => console.log('ServiceWorker registration failed: ', err));
+                });
+            }
+            
+            // --- Initialize Today's Itinerary on Load ---
+            function initializeToday() {
+                const today = new Date();
+                const year = today.getFullYear();
+                const mm = String(today.getMonth() + 1).padStart(2, '0');
+                const dd = String(today.getDate()).padStart(2, '0');
+                const todayString = `${year}-${mm}-${dd}`;
+                
+                const todayElement = document.querySelector(`[data-date="${todayString}"]`);
+
+                if (todayElement) {
+                    const summaryElement = todayElement.querySelector('summary');
+                    if(summaryElement) {
+                        summaryElement.classList.add('summary-today');
+                    }
+                    if (!window.location.hash) {
+                       setTimeout(() => scrollToToday(true), 200);
+                    }
+                }
+            }
+            
+            initializeToday();
+
+        }); // End of DOMContentLoaded
+    </script>
+</body>
+</html>
