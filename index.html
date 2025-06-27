@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>F&S飛翔旅行 | 加拿大東岸 & 芝加哥探索之旅 (修訂版)</title>
+    <title>F&S飛翔旅行 | 加拿大東岸 & 芝加哥探索之旅</title>
     
     <!-- PWA Manifest and Theme Color -->
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -48,6 +48,18 @@
             box-shadow: 0 10px 20px rgba(0,0,0,0.08), 0 6px 6px rgba(0,0,0,0.1);
         }
         
+        /* Animation for Activity Blocks */
+        .activity-block {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+        }
+
+        .is-visible .activity-block {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         .sticky-nav {
             position: sticky;
             top: env(safe-area-inset-top);
@@ -59,7 +71,7 @@
         }
 
         .tag { display: inline-block; background-color: var(--brand-color-light); color: #4338ca; padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.8rem; font-weight: 500; margin-right: 0.5rem; margin-bottom: 0.5rem; }
-        .activity-block { border-left-width: 4px; padding: 1rem; border-radius: 0 0.5rem 0.5rem 0; }
+        
         .activity-block a {
             font-weight: 600; /* semibold */
             color: #4338ca; /* indigo-700 */
@@ -207,6 +219,10 @@
                 opacity: 1 !important; 
                 transform: none !important; 
             }
+            .activity-block {
+                opacity: 1 !important;
+                transform: none !important;
+            }
             main { 
                 border-left: none !important; 
                 padding-left: 0 !important; 
@@ -214,7 +230,6 @@
             }
             details { 
                 page-break-inside: avoid; 
-                /* Ensures details are open for printing, handled by JS */
             }
             details summary .summary-arrow { 
                 display: none !important; 
@@ -405,15 +420,15 @@
                                 <h4 class="font-bold text-lg text-blue-800">上午: 國內線轉機</h4>
                                 <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
                                     <li>返回溫哥華機場 (YVR) 國內航廈，辦理登機手續。</li>
-                                    <li><strong>航班建議：</strong>搭乘 Air Canada 早班機（如 <a href="https://www.google.com/travel/flights/search?tfs=CBwQAhooEgoyMDI1LTA3LTAzKABqDAgDEggvbS8wN2Y2ZnIMCAISCC9tLzAzMDR3QAFIAXABggELCP___________wGYAQI" target="_blank">AC306，09:00 YVR → 16:46 YUL</a>）或類似班機。</li>
+                                    <li><strong>航班建議：</strong>搭乘 Air Canada 早班機（如 <a href="https://www.google.com/travel/flights/search?tfs=CBwQAhooEgoyMDI1LTA3LTAzKABqDAgDEggvbS8wN2Y2ZnIMCAISCC9tLzAzMDR3QAFIAXABggELCP___________wGYAQI" target="_blank" class="hover:underline">AC306，09:00 YVR → 16:46 YUL</a>）或類似班機。</li>
                                 </ul>
                             </div>
                             <div class="activity-block border-green-400 bg-green-50/70">
                                 <h4 class="font-bold text-lg text-green-800">19:00 – 22:00: 抵達蒙特婁 → 入住與休息</h4>
                                 <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
                                     <li><strong>機場交通建議：</strong>搭乘 <strong>747 Express Bus</strong> 前往市中心，費用 CA$11，約 45–60 分鐘。建議購買 OPUS 一日卡。</li>
-                                    <li><strong>入住地點建議：</strong><a href="https://maps.apple.com/?q=Old+Montreal" target="_blank">舊城區 (Vieux-Montréal)</a> 或 <a href="https://maps.apple.com/?q=Berri-UQAM,Montreal" target="_blank">Berri-UQAM</a> 附近，方便觀光散步。</li>
-                                    <li>若體力許可，可於飯店附近（如雅克卡蒂亞廣場周邊）簡單散步拍夜景。</li>
+                                    <li><strong>入住地點建議：</strong><a href="https://maps.apple.com/?q=Old+Montreal" target="_blank" class="hover:underline">舊城區 (Vieux-Montréal)</a> 或 <a href="https://maps.apple.com/?q=Berri-UQAM,Montreal" target="_blank" class="hover:underline">Berri-UQAM</a> 附近，方便觀光散步。</li>
+                                    <li>若體力許可，可於飯店附近（如<a href="https://maps.apple.com/?q=Place+Jacques-Cartier,Montreal" target="_blank" class="hover:underline">雅克卡蒂亞廣場</a>周邊）簡單散步拍夜景。</li>
                                 </ul>
                             </div>
                              <div class="mt-4 p-4 bg-amber-100/60 rounded-lg border-l-4 border-amber-400">
@@ -446,9 +461,9 @@
                             <div class="activity-block border-blue-400 bg-blue-50/70">
                                 <h4 class="font-bold text-lg text-blue-800">18:00 – 20:00: 飯店周邊簡單散步</h4>
                                 <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
-                                    <li><strong>建議散步路線：</strong><a href="https://maps.apple.com/?q=Place+Jacques-Cartier" target="_blank">Place Jacques-Cartier</a> → <a href="https://maps.apple.com/?q=Rue+Saint-Paul" target="_blank">Rue Saint-Paul</a> → <a href="https://maps.apple.com/?q=Old+Port+of+Montreal" target="_blank">舊港 (Vieux-Port)</a>。</li>
+                                    <li><strong>建議散步路線：</strong><a href="https://maps.apple.com/?q=Place+Jacques-Cartier,Montreal" target="_blank" class="hover:underline">Place Jacques-Cartier</a> → <a href="https://maps.apple.com/?q=Rue+Saint-Paul,Montreal" target="_blank" class="hover:underline">Rue Saint-Paul</a> → <a href="https://maps.apple.com/?q=Old+Port+of+Montreal" target="_blank" class="hover:underline">舊港 (Vieux-Port)</a>。</li>
                                     <li>可選擇在港邊長椅休息，看夕陽與街頭表演。</li>
-                                    <li><strong>餐廳建議：</strong><a href="https://maps.apple.com/?q=Jardin+Nelson,Montreal" target="_blank">Jardin Nelson</a> (戶外庭園法式小酒館) 或 <a href="https://maps.apple.com/?q=Olive+et+Gourmando,Montreal" target="_blank">Olive et Gourmando</a> (人氣咖啡簡餐)。</li>
+                                    <li><strong>餐廳建議：</strong><a href="https://maps.apple.com/?q=Jardin+Nelson,Montreal" target="_blank" class="hover:underline">Jardin Nelson</a> (戶外庭園法式小酒館) 或 <a href="https://maps.apple.com/?q=Olive+et+Gourmando,Montreal" target="_blank" class="hover:underline">Olive et Gourmando</a> (人氣咖啡簡餐)。</li>
                                 </ul>
                             </div>
                             <div class="mt-4 p-4 bg-amber-100/60 rounded-lg border-l-4 border-amber-400">
@@ -481,30 +496,30 @@
                             <div class="activity-block border-blue-400 bg-blue-50/70">
                                 <h4 class="font-bold text-lg text-blue-800">08:30 – 12:00: 舊城區巡禮</h4>
                                 <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
-                                    <li><strong>08:30：</strong>前往<a href="https://maps.apple.com/?q=Notre-Dame+Basilica+of+Montreal" target="_blank">諾特丹聖母大教堂 (Notre-Dame Basilica)</a>。可線上預約門票，建議停留約 45–60 分鐘。</li>
-                                    <li><strong>10:00：</strong><a href="https://maps.apple.com/?q=Place+d'Armes,Montreal" target="_blank">Place d’Armes</a> → <a href="https://maps.apple.com/?q=Rue+Saint-Paul,Montreal" target="_blank">Rue Saint-Paul</a> → <a href="https://maps.apple.com/?q=Bonsecours+Market,Montreal" target="_blank">Bonsecours Market</a>。可沿街探索古歐洲風格建築、藝人表演、特色小店。</li>
+                                    <li><strong>08:30：</strong>前往<a href="https://maps.apple.com/?q=Notre-Dame+Basilica+of+Montreal" target="_blank" class="hover:underline">諾特丹聖母大教堂 (Notre-Dame Basilica)</a>。可線上預約門票，建議停留約 45–60 分鐘。</li>
+                                    <li><strong>10:00：</strong><a href="https://maps.apple.com/?q=Place+d'Armes,Montreal" target="_blank" class="hover:underline">Place d’Armes</a> → <a href="https://maps.apple.com/?q=Rue+Saint-Paul,Montreal" target="_blank" class="hover:underline">Rue Saint-Paul</a> → <a href="https://maps.apple.com/?q=Bonsecours+Market,Montreal" target="_blank" class="hover:underline">Bonsecours Market</a>。可沿街探索古歐洲風格建築、藝人表演、特色小店。</li>
                                 </ul>
                             </div>
                              <div class="activity-block border-green-400 bg-green-50/70">
                                 <h4 class="font-bold text-lg text-green-800">12:30 – 14:00: 舊城午餐</h4>
                                 <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
-                                    <li><strong>推薦地點：</strong><a href="https://maps.apple.com/?q=Maison+Christian+Faure,Montreal" target="_blank">Maison Christian Faure</a> (法式甜點塔派) 或 <a href="https://maps.apple.com/?q=Modavie,Montreal" target="_blank">Bistro Modavie</a> (爵士現場音樂 + 法餐)。</li>
+                                    <li><strong>推薦地點：</strong><a href="https://maps.apple.com/?q=Maison+Christian+Faure,Montreal" target="_blank" class="hover:underline">Maison Christian Faure</a> (法式甜點塔派) 或 <a href="https://maps.apple.com/?q=Modavie,Montreal" target="_blank" class="hover:underline">Bistro Modavie</a> (爵士現場音樂 + 法餐)。</li>
                                     <li>若天氣晴朗，也可選戶外座位享受陽光。</li>
                                 </ul>
                             </div>
                             <div class="activity-block border-purple-400 bg-purple-50/70">
                                 <h4 class="font-bold text-lg text-purple-800">14:00 – 17:00: 港邊散步 + 摩天輪</h4>
                                 <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
-                                    <li>沿 <a href="https://maps.apple.com/?q=Old+Port+of+Montreal" target="_blank">Vieux-Port</a> 河岸散步，經 Jacques Cartier 碼頭。</li>
-                                    <li><strong>15:00：</strong>搭乘 <a href="https://maps.apple.com/?q=La+Grande+Roue+de+Montréal" target="_blank">La Grande Roue de Montréal</a> (蒙特婁摩天輪，高達60公尺)。</li>
+                                    <li>沿 <a href="https://maps.apple.com/?q=Old+Port+of+Montreal" target="_blank" class="hover:underline">Vieux-Port</a> 河岸散步，經 <a href="https://maps.apple.com/?q=Jacques+Cartier+Pier,Montreal" target="_blank" class="hover:underline">Jacques Cartier 碼頭</a>。</li>
+                                    <li><strong>15:00：</strong>搭乘 <a href="https://maps.apple.com/?q=La+Grande+Roue+de+Montréal" target="_blank" class="hover:underline">La Grande Roue de Montréal</a> (蒙特婁摩天輪，高達60公尺)。</li>
                                     <li>之後可自由探索港區手工藝店、露天咖啡、夏日市集。</li>
                                 </ul>
                             </div>
                             <div class="activity-block border-red-400 bg-red-50/70">
                                 <h4 class="font-bold text-lg text-red-800">18:00 – 20:00: 晚餐 + 夜景建議</h4>
                                 <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
-                                    <li><strong>晚餐建議：</strong><a href="https://maps.apple.com/?q=Vieux-Port+Steakhouse,Montreal" target="_blank">Vieux-Port Steakhouse</a> (牛排與紅酒) 或回到 Rue Saint-Paul 的小酒館區。</li>
-                                    <li>飯後可走回 Jacques-Cartier 廣場欣賞打燈街景。</li>
+                                    <li><strong>晚餐建議：</strong><a href="https://maps.apple.com/?q=Vieux-Port+Steakhouse,Montreal" target="_blank" class="hover:underline">Vieux-Port Steakhouse</a> (牛排與紅酒) 或回到 <a href="https://maps.apple.com/?q=Rue+Saint-Paul,Montreal" target="_blank" class="hover:underline">Rue Saint-Paul</a> 的小酒館區。</li>
+                                    <li>飯後可走回 <a href="https://maps.apple.com/?q=Place+Jacques-Cartier,Montreal" target="_blank" class="hover:underline">Jacques-Cartier 廣場</a>欣賞打燈街景。</li>
                                 </ul>
                             </div>
                             <div class="mt-4 p-4 bg-teal-100/60 rounded-lg border-l-4 border-teal-400">
@@ -513,7 +528,7 @@
                                     <li>💳 地鐵使用 STM 系統，一日票或 OPUS 卡皆可。</li>
                                     <li>🗣 雖以法語為主，但觀光區英文通用，用「Bonjour / Merci」開場更有禮。</li>
                                     <li>📱 可下載 STM Metro App 或使用 Google Maps 即時查路線。</li>
-                                    <li>👟 鞋子請選擇適合步行的，石板路段多。</li>
+                                    <li>� 鞋子請選擇適合步行的，石板路段多。</li>
                                     <li>🌤 七月天氣約 22–26°C，日夜溫差稍大，建議攜帶薄外套。</li>
                                 </ul>
                             </div>
@@ -541,29 +556,29 @@
                              <div class="activity-block border-blue-400 bg-blue-50/70">
                                 <h4 class="font-bold text-lg text-blue-800">07:30 – 11:30: 退房 → 搭乘 VIA Rail</h4>
                                 <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
-                                    <li>建議搭乘 VIA Rail 班次（如 08:45 出發），從蒙特婁中央車站（Gare Centrale）前往魁北克市（Gare du Palais），行程約 3 小時。</li>
-                                    <li>搭地鐵至 Bonaventure 站即達車站，請預留提早報到時間（建議 30 分鐘前）。</li>
+                                    <li>建議搭乘 VIA Rail 班次（如 08:45 出發），從<a href="https://maps.apple.com/?q=Gare+Centrale,Montreal" target="_blank" class="hover:underline">蒙特婁中央車站 (Gare Centrale)</a>前往<a href="https://maps.apple.com/?q=Gare+du+Palais,Quebec+City" target="_blank" class="hover:underline">魁北克市 (Gare du Palais)</a>，行程約 3 小時。</li>
+                                    <li>搭地鐵至 <a href="https://maps.apple.com/?q=Bonaventure+Station,Montreal" target="_blank" class="hover:underline">Bonaventure 站</a>即達車站，請預留提早報到時間（建議 30 分鐘前）。</li>
                                 </ul>
                             </div>
                             <div class="activity-block border-green-400 bg-green-50/70">
                                 <h4 class="font-bold text-lg text-green-800">12:00 – 13:30: 抵達魁北克市 → 午餐</h4>
                                 <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
-                                    <li>建議選擇上城區（Haute-Ville）或芳堤娜城堡附近飯店，地勢平穩、景點集中。</li>
-                                    <li><strong>午餐建議地點：</strong><a href="https://maps.apple.com/?q=Buffet+de+l’Antiquaire,Quebec" target="_blank">Buffet de l’Antiquaire</a> (經典家庭餐館) 或 <a href="https://maps.apple.com/?q=Le+Chic+Shack,Quebec" target="_blank">Le Chic Shack</a> (手打漢堡、在城堡對面)。</li>
+                                    <li>建議選擇<a href="https://maps.apple.com/?q=Haute-Ville,Quebec+City" target="_blank" class="hover:underline">上城區 (Haute-Ville)</a>或<a href="https://maps.apple.com/?q=Fairmont+Le+Château+Frontenac,Quebec" target="_blank" class="hover:underline">芳堤娜城堡</a>附近飯店，地勢平穩、景點集中。</li>
+                                    <li><strong>午餐建議地點：</strong><a href="https://maps.apple.com/?q=Buffet+de+l’Antiquaire,Quebec" target="_blank" class="hover:underline">Buffet de l’Antiquaire</a> (經典家庭餐館) 或 <a href="https://maps.apple.com/?q=Le+Chic+Shack,Quebec" target="_blank" class="hover:underline">Le Chic Shack</a> (手打漢堡、在城堡對面)。</li>
                                 </ul>
                             </div>
                             <div class="activity-block border-purple-400 bg-purple-50/70">
                                  <h4 class="font-bold text-lg text-purple-800">14:00 – 17:00: 舊城區初步散步</h4>
                                 <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
-                                    <li><strong>步行路線建議：</strong><a href="https://maps.apple.com/?q=Château+Frontenac,Quebec" target="_blank">芳堤娜城堡 (Château Frontenac)</a> → <a href="https://maps.apple.com/?q=Dufferin+Terrace,Quebec" target="_blank">杜費林露台 (Dufferin Terrace)</a> → 城牆 → 城門 → 國會大廈。</li>
+                                    <li><strong>步行路線建議：</strong><a href="https://maps.apple.com/?q=Fairmont+Le+Château+Frontenac,Quebec" target="_blank" class="hover:underline">芳堤娜城堡 (Château Frontenac)</a> → <a href="https://maps.apple.com/?q=Dufferin+Terrace,Quebec" target="_blank" class="hover:underline">杜費林露台 (Dufferin Terrace)</a> → 城牆 → 城門 → <a href="https://maps.apple.com/?q=Parliament+Building,Quebec+City" target="_blank" class="hover:underline">國會大廈</a>。</li>
                                     <li>可沿石板路走至觀景台俯瞰聖羅倫斯河。</li>
                                 </ul>
                             </div>
                             <div class="activity-block border-red-400 bg-red-50/70">
                                 <h4 class="font-bold text-lg text-red-800">18:00 – 20:00: 晚餐 + 夜間打燈景觀</h4>
                                 <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
-                                    <li><strong>餐廳建議：</strong><a href="https://maps.apple.com/?q=Bistro+Sous+le+Fort,Quebec" target="_blank">Bistro Sous le Fort</a> (景觀小館) 或 <a href="https://maps.apple.com/?q=Aux+Anciens+Canadiens,Quebec" target="_blank">Aux Anciens Canadiens</a> (古蹟餐廳，法式家常料理)。</li>
-                                    <li>飯後可回 Dufferin Terrace 或 Place d’Armes 拍攝夜景。</li>
+                                    <li><strong>餐廳建議：</strong><a href="https://maps.apple.com/?q=Bistro+Sous+le+Fort,Quebec" target="_blank" class="hover:underline">Bistro Sous le Fort</a> (景觀小館) 或 <a href="https://maps.apple.com/?q=Aux+Anciens+Canadiens,Quebec" target="_blank" class="hover:underline">Aux Anciens Canadiens</a> (古蹟餐廳，法式家常料理)。</li>
+                                    <li>飯後可回 <a href="https://maps.apple.com/?q=Dufferin+Terrace,Quebec" target="_blank" class="hover:underline">Dufferin Terrace</a> 或 <a href="https://maps.apple.com/?q=Place+d'Armes,Quebec" target="_blank" class="hover:underline">Place d’Armes</a> 拍攝夜景。</li>
                                 </ul>
                             </div>
                         </div>
@@ -589,30 +604,30 @@
                            <div class="activity-block border-blue-400 bg-blue-50/70">
                                 <h4 class="font-bold text-lg text-blue-800">09:00 – 12:00: 下城區探索 + 文明博物館</h4>
                                 <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
-                                    <li>從<a href="https://maps.apple.com/?q=Breakneck+Stairs,Quebec" target="_blank">Breakneck Stairs (斷頭階梯)</a>或搭<a href="https://maps.apple.com/?q=Funiculaire+du+Vieux-Québec" target="_blank">登山纜車 (Funiculaire)</a>下至<a href="https://maps.apple.com/?q=Rue+du+Petit-Champlain,Quebec" target="_blank">小尚普蘭街 (Petit-Champlain)</a>。</li>
-                                    <li>散步至 <a href="https://maps.apple.com/?q=Place+Royale,Quebec" target="_blank">Place Royale</a>、<a href="https://maps.apple.com/?q=Notre-Dame-des-Victoires+Church,Quebec" target="_blank">Notre-Dame-des-Victoires</a> 教堂。</li>
-                                    <li>參觀 <a href="https://www.mcq.org/en/" target="_blank">文明博物館 Musée de la civilisation</a> (推薦預約門票)，原住民展、魁北克歷史展皆值得一看。</li>
+                                    <li>從<a href="https://maps.apple.com/?q=Breakneck+Stairs,Quebec+City" target="_blank" class="hover:underline">Breakneck Stairs (斷頭階梯)</a>或搭<a href="https://maps.apple.com/?q=Funiculaire+du+Vieux-Québec" target="_blank" class="hover:underline">登山纜車 (Funiculaire)</a>下至<a href="https://maps.apple.com/?q=Rue+du+Petit-Champlain,Quebec" target="_blank" class="hover:underline">小尚普蘭街 (Petit-Champlain)</a>。</li>
+                                    <li>散步至 <a href="https://maps.apple.com/?q=Place+Royale,Quebec" target="_blank" class="hover:underline">Place Royale</a>、<a href="https://maps.apple.com/?q=Notre-Dame-des-Victoires+Church,Quebec+City" target="_blank" class="hover:underline">Notre-Dame-des-Victoires 教堂</a>。</li>
+                                    <li>參觀 <a href="https://www.mcq.org/en/" target="_blank" class="hover:underline">文明博物館 Musée de la civilisation</a> (推薦預約門票)，原住民展、魁北克歷史展皆值得一看。</li>
                                 </ul>
                             </div>
                             <div class="activity-block border-green-400 bg-green-50/70">
                                 <h4 class="font-bold text-lg text-green-800">12:30 – 14:00: 午餐建議</h4>
                                 <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
-                                    <li><a href="https://maps.apple.com/?q=Le+Lapin+Sauté,Quebec" target="_blank">Le Lapin Sauté</a> (以兔肉料理聞名，氣氛佳)。</li>
-                                    <li>或 <a href="https://maps.apple.com/?q=Cochon+Dingue,Quebec" target="_blank">Cochon Dingue</a> (下城區人氣早午餐餐廳)。</li>
+                                    <li><a href="https://maps.apple.com/?q=Le+Lapin+Sauté,Quebec" target="_blank" class="hover:underline">Le Lapin Sauté</a> (以兔肉料理聞名，氣氛佳)。</li>
+                                    <li>或 <a href="https://maps.apple.com/?q=Cochon+Dingue,Quebec" target="_blank" class="hover:underline">Cochon Dingue</a> (下城區人氣早午餐餐廳)。</li>
                                 </ul>
                             </div>
                             <div class="activity-block border-purple-400 bg-purple-50/70">
                                  <h4 class="font-bold text-lg text-purple-800">14:30 – 17:00: 亞伯拉罕平原 + 城牆步道</h4>
                                 <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
-                                    <li>從芳堤娜城堡出發，沿「總督散步道 Promenade des Gouverneurs」進入<a href="https://maps.apple.com/?q=Plains+of+Abraham,Quebec" target="_blank">亞伯拉罕平原 (Plains of Abraham)</a>。</li>
+                                    <li>從芳堤娜城堡出發，沿「<a href="https://maps.apple.com/?q=Promenade+des+Gouverneurs,Quebec+City" target="_blank" class="hover:underline">總督散步道 Promenade des Gouverneurs</a>」進入<a href="https://maps.apple.com/?q=Plains+of+Abraham,Quebec" target="_blank" class="hover:underline">亞伯拉罕平原 (Plains of Abraham)</a>。</li>
                                     <li>可參觀：兵營遺跡、歷史展示館、觀景區。</li>
                                 </ul>
                             </div>
                             <div class="activity-block border-red-400 bg-red-50/70">
                                 <h4 class="font-bold text-lg text-red-800">18:00 – 20:00: 晚餐 + 城市收尾</h4>
                                 <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
-                                    <li><strong>建議餐廳：</strong><a href="https://maps.apple.com/?q=Chez+Boulay,Quebec" target="_blank">Chez Boulay</a> (本地野生食材創意料理) 或返回上城 Rue Saint-Louis 一帶尋找露天餐廳。</li>
-                                    <li>若有體力，建議再夜拍芳堤娜城堡與市政廳區域。</li>
+                                    <li><strong>建議餐廳：</strong><a href="https://maps.apple.com/?q=Chez+Boulay,Quebec" target="_blank" class="hover:underline">Chez Boulay</a> (本地野生食材創意料理) 或返回上城 <a href="https://maps.apple.com/?q=Rue+Saint-Louis,Quebec" target="_blank" class="hover:underline">Rue Saint-Louis</a> 一帶尋找露天餐廳。</li>
+                                    <li>若有體力，建議再夜拍<a href="https://maps.apple.com/?q=Fairmont+Le+Château+Frontenac,Quebec" target="_blank" class="hover:underline">芳堤娜城堡</a>與<a href="https://maps.apple.com/?q=Quebec+City+Hall" target="_blank" class="hover:underline">市政廳</a>區域。</li>
                                 </ul>
                             </div>
                             <div class="mt-4 p-4 bg-teal-100/60 rounded-lg border-l-4 border-teal-400">
@@ -662,14 +677,14 @@
                             <div class="activity-block border-purple-400 bg-purple-50/70">
                                 <h4 class="font-bold text-lg text-purple-800">16:30 – 18:00: 入住 → 初探瀑布區</h4>
                                 <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
-                                    <li><strong>建議入住地點：</strong>瀑布景觀飯店（<a href="https://www.booking.com/searchresults.html?ss=Niagara+Falls&ssne=Niagara+Falls&ssne_untouched=Niagara+Falls&label=gen173nr-1FCAEoggI46AdIM1gEaMIBiAEBmAExuAEXyAEM2AED6AEB-AECiAIBqAIDuAL8jLqwBsACAdICJGEwYzY4ODRjLTliYjQtNDI5Yy04YzYyLTBiMzkxYmE3ZjgxNNgCBeACAQ&sid=1c7b8c8f8b8a8b8b8b8b8b8b8b8b8b8b&aid=304142&lang=en-us&sb=1&src_elem=sb&src=searchresults&dest_id=-565225&dest_type=city&checkin=2025-07-07&checkout=2025-07-08&group_adults=2&no_rooms=1&group_children=0&sb_travel_purpose=leisure" target="_blank">Sheraton, Marriott on the Falls, Embassy Suites</a>）。</li>
-                                    <li>可散步至 <a href="https://maps.apple.com/?q=Table+Rock+Welcome+Centre,Niagara+Falls" target="_blank">Table Rock Centre</a>，看 Horseshoe Falls 近距離水勢與水霧，或從 <a href="https://maps.apple.com/?q=Skylon+Tower,Niagara+Falls" target="_blank">Skylon Tower</a> 上方遠觀全瀑布景。</li>
+                                    <li><strong>建議入住地點：</strong>瀑布景觀飯店（<a href="https://maps.apple.com/?q=Sheraton+on+the+Falls+Hotel" target="_blank" class="hover:underline">Sheraton</a>, <a href="https://maps.apple.com/?q=Niagara+Falls+Marriott+on+the+Falls" target="_blank" class="hover:underline">Marriott on the Falls</a>, <a href="https://maps.apple.com/?q=Embassy+Suites+by+Hilton+Niagara+Falls+Fallsview" target="_blank" class="hover:underline">Embassy Suites</a>）。</li>
+                                    <li>可散步至 <a href="https://maps.apple.com/?q=Table+Rock+Welcome+Centre,Niagara+Falls" target="_blank" class="hover:underline">Table Rock Centre</a>，看 Horseshoe Falls 近距離水勢與水霧，或從 <a href="https://maps.apple.com/?q=Skylon+Tower,Niagara+Falls" target="_blank" class="hover:underline">Skylon Tower</a> 上方遠觀全瀑布景。</li>
                                 </ul>
                             </div>
                             <div class="activity-block border-red-400 bg-red-50/70">
                                 <h4 class="font-bold text-lg text-red-800">18:00 – 21:00: 晚餐 + 夜間燈光秀</h4>
                                 <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
-                                    <li><strong>晚餐建議：</strong><a href="https://maps.apple.com/?q=Skylon+Tower,Niagara+Falls" target="_blank">Skylon Tower 旋轉餐廳</a>或 <a href="https://maps.apple.com/?q=The+Keg+Steakhouse,Niagara+Falls" target="_blank">The Keg Steakhouse</a> (有景觀座位)。</li>
+                                    <li><strong>晚餐建議：</strong><a href="https://maps.apple.com/?q=Skylon+Tower,Niagara+Falls" target="_blank" class="hover:underline">Skylon Tower 旋轉餐廳</a>或 <a href="https://maps.apple.com/?q=The+Keg+Steakhouse,Niagara+Falls" target="_blank" class="hover:underline">The Keg Steakhouse</a> (有景觀座位)。</li>
                                     <li>每晚約21:00 起，瀑布會打燈照明（依季節與天氣調整），色彩絢麗，非常適合拍照。</li>
                                 </ul>
                             </div>
@@ -696,29 +711,29 @@
                             <div class="activity-block border-blue-400 bg-blue-50/70">
                                 <h4 class="font-bold text-lg text-blue-800">09:00 – 12:00: 經典瀑布體驗</h4>
                                 <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
-                                    <li>登船參加「<a href="https://www.niagaraparks.com/visit/attractions/niagara-city-cruises/" target="_blank">Voyage to the Falls</a>」(霧中少女號)，進入瀑布核心區，強力推薦。</li>
-                                    <li>參觀「<a href="https://www.niagaraparks.com/visit/attractions/journey-behind-the-falls/" target="_blank">Journey Behind the Falls</a>」，從岩壁後方近距離看水柱傾瀉。</li>
+                                    <li>登船參加「<a href="https://www.niagaraparks.com/visit/attractions/niagara-city-cruises/" target="_blank" class="hover:underline">Voyage to the Falls</a>」(霧中少女號)，進入瀑布核心區，強力推薦。</li>
+                                    <li>參觀「<a href="https://www.niagaraparks.com/visit/attractions/journey-behind-the-falls/" target="_blank" class="hover:underline">Journey Behind the Falls</a>」，從岩壁後方近距離看水柱傾瀉。</li>
                                     <li>若購 Niagara Parks Pass，可包含多景點套票與 WEGO 巴士乘坐權。</li>
                                 </ul>
                             </div>
                             <div class="activity-block border-green-400 bg-green-50/70">
                                 <h4 class="font-bold text-lg text-green-800">12:00 – 13:30: 午餐建議</h4>
                                 <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
-                                    <li><a href="https://maps.apple.com/?q=Queen+Victoria+Place+Restaurant,Niagara+Falls" target="_blank">Queen Victoria Place Restaurant</a> (景觀 + 地道菜色)。</li>
-                                    <li>或於 <a href="https://maps.apple.com/?q=Table+Rock+Welcome+Centre,Niagara+Falls" target="_blank">Table Rock Centre</a> 自助選餐，節省時間。</li>
+                                    <li><a href="https://maps.apple.com/?q=Queen+Victoria+Place+Restaurant,Niagara+Falls" target="_blank" class="hover:underline">Queen Victoria Place Restaurant</a> (景觀 + 地道菜色)。</li>
+                                    <li>或於 <a href="https://maps.apple.com/?q=Table+Rock+Welcome+Centre,Niagara+Falls" target="_blank" class="hover:underline">Table Rock Centre</a> 自助選餐，節省時間。</li>
                                 </ul>
                             </div>
                             <div class="activity-block border-purple-400 bg-purple-50/70">
                                 <h4 class="font-bold text-lg text-purple-800">14:00 – 17:00: 瀑布上游與蝴蝶園</h4>
                                 <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
-                                    <li>可搭乘 WEGO 前往：<a href="https://www.niagaraparks.com/visit/attractions/butterfly-conservatory/" target="_blank">Butterfly Conservatory (蝴蝶館)</a>、<a href="https://www.niagaraparks.com/visit/attractions/white-water-walk/" target="_blank">White Water Walk (近距離看激流)</a>、或 <a href="https://www.niagaraparks.com/visit/attractions/whirlpool-aero-car/" target="_blank">Whirlpool Aero Car (空中纜車)</a>。</li>
+                                    <li>可搭乘 WEGO 前往：<a href="https://www.niagaraparks.com/visit/attractions/butterfly-conservatory/" target="_blank" class="hover:underline">Butterfly Conservatory (蝴蝶館)</a>、<a href="https://www.niagaraparks.com/visit/attractions/white-water-walk/" target="_blank" class="hover:underline">White Water Walk (近距離看激流)</a>、或 <a href="https://www.niagaraparks.com/visit/attractions/whirlpool-aero-car/" target="_blank" class="hover:underline">Whirlpool Aero Car (空中纜車)</a>。</li>
                                     <li>若體力有限，也可選擇酒店休息，傍晚再出來拍照或購物。</li>
                                 </ul>
                             </div>
                             <div class="activity-block border-red-400 bg-red-50/70">
                                 <h4 class="font-bold text-lg text-red-800">18:00 – 20:00: 收尾晚餐</h4>
                                 <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
-                                    <li>若前一晚未登 Skylon Tower，可當晚安排登塔與晚餐。</li>
+                                    <li>若前一晚未登 <a href="https://maps.apple.com/?q=Skylon+Tower,Niagara+Falls" target="_blank" class="hover:underline">Skylon Tower</a>，可當晚安排登塔與晚餐。</li>
                                     <li>或簡餐結束後回到瀑布前散步拍照，圓滿收尾尼加拉段行程。</li>
                                 </ul>
                             </div>
@@ -726,7 +741,7 @@
                                 <h4 class="font-bold text-teal-800 flex items-center mb-2">⭐ 瀑布實用資訊</h4>
                                 <ul class="list-disc list-inside mt-2 text-teal-900/80 space-y-1">
                                     <li>🧥 參加瀑布船與後方通道活動務必攜帶雨衣（現場也會提供）。</li>
-                                    <li>🎫 建議提前線上購買 <a href="https://www.niagaraparks.com/visit/attractions/adventure-pass-classic" target="_blank">Niagara Pass</a>（含票+WEGO車）避免現場排隊。</li>
+                                    <li>🎫 建議提前線上購買 <a href="https://www.niagaraparks.com/visit/attractions/adventure-pass-classic" target="_blank" class="hover:underline">Niagara Pass</a>（含票+WEGO車）避免現場排隊。</li>
                                     <li>📷 相機建議使用防水袋，手機請準備擦拭布。</li>
                                     <li>☀️ 七月氣溫約 25–29°C，日曬強烈建議塗防曬。</li>
                                 </ul>
@@ -769,15 +784,15 @@
                              <div class="activity-block border-purple-400 bg-purple-50/70">
                                 <h4 class="font-bold text-lg text-purple-800">16:00 – 18:00: 入住 → 芝加哥河畔散步</h4>
                                 <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
-                                    <li><strong>建議住宿區域：</strong><a href="https://maps.apple.com/?q=The+Loop,Chicago" target="_blank">The Loop</a> (市政廳、千禧公園旁) 或 <a href="https://maps.apple.com/?q=River+North,Chicago" target="_blank">River North</a> (商業、美食、夜景熱區)。</li>
-                                    <li>可沿 <a href="https://maps.apple.com/?q=Chicago+Riverwalk" target="_blank">Chicago Riverwalk</a> 步道散步，欣賞橋樑與兩岸建築倒影。</li>
+                                    <li><strong>建議住宿區域：</strong><a href="https://maps.apple.com/?q=The+Loop,Chicago" target="_blank" class="hover:underline">The Loop</a> (市政廳、千禧公園旁) 或 <a href="https://maps.apple.com/?q=River+North,Chicago" target="_blank" class="hover:underline">River North</a> (商業、美食、夜景熱區)。</li>
+                                    <li>可沿 <a href="https://maps.apple.com/?q=Chicago+Riverwalk" target="_blank" class="hover:underline">Chicago Riverwalk</a> 步道散步，欣賞橋樑與兩岸建築倒影。</li>
                                 </ul>
                             </div>
                              <div class="activity-block border-red-400 bg-red-50/70">
                                 <h4 class="font-bold text-lg text-red-800">18:00 – 20:30: 深盤披薩晚餐 + 芝加哥夜景</h4>
                                 <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
-                                    <li><strong>晚餐建議：</strong><a href="https://maps.apple.com/?q=Giordano's,Chicago" target="_blank">Giordano’s</a> 或 <a href="https://maps.apple.com/?q=Lou+Malnati's,Chicago" target="_blank">Lou Malnati’s</a> (芝加哥經典 Deep Dish Pizza)。</li>
-                                    <li>若天氣晴朗，可前往 <a href="https://maps.apple.com/?q=Navy+Pier,Chicago" target="_blank">Navy Pier</a> 看夜景，或 <a href="https://maps.apple.com/?q=Millennium+Park,Chicago" target="_blank">Millennium Park</a> 漫步。</li>
+                                    <li><strong>晚餐建議：</strong><a href="https://maps.apple.com/?q=Giordano's,Chicago" target="_blank" class="hover:underline">Giordano’s</a> 或 <a href="https://maps.apple.com/?q=Lou+Malnati's,Chicago" target="_blank" class="hover:underline">Lou Malnati’s</a> (芝加哥經典 Deep Dish Pizza)。</li>
+                                    <li>若天氣晴朗，可前往 <a href="https://maps.apple.com/?q=Navy+Pier,Chicago" target="_blank" class="hover:underline">Navy Pier</a> 看夜景，或 <a href="https://maps.apple.com/?q=Millennium+Park,Chicago" target="_blank" class="hover:underline">Millennium Park</a> 漫步。</li>
                                 </ul>
                             </div>
                         </div>
@@ -803,30 +818,30 @@
                             <div class="activity-block border-blue-400 bg-blue-50/70">
                                 <h4 class="font-bold text-lg text-blue-800">09:00 – 12:00: 建築遊船 + 千禧公園</h4>
                                 <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
-                                    <li>建議預約：<a href="https://www.architecture.org/tours/chicago-architecture-foundation-center-river-cruise-aboard-chicago-s-first-lady/" target="_blank">Chicago Architecture River Cruise</a> (早上最不曬)。</li>
+                                    <li>建議預約：<a href="https://www.architecture.org/tours/chicago-architecture-foundation-center-river-cruise-aboard-chicago-s-first-lady/" target="_blank" class="hover:underline">Chicago Architecture River Cruise</a> (早上最不曬)。</li>
                                     <li>搭船由芝加哥河中看近百年摩天大樓的演進。</li>
-                                    <li>結束後可步行至 <a href="https://maps.apple.com/?q=Millennium+Park,Chicago" target="_blank">Millennium Park</a> 看雲門 (The Bean) 與 Crown Fountain。</li>
+                                    <li>結束後可步行至 <a href="https://maps.apple.com/?q=Millennium+Park,Chicago" target="_blank" class="hover:underline">Millennium Park</a> 看<a href="https://maps.apple.com/?q=Cloud+Gate,Chicago" target="_blank" class="hover:underline">雲門 (The Bean)</a>與<a href="https://maps.apple.com/?q=Crown+Fountain,Chicago" target="_blank" class="hover:underline">Crown Fountain</a>。</li>
                                 </ul>
                             </div>
                             <div class="activity-block border-green-400 bg-green-50/70">
                                  <h4 class="font-bold text-lg text-green-800">12:30 – 14:00: 午餐建議</h4>
                                 <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
-                                    <li><a href="https://maps.apple.com/?q=The+Purple+Pig,Chicago" target="_blank">The Purple Pig</a> (地中海小酒館)。</li>
-                                    <li><a href="https://maps.apple.com/?q=Beatrix,Chicago" target="_blank">Beatrix</a> (健康系早午餐)。</li>
+                                    <li><a href="https://maps.apple.com/?q=The+Purple+Pig,Chicago" target="_blank" class="hover:underline">The Purple Pig</a> (地中海小酒館)。</li>
+                                    <li><a href="https://maps.apple.com/?q=Beatrix,Chicago" target="_blank" class="hover:underline">Beatrix</a> (健康系早午餐)。</li>
                                 </ul>
                             </div>
                             <div class="activity-block border-purple-400 bg-purple-50/70">
                                 <h4 class="font-bold text-lg text-purple-800">14:30 – 17:00: Navy Pier + 湖濱漫步</h4>
                                 <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
-                                    <li>可登上 <a href="https://navypier.org/things-to-do/rides-attractions/centennial-wheel/" target="_blank">Centennial Wheel 摩天輪</a>或參加湖上遊艇。</li>
-                                    <li>若喜歡藝術，可前往 <a href="https://mcachicago.org/" target="_blank">Museum of Contemporary Art</a> (步行可達)。</li>
+                                    <li>可登上 <a href="https://navypier.org/things-to-do/rides-attractions/centennial-wheel/" target="_blank" class="hover:underline">Centennial Wheel 摩天輪</a>或參加湖上遊艇。</li>
+                                    <li>若喜歡藝術，可前往 <a href="https://mcachicago.org/" target="_blank" class="hover:underline">Museum of Contemporary Art</a> (步行可達)。</li>
                                 </ul>
                             </div>
                             <div class="activity-block border-red-400 bg-red-50/70">
                                 <h4 class="font-bold text-lg text-red-800">18:00 – 20:30: 高空晚餐 + 夜景</h4>
                                 <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
-                                    <li><strong>晚餐建議：</strong><a href="https://360chicago.com/" target="_blank">360 CHICAGO Observation Deck</a> (推薦傍晚登頂 + 酒吧) 或 <a href="https://theskydeck.com/" target="_blank">Skydeck Chicago</a> (可體驗玻璃懸空盒) 後再下樓用餐。</li>
-                                    <li>若不登塔，也可選擇 <a href="https://maps.apple.com/?q=The+Gage,Chicago" target="_blank">The Gage</a> (高級酒吧餐廳) 作為行程結尾。</li>
+                                    <li><strong>晚餐建議：</strong><a href="https://360chicago.com/" target="_blank" class="hover:underline">360 CHICAGO Observation Deck</a> (推薦傍晚登頂 + 酒吧) 或 <a href="https://theskydeck.com/" target="_blank" class="hover:underline">Skydeck Chicago</a> (可體驗玻璃懸空盒) 後再下樓用餐。</li>
+                                    <li>若不登塔，也可選擇 <a href="https://maps.apple.com/?q=The+Gage,Chicago" target="_blank" class="hover:underline">The Gage</a> (高級酒吧餐廳) 作為行程結尾。</li>
                                 </ul>
                             </div>
                             <div class="mt-4 p-4 bg-teal-100/60 rounded-lg border-l-4 border-teal-400">
@@ -863,27 +878,27 @@
                                 <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
                                     <li>世界級收藏，包括梵谷、莫內、秀拉、格蘭特·伍德《美國哥德式》等。</li>
                                     <li>建議租借語音導覽，推薦路線：約 2–3 小時。</li>
-                                    <li>地點就在 Millennium Park 東側，交通便利。</li>
+                                    <li>地點就在 <a href="https://maps.apple.com/?q=Millennium+Park,Chicago" target="_blank" class="hover:underline">Millennium Park</a> 東側，交通便利。</li>
                                 </ul>
                             </div>
                             <div class="activity-block border-green-400 bg-green-50/70">
                                 <h4 class="font-bold text-lg text-green-800">12:30 – 14:00: 午餐建議</h4>
                                 <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
-                                    <li><a href="https://maps.apple.com/?q=Cindy's+Rooftop,Chicago" target="_blank">Cindy’s Rooftop</a> (藝術學院上方景觀餐廳)。</li>
-                                    <li>或附近的 <a href="https://maps.apple.com/?q=The+Gage,Chicago" target="_blank">The Gage</a>、<a href="https://maps.apple.com/?q=Le+Pain+Quotidien,Chicago" target="_blank">Le Pain Quotidien</a> 等輕食選擇。</li>
+                                    <li><a href="https://maps.apple.com/?q=Cindy's+Rooftop,Chicago" target="_blank" class="hover:underline">Cindy’s Rooftop</a> (藝術學院上方景觀餐廳)。</li>
+                                    <li>或附近的 <a href="https://maps.apple.com/?q=The+Gage,Chicago" target="_blank" class="hover:underline">The Gage</a>、<a href="https://maps.apple.com/?q=Le+Pain+Quotidien,Chicago" target="_blank" class="hover:underline">Le Pain Quotidien</a> 等輕食選擇。</li>
                                 </ul>
                             </div>
                             <div class="activity-block border-purple-400 bg-purple-50/70">
                                 <h4 class="font-bold text-lg text-purple-800">14:30 – 17:00: 選擇一館再訪 or 購物自由行</h4>
                                 <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
-                                    <li><strong>博物館選項 (依興趣擇一)：</strong><a href="https://www.fieldmuseum.org/" target="_blank">Field Museum (自然史)</a>、<a href="https://www.sheddaquarium.org/" target="_blank">Shedd Aquarium (水族館)</a>、<a href="https://mcachicago.org/" target="_blank">Museum of Contemporary Art (近現代藝術)</a>。</li>
-                                    <li><strong>若偏好輕鬆：</strong>可安排 <a href="https://www.themagnificentmile.com/" target="_blank">Michigan Avenue (The Magnificent Mile)</a> 採購紀念品。</li>
+                                    <li><strong>博物館選項 (依興趣擇一)：</strong><a href="https://maps.apple.com/?q=Field+Museum,Chicago" target="_blank" class="hover:underline">Field Museum (自然史)</a>、<a href="https://maps.apple.com/?q=Shedd+Aquarium,Chicago" target="_blank" class="hover:underline">Shedd Aquarium (水族館)</a>、<a href="https://mcachicago.org/" target="_blank" class="hover:underline">Museum of Contemporary Art (近現代藝術)</a>。</li>
+                                    <li><strong>若偏好輕鬆：</strong>可安排 <a href="https://maps.apple.com/?q=The+Magnificent+Mile,Chicago" target="_blank" class="hover:underline">Michigan Avenue (The Magnificent Mile)</a> 採購紀念品。</li>
                                 </ul>
                             </div>
                             <div class="activity-block border-red-400 bg-red-50/70">
                                 <h4 class="font-bold text-lg text-red-800">18:00 – 20:30: 特色晚餐收尾</h4>
                                 <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
-                                    <li><strong>餐廳建議：</strong><a href="https://maps.apple.com/?q=The+Dearborn,Chicago" target="_blank">The Dearborn</a> (現代美式＋氣氛佳) 或 <a href="https://maps.apple.com/?q=Ema,Chicago" target="_blank">Ema</a> (地中海風格小盤料理)。</li>
+                                    <li><strong>餐廳建議：</strong><a href="https://maps.apple.com/?q=The+Dearborn,Chicago" target="_blank" class="hover:underline">The Dearborn</a> (現代美式＋氣氛佳) 或 <a href="https://maps.apple.com/?q=Ema,Chicago" target="_blank" class="hover:underline">Ema</a> (地中海風格小盤料理)。</li>
                                     <li>建議安排舒適安靜空間，回顧旅程並放鬆。</li>
                                 </ul>
                             </div>
@@ -910,15 +925,15 @@
                             <div class="activity-block border-blue-400 bg-blue-50/70">
                                 <h4 class="font-bold text-lg text-blue-800">09:00 – 12:00: 早午餐 + 輕鬆散步</h4>
                                 <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
-                                    <li><strong>餐廳建議：</strong><a href="https://maps.apple.com/?q=Wildberry+Pancakes+and+Cafe,Chicago" target="_blank">Wildberry Pancakes</a> (市中心早午餐名店) 或回訪喜愛餐廳收尾。</li>
-                                    <li>可再訪 Millennium Park 或 Riverwalk，拍下最後的旅行紀念照。</li>
+                                    <li><strong>餐廳建議：</strong><a href="https://maps.apple.com/?q=Wildberry+Pancakes+and+Cafe,Chicago" target="_blank" class="hover:underline">Wildberry Pancakes</a> (市中心早午餐名店) 或回訪喜愛餐廳收尾。</li>
+                                    <li>可再訪 <a href="https://maps.apple.com/?q=Millennium+Park,Chicago" target="_blank" class="hover:underline">Millennium Park</a> 或 <a href="https://maps.apple.com/?q=Chicago+Riverwalk" target="_blank" class="hover:underline">Riverwalk</a>，拍下最後的旅行紀念照。</li>
                                 </ul>
                             </div>
                             <div class="activity-block border-green-400 bg-green-50/70">
                                 <h4 class="font-bold text-lg text-green-800">12:00 – 17:00: 自由時間 / 打包行李</h4>
                                 <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
                                     <li>回飯店收拾行李，退房後可將行李寄存在飯店。</li>
-                                    <li>若有力氣，可短暫逛 Target、Uniqlo、Nordstrom Rack 等商店。</li>
+                                    <li>若有力氣，可短暫逛 <a href="https://maps.apple.com/?q=Target,Chicago" target="_blank" class="hover:underline">Target</a>、Uniqlo、Nordstrom Rack 等商店。</li>
                                     <li>建議於 17:00–18:00 晚餐前吃簡單清爽食物，避免搭機前不適。</li>
                                 </ul>
                             </div>
@@ -1128,9 +1143,15 @@
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('is-visible');
+                        
+                        // New: Staggered animation for activity blocks
+                        const activityBlocks = entry.target.querySelectorAll('.activity-block');
+                        activityBlocks.forEach((block, index) => {
+                            block.style.transitionDelay = `${index * 120}ms`; // Stagger by 120ms
+                        });
                     }
                 });
-            }, { threshold: 0.1 });
+            }, { threshold: 0.15 }); // Adjust threshold slightly
             tripCards.forEach(card => cardObserver.observe(card));
 
             // --- Feature: Smart Navigation Tabs (Desktop) ---
