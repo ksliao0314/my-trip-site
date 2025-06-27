@@ -95,6 +95,11 @@
              margin-right: 0.5rem;
         }
 
+        .weather-display {
+            font-size: 0.8rem;
+            color: #6b7280;
+        }
+
         /* --- Map Interaction Styles --- */
         .map-city-link:hover g .map-city-dot, .map-city-link:active g .map-city-dot {
             r: 7;
@@ -278,11 +283,12 @@
             <div data-day="1" data-date="2025-07-04" data-day-group="1">
                 <details class="trip-card bg-white rounded-2xl shadow-lg ring-1 ring-gray-200 overflow-hidden" open>
                     <summary class="flex justify-between items-center">
-                        <div>
+                        <div class="flex-grow">
                             <p class="text-sm font-medium text-indigo-600">Day 1-2 | 7月4日（週五）</p>
                             <h3 id="day1" class="text-xl sm:text-2xl font-bold mt-1 text-gray-900">落地蒙特婁首日</h3>
                         </div>
-                        <div class="summary-arrow">
+                        <div class="weather-display flex-shrink-0 ml-4 text-right"></div>
+                        <div class="summary-arrow ml-2 flex-shrink-0">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
                         </div>
                     </summary>
@@ -340,11 +346,12 @@
             <div data-day="3" data-date="2025-07-05" data-day-group="1">
                 <details class="trip-card bg-white rounded-2xl shadow-lg ring-1 ring-gray-200 overflow-hidden">
                     <summary class="flex justify-between items-center">
-                        <div>
+                        <div class="flex-grow">
                             <p class="text-sm font-medium text-indigo-600">Day 3 | 7月5日（週六）</p>
                             <h3 id="day3" class="text-xl sm:text-2xl font-bold mt-1 text-gray-900">蒙特婁舊城漫步日</h3>
                         </div>
-                        <div class="summary-arrow">
+                        <div class="weather-display flex-shrink-0 ml-4 text-right"></div>
+                        <div class="summary-arrow ml-2 flex-shrink-0">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
                         </div>
                     </summary>
@@ -381,11 +388,12 @@
             <div data-day="4" data-date="2025-07-06" data-day-group="4">
                 <details class="trip-card bg-white rounded-2xl shadow-lg ring-1 ring-gray-200 overflow-hidden">
                      <summary class="flex justify-between items-center">
-                        <div>
+                        <div class="flex-grow">
                             <p class="text-sm font-medium text-indigo-600">Day 4 | 7月6日（週日）</p>
                             <h3 id="day4" class="text-xl sm:text-2xl font-bold mt-1 text-gray-900">小義大利 → 魁北克市</h3>
                         </div>
-                        <div class="summary-arrow">
+                        <div class="weather-display flex-shrink-0 ml-4 text-right"></div>
+                        <div class="summary-arrow ml-2 flex-shrink-0">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
                         </div>
                     </summary>
@@ -437,11 +445,12 @@
             <div data-day="5" data-date="2025-07-07" data-day-group="4">
                 <details class="trip-card bg-white rounded-2xl shadow-lg ring-1 ring-gray-200 overflow-hidden">
                      <summary class="flex justify-between items-center">
-                        <div>
+                        <div class="flex-grow">
                             <p class="text-sm font-medium text-indigo-600">Day 5 | 7月7日（週一）</p>
                             <h3 id="day5" class="text-xl sm:text-2xl font-bold mt-1 text-gray-900">魁北克市舊城一日遊</h3>
                         </div>
-                        <div class="summary-arrow">
+                        <div class="weather-display flex-shrink-0 ml-4 text-right"></div>
+                        <div class="summary-arrow ml-2 flex-shrink-0">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
                         </div>
                     </summary>
@@ -496,11 +505,12 @@
             <div data-day="6" data-date="2025-07-08" data-day-group="6">
                  <details class="trip-card bg-white rounded-2xl shadow-lg ring-1 ring-gray-200 overflow-hidden">
                     <summary class="summary-travel-day flex justify-between items-center">
-                        <div>
+                        <div class="flex-grow">
                             <p class="text-sm font-medium text-amber-700">Day 6 | 7月8日（週二）</p>
                             <h3 id="day6" class="text-xl sm:text-2xl font-bold mt-1 text-gray-900">✈️ 大轉運日：魁北克 → 多倫多</h3>
                         </div>
-                        <div class="summary-arrow">
+                        <div class="weather-display flex-shrink-0 ml-4 text-right"></div>
+                        <div class="summary-arrow ml-2 flex-shrink-0">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
                         </div>
                     </summary>
@@ -557,11 +567,12 @@
             <div data-day="7" data-date="2025-07-09" data-day-group="6">
                  <details class="trip-card bg-white rounded-2xl shadow-lg ring-1 ring-gray-200 overflow-hidden">
                     <summary class="flex justify-between items-center">
-                        <div>
+                        <div class="flex-grow">
                             <p class="text-sm font-medium text-indigo-600">Day 7 | 7月9日（週三）</p>
                             <h3 id="day7" class="text-xl sm:text-2xl font-bold mt-1 text-gray-900">尼加拉瓜瀑布一日遊</h3>
                         </div>
-                        <div class="summary-arrow">
+                        <div class="weather-display flex-shrink-0 ml-4 text-right"></div>
+                        <div class="summary-arrow ml-2 flex-shrink-0">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
                         </div>
                     </summary>
@@ -620,11 +631,12 @@
             <div data-day="8" data-date="2025-07-10" data-day-group="6">
                  <details class="trip-card bg-white rounded-2xl shadow-lg ring-1 ring-gray-200 overflow-hidden">
                     <summary class="summary-travel-day flex justify-between items-center">
-                        <div>
+                        <div class="flex-grow">
                             <p class="text-sm font-medium text-amber-700">Day 8 | 7月10日（週四）</p>
                             <h3 id="day8" class="text-xl sm:text-2xl font-bold mt-1 text-gray-900">✈️ 尼加拉瓜瀑布 → 芝加哥</h3>
                         </div>
-                        <div class="summary-arrow">
+                        <div class="weather-display flex-shrink-0 ml-4 text-right"></div>
+                        <div class="summary-arrow ml-2 flex-shrink-0">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
                         </div>
                     </summary>
@@ -685,11 +697,12 @@
              <div data-day="9" data-date="2025-07-11" data-day-group="9">
                  <details class="trip-card bg-white rounded-2xl shadow-lg ring-1 ring-gray-200 overflow-hidden">
                     <summary class="flex justify-between items-center">
-                        <div>
+                        <div class="flex-grow">
                             <p class="text-sm font-medium text-indigo-600">Day 9 | 7月11日（週五）</p>
                             <h3 id="day9" class="text-xl sm:text-2xl font-bold mt-1 text-gray-900">芝加哥建築美學與湖濱魅力</h3>
                         </div>
-                        <div class="summary-arrow">
+                        <div class="weather-display flex-shrink-0 ml-4 text-right"></div>
+                        <div class="summary-arrow ml-2 flex-shrink-0">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
                         </div>
                     </summary>
@@ -752,11 +765,12 @@
              <div data-day="10" data-date="2025-07-12" data-day-group="9">
                  <details class="trip-card bg-white rounded-2xl shadow-lg ring-1 ring-gray-200 overflow-hidden">
                     <summary class="flex justify-between items-center">
-                        <div>
+                        <div class="flex-grow">
                             <p class="text-sm font-medium text-indigo-600">Day 10 | 7月12日（週六）</p>
                             <h3 id="day10" class="text-xl sm:text-2xl font-bold mt-1 text-gray-900">芝加哥高空挑戰 + 博物館探索</h3>
                         </div>
-                        <div class="summary-arrow">
+                        <div class="weather-display flex-shrink-0 ml-4 text-right"></div>
+                        <div class="summary-arrow ml-2 flex-shrink-0">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
                         </div>
                     </summary>
@@ -809,11 +823,12 @@
              <div data-day="11" data-date="2025-07-13" data-day-group="9">
                  <details class="trip-card bg-white rounded-2xl shadow-lg ring-1 ring-gray-200 overflow-hidden">
                     <summary class="flex justify-between items-center">
-                        <div>
+                        <div class="flex-grow">
                             <p class="text-sm font-medium text-indigo-600">Day 11 | 7月13日（週日）</p>
                             <h3 id="day11" class="text-xl sm:text-2xl font-bold mt-1 text-gray-900">芝加哥的生活感與收尾採購</h3>
                         </div>
-                         <div class="summary-arrow">
+                         <div class="weather-display flex-shrink-0 ml-4 text-right"></div>
+                         <div class="summary-arrow ml-2 flex-shrink-0">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
                         </div>
                     </summary>
@@ -866,11 +881,12 @@
              <div data-day="12" data-date="2025-07-14" data-day-group="9">
                  <details class="trip-card bg-white rounded-2xl shadow-lg ring-1 ring-gray-200 overflow-hidden">
                     <summary class="flex justify-between items-center">
-                        <div>
+                        <div class="flex-grow">
                             <p class="text-sm font-medium text-indigo-600">Day 12 | 7月14日（週一）</p>
                             <h3 id="day12" class="text-xl sm:text-2xl font-bold mt-1 text-gray-900">芝加哥 → 台北：踏上返鄉之路</h3>
                         </div>
-                         <div class="summary-arrow">
+                        <div class="weather-display flex-shrink-0 ml-4 text-right"></div>
+                        <div class="summary-arrow ml-2 flex-shrink-0">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
                         </div>
                     </summary>
@@ -1107,14 +1123,15 @@
                 try {
                     const targetElement = document.querySelector(hash);
                     if (!targetElement) return;
+                    
+                    // Use scroll-margin-top for positioning
+                    const offset = 80; // Fallback offset
+                    const targetTop = targetElement.getBoundingClientRect().top + window.pageYOffset;
+                     window.scrollTo({
+                        top: targetTop - offset,
+                        behavior: 'smooth'
+                    });
 
-                    const offset = mainNav.offsetHeight;
-                    const bodyRect = document.body.getBoundingClientRect().top;
-                    const elementRect = targetElement.getBoundingClientRect().top;
-                    const elementPosition = elementRect - bodyRect;
-                    const offsetPosition = elementPosition - offset - 20; // Extra padding
-
-                    window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
 
                     if (targetElement.hasAttribute('data-city-section')) {
                         let nextElement = targetElement.nextElementSibling;
@@ -1179,7 +1196,7 @@
 
                 if (!activeSection) {
                     for(let i = entries.length - 1; i >= 0; i--) {
-                        if (entries[i].boundingClientRect.top < mainNav.offsetHeight) {
+                        if (entries[i].getBoundingClientRect().top < mainNav.offsetHeight) {
                             activeSection = entries[i].target;
                             break;
                         }
@@ -1288,7 +1305,6 @@
                 e.preventDefault();
                 deferredPrompt = e;
                 const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-                // Only show install button if it's not iOS
                 if (!isIOS) {
                     installBtn.classList.remove('hidden');
                 }
@@ -1309,19 +1325,50 @@
             });
 
             
-            // --- Feature: PWA Service Worker Registration ---
+            // --- Feature: PWA Service Worker Registration & Weather ---
             if ('serviceWorker' in navigator) {
                 const swCode = `
-                    const CACHE_NAME = 'trip-cache-v24-fs'; // Updated cache version
-                    const urlsToCache = ['./', 'https://cdn.tailwindcss.com'];
-                    self.addEventListener('install', e => e.waitUntil(caches.open(CACHE_NAME).then(c => c.addAll(urlsToCache))));
-                    self.addEventListener('fetch', e => e.respondWith(caches.match(e.request).then(r => r || fetch(e.request))));
+                    const CACHE_NAME = 'trip-cache-v25-fs';
+                    const urlsToCache = [
+                        './',
+                        'https://cdn.tailwindcss.com',
+                        'https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap',
+                        'https://placehold.co/192x192/4f46e5/ffffff?text=F%26S',
+                        'https://placehold.co/512x512/4f46e5/ffffff?text=F%26S',
+                        'https://placehold.co/180x180/4f46e5/ffffff?text=F%26S'
+                    ];
+
+                    self.addEventListener('install', e => {
+                        e.waitUntil(
+                            caches.open(CACHE_NAME).then(cache => {
+                                return cache.addAll(urlsToCache);
+                            })
+                        );
+                    });
+
+                    self.addEventListener('fetch', e => {
+                      e.respondWith(
+                        caches.open(CACHE_NAME).then(cache => {
+                          return cache.match(e.request).then(response => {
+                            const fetchPromise = fetch(e.request).then(networkResponse => {
+                              cache.put(e.request, networkResponse.clone());
+                              return networkResponse;
+                            });
+                            return response || fetchPromise;
+                          });
+                        })
+                      );
+                    });
+
                     self.addEventListener('activate', e => {
                         const cacheWhitelist = [CACHE_NAME];
                         e.waitUntil(caches.keys().then(names => Promise.all(names.map(name => {
-                        if (cacheWhitelist.indexOf(name) === -1) return caches.delete(name);
+                            if (cacheWhitelist.indexOf(name) === -1) {
+                                return caches.delete(name);
+                            }
                         }))));
-                    });`;
+                    });
+                `;
                 const swBlob = new Blob([swCode], { type: 'application/javascript' });
                 const swUrl = URL.createObjectURL(swBlob);
                 window.addEventListener('load', () => {
@@ -1330,6 +1377,43 @@
                     .catch(err => console.log('ServiceWorker registration failed: ', err));
                 });
             }
+
+            // --- Feature: Weather Display ---
+            const mockWeatherData = {
+                '2025-07-04': { temp: '24°', rain: '10%', icon: '☀️' },
+                '2025-07-05': { temp: '25°', rain: '20%', icon: '⛅️' },
+                '2025-07-06': { temp: '23°', rain: '60%', icon: '🌦️' },
+                '2025-07-07': { temp: '22°', rain: '30%', icon: '☁️' },
+                '2025-07-08': { temp: '26°', rain: '10%', icon: '☀️' },
+                '2025-07-09': { temp: '27°', rain: '50%', icon: '🌦️' },
+                '2025-07-10': { temp: '28°', rain: '20%', icon: '⛅️' },
+                '2025-07-11': { temp: '29°', rain: '10%', icon: '☀️' },
+                '2025-07-12': { temp: '30°', rain: '40%', icon: '⛈️' },
+                '2025-07-13': { temp: '28°', rain: '20%', icon: '⛅️' },
+                '2025-07-14': { temp: '27°', rain: '10%', icon: '☀️' },
+            };
+            
+            function fetchAndDisplayWeather() {
+                console.log("Fetching weather data...");
+                const dayElements = document.querySelectorAll('[data-date]');
+                dayElements.forEach(dayEl => {
+                    const date = dayEl.dataset.date;
+                    const weather = mockWeatherData[date];
+                    const weatherDisplay = dayEl.querySelector('.weather-display');
+                    if(weather && weatherDisplay) {
+                        weatherDisplay.innerHTML = `<span title="降雨機率 ${weather.rain}">${weather.icon} ${weather.temp}</span>`;
+                    }
+                });
+            }
+
+            // Fetch weather on load
+            fetchAndDisplayWeather();
+            // Refetch when tab is visible again (simulates background sync)
+            document.addEventListener('visibilitychange', () => {
+                if (document.visibilityState === 'visible') {
+                    fetchAndDisplayWeather();
+                }
+            });
             
             // --- Initialize Today's Itinerary on Load ---
             function initializeToday() {
