@@ -238,7 +238,7 @@
                 -webkit-print-color-adjust: exact; 
                 print-color-adjust: exact; 
             }
-            .no-print, .sticky-nav, #today-btn, #mobile-menu-btn, #time-dashboard { 
+            .no-print, .sticky-nav, #today-btn, #mobile-menu-btn, #time-dashboard, #hotel-status-section { 
                 display: none !important; 
             }
             .trip-card, .trip-card.is-visible { 
@@ -353,7 +353,7 @@
                     <p id="date-chicago" class="text-xs text-gray-400">---</p>
                 </div>
                  <div id="time-taipei-block" class="timezone-block bg-white p-4 rounded-lg shadow text-center">
-                    <h2 class="text-sm font-bold text-gray-500">🇹🇼 台北</h2>
+                    <h2 class="text-sm font-bold text-gray-500">�🇼 台北</h2>
                     <p id="time-taipei" class="text-xl sm:text-2xl font-mono font-bold text-gray-800">--:--:--</p>
                     <p id="date-taipei" class="text-xs text-gray-400">---</p>
                 </div>
@@ -1471,11 +1471,17 @@
             
             // --- Robust Date and View Management ---
             function initializeTripView() {
+                const hotelData = [
+                    { name: 'InterContinental Montreal By IHG', checkIn: '2025-07-02', checkOut: '2025-07-04', mapLink: 'https://maps.apple.com/?q=InterContinental+Montreal', checkInTime: '下午4:00後', checkOutTime: '下午12:00前' },
+                    { name: 'Fairmont Le Château Frontenac (範例)', checkIn: '2025-07-04', checkOut: '2025-07-06', mapLink: 'https://maps.apple.com/?q=Fairmont+Le+Château+Frontenac', checkInTime: '下午4:00後', checkOutTime: '上午11:00前' },
+                    { name: 'Sheraton Fallsview Hotel', checkIn: '2025-07-06', checkOut: '2025-07-08', mapLink: 'https://maps.apple.com/?q=Sheraton+Fallsview+Hotel', checkInTime: '下午4:00後', checkOutTime: '下午12:00前' },
+                    { name: 'The Peninsula Chicago (範例)', checkIn: '2025-07-08', checkOut: '2025-07-13', mapLink: 'https://maps.apple.com/?q=The+Peninsula+Chicago', checkInTime: '下午3:00後', checkOutTime: '中午12:00前' }
+                ];
+
                 const showPastToggle = document.getElementById('show-past-toggle');
                 const mainContainer = document.querySelector('main.space-y-8');
                 if (!mainContainer || !showPastToggle) return;
                 
-                // Store original titles
                 const timezoneTitles = {
                     'time-montreal-block': document.querySelector('#time-montreal-block h2'),
                     'time-chicago-block': document.querySelector('#time-chicago-block h2'),
@@ -1485,7 +1491,6 @@
                 for(const id in timezoneTitles) {
                     if(timezoneTitles[id]) originalTitles[id] = timezoneTitles[id].textContent;
                 }
-
 
                 showPastToggle.checked = false;
 
@@ -1507,8 +1512,40 @@
                     if (!dateStr) return;
                     
                     el.classList.remove('day-past');
-                    const summary = el.querySelector('summary');
-                    if (summary) summary.classList.remove('summary-today');
+                    if (el.querySelector('summary')) el.querySelector('summary').classList.remove('summary-today');
+
+                    // --- NEW: Dynamic Hotel Info Injection Logic ---
+                    const dayContent = el.querySelector('.p-4.sm\\:p-6');
+                    if (dayContent) {
+                        const existingInfo = dayContent.querySelector('.accommodation-info');
+                        if (existingInfo) existingInfo.remove(); // Clear previous info
+
+                        const checkingOut = hotelData.find(h => h.checkOut === dateStr);
+                        const checkingIn = hotelData.find(h => h.checkIn === dateStr);
+                        const stayingAt = hotelData.find(h => dateStr >= h.checkIn && dateStr < h.checkOut);
+
+                        let infoHTML = '';
+                        if (checkingOut) {
+                            infoHTML += `<p class="text-gray-700">今日退房：<a href="${checkingOut.mapLink}" target="_blank" class="font-semibold hover:underline">${checkingOut.name}</a> (${checkingOut.checkOutTime}須退房)</p>`;
+                        }
+                        if (checkingIn) {
+                             infoHTML += `<p class="text-gray-700 mt-1">今日入住：<a href="${checkingIn.mapLink}" target="_blank" class="font-semibold hover:underline">${checkingIn.name}</a> (${checkingIn.checkInTime}可入住)</p>`;
+                        } else if (!checkingOut && stayingAt) {
+                            infoHTML += `<p class="text-gray-700">今晚入住：<a href="${stayingAt.mapLink}" target="_blank" class="font-semibold hover:underline">${stayingAt.name}</a></p>`;
+                        }
+
+                        if (infoHTML) {
+                            const accommodationHTML = `
+                                <div class="accommodation-info mt-0 mb-6 p-4 bg-gray-100 rounded-lg border-l-4 border-indigo-400">
+                                    <h4 class="font-bold text-lg text-indigo-800 flex items-center mb-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor"><path d="M19 9.5A2.5 2.5 0 0016.5 7H3.5A2.5 2.5 0 001 9.5v7A2.5 2.5 0 003.5 19h13a2.5 2.5 0 002.5-2.5v-7zM6 13a1 1 0 11-2 0 1 1 0 012 0zm3 0a1 1 0 11-2 0 1 1 0 012 0z" /><path d="M3.5 4A1.5 1.5 0 002 5.5v1A1.5 1.5 0 003.5 8h13A1.5 1.5 0 0018 6.5v-1A1.5 1.5 0 0016.5 4h-13z" /></svg>
+                                        住宿資訊
+                                    </h4>
+                                    ${infoHTML}
+                                </div>`;
+                            dayContent.insertAdjacentHTML('afterbegin', accommodationHTML);
+                        }
+                    }
                     
                     if (dateStr < todayString) {
                         el.classList.add('day-past');
@@ -1522,21 +1559,20 @@
                         if (summaryElement) {
                             summaryElement.classList.add('summary-today');
                             const h3 = summaryElement.querySelector('h3');
-                            const marker = h3?.querySelector('.today-marker');
-                            if(h3 && !marker) {
+                            if(h3 && !h3.querySelector('.today-marker')) {
                                 h3.insertAdjacentHTML('beforeend', ' <span class="today-marker text-base font-medium text-green-600">(今日行程)</span>');
                             }
                         }
                     }
                 });
                 
+                // --- Highlight Map and Timezone ---
                 document.querySelectorAll('.map-city-link').forEach(link => link.classList.remove('map-city-current'));
                 if (todayCityTargetId) {
                     const currentCityLink = document.querySelector(`.map-city-link[data-city-id="${todayCityTargetId}"]`);
                     currentCityLink?.classList.add('map-city-current');
                 }
 
-                // --- DYNAMIC HIGHLIGHT LOGIC ---
                 document.querySelectorAll('.timezone-block').forEach(block => block.classList.remove('timezone-highlight'));
                 for(const id in timezoneTitles) {
                     if(timezoneTitles[id] && originalTitles[id]) timezoneTitles[id].textContent = originalTitles[id];
@@ -1559,6 +1595,7 @@
                     titleToUpdate.textContent = `${originalTitles[highlightBlockId]} (當地)`;
                 }
 
+                // --- Final setup ---
                 const updateVisibility = () => mainContainer.classList.toggle('show-past', showPastToggle.checked);
                 showPastToggle.addEventListener('change', updateVisibility);
                 updateVisibility();
