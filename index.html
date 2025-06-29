@@ -10,7 +10,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="F&S飛翔旅行">
     <meta name="theme-color" content="#4f46e5">
-    <link rel="manifest" href="data:application/manifest+json;base64,ew0KICAic2hvcnRfbmFtZSI6ICJGJlPkvZXlvLpUSEsiLA0KICAibmFtZSI6ICJGJlPkvZXlvLpUSEsiLCANCiAgImljb25zIjogWw0KICAgIHsNCiAgICAgICJzcmMiOiAiaHR0cHM6Ly9wbGFjZWhvbGQuY28vMTkyeDE5Mi80ZjQ2ZTUvZmZmZmZmP3RleHQ9RlMlMjZTIiwNCiAgICAgICJ0eXBlIjogImltYWdlL3BuZyIsDQogICAgICAic2l6ZXMiOiAiMTkyeDE5MiINCiAgICB9LA0KICAgIHsNCiAgICAgICJzcmMiOiAiaHR0cHM6Ly9wbGFjZWhvbGQuY28vNTEyeDUxMi80ZjQ2ZTUvZmZmZmZmP3RleHQ9RlMlMjZTIiwNCiAgICAgICJ0eXBlIjogImltYWdlL3BuZyIsDQogICAgICAic2l6ZXMiOiAiNTEyeDUxMiINCiAgICB9DQogIF0sDQogICJzdGFydF91cmwiOiAiLiIsDQogICJkaXNwbGF5IjogInN0YW5kYWxvbmUiLA0KICAidGhlbZV9jb2xvciI6ICIjNGY0NmU1IiwNCiAgImJhY2tncm91bmRfY29sb3IiOiAiI2Y4ZjlmYSIgDQp9">
+    <link rel="manifest" href="data:application/manifest+json;base64,ew0KICAic2hvcnRfbmFtZSI6ICJGJlPkvZXlvLpUSEsiLA0KICAibmFtZSI6ICJGJlPkvZXlvLpUSEsiLCANCiAgImljb25zIjogWw0KICAgIHsNCiAgICAgICJzcmMiOiAiaHR0cHM6Ly9wbGFjZWhvbGQuY28vMTkyeDE5Mi80ZjQ2ZTUvZmZmZmZmP3RleHQ9RlMlMjZTIiwNCiAgICAgICJ0eXBlIjogImltYWdlL3BuZyIsDQogICAgICAic2l6ZXMiOiAiMTkyeDE5MiINCiAgICB9LA0KICAgIHsNCiAgICAgICJzcmMiOiAiaHR0cHM6Ly9wbGFjZWhvbGQuY28vNTEyeDUxMi80ZjQ2ZTUvZmZmZmZmP3RleHQ9RlMlMjZTIiwNCiAgICAgICJ0eXBlIjogImltYWdlL3BuZyIsDQogICAgICAic2l6ZXMiOiAiNTEyeDUxMiINCiAgICB9DQogIF0sDQogICJzdGFydF91cmwiOiAiLiIsDQogICJkaXNwbGF5IjogInN0YW5kYWxvbmUiLA0KICAidGhlbWVfY29sb3IiOiAiI0NGY0NmU1IiwNCiAgImJhY2tncm91bmRfY29sb3IiOiAiI2Y4ZjlmYSIgDQp9">
     <link rel="apple-touch-icon" href="https://placehold.co/180x180/4f46e5/ffffff?text=F%26S">
 
     <script src="https://cdn.tailwindcss.com"></script>
@@ -111,6 +111,17 @@
             font-size: 0.8rem;
             color: #6b7280;
         }
+        
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.5);
+                opacity: 0.7;
+            }
+        }
 
         /* --- Map Interaction Styles --- */
         .map-city-link:hover g .map-city-dot, .map-city-link:active g .map-city-dot {
@@ -121,7 +132,6 @@
             font-weight: bold;
         }
         
-        /* Style for scroll-activated highlighting */
         .map-city-active g .map-city-dot {
             r: 8;
             fill: #ef4444; /* red-500 */
@@ -131,6 +141,19 @@
         .map-city-active g text {
             font-weight: bold;
             fill: #ef4444;
+        }
+
+        .map-city-current g .map-city-dot {
+            r: 9;
+            fill: #f59e0b; /* amber-500 */
+            stroke: white;
+            stroke-width: 2px;
+            animation: pulse 2s infinite;
+        }
+        .map-city-current g text {
+            font-weight: 900; /* black */
+            font-size: 11px;
+            fill: #d97706; /* amber-600 */
         }
         
         .route-line {
@@ -147,28 +170,19 @@
             stroke-dasharray: none;
         }
 
-        /* Map Animation Styles */
         .transport-icon {
             opacity: 0;
             animation: fadeIn 1s ease-in forwards;
-            animation-delay: 2s; /* Delay until paths are mostly drawn */
+            animation-delay: 2s;
         }
         .animated-route {
-            stroke-dasharray: 500; /* A large enough value to cover the path length */
+            stroke-dasharray: 500;
             stroke-dashoffset: 500;
             animation: draw 2s ease-out forwards;
         }
         
-        @keyframes draw {
-            to {
-                stroke-dashoffset: 0;
-            }
-        }
-        @keyframes fadeIn {
-            to {
-                opacity: 1;
-            }
-        }
+        @keyframes draw { to { stroke-dashoffset: 0; } }
+        @keyframes fadeIn { to { opacity: 1; } }
 
         .nav-pill-group {
             display: inline-flex;
@@ -199,11 +213,26 @@
             color: var(--brand-color);
             border-bottom-color: var(--brand-color);
         }
+
+        .timezone-block {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .timezone-highlight {
+            transform: scale(1.03);
+            box-shadow: 0 0 0 3px var(--brand-color);
+            background-color: #f0f9ff;
+        }
+        .day-past {
+            display: none;
+        }
+        .show-past .day-past {
+            display: block;
+        }
         
         @media print {
             @page { 
                 size: A4 portrait; 
-                margin: 1cm; /* Reduced margin to hide browser headers/footers */
+                margin: 1cm;
             }
             body { 
                 -webkit-print-color-adjust: exact; 
@@ -233,6 +262,9 @@
             }
             details summary .summary-arrow { 
                 display: none !important; 
+            }
+            .day-past {
+                display: block !important;
             }
         }
     </style>
@@ -309,24 +341,19 @@
         
         <!-- Live Time Dashboard -->
         <section id="time-dashboard" class="mb-12 no-print">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div class="bg-white p-4 rounded-lg shadow text-center">
-                    <h2 class="text-sm font-bold text-gray-500">📍您的當地時間</h2>
-                    <p id="time-local" class="text-xl sm:text-2xl font-mono font-bold text-indigo-700">--:--:--</p>
-                    <p id="date-local" class="text-xs text-gray-400">---</p>
-                </div>
-                <div class="bg-white p-4 rounded-lg shadow text-center">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div id="time-montreal-block" class="timezone-block bg-white p-4 rounded-lg shadow text-center">
                     <h2 class="text-sm font-bold text-gray-500">🍁 蒙特婁/魁北克</h2>
                     <p id="time-montreal" class="text-xl sm:text-2xl font-mono font-bold text-gray-800">--:--:--</p>
                     <p id="date-montreal" class="text-xs text-gray-400">---</p>
                 </div>
-                <div class="bg-white p-4 rounded-lg shadow text-center">
+                <div id="time-chicago-block" class="timezone-block bg-white p-4 rounded-lg shadow text-center">
                     <h2 class="text-sm font-bold text-gray-500">🇺🇸 芝加哥</h2>
                     <p id="time-chicago" class="text-xl sm:text-2xl font-mono font-bold text-gray-800">--:--:--</p>
                     <p id="date-chicago" class="text-xs text-gray-400">---</p>
                 </div>
-                 <div class="bg-white p-4 rounded-lg shadow text-center">
-                    <h2 class="text-sm font-bold text-gray-500">🇹🇼 台北</h2>
+                 <div id="time-taipei-block" class="timezone-block bg-white p-4 rounded-lg shadow text-center">
+                    <h2 class="text-sm font-bold text-gray-500">🇹🇼 台北 (當地)</h2>
                     <p id="time-taipei" class="text-xl sm:text-2xl font-mono font-bold text-gray-800">--:--:--</p>
                     <p id="date-taipei" class="text-xs text-gray-400">---</p>
                 </div>
@@ -372,6 +399,19 @@
                 </svg>
             </div>
         </section>
+
+        <!-- Past Itinerary Toggle Switch -->
+        <div class="flex justify-end items-center mb-4 no-print">
+            <label for="show-past-toggle" class="flex items-center cursor-pointer text-sm font-medium text-gray-700">
+                <span class="mr-3">顯示過去行程</span>
+                <div class="relative">
+                    <input type="checkbox" id="show-past-toggle" class="sr-only peer">
+                    <div class="block bg-gray-200 w-10 h-6 rounded-full peer-checked:bg-indigo-300 transition-colors"></div>
+                    <div class="dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-transform peer-checked:translate-x-full"></div>
+                </div>
+            </label>
+        </div>
+
 
         <!-- Itinerary Cards -->
         <main class="space-y-8">
@@ -1100,7 +1140,7 @@
 
     <!-- "Today's Itinerary" Button -->
     <div class="no-print fixed bottom-4 right-4 z-50">
-        <button id="today-btn" onclick="scrollToToday(false)" class="bg-amber-500 text-white font-semibold px-4 py-3 rounded-full shadow-lg hover:bg-amber-600 transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-400 flex items-center justify-center">
+        <button id="today-btn" onclick="scrollToToday()" class="bg-amber-500 text-white font-semibold px-4 py-3 rounded-full shadow-lg hover:bg-amber-600 transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-400 flex items-center justify-center">
             📅 今天行程
         </button>
     </div>
@@ -1124,9 +1164,8 @@
             clearTimeout(toastTimeout);
             toastTimeout = setTimeout(() => {
                 toastEl.classList.add('opacity-0');
-                // Wait for the fade-out animation to finish before hiding
                 setTimeout(() => toastEl.classList.add('hidden'), 300);
-            }, 3000); // Hide after 3 seconds
+            }, 3000);
         }
 
         /**
@@ -1134,15 +1173,12 @@
          * @param {boolean} isAuto - True if called automatically on page load.
          */
         function scrollToToday(isAuto = false) {
-            const today = new Date();
-            const year = today.getFullYear();
-            const mm = String(today.getMonth() + 1).padStart(2, '0'); // Months are 0-based
-            const dd = String(today.getDate()).padStart(2, '0');
-            const todayString = `${year}-${mm}-${dd}`;
+            const todaySummary = document.querySelector('.summary-today');
             
-            const todayElement = document.querySelector(`[data-date="${todayString}"]`);
-            
-            if (todayElement) {
+            if (todaySummary) {
+                const todayElement = todaySummary.closest('[data-day]');
+                if (!todayElement) return;
+
                 const details = todayElement.querySelector('details');
                 if (details && !details.open) {
                     details.open = true;
@@ -1153,14 +1189,17 @@
                 const bodyRect = document.body.getBoundingClientRect().top;
                 const elementRect = todayElement.getBoundingClientRect().top;
                 const elementPosition = elementRect - bodyRect;
-                const offsetPosition = elementPosition - offset - 20; // Extra padding
+                const offsetPosition = elementPosition - offset - 20;
 
                 window.scrollTo({
                     top: offsetPosition,
                     behavior: 'smooth'
                 });
+
                 if (!isAuto) {
-                    showToast(`已為您跳轉至 ${mm}/${dd} 的行程！`);
+                    const dateStr = todayElement.dataset.date;
+                    const date = dateStr ? dateStr.substring(5).replace('-', '/') : '今天';
+                    showToast(`已為您跳轉至 ${date} 的行程！`);
                 }
             } else {
                  if (!isAuto) {
@@ -1177,38 +1216,30 @@
             const mobileMenuBtn = document.getElementById('mobile-menu-btn');
             const mobileMenuPanel = document.getElementById('mobile-menu-panel');
             
-            // --- Feature: Mobile Menu Toggle ---
             if (mobileMenuBtn) {
                 mobileMenuBtn.addEventListener('click', () => {
-                    if (mobileMenuPanel) {
-                        mobileMenuPanel.classList.toggle('hidden');
-                    }
+                    if (mobileMenuPanel) mobileMenuPanel.classList.toggle('hidden');
                 });
             }
             
-            // --- Feature: Sticky Nav Shadow ---
             window.addEventListener('scroll', () => {
                 if(mainNav) mainNav.classList.toggle('scrolled', window.scrollY > 0);
             });
 
-            // --- Feature: Fade-in on Scroll Animation for cards ---
             const tripCards = document.querySelectorAll('.trip-card');
             const cardObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('is-visible');
-                        
-                        // New: Staggered animation for activity blocks
                         const activityBlocks = entry.target.querySelectorAll('.activity-block');
                         activityBlocks.forEach((block, index) => {
-                            block.style.transitionDelay = `${index * 120}ms`; // Stagger by 120ms
+                            block.style.transitionDelay = `${index * 120}ms`;
                         });
                     }
                 });
-            }, { threshold: 0.15 }); // Adjust threshold slightly
+            }, { threshold: 0.1 });
             tripCards.forEach(card => cardObserver.observe(card));
 
-            // --- Feature: Smart Navigation Tabs (Desktop) ---
             const desktopNavPills = document.querySelectorAll('#desktop-nav-pills .nav-pill');
             const daysContent = document.getElementById('desktop-nav-content-days');
             const citiesContent = document.getElementById('desktop-nav-content-cities');
@@ -1226,14 +1257,26 @@
                 });
             });
 
-            // --- Feature: Unified Navigation and Auto-Expanding Details ---
             function handleNavigation(hash) {
                 if (!hash || hash === '#') return;
                 try {
                     const targetElement = document.querySelector(hash);
                     if (!targetElement) return;
+
+                    // NEW: Smartly handle past itinerary clicks from map
+                    const toggle = document.getElementById('show-past-toggle');
+                    if (targetElement.hasAttribute('data-city-section') && toggle && !toggle.checked) {
+                        const cityId = targetElement.id;
+                        const hasPastDay = !!document.querySelector(`[data-city-target="${cityId}"].day-past`);
+
+                        if (hasPastDay) {
+                            toggle.checked = true;
+                            toggle.dispatchEvent(new Event('change'));
+                            showToast('為您顯示過去行程以查看目的地');
+                        }
+                    }
                     
-                    const offset = 80; // Fallback offset
+                    const offset = mainNav ? mainNav.offsetHeight + 20 : 80;
                     const targetTop = targetElement.getBoundingClientRect().top + window.pageYOffset;
                      window.scrollTo({
                         top: targetTop - offset,
@@ -1242,9 +1285,8 @@
 
                     if (targetElement.hasAttribute('data-city-section')) {
                         let nextElement = targetElement.nextElementSibling;
-                        while (nextElement) {
-                             if (nextElement.hasAttribute('data-city-section')) break;
-                            if (nextElement.hasAttribute('data-day')) {
+                        while (nextElement && !nextElement.hasAttribute('data-city-section')) {
+                            if (nextElement.dataset.cityTarget === targetElement.id) {
                                 const details = nextElement.querySelector('details');
                                 if (details && !details.open) details.open = true;
                             }
@@ -1269,7 +1311,7 @@
                     } else {
                         location.hash = hash;
                     }
-                    if (mobileMenuPanel && mobileMenuPanel.classList.contains('block')) {
+                    if (mobileMenuPanel && !mobileMenuPanel.classList.contains('hidden')) {
                         mobileMenuPanel.classList.add('hidden');
                     }
                 });
@@ -1285,12 +1327,10 @@
                 });
             });
             
-            // --- Feature: Interactive Map & Scroll-based Highlighting ---
             const mapCityLinks = document.querySelectorAll('.map-city-link');
             const mapRouteLines = document.querySelectorAll('.route-line');
             const dayCards = document.querySelectorAll('[data-city-target]');
 
-            // Mouse hover interaction
             mapCityLinks.forEach(link => {
                 if (!link.dataset.pathId) return;
                 const pathIds = link.dataset.pathId.split(',');
@@ -1302,20 +1342,13 @@
                 link.addEventListener('mouseleave', unhighlight);
             });
 
-            // Scroll-based interaction
             const mapHighlightObserver = new IntersectionObserver((entries) => {
-                // Clear all active states first
                 mapCityLinks.forEach(link => link.classList.remove('map-city-active'));
                 mapRouteLines.forEach(line => line.classList.remove('highlight-scroll'));
                 
-                let latestActiveCity = null;
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                         latestActiveCity = entry.target.dataset.cityTarget;
-                    }
-                });
-
-                if(latestActiveCity) {
+                const intersectingEntries = entries.filter(e => e.isIntersecting);
+                if (intersectingEntries.length > 0) {
+                    const latestActiveCity = intersectingEntries[intersectingEntries.length - 1].target.dataset.cityTarget;
                      mapCityLinks.forEach(link => {
                         if (link.dataset.cityId === latestActiveCity) {
                             link.classList.add('map-city-active');
@@ -1327,41 +1360,28 @@
             }, { rootMargin: `-${mainNav ? mainNav.offsetHeight : 60}px 0px -60% 0px`, threshold: 0 });
 
             dayCards.forEach(card => {
-                if (card.dataset.cityTarget) {
-                    mapHighlightObserver.observe(card);
-                }
+                if (card.dataset.cityTarget) mapHighlightObserver.observe(card);
             });
 
 
-            // --- Feature: Print Buttons (Desktop and Mobile) ---
             function triggerPrint() {
                 const allDetails = document.querySelectorAll('details');
-                // Store the original open state
                 const originallyOpen = new WeakMap();
                 allDetails.forEach(detail => {
                     originallyOpen.set(detail, detail.open);
-                    // Open all details for printing
                     detail.open = true;
                 });
-
-                // Use a timeout to allow the browser to render the open details before printing
                 setTimeout(() => {
                     window.print();
-
-                    // Restore the original state after printing
                     allDetails.forEach(detail => {
                         detail.open = originallyOpen.get(detail);
                     });
                 }, 100);
             }
-            const printBtn = document.getElementById('print-btn');
-            if(printBtn) printBtn.addEventListener('click', triggerPrint);
-
-            const mobilePrintBtn = document.getElementById('mobile-print-btn');
-            if(mobilePrintBtn) mobilePrintBtn.addEventListener('click', triggerPrint);
+            document.getElementById('print-btn')?.addEventListener('click', triggerPrint);
+            document.getElementById('mobile-print-btn')?.addEventListener('click', triggerPrint);
 
 
-            // --- Feature: Tip Calculator ---
             const billInput = document.getElementById('bill-amount');
             const tipSelect = document.getElementById('tip-rate');
             const tipResultEl = document.getElementById('tip-result');
@@ -1384,104 +1404,9 @@
             if (billInput) billInput.addEventListener('input', calculateTip);
             if (tipSelect) tipSelect.addEventListener('change', calculateTip);
 
-
-            // --- Feature: PWA Installation ---
-            const installBtn = document.getElementById('install-btn');
-            let deferredPrompt;
-
-            window.addEventListener('beforeinstallprompt', (e) => {
-                e.preventDefault();
-                deferredPrompt = e;
-                const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-                if (!isIOS && installBtn) {
-                    installBtn.classList.remove('hidden');
-                }
-            });
-            
-            if(installBtn) {
-                installBtn.addEventListener('click', async () => {
-                    if (deferredPrompt) {
-                        installBtn.classList.add('hidden');
-                        deferredPrompt.prompt();
-                        await deferredPrompt.userChoice;
-                        deferredPrompt = null;
-                    }
-                });
-            }
-
-            window.addEventListener('appinstalled', () => {
-                if(installBtn) installBtn.classList.add('hidden');
-                deferredPrompt = null;
-            });
-
-            
-            // --- Feature: Real-time Weather ---
-            const cityCoordinates = {
-                montreal: { lat: 45.50, lon: -73.57 },
-                quebec: { lat: 46.81, lon: -71.21 },
-                niagara: { lat: 43.09, lon: -79.08 },
-                chicago: { lat: 41.88, lon: -87.63 }
-            };
-
-            function getWeatherIcon(code) {
-                const icons = {
-                    0: '☀️', 1: '🌤️', 2: '⛅️', 3: '☁️', 45: '🌫️', 48: '🌫️', 
-                    51: '🌦️', 53: '🌦️', 55: '🌦️', 61: '🌧️', 63: '🌧️', 65: '🌧️', 
-                    66: '🌧️', 67: '🌧️', 71: '🌨️', 73: '🌨️', 75: '🌨️', 77: '🌨️',
-                    80: '🌧️', 81: '🌧️', 82: '暴雨', 85: '🌨️', 86: '🌨️',
-                    95: '⛈️', 96: '⛈️', 99: '⛈️',
-                };
-                return icons[code] || '🌡️';
-            }
-
-            async function fetchAndDisplayWeather() {
-                const dayElements = document.querySelectorAll('[data-weather-city]');
-                const weatherPromises = [];
-                const cityDataMap = {};
-
-                // Set initial loading state
-                dayElements.forEach(dayEl => {
-                     const weatherDisplay = dayEl.querySelector('.weather-display');
-                     if (weatherDisplay) weatherDisplay.textContent = '讀取中...';
-                });
-
-                for (const city in cityCoordinates) {
-                    const { lat, lon } = cityCoordinates[city];
-                    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=weather_code,temperature_2m_max&timezone=auto`;
-                    weatherPromises.push(
-                        fetch(url)
-                            .then(response => response.json())
-                            .then(data => { cityDataMap[city] = data.daily; })
-                            .catch(error => console.error(`Error fetching weather for ${city}:`, error))
-                    );
-                }
-
-                await Promise.all(weatherPromises);
-
-                dayElements.forEach(dayEl => {
-                    const date = dayEl.dataset.date;
-                    const city = dayEl.dataset.weatherCity;
-                    const weatherDisplay = dayEl.querySelector('.weather-display');
-
-                    if (city && cityDataMap[city] && weatherDisplay) {
-                        const dayIndex = cityDataMap[city].time.indexOf(date);
-                        if (dayIndex > -1) {
-                            const temp = Math.round(cityDataMap[city].temperature_2m_max[dayIndex]);
-                            const code = cityDataMap[city].weather_code[dayIndex];
-                            const icon = getWeatherIcon(code);
-                            weatherDisplay.innerHTML = `<span title="點擊查看詳情">${icon} ${temp}°C</span>`;
-                        } else {
-                             weatherDisplay.textContent = '暫無預報';
-                        }
-                    }
-                });
-            }
-            
-            // --- Feature: Live Time Clocks ---
             function updateClocks() {
                 const now = new Date();
                 const timezones = {
-                    local: Intl.DateTimeFormat().resolvedOptions().timeZone,
                     montreal: 'America/Montreal',
                     chicago: 'America/Chicago',
                     taipei: 'Asia/Taipei'
@@ -1492,7 +1417,7 @@
                     const dateEl = document.getElementById(`date-${id}`);
                     if (timeEl && dateEl) {
                         try {
-                            timeEl.textContent = now.toLocaleTimeString('en-GB', { timeZone: tz });
+                            timeEl.textContent = now.toLocaleTimeString('en-GB', { timeZone: tz, hour12: false });
                             dateEl.textContent = now.toLocaleDateString('zh-TW', { timeZone: tz, weekday: 'long' });
                         } catch (e) {
                             timeEl.textContent = "N/A";
@@ -1502,34 +1427,130 @@
                 }
             }
 
+            const cityCoordinates = {
+                montreal: { lat: 45.50, lon: -73.57 },
+                quebec: { lat: 46.81, lon: -71.21 },
+                niagara: { lat: 43.09, lon: -79.08 },
+                chicago: { lat: 41.88, lon: -87.63 }
+            };
 
-            // Initial Calls on Load
-            fetchAndDisplayWeather();
-            updateClocks();
-            setInterval(updateClocks, 1000); // Update clocks every second
-            
-            // --- Initialize Today's Itinerary on Load ---
-            function initializeToday() {
-                const today = new Date();
-                const year = today.getFullYear();
-                const mm = String(today.getMonth() + 1).padStart(2, '0');
-                const dd = String(today.getDate()).padStart(2, '0');
-                const todayString = `${year}-${mm}-${dd}`;
+            function getWeatherIcon(code) {
+                const icons = { 0: '☀️', 1: '🌤️', 2: '⛅️', 3: '☁️', 45: '🌫️', 48: '🌫️', 51: '🌦️', 53: '🌦️', 55: '🌦️', 61: '🌧️', 63: '🌧️', 65: '🌧️', 66: '🌧️', 67: '🌧️', 71: '🌨️', 73: '🌨️', 75: '🌨️', 77: '🌨️', 80: '🌧️', 81: '🌧️', 82: '暴雨', 85: '🌨️', 86: '🌨️', 95: '⛈️', 96: '⛈️', 99: '⛈️' };
+                return icons[code] || '🌡️';
+            }
+
+            async function fetchAndDisplayWeather() {
+                const dayElements = document.querySelectorAll('[data-weather-city]');
+                const promises = Array.from(new Set(Array.from(dayElements).map(el => el.dataset.weatherCity)))
+                    .filter(Boolean)
+                    .map(city => {
+                        const { lat, lon } = cityCoordinates[city];
+                        const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=weather_code,temperature_2m_max&timezone=auto`;
+                        return fetch(url).then(res => res.json()).then(data => ({ city, data }));
+                    });
+
+                const results = await Promise.all(promises);
+                const weatherData = results.reduce((acc, {city, data}) => ({ ...acc, [city]: data.daily }), {});
                 
-                const todayElement = document.querySelector(`[data-date="${todayString}"]`);
-
-                if (todayElement) {
-                    const summaryElement = todayElement.querySelector('summary');
-                    if(summaryElement) {
-                        summaryElement.classList.add('summary-today');
+                dayElements.forEach(dayEl => {
+                    const date = dayEl.dataset.date;
+                    const city = dayEl.dataset.weatherCity;
+                    const weatherDisplay = dayEl.querySelector('.weather-display');
+                    if (city && weatherData[city] && weatherDisplay) {
+                        const dayIndex = weatherData[city].time.indexOf(date);
+                        if (dayIndex !== -1) {
+                            const temp = Math.round(weatherData[city].temperature_2m_max[dayIndex]);
+                            const icon = getWeatherIcon(weatherData[city].weather_code[dayIndex]);
+                            weatherDisplay.innerHTML = `${icon} ${temp}°C`;
+                        } else {
+                             weatherDisplay.textContent = '暫無預報';
+                        }
                     }
-                    if (!window.location.hash) {
-                       setTimeout(() => scrollToToday(true), 200);
-                    }
-                }
+                });
             }
             
-            initializeToday();
+            // --- Robust Date and View Management ---
+            function initializeTripView() {
+                const showPastToggle = document.getElementById('show-past-toggle');
+                const mainContainer = document.querySelector('main.space-y-8');
+                if (!mainContainer || !showPastToggle) return;
+
+                showPastToggle.checked = false;
+
+                // Use local date string for robust comparison, ignoring timezones
+                const getTodayString = () => {
+                    const today = new Date();
+                    const year = today.getFullYear();
+                    const month = String(today.getMonth() + 1).padStart(2, '0');
+                    const day = String(today.getDate()).padStart(2, '0');
+                    return `${year}-${month}-${day}`;
+                };
+                const todayString = getTodayString();
+
+                let todayElement = null;
+                let todayCityTargetId = null;
+                let todayWeatherCity = null;
+
+                document.querySelectorAll('[data-date]').forEach(el => {
+                    const dateStr = el.dataset.date;
+                    if (!dateStr) return;
+                    
+                    el.classList.remove('day-past', 'summary-today');
+                    const summary = el.querySelector('summary');
+                    if (summary) summary.classList.remove('summary-today');
+                    
+                    if (dateStr < todayString) {
+                        el.classList.add('day-past');
+                        if (el.querySelector('details')) el.querySelector('details').open = false;
+                    } else if (dateStr === todayString) {
+                        todayElement = el;
+                        todayCityTargetId = el.dataset.cityTarget;
+                        todayWeatherCity = el.dataset.weatherCity;
+
+                        const summaryElement = el.querySelector('summary');
+                        if (summaryElement) {
+                            summaryElement.classList.add('summary-today');
+                            const h3 = summaryElement.querySelector('h3');
+                            const marker = h3?.querySelector('.today-marker');
+                            if(h3 && !marker) {
+                                h3.insertAdjacentHTML('beforeend', ' <span class="today-marker text-base font-medium text-green-600">(今日行程)</span>');
+                            }
+                        }
+                    }
+                });
+                
+                document.querySelectorAll('.map-city-link').forEach(link => link.classList.remove('map-city-current'));
+                if (todayCityTargetId) {
+                    const currentCityLink = document.querySelector(`.map-city-link[data-city-id="${todayCityTargetId}"]`);
+                    currentCityLink?.classList.add('map-city-current');
+                }
+
+                document.querySelectorAll('.timezone-block').forEach(block => block.classList.remove('timezone-highlight'));
+                let highlightBlockId = 'time-taipei-block';
+                if (todayWeatherCity) {
+                    const eastern = ['montreal', 'quebec', 'niagara'];
+                    if (eastern.includes(todayWeatherCity)) {
+                        highlightBlockId = 'time-montreal-block';
+                    } else if (todayWeatherCity === 'chicago') {
+                        highlightBlockId = 'time-chicago-block';
+                    }
+                }
+                document.getElementById(highlightBlockId)?.classList.add('timezone-highlight');
+
+                const updateVisibility = () => mainContainer.classList.toggle('show-past', showPastToggle.checked);
+                showPastToggle.addEventListener('change', updateVisibility);
+                updateVisibility();
+
+                if (todayElement && !window.location.hash) {
+                    setTimeout(() => scrollToToday(true), 500);
+                }
+            }
+
+            // --- Initial Calls ---
+            updateClocks();
+            setInterval(updateClocks, 1000);
+            fetchAndDisplayWeather();
+            initializeTripView();
 
         }); // End of DOMContentLoaded
     </script>
