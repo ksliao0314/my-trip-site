@@ -2,8 +2,52 @@
   "tripInfo": {
     "totalDays": 14,
     "tripStartDate": "2025-07-02",
-    "tripEndDate": "2025-07-15"
+    "tripEndDate": "2025-07-16"
   },
+  "timePhases": [
+    {
+      "startUTC": "2025-07-02T01:00:00Z",
+      "endUTC": "2025-07-02T21:00:00Z",
+      "type": "flight",
+      "label": "飛行中 (TPE → YUL)"
+    },
+    {
+      "startUTC": "2025-07-02T21:00:00Z",
+      "endUTC": "2025-07-06T17:00:00Z",
+      "timezone": "America/Montreal",
+      "label": "蒙特婁 / 魁北克"
+    },
+    {
+      "startUTC": "2025-07-06T17:00:00Z",
+      "endUTC": "2025-07-06T18:30:00Z",
+      "type": "flight",
+      "label": "飛行中 (YQB → YYZ)"
+    },
+    {
+      "startUTC": "2025-07-06T18:30:00Z",
+      "endUTC": "2025-07-08T19:00:00Z",
+      "timezone": "America/Toronto",
+      "label": "尼加拉瀑布"
+    },
+    {
+      "startUTC": "2025-07-08T19:00:00Z",
+      "endUTC": "2025-07-08T21:00:00Z",
+      "type": "flight",
+      "label": "飛行中 (YYZ → ORD)"
+    },
+    {
+      "startUTC": "2025-07-08T21:00:00Z",
+      "endUTC": "2025-07-14T06:30:00Z",
+      "timezone": "America/Chicago",
+      "label": "芝加哥"
+    },
+    {
+      "startUTC": "2025-07-14T06:30:00Z",
+      "endUTC": "2025-07-15T03:35:00Z",
+      "type": "flight",
+      "label": "返程飛行"
+    }
+  ],
   "hotels": [
     { "name": "InterContinental Montreal By IHG", "checkIn": "2025-07-02", "checkOut": "2025-07-04", "mapLink": "https://maps.apple.com/?q=InterContinental+Montreal", "checkInTime": "下午4:00後", "checkOutTime": "下午12:00前" },
     { "name": "Fairmont Le Château Frontenac (範例)", "checkIn": "2025-07-04", "checkOut": "2025-07-06", "mapLink": "https://maps.apple.com/?q=Fairmont+Le+Château+Frontenac", "checkInTime": "下午4:00後", "checkOutTime": "上午11:00前" },
@@ -11,15 +55,15 @@
     { "name": "The Peninsula Chicago (範例)", "checkIn": "2025-07-08", "checkOut": "2025-07-13", "mapLink": "https://maps.apple.com/?q=The+Peninsula+Chicago", "checkInTime": "下午3:00後", "checkOutTime": "中午12:00前" }
   ],
   "transport": [
-    { "date": "2025-07-02", "type": "航班", "details": "長榮 BR198 + 加航 AC6" },
+    { "date": "2025-07-02", "type": "航班", "details": "長榮 BR198 + 加航 AC6", "departureUTC": "2025-07-02T01:00:00Z", "arrivalUTC": "2025-07-02T21:00:00Z" },
     { "date": "2025-07-02", "type": "巴士", "details": "747 Express Bus" },
     { "date": "2025-07-04", "type": "火車", "details": "VIA Rail (蒙特婁 → 魁北克市)" },
-    { "date": "2025-07-06", "type": "航班", "details": "加航 AC7959 (魁北克 → 多倫多)" },
-    { "date": "2025-07-08", "type": "航班", "details": "加航 AC515 (多倫多 → 芝加哥)" },
-    { "date": "2025-07-14", "type": "航班", "details": "日航 JL009 (芝加哥 → 東京)" },
-    { "date": "2025-07-15", "type": "航班", "details": "日航 JL097 (東京 → 台北)" }
+    { "date": "2025-07-06", "type": "航班", "details": "加航 AC7959 (魁北克 → 多倫多)", "departureUTC": "2025-07-06T17:00:00Z", "arrivalUTC": "2025-07-06T18:30:00Z" },
+    { "date": "2025-07-08", "type": "航班", "details": "加航 AC515 (多倫多 → 芝加哥)", "departureUTC": "2025-07-08T19:00:00Z", "arrivalUTC": "2025-07-08T21:00:00Z" },
+    { "date": "2025-07-14", "type": "航班", "details": "日航 JL009 (芝加哥 → 東京)", "departureUTC": "2025-07-14T06:30:00Z", "arrivalUTC": "2025-07-14T19:20:00Z" },
+    { "date": "2025-07-15", "type": "航班", "details": "日航 JL097 (東京 → 台北)", "departureUTC": "2025-07-14T23:55:00Z", "arrivalUTC": "2025-07-15T03:35:00Z" }
   ],
-  "foodie": {
+ "foodie": {
     "montreal": {
       "name": "蒙特婁",
       "categories": [
@@ -79,11 +123,11 @@
     "niagara": {
       "name": "尼加拉瀑布",
       "categories": [
-        { "name": "� 景觀牛排／西式主餐", "items": [
+        { "name": "🍽️ 景觀牛排／西式主餐", "items": [
           { "name": "旋轉餐廳", "desc": "Skylon Tower 旋轉餐廳提供壯麗的瀑布全景。", "places": [{ "name": "Skylon Tower", "link": "https://maps.apple.com/?q=Skylon+Tower" }] },
           { "name": "瀑布景觀牛排", "desc": "The Keg Steakhouse – Fallsview 享有絕佳的瀑布景觀。", "places": [{ "name": "The Keg Steakhouse – Fallsview", "link": "https://maps.apple.com/?q=The+Keg+Steakhouse+Fallsview" }] }
         ]},
-        { "name": "🍽 家庭餐／平價美食", "items": [
+        { "name": "🍽️ 家庭餐／平價美食", "items": [
           { "name": "經典菜色＋瀑布景", "desc": "Queen Victoria Place Restaurant 結合美食與美景。", "places": [{ "name": "Queen Victoria Place Restaurant", "link": "https://maps.apple.com/?q=Queen+Victoria+Place+Restaurant" }] },
           { "name": "創意漢堡", "desc": "The Works Gourmet Burger Bistro 提供多樣化的漢堡選擇。", "places": [{ "name": "The Works Gourmet Burger Bistro", "link": "https://maps.apple.com/?q=The+Works+Gourmet+Burger+Bistro+Niagara" }] }
         ]},
@@ -213,7 +257,7 @@
       "activities": [
         { "title": "☕ 08:30 – 10:30｜早餐與最後散步", "items": ["<strong>推薦早餐地點：</strong><a href='https://maps.apple.com/?q=Le+Cochon+Dingue,Quebec' target='_blank' class='hover:underline'>Le Cochon Dingue</a> 或 <a href='https://maps.apple.com/?q=La+Maison+Smith,Quebec' target='_blank' class='hover:underline'>La Maison Smith</a>。", "可選擇短距離散步（如 Place Royale 再訪、沿芳堤娜城堡拍照收尾）。"] },
         { "title": "✈️ 11:00 – 14:30｜退房 → 前往機場 → 搭乘中午航班", "items": ["建議搭乘航班如 Air Canada AC7959（13:00 YQB → 14:30 YYZ）或類似班次。", "從舊城至機場約 20–30 分鐘計程車程。"] },
-        { "title": "🚌 15:30 – 17:30｜轉乘至尼加拉瀑布", "items": ["<strong>包車：</strong>約 1.5 小時直達飯店。", "<strong>大眾運輸：</strong>YYZ 機場搭 UP Express 至 Union Station，轉 GO Transit 火車/巴士至 Niagara Falls (總程約 2.5–3 小時)。"] },
+        { "title": "� 15:30 – 17:30｜轉乘至尼加拉瀑布", "items": ["<strong>包車：</strong>約 1.5 小時直達飯店。", "<strong>大眾運輸：</strong>YYZ 機場搭 UP Express 至 Union Station，轉 GO Transit 火車/巴士至 Niagara Falls (總程約 2.5–3 小時)。"] },
         { "title": "🌇 18:30 – 20:30｜瀑布前散步 + 景觀晚餐", "items": ["入住瀑布景觀飯店後，可前往 <a href='https://maps.apple.com/?q=Table+Rock+Welcome+Centre' target='_blank'>Table Rock Centre</a>，觀察黃昏瀑布光影。", "<strong>晚餐建議：</strong><a href='https://maps.apple.com/?q=Skylon+Tower,Niagara+Falls' target='_blank' class='hover:underline'>Skylon Tower 旋轉餐廳</a> 或 <a href='https://maps.apple.com/?q=The+Keg+Steakhouse,Niagara+Falls' target='_blank' class='hover:underline'>The Keg Steakhouse</a>（靠窗位）。"] }
       ]
     },
@@ -229,7 +273,7 @@
       "tags": ["#經典體驗", "#自然奇觀", "#夜間煙火"],
       "activities": [
         { "title": "🌊 09:00 – 12:00｜經典瀑布三合一體驗", "items": ["<strong><a href='https://www.niagaraparks.com/visit/attractions/niagara-city-cruises/' target='_blank' class='hover:underline'>Voyage to the Falls 船票體驗</a>：</strong>近距離感受瀑布水勢，建議線上預約上午場。", "<strong><a href='https://www.niagaraparks.com/visit/attractions/journey-behind-the-falls/' target='_blank' class='hover:underline'>Journey Behind the Falls</a>：</strong>進入瀑布後方岩壁隧道觀賞水柱傾瀉。", "<strong><a href='https://www.niagaraparks.com/visit/attractions/niagaras-fury/' target='_blank' class='hover:underline'>Niagara’s Fury 4D 劇場</a>（備選）：</strong>觀看瀑布形成歷史的沉浸式體驗。"] },
-        { "title": "🍽 12:30 – 14:00｜午餐建議", "items": ["<a href='https://maps.apple.com/?q=Queen+Victoria+Place+Restaurant,Niagara+Falls' target='_blank' class='hover:underline'>Queen Victoria Place Restaurant</a>（景觀+當地食材）或 Table Rock Centre 美食廣場。"] },
+        { "title": "🍽️ 12:30 – 14:00｜午餐建議", "items": ["<a href='https://maps.apple.com/?q=Queen+Victoria+Place+Restaurant,Niagara+Falls' target='_blank' class='hover:underline'>Queen Victoria Place Restaurant</a>（景觀+當地食材）或 Table Rock Centre 美食廣場。"] },
         { "title": "🦋 14:00 – 17:00｜自然景點探索", "items": ["搭乘 <strong>WEGO 巴士</strong>（建議購買 Niagara Pass）前往：<a href='https://www.niagaraparks.com/visit/attractions/butterfly-conservatory/' target='_blank' class='hover:underline'>Butterfly Conservatory</a>（蝴蝶園）或 <a href='https://www.niagaraparks.com/visit/attractions/white-water-walk/' target='_blank' class='hover:underline'>White Water Walk</a>（激流步道）。"] },
         { "title": "🍷 18:00 – 21:30｜晚餐 + 夜景 + 煙火", "items": ["<strong>夜間活動：</strong>約 21:00 起瀑布打燈，21:45～22:00 季節性煙火秀（如天氣良好）。", "建議提早至 <a href='https://maps.apple.com/?q=Table+Rock+Welcome+Centre,Niagara+Falls' target='_blank'>Table Rock</a> 或 <a href='https://maps.apple.com/?q=Queen+Victoria+Park,Niagara+Falls' target='_blank'>Queen Victoria Park</a> 卡位拍照。"] }
       ],
@@ -266,7 +310,7 @@
         { "title": "🛥️ 09:30 – 12:00｜芝加哥建築遊船 + 千禧公園", "items": ["<strong><a href='https://www.architecture.org/tours/chicago-architecture-foundation-center-river-cruise-aboard-chicago-s-first-lady/' target='_blank' class='hover:underline'>Chicago Architecture River Cruise</a>：</strong>建議預約 <a href='https://www.wendellaboats.com/' target='_blank'>Wendella</a> 或 <a href='https://www.cruisechicago.com/first-lady-cruises' target='_blank'>Chicago’s First Lady</a> 上午場。", "遊船後步行至 <a href='https://maps.apple.com/?q=Millennium+Park,Chicago' target='_blank' class='hover:underline'>Millennium Park</a> 拍攝 <a href='https://maps.apple.com/?q=Cloud+Gate,Chicago' target='_blank' class='hover:underline'>Cloud Gate (The Bean)</a>。"] },
         { "title": "🍽️ 12:30 – 14:00｜午餐建議", "items": ["<a href='https://maps.apple.com/?q=The+Purple+Pig,Chicago' target='_blank' class='hover:underline'>The Purple Pig</a>（地中海風味）或 <a href='https://maps.apple.com/?q=Beatrix,Chicago' target='_blank' class='hover:underline'>Beatrix</a>（人氣早午餐）。"] },
         { "title": "🎡 14:30 – 17:00｜海軍碼頭 Navy Pier + 湖畔活動", "items": ["登上 <a href='https://navypier.org/things-to-do/rides-attractions/centennial-wheel/' target='_blank' class='hover:underline'>Centennial Wheel 摩天輪</a>，俯瞰密西根湖與天際線。", "或前往<a href='https://mcachicago.org/' target='_blank' class='hover:underline'>當代藝術博物館（MCA）</a>。"] },
-        { "title": "� 18:00 – 21:00｜夜景體驗 + 高空酒吧或觀景塔", "items": ["<strong>選擇一：</strong><a href='https://360chicago.com/' target='_blank' class='hover:underline'>360 CHICAGO</a>（Hancock Tower），可選附酒吧門票。", "<strong>選擇二：</strong><a href='https://theskydeck.com/' target='_blank' class='hover:underline'>Skydeck Chicago</a>（Willis Tower），體驗懸空玻璃盒。", "<strong>晚餐：</strong><a href='https://www.signatureroom.com/' target='_blank' class='hover:underline'>The Signature Room</a>（Hancock Tower 95樓）或 <a href='https://maps.apple.com/?q=The+Gage,Chicago' target='_blank' class='hover:underline'>The Gage</a>。"] }
+        { "title": "🏙️ 18:00 – 21:00｜夜景體驗 + 高空酒吧或觀景塔", "items": ["<strong>選擇一：</strong><a href='https://360chicago.com/' target='_blank' class='hover:underline'>360 CHICAGO</a>（Hancock Tower），可選附酒吧門票。", "<strong>選擇二：</strong><a href='https://theskydeck.com/' target='_blank' class='hover:underline'>Skydeck Chicago</a>（Willis Tower），體驗懸空玻璃盒。", "<strong>晚餐：</strong><a href='https://www.signatureroom.com/' target='_blank' class='hover:underline'>The Signature Room</a>（Hancock Tower 95樓）或 <a href='https://maps.apple.com/?q=The+Gage,Chicago' target='_blank' class='hover:underline'>The Gage</a>。"] }
       ],
       "infoBox": { "title": "⭐ 芝加哥實用資訊", "items": ["🚇 地鐵系統 CTA 可使用 Ventra App 或現場購票。", "📶 網路不穩地點可使用 Starbucks / Target 等店內免費 Wi-Fi。", "💨 芝加哥有「風城」之稱，日夜溫差大且湖邊風強，務必攜帶防風外套。"] }
     },
