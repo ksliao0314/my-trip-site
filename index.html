@@ -301,7 +301,6 @@
             <div class="flex justify-between items-center py-3">
                 <a href="#" class="font-bold text-base sm:text-lg text-indigo-700">F＆S飛翔旅行</a>
                 
-                <!-- MODIFIED: Right-aligned desktop navigation -->
                 <div class="hidden md:flex items-center space-x-6 text-sm font-medium text-gray-600">
                     <a href="#status-dashboard-section" class="nav-link flex items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1.5" viewBox="0 0 20 20" fill="currentColor"><path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" /><path fill-rule="evenodd" d="M4 5a2 2 0 012-2h8a2 2 0 012 2v10a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd" /></svg>
@@ -582,8 +581,55 @@
             }, 3000);
         }
         
+        // MODIFIED: This function is now the core of the smart timezone logic
+        function getEffectiveDate(data) {
+            const now = new Date(); // Current UTC time
+            const { timePhases, tripInfo } = data;
+
+            // Find the current phase based on UTC time
+            const currentPhase = timePhases.find(p => {
+                const start = new Date(p.startUTC);
+                const end = new Date(p.endUTC);
+                return now >= start && now < end;
+            });
+
+            // Handle pre-trip state
+            const firstPhaseStart = new Date(timePhases[0].startUTC);
+            if (now < firstPhaseStart) {
+                const effectiveDateStr = now.toLocaleDateString('en-CA', { timeZone: 'Asia/Taipei' });
+                return { date: effectiveDateStr, phase: { type: 'pre-trip', label: '旅程前', timezone: 'Asia/Taipei' } };
+            }
+            
+            // Handle post-trip state
+            const lastPhaseEnd = new Date(timePhases[timePhases.length - 1].endUTC);
+            if (now >= lastPhaseEnd) {
+                return { date: tripInfo.tripEndDate, phase: { type: 'post-trip', label: '旅程後', timezone: 'Asia/Taipei' } };
+            }
+
+            if (currentPhase) {
+                let effectiveTimezone = 'Asia/Taipei'; // Default timezone
+                // If in a phase with a timezone (at a destination)
+                if (currentPhase.timezone) {
+                    effectiveTimezone = currentPhase.timezone;
+                }
+                // If in a flight phase, use the timezone of the NEXT destination phase to determine the 'effective' date
+                else if (currentPhase.type === 'flight') {
+                    const nextPhaseIndex = timePhases.indexOf(currentPhase) + 1;
+                    if (nextPhaseIndex < timePhases.length && timePhases[nextPhaseIndex].timezone) {
+                        effectiveTimezone = timePhases[nextPhaseIndex].timezone;
+                    }
+                }
+                const effectiveDateStr = now.toLocaleDateString('en-CA', { timeZone: effectiveTimezone });
+                return { date: effectiveDateStr, phase: currentPhase };
+            }
+            
+            // Fallback (should not be reached with proper data)
+            const fallbackDate = now.toISOString().split('T')[0];
+            return { date: fallbackDate, phase: { type: 'unknown', label: "未知階段", timezone: "Asia/Taipei"} };
+        }
+
+
         function scrollToToday(isAuto = false) {
-            const todayString = new Date().toISOString().split('T')[0];
             const dashboardSection = document.getElementById('status-dashboard-section');
 
             if (dashboardSection) {
@@ -599,9 +645,9 @@
             const tripData = window.tripData; 
             const allWeatherData = window.allWeatherData;
             if (tripData && typeof updateStatusDashboard === 'function') {
-                const isTripActive = todayString >= tripData.tripInfo.tripStartDate && todayString < tripData.tripInfo.tripEndDate;
-                currentDisplayDate = isTripActive ? todayString : tripData.tripInfo.tripStartDate;
-                updateStatusDashboard(currentDisplayDate, tripData, allWeatherData);
+                const { date, phase } = getEffectiveDate(tripData);
+                currentDisplayDate = date;
+                updateStatusDashboard(currentDisplayDate, tripData, allWeatherData, phase);
             }
             
             if (!isAuto) {
@@ -682,16 +728,18 @@
             const results = await Promise.all(promises);
             return results.filter(r => r).reduce((acc, {city, data}) => ({ ...acc, [city]: data.daily }), {});
         }
-
-        function updateStatusDashboard(date, data, allWeatherData) {
+        
+        // MODIFIED: Function signature now includes currentPhase
+        function updateStatusDashboard(date, data, allWeatherData, currentPhase) {
             const { itinerary, hotels, transport, tripInfo } = data;
-            const targetDayData = itinerary.find(d => d.date === date);
-
+            
             const statusDateEl = document.getElementById('status-date');
             const statusCityTextEl = document.getElementById('status-city-text'); 
+            const statusCityBtn = document.getElementById('status-city-btn');
             const progressTextEl = document.getElementById('status-progress-text');
             const progressBarEl = document.getElementById('status-progress-bar');
             const viewDetailsBtn = document.getElementById('view-details-btn');
+            const statusInfoListEl = document.getElementById('status-info-list');
             const weatherItemEl = document.getElementById('status-weather-item');
             const weatherIconEl = document.getElementById('status-weather-icon');
             const weatherTempEl = document.getElementById('status-weather-temp');
@@ -704,7 +752,26 @@
             const travelDayIndicatorEl = document.getElementById('status-travel-day-indicator');
             const timeInfoEl = document.getElementById('status-time-info');
             const timeDiffEl = document.getElementById('status-time-diff');
+            
+            // Restore visibility by default
+            statusInfoListEl.style.display = 'block';
+            progressBarEl.parentElement.style.display = 'block';
+            progressTextEl.style.display = 'block';
+            statusCityBtn.style.display = 'inline-flex';
+            viewDetailsBtn.style.display = 'inline-block';
+            
+            // MODIFIED: Handle flight/pre/post trip phases
+            if (currentPhase.type === 'flight' || currentPhase.type === 'pre-trip' || currentPhase.type === 'post-trip') {
+                statusDateEl.textContent = currentPhase.label;
+                statusCityTextEl.textContent = (currentPhase.type === 'pre-trip') ? "旅程即將開始" : (currentPhase.type === 'post-trip' ? "期待下次旅行" : "跨時區移動中");
+                progressBarEl.parentElement.style.display = 'none';
+                progressTextEl.style.display = 'none';
+                statusInfoListEl.style.display = 'none';
+                if(viewDetailsBtn) viewDetailsBtn.style.display = 'none';
+                return;
+            }
 
+            const targetDayData = itinerary.find(d => d.date === date);
 
             if (!targetDayData) {
                 if(timeInfoEl) timeInfoEl.style.display = 'none';
@@ -723,7 +790,6 @@
             }
 
             if(timeInfoEl) timeInfoEl.style.display = 'flex';
-            if(viewDetailsBtn) viewDetailsBtn.style.display = 'inline-block';
             
             if (travelDayIndicatorEl) {
                 if (targetDayData.isTravelDay) {
@@ -748,15 +814,18 @@
             progressTextEl.textContent = `Day ${targetDayData.day} / ${tripInfo.totalDays}`;
 
             if (timeDiffEl) {
-                const cityTimezoneMap = { montreal: 'America/Montreal', quebec: 'America/Montreal', niagara: 'America/Montreal', chicago: 'America/Chicago' };
-                const localTzKey = targetDayData.weatherCity;
-                let diffText = '✈️ 飛行中';
-                if (cityTimezoneMap[localTzKey] === 'America/Montreal') {
-                    diffText = '與當地時差 12 小時';
-                } else if (cityTimezoneMap[localTzKey] === 'America/Chicago') {
-                    diffText = '與當地時差 13 小時';
+                 const timeZoneDiffMap = {
+                    'America/Montreal': 12,
+                    'America/Toronto': 12, // Same as Montreal for this trip
+                    'America/Chicago': 13,
+                    'Asia/Taipei': 0
+                };
+                const diff = timeZoneDiffMap[currentPhase.timezone] || null;
+                if (diff !== null && diff > 0) {
+                    timeDiffEl.textContent = `與當地時差 ${diff} 小時`;
+                } else {
+                    timeDiffEl.textContent = '與台灣時間同步';
                 }
-                timeDiffEl.textContent = diffText;
             }
 
             const cityWeather = allWeatherData[city];
@@ -769,12 +838,10 @@
                     weatherIconEl.textContent = getWeatherIcon(code);
                     weatherTempEl.textContent = `${tempMin}°C / ${tempMax}°C`;
                     weatherReminderEl.textContent = getWeatherReminder(code);
+                    weatherItemEl.style.display = 'flex';
                 } else {
-                    weatherIconEl.textContent = '�';
-                    weatherTempEl.textContent = '無預報';
-                    weatherReminderEl.textContent = '無法取得本日天氣資訊。';
+                     weatherItemEl.style.display = 'none';
                 }
-                 weatherItemEl.style.display = 'flex';
             } else {
                  weatherItemEl.style.display = 'none';
             }
@@ -859,7 +926,9 @@
                         
                         if (firstDayInCity) {
                             currentDisplayDate = firstDayInCity.date;
-                            updateStatusDashboard(currentDisplayDate, data, allWeatherData);
+                            // When manually selecting a city, we find its phase to show correct info
+                            const phase = data.timePhases.find(p => p.timezone?.includes(cityKey.charAt(0).toUpperCase() + cityKey.slice(1))) || {};
+                            updateStatusDashboard(currentDisplayDate, data, allWeatherData, phase);
                             showToast(`已切換至 ${item.textContent}`);
                         }
 
@@ -1033,9 +1102,9 @@
                 if (!mainContainer || !showPastToggle || !showPastLabel) return;
                 
                 showPastToggle.checked = false;
-                const todayString = new Date().toISOString().split('T')[0];
+                const { date: effectiveDateStr } = getEffectiveDate(data);
                 
-                if (todayString < tripInfo.tripStartDate) {
+                if (effectiveDateStr < tripInfo.tripStartDate) {
                     showPastToggle.disabled = true;
                     showPastLabel.classList.add('opacity-50', 'cursor-not-allowed');
                 }
@@ -1076,10 +1145,10 @@
                         }
                     }
                     
-                    if (dateStr < todayString) {
+                    if (dateStr < effectiveDateStr) {
                         el.classList.add('day-past');
                         if (el.querySelector('details')) el.querySelector('details').open = false;
-                    } else if (dateStr === todayString) {
+                    } else if (dateStr === effectiveDateStr) {
                         const summaryElement = el.querySelector('summary');
                         if (summaryElement) {
                             summaryElement.classList.add('summary-today');
@@ -1094,7 +1163,6 @@
                 updateVisibility();
             }
             
-            // MODIFIED: Added scroll observer for nav links
             const navLinks = document.querySelectorAll('.nav-link');
             const sections = document.querySelectorAll('section[id], main > div[id]');
             const sectionObserver = new IntersectionObserver((entries) => {
@@ -1114,18 +1182,20 @@
             setInterval(updateLiveTaipeiTime, 1000); 
 
             populateDayCardWeather(allWeatherData);
-            initializeTripView();
-
-            const todayString = new Date().toISOString().split('T')[0];
-            currentDisplayDate = todayString >= tripInfo.tripStartDate && todayString < tripInfo.tripEndDate ? todayString : tripInfo.tripStartDate;
-            updateStatusDashboard(currentDisplayDate, data, allWeatherData);
+            
+            // MODIFIED: Use the new effective date logic to initialize the app
+            const { date, phase } = getEffectiveDate(data);
+            currentDisplayDate = date;
+            updateStatusDashboard(currentDisplayDate, data, allWeatherData, phase);
+            initializeTripView(); // This now runs after the first status update
 
             document.getElementById('prev-day-btn').addEventListener('click', () => {
                 const [year, month, day] = currentDisplayDate.split('-').map(Number);
                 const currentDateObj = new Date(Date.UTC(year, month - 1, day));
                 currentDateObj.setUTCDate(currentDateObj.getUTCDate() - 1);
                 currentDisplayDate = currentDateObj.toISOString().split('T')[0];
-                updateStatusDashboard(currentDisplayDate, data, allWeatherData);
+                const newPhase = getEffectiveDate(data).phase; // Re-evaluate phase for the new day
+                updateStatusDashboard(currentDisplayDate, data, allWeatherData, newPhase);
             });
 
             document.getElementById('next-day-btn').addEventListener('click', () => {
@@ -1133,7 +1203,8 @@
                 const currentDateObj = new Date(Date.UTC(year, month - 1, day));
                 currentDateObj.setUTCDate(currentDateObj.getUTCDate() + 1);
                 currentDisplayDate = currentDateObj.toISOString().split('T')[0];
-                updateStatusDashboard(currentDisplayDate, data, allWeatherData);
+                const newPhase = getEffectiveDate(data).phase; // Re-evaluate phase for the new day
+                updateStatusDashboard(currentDisplayDate, data, allWeatherData, newPhase);
             });
 
             document.getElementById('view-details-btn').addEventListener('click', () => {
