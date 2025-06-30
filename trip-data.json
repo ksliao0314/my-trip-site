@@ -2,7 +2,8 @@
   "tripInfo": {
     "totalDays": 14,
     "tripStartDate": "2025-07-02",
-    "tripEndDate": "2025-07-16"
+    "tripEndDate": "2025-07-16",
+    "dataVersion": "20250701-02"
   },
   "timePhases": [
     {
@@ -176,7 +177,7 @@
           { "name": "酥皮濃郁", "desc": "Lou Malnati’s 的奶油酥皮是其特色。", "places": [{ "name": "Lou Malnati’s", "link": "https://maps.apple.com/?q=Lou+Malnati’s+Pizzeria" }] },
           { "name": "焦香起司邊", "desc": "Pequod’s Pizza 的焦糖化起司邊是一大亮點。", "places": [{ "name": "Pequod’s Pizza", "link": "https://maps.apple.com/?q=Pequod’s+Pizza" }] }
         ]},
-        { "name": "🥩 美式餐廳／牛排", "items": [
+        { "name": "� 美式餐廳／牛排", "items": [
           { "name": "經典美式＋現代", "desc": "The Dearborn 提供經典與現代融合的美式料理。", "places": [{ "name": "The Dearborn", "link": "https://maps.apple.com/?q=The+Dearborn" }] },
           { "name": "高級牛排館", "desc": "RPM Steak 是享受頂級牛排的絕佳選擇。", "places": [{ "name": "RPM Steak", "link": "https://maps.apple.com/?q=RPM+Steak" }] },
           { "name": "酒吧氛圍美式餐", "desc": "The Gage 結合了美食與熱鬧的酒吧氛圍。", "places": [{ "name": "The Gage", "link": "https://maps.apple.com/?q=The+Gage" }] }
