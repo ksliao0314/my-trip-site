@@ -734,10 +734,14 @@
                 }
             }
             
-            const dateObj = new Date(date + 'T00:00:00');
+            // --- MODIFICATION START ---
+            // This is the corrected code block to prevent timezone issues.
+            const [year, month, day] = date.split('-').map(Number);
+            const dateObj = new Date(Date.UTC(year, month - 1, day));
             const dayOfWeek = dateObj.toLocaleDateString('zh-TW', { weekday: 'long', timeZone: 'UTC' });
-            const datePart = `${dateObj.getUTCMonth() + 1}月${dateObj.getUTCDate()}日`;
+            const datePart = `${month}月${day}日`;
             statusDateEl.textContent = `${datePart} (${dayOfWeek.replace('星期','週')})`;
+            // --- MODIFICATION END ---
             
             const city = targetDayData.weatherCity;
             const cityMap = { montreal: '蒙特婁', quebec: '魁北克市', niagara: '尼加拉瀑布', chicago: '芝加哥', '': '飛行途中' };
@@ -1099,7 +1103,7 @@
             const sections = document.querySelectorAll('section[id], main > div[id]');
             const sectionObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
-                    if (entry.isIntersecting) {
+                    if (entry.isintersecting) {
                         const id = entry.target.getAttribute('id');
                         navLinks.forEach(link => {
                             link.classList.toggle('nav-link-active', link.getAttribute('href') === `#${id}`);
