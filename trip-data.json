@@ -61,7 +61,7 @@
     { "date": "2025-07-06", "type": "航班", "details": "加航 AC7959 (魁北克 → 多倫多)" },
     { "date": "2025-07-08", "type": "航班", "details": "加航 AC515 (多倫多 → 芝加哥)" },
     { "date": "2025-07-14", "type": "航班", "details": "日航 JL009 (芝加哥 → 東京)" },
-    { "date": "2025-07-14", "type": "航班", "details": "日航 JL097 (東京 → 台北)" }
+    { "date": "2025-07-15", "type": "航班", "details": "日航 JL097 (東京 → 台北)" }
   ],
  "foodie": {
     "montreal": {
@@ -189,7 +189,7 @@
         { "title": "🚕 前往市區飯店", "items": ["<strong>747 Express Bus (24小時營運)：</strong>費用 CA$11，行程約 45–60 分鐘，可直接用信用卡刷進站。", "<strong>Uber／Taxi：</strong>約 CA$45–55，車程約 30–40 分鐘。", "<strong>飯店建議地點：</strong><a href='https://maps.apple.com/?q=Vieux-Montréal' target='_blank' class='hover:underline'>Vieux-Montréal（舊城區）</a>或 <a href='https://maps.apple.com/?q=Berri-UQAM' target='_blank' class='hover:underline'>Berri-UQAM／Quartier Latin</a>。"] },
         { "title": "🌇 19:00–21:00 飯店安頓＋簡單夜間散步", "items": ["<strong>夕陽夜景路線：</strong>沿<a href='https://maps.apple.com/?q=Old+Port+of+Montreal' target='_blank' class='hover:underline'>舊港</a>慢行至 <a href='https://maps.apple.com/?q=La+Grande+Roue+de+Montréal' target='_blank' class='hover:underline'>La Grande Roue 摩天輪區</a>，看聖勞倫斯河夜景。", "<strong>輕食建議：</strong><a href='https://maps.apple.com/?q=Olive+et+Gourmando' target='_blank' class='hover:underline'>Olive et Gourmando</a> 或 <a href='https://maps.apple.com/?q=Maison+Christian+Faure' target='_blank' class='hover:underline'>Maison Christian Faure</a>（甜點塔派）。"] }
       ],
-      "reminder": { "title": "🌙 睡前提醒", "items": ["🧴 建議泡澡放鬆，避免時差影響過大。", "🕓 盡量調整作息至當地時間，避免太早入睡。", "📦 可順便打開行李，準備第二天城市探索用物（行動網路、地鐵卡、備用雨具）。"] }
+      "reminder": { "title": "🌙 睡前提醒", "items": ["🧴 建議泡澡放鬆，避免時差影響過大。", "� 盡量調整作息至當地時間，避免太早入睡。", "📦 可順便打開行李，準備第二天城市探索用物（行動網路、地鐵卡、備用雨具）。"] }
     },
     {
       "day": 2,
@@ -385,19 +385,38 @@
       "dayGroup": 10,
       "cityTarget": "",
       "weatherCity": "",
-      "title": "✈️ 返家：芝加哥 → 東京 → 台北",
-      "subTitle": "Day 13-14 | 7/14(一) – 7/15(二)",
+      "title": "✈️ 返家啟程：芝加哥 → 東京",
+      "subTitle": "Day 13 | 7/14(一)",
       "isTravelDay": true,
-      "tags": ["#返家之日", "#跨時區航班", "#滿載而歸"],
+      "tags": ["#返家之日", "#跨時區航班"],
       "activities": [
         { "title": "航班資訊", "items": [
-            "<strong>航班 JL009：</strong>芝加哥(ORD) 01:30 → 東京羽田(HND) 04:20 (+1)",
-            "<strong>航班 JL097：</strong>東京羽田(HND) 08:55 → 台北松山(TSA) 11:35"
+            "<strong>航班 JL009：</strong>芝加哥(ORD) 01:30 → 東京羽田(HND) 04:20 (+1)"
           ] 
         },
         { "title": "行程備註", "items": [
-            "返程為跨夜航班，將於隔日 (7/15 週二) 抵達東京轉機。",
-            "抵達台北後，旅程圓滿結束！"
+            "此為跨夜航班，將於隔日 (7/15 週二) 抵達東京轉機。"
+          ]
+        }
+      ]
+    },
+    {
+      "day": 14,
+      "date": "2025-07-15",
+      "dayGroup": 10,
+      "cityTarget": "",
+      "weatherCity": "",
+      "title": "✈️ 抵達台灣・旅程結束",
+      "subTitle": "Day 14 | 7/15(二)",
+      "isTravelDay": true,
+      "tags": ["#東京轉機", "#滿載而歸"],
+      "activities": [
+        { "title": "航班資訊", "items": [
+            "<strong>航班 JL097：</strong>東京羽田(HND) 08:55 → 台北松山(TSA) 11:35"
+          ] 
+        },
+        { "title": "歡迎回家！", "items": [
+            "抵達台北松山機場後，旅程圓滿結束！"
           ]
         }
       ]
