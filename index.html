@@ -451,7 +451,7 @@
                     <p id="date-chicago" class="text-xs text-gray-400">---</p>
                 </div>
                  <div id="time-taipei-block" class="timezone-block bg-white p-4 rounded-lg shadow text-center">
-                    <h2 class="text-sm font-bold text-gray-500">🇹🇼 台北</h2>
+                    <h2 class="text-sm font-bold text-gray-500">�🇼 台北</h2>
                     <p id="time-taipei" class="text-xl sm:text-2xl font-mono font-bold text-gray-800">--:--:--</p>
                     <p id="date-taipei" class="text-xs text-gray-400">---</p>
                 </div>
@@ -1298,17 +1298,21 @@
             
             updateStatusDashboard(currentDisplayDate, data); // 初始載入
 
-            // 左右箭頭按鈕事件
+            // 左右箭頭按鈕事件 (已修正時區問題)
             document.getElementById('prev-day-btn').addEventListener('click', () => {
-                const currentDateObj = new Date(currentDisplayDate + 'T00:00:00');
-                currentDateObj.setDate(currentDateObj.getDate() - 1);
+                const [year, month, day] = currentDisplayDate.split('-').map(Number);
+                // 月份在Date.UTC中是0-11，所以要-1
+                const currentDateObj = new Date(Date.UTC(year, month - 1, day));
+                currentDateObj.setUTCDate(currentDateObj.getUTCDate() - 1);
                 currentDisplayDate = currentDateObj.toISOString().split('T')[0];
                 updateStatusDashboard(currentDisplayDate, data);
             });
 
             document.getElementById('next-day-btn').addEventListener('click', () => {
-                const currentDateObj = new Date(currentDisplayDate + 'T00:00:00');
-                currentDateObj.setDate(currentDateObj.getDate() + 1);
+                const [year, month, day] = currentDisplayDate.split('-').map(Number);
+                // 月份在Date.UTC中是0-11，所以要-1
+                const currentDateObj = new Date(Date.UTC(year, month - 1, day));
+                currentDateObj.setUTCDate(currentDateObj.getUTCDate() + 1);
                 currentDisplayDate = currentDateObj.toISOString().split('T')[0];
                 updateStatusDashboard(currentDisplayDate, data);
             });
