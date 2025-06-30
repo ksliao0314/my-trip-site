@@ -52,7 +52,6 @@
             box-shadow: 0 10px 20px rgba(0,0,0,0.08), 0 6px 6px rgba(0,0,0,0.1);
         }
         
-        /* Animation for Activity Blocks */
         .activity-block {
             opacity: 0;
             transform: translateY(20px);
@@ -316,21 +315,11 @@
             to { transform: translateX(0); opacity: 1; }
         }
 
-        /* Classes to apply animation */
-        #status-card-content.slide-out-left {
-            animation: slideOutLeft 0.3s forwards;
-        }
-        #status-card-content.slide-in-right {
-            animation: slideInRight 0.3s forwards;
-        }
-        #status-card-content.slide-out-right {
-            animation: slideOutRight 0.3s forwards;
-        }
-        #status-card-content.slide-in-left {
-            animation: slideInLeft 0.3s forwards;
-        }
+        #status-card-content.slide-out-left { animation: slideOutLeft 0.3s forwards; }
+        #status-card-content.slide-in-right { animation: slideInRight 0.3s forwards; }
+        #status-card-content.slide-out-right { animation: slideOutRight 0.3s forwards; }
+        #status-card-content.slide-in-left { animation: slideInLeft 0.3s forwards; }
 
-        /* Styles for pagination dots */
         .pagination-dot {
             width: 8px;
             height: 8px;
@@ -340,44 +329,39 @@
             transition: background-color 0.3s ease;
         }
         .pagination-dot.active {
-            background-color: var(--brand-color); /* indigo-600 */
+            background-color: var(--brand-color);
         }
 
-        /* NEW: Styles for Mobile Menu Panel and Overlay */
+        /* --- MODIFICATION: Mobile Menu Styles Consolidated --- */
         #mobile-menu-overlay {
             position: fixed;
-            inset: 0; /* top:0, right:0, bottom:0, left:0 */
-            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
-            z-index: 90; /* Below menu, above content */
-            transition: opacity 0.3s ease;
-            opacity: 0; /* Start hidden */
-            pointer-events: none; /* Allow clicks through when hidden */
-            display: block; /* Always render as block to control visibility via opacity/pointer-events */
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 99;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease-in-out;
         }
         #mobile-menu-overlay.is-open {
             opacity: 1;
-            pointer-events: auto; /* Enable clicks when open */
+            pointer-events: auto;
         }
-
         #mobile-menu-panel {
             position: fixed;
             top: 0;
             right: 0;
-            height: auto; 
-            width: auto; 
-            max-width: 250px; 
-            min-width: 180px; 
+            bottom: 0;
+            width: 250px;
+            max-width: 80vw;
             background-color: white;
             box-shadow: -4px 0 10px rgba(0, 0, 0, 0.1);
-            z-index: 100; /* Above overlay */
-            transform: translateX(100%); /* Start off-screen to the right */
+            z-index: 100;
+            transform: translateX(100%); /* Hidden off-screen */
             transition: transform 0.3s ease-in-out;
-            display: block; 
-            padding-top: env(safe-area-inset-top); /* Add padding for notch */
+            padding-top: env(safe-area-inset-top);
         }
-
         #mobile-menu-panel.is-open {
-            transform: translateX(0); /* Slide into view */
+            transform: translateX(0); /* Slides into view */
         }
     </style>
 </head>
@@ -385,10 +369,8 @@
 
     <!-- Sticky Navigation Bar -->
     <nav id="main-nav" class="sticky-nav bg-white/80 backdrop-blur-lg no-print">
-        <!-- MODIFICATION: Reduced vertical padding on mobile (py-2) and kept it for larger screens (md:py-3) -->
         <div class="container mx-auto max-w-6xl px-4">
             <div class="flex justify-between items-center py-2 md:py-3">
-                <!-- MODIFICATION: Adjusted title font size for mobile (text-base) and larger screens (md:text-lg) -->
                 <a href="#" class="font-bold text-base md:text-lg text-indigo-700">F＆S飛翔旅行</a>
                 
                 <div class="hidden md:flex items-center space-x-6 text-sm font-medium text-gray-600">
@@ -421,12 +403,12 @@
         </div>
     </nav>
 
-    <!-- NEW: Mobile Menu Overlay (Hidden by default, shown when menu opens) -->
-    <div id="mobile-menu-overlay" class="fixed inset-0 bg-black/50 z-[90]"></div>
+    <!-- MODIFICATION: Mobile Menu Overlay (classes removed, controlled by CSS) -->
+    <div id="mobile-menu-overlay"></div>
 
-    <!-- Mobile Menu Panel (Hidden by default, slides in from right) -->
-    <div id="mobile-menu-panel" class="fixed top-0 right-0 h-full w-3/4 bg-white shadow-lg z-[100] transform translate-x-full transition-transform duration-300 ease-in-out">
-        <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+    <!-- MODIFICATION: Mobile Menu Panel (classes removed, controlled by CSS) -->
+    <div id="mobile-menu-panel">
+        <div class="p-4 space-y-2">
              <a href="#status-dashboard-section" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">📋 行程要覽</a>
              <a href="#tip-calculator-section" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">🧮 小費計算機</a>
              <a href="#links-dashboard" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">🔗 常用連結</a>
@@ -437,9 +419,6 @@
     <!-- Main Container -->
     <div class="container mx-auto p-4 sm:p-6 md:p-8 max-w-6xl">
         
-        <!-- ==================================================== -->
-        <!-- ============ 行程要覽 (新功能區塊) ============ -->
-        <!-- ==================================================== -->
         <section id="status-dashboard-section" class="mb-12 no-print">
             <div class="bg-white rounded-2xl shadow-lg p-5 md:p-6 ring-1 ring-gray-200">
                 <div id="status-time-info" class="flex justify-between items-center text-xs text-gray-500 mb-4 pb-4 border-b border-gray-200 font-mono">
@@ -466,7 +445,7 @@
                     </div>
                 </div>
 
-                <div id="status-card-content" class="space-y-4 mt-4" style="touch-action: pan-y;"> <!-- NEW: Added touch-action for better scroll handling -->
+                <div id="status-card-content" class="space-y-4 mt-4" style="touch-action: pan-y;">
                     <div>
                         <div class="flex justify-between items-baseline">
                             <p id="status-date" class="text-lg font-bold text-indigo-700">7月2日 (週三)</p>
@@ -511,9 +490,7 @@
                     </div>
                 </div>
 
-                <div id="status-pagination-dots" class="flex justify-center mt-4 space-x-2">
-                    <!-- Dots will be dynamically generated here -->
-                </div>
+                <div id="status-pagination-dots" class="flex justify-center mt-4 space-x-2"></div>
 
                  <div class="mt-5 text-center">
                     <button id="view-details-btn" class="w-full md:w-auto bg-indigo-600 text-white font-semibold px-6 py-3 rounded-lg shadow-md hover:bg-indigo-700 transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
@@ -777,7 +754,7 @@
             return results.filter(r => r).reduce((acc, {city, data}) => ({ ...acc, [city]: data.daily }), {});
         }
 
-        function updateStatusDashboard(date, data, allWeatherData, direction = 0) { // direction: 1 for next, -1 for prev, 0 for no animation
+        function updateStatusDashboard(date, data, allWeatherData, direction = 0) {
             const { itinerary, hotels, transport, tripInfo } = data;
             const targetDayData = itinerary.find(d => d.date === date);
 
@@ -801,18 +778,15 @@
             const timeDiffEl = document.getElementById('status-time-diff');
             const paginationDotsContainer = document.getElementById('status-pagination-dots');
 
-
-            // Function to apply and remove animation classes
             const applyAnimation = (outClass, inClass, callback) => {
-                statusCardContentEl.classList.remove('slide-in-left', 'slide-in-right', 'slide-out-left', 'slide-out-right'); // Clean up previous
+                statusCardContentEl.classList.remove('slide-in-left', 'slide-in-right', 'slide-out-left', 'slide-out-right');
                 statusCardContentEl.classList.add(outClass);
 
                 const handleOutAnimationEnd = () => {
                     statusCardContentEl.removeEventListener('animationend', handleOutAnimationEnd);
                     statusCardContentEl.classList.remove(outClass);
-                    callback(); // Update content
+                    callback(); 
 
-                    // Apply slide-in animation
                     statusCardContentEl.classList.add(inClass);
                     const handleInAnimationEnd = () => {
                         statusCardContentEl.removeEventListener('animationend', handleInAnimationEnd);
@@ -837,7 +811,7 @@
                     accommodationItemEl.style.display = 'none';
                     transportItemEl.style.display = 'none';
                     if (travelDayIndicatorEl) travelDayIndicatorEl.style.display = 'none';
-                    if (paginationDotsContainer) paginationDotsContainer.innerHTML = ''; // Clear dots
+                    if (paginationDotsContainer) paginationDotsContainer.innerHTML = '';
                     return;
                 }
 
@@ -946,7 +920,7 @@
                 } else {
                     transportItemEl.style.display = 'none';
                 }
-            }; // End of updateContent
+            }; 
 
             if (direction === 1) { 
                 applyAnimation('slide-out-left', 'slide-in-right', updateContent);
@@ -957,8 +931,6 @@
             }
         }
 
-
-        // --- Main script execution ---
         let currentDisplayDate;
 
         document.addEventListener('DOMContentLoaded', async () => {
@@ -1146,7 +1118,7 @@
                     const dateString = now.toLocaleDateString('zh-TW', { timeZone: 'Asia/Taipei', month: '2-digit', day: '2-digit' });
                     const dayOfWeekString = now.toLocaleDateString('zh-TW', { timeZone: 'Asia/Taipei', weekday: 'short' });
                     const timeString = now.toLocaleTimeString('en-GB', { timeZone: 'Asia/Taipei', hour: '2-digit', minute: '2-digit', hour12: false });
-                    taipeiTimeEl.textContent = `�🇼 台北 ${dateString}(${dayOfWeekString}) ${timeString}`;
+                    taipeiTimeEl.textContent = `🇹🇼 台北 ${dateString}(${dayOfWeekString}) ${timeString}`;
                 } catch(e) {
                     taipeiTimeEl.textContent = `🇹🇼 台北時間 --:--`;
                 }
@@ -1343,9 +1315,9 @@
                 const swipeDistance = touchEndX - touchStartX;
                 if (Math.abs(swipeDistance) < swipeThreshold) return; 
 
-                if (swipeDistance < 0) { // Swiped left
+                if (swipeDistance < 0) {
                     document.getElementById('next-day-btn').click();
-                } else { // Swiped right
+                } else {
                     document.getElementById('prev-day-btn').click();
                 }
             }
@@ -1355,16 +1327,13 @@
                     const clickedDot = event.target.closest('.pagination-dot');
                     if (clickedDot) {
                         const targetDay = parseInt(clickedDot.dataset.day);
-                        const targetDate = data.itinerary[targetDay - 1].date; // Days are 1-indexed
+                        const targetDate = data.itinerary[targetDay - 1].date;
                         
                         const currentDayData = data.itinerary.find(d => d.date === currentDisplayDate);
                         const currentDay = currentDayData ? currentDayData.day : 0;
                         let direction = 0;
-                        if (targetDay > currentDay) {
-                            direction = 1; 
-                        } else if (targetDay < currentDay) {
-                            direction = -1;
-                        }
+                        if (targetDay > currentDay) { direction = 1; } 
+                        else if (targetDay < currentDay) { direction = -1; }
 
                         currentDisplayDate = targetDate;
                         updateStatusDashboard(currentDisplayDate, data, window.allWeatherData, direction);
