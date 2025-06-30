@@ -447,7 +447,7 @@
     <div id="mobile-menu-panel">
         <div class="p-4 space-y-2">
              <a href="#status-dashboard-section" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">📋 行程要覽</a>
-             <a href="#tip-calculator-section" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">� 小費計算機</a>
+             <a href="#tip-calculator-section" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">🧮 小費計算機</a>
              <a href="#links-dashboard" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">🔗 常用連結</a>
              <button id="mobile-print-btn" class="w-full text-left mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">📄 列印行程</button>
         </div>
@@ -1032,6 +1032,7 @@
             const statusCityArrow = document.getElementById('status-city-arrow');
             const paginationDotsContainer = document.getElementById('status-pagination-dots');
             const daySlider = document.getElementById('day-slider');
+            let isSliderActive = false; // Flag to track slider interaction
 
             if(daySlider) {
                 daySlider.max = tripInfo.totalDays;
@@ -1043,6 +1044,9 @@
                         updateStatusDashboard(currentDisplayDate, data, window.allWeatherData, 0); 
                     }
                 });
+                // Add touch event listeners to handle gesture conflicts
+                daySlider.addEventListener('touchstart', () => { isSliderActive = true; }, { passive: true });
+                daySlider.addEventListener('touchend', () => { isSliderActive = false; }, { passive: true });
             }
 
             if (statusCityBtn && cityDropdown && statusCityArrow) {
@@ -1403,6 +1407,7 @@
             }, { passive: true });
 
             function handleSwipe() {
+                if (isSliderActive) return; // Ignore swipe if slider is being used
                 const swipeDistance = touchEndX - touchStartX;
                 if (Math.abs(swipeDistance) < swipeThreshold) return; 
 
