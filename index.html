@@ -128,7 +128,6 @@
         .nav-link.nav-link-active {
             color: var(--brand-color);
             font-weight: 700;
-            border-bottom-color: var(--brand-color);
         }
 
         .day-past {
@@ -302,15 +301,21 @@
             <div class="flex justify-between items-center py-3">
                 <a href="#" class="font-bold text-base sm:text-lg text-indigo-700">F＆S飛翔旅行</a>
                 
-                <div class="hidden md:flex flex-grow justify-center items-center space-x-6 text-sm font-medium">
-                    <a href="#status-dashboard-section" class="nav-link nav-link-active">行程要覽</a>
-                    <a href="#itinerary-container" class="nav-link">詳細行程</a>
-                    <a href="#tip-calculator-section" class="nav-link">小費計算</a>
-                    <a href="#links-dashboard" class="nav-link">常用連結</a>
-                </div>
-
-                <div class="hidden md:flex items-center space-x-4">
-                    <button id="print-btn" class="no-print inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                <!-- MODIFIED: Right-aligned desktop navigation -->
+                <div class="hidden md:flex items-center space-x-6 text-sm font-medium text-gray-600">
+                    <a href="#status-dashboard-section" class="nav-link flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1.5" viewBox="0 0 20 20" fill="currentColor"><path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" /><path fill-rule="evenodd" d="M4 5a2 2 0 012-2h8a2 2 0 012 2v10a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd" /></svg>
+                        行程要覽
+                    </a>
+                    <a href="#tip-calculator-section" class="nav-link flex items-center">
+                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1.5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V4a2 2 0 00-2-2H6zm1 2a1 1 0 00-1 1v1a1 1 0 001 1h6a1 1 0 001-1V5a1 1 0 00-1-1H7zm-1 4a1 1 0 011-1h6a1 1 0 011 1v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-1zm1 3a1 1 0 00-1 1v1a1 1 0 001 1h6a1 1 0 001-1v-1a1 1 0 00-1-1H7z" clip-rule="evenodd" /></svg>
+                        小費計算
+                    </a>
+                    <a href="#links-dashboard" class="nav-link flex items-center">
+                       <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1.5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0 1 1 0 00-1.414 1.414 4 4 0 005.656 0l3-3a4 4 0 00-5.656-5.656l-1.5 1.5a1 1 0 101.414 1.414l1.5-1.5zm-5 5a2 2 0 012.828 0 1 1 0 101.414-1.414 4 4 0 00-5.656 0l-3 3a4 4 0 105.656 5.656l1.5-1.5a1 1 0 10-1.414-1.414l-1.5 1.5a2 2 0 11-2.828-2.828l3-3z" clip-rule="evenodd" /></svg>
+                        常用連結
+                    </a>
+                     <button id="print-btn" class="no-print inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" /></svg>
                         列印行程
                     </button>
@@ -329,10 +334,9 @@
         <div id="mobile-menu-panel" class="md:hidden hidden bg-white shadow-lg">
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                  <a href="#status-dashboard-section" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">📍 行程要覽</a>
-                 <a href="#itinerary-container" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">🗺️ 詳細行程</a>
                  <a href="#tip-calculator-section" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">🧮 小費計算機</a>
                  <a href="#links-dashboard" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">🔗 常用連結</a>
-                 <button id="mobile-print-btn" class="w-full text-left mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">� 列印行程</button>
+                 <button id="mobile-print-btn" class="w-full text-left mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">📄 列印行程</button>
             </div>
         </div>
     </nav>
@@ -766,7 +770,7 @@
                     weatherTempEl.textContent = `${tempMin}°C / ${tempMax}°C`;
                     weatherReminderEl.textContent = getWeatherReminder(code);
                 } else {
-                    weatherIconEl.textContent = '🤷';
+                    weatherIconEl.textContent = '�';
                     weatherTempEl.textContent = '無預報';
                     weatherReminderEl.textContent = '無法取得本日天氣資訊。';
                 }
@@ -1031,7 +1035,6 @@
                 showPastToggle.checked = false;
                 const todayString = new Date().toISOString().split('T')[0];
                 
-                // MODIFIED: Disable toggle if trip hasn't started
                 if (todayString < tripInfo.tripStartDate) {
                     showPastToggle.disabled = true;
                     showPastLabel.classList.add('opacity-50', 'cursor-not-allowed');
@@ -1090,6 +1093,22 @@
                 showPastToggle.addEventListener('change', updateVisibility);
                 updateVisibility();
             }
+            
+            // MODIFIED: Added scroll observer for nav links
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('section[id], main > div[id]');
+            const sectionObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        navLinks.forEach(link => {
+                            link.classList.toggle('nav-link-active', link.getAttribute('href') === `#${id}`);
+                        });
+                    }
+                });
+            }, { rootMargin: "-50% 0px -50% 0px" });
+            sections.forEach(section => sectionObserver.observe(section));
+
 
             updateLiveTaipeiTime();
             setInterval(updateLiveTaipeiTime, 1000); 
