@@ -39,7 +39,6 @@
         h1, h2, h3 { font-family: 'Noto Sans TC', sans-serif; font-weight: 900; }
         
         .trip-card {
-            border: 1px solid #e5e7eb;
             opacity: 0;
             transform: translateY(30px);
             transition: opacity 0.6s ease-out, transform 0.6s ease-out;
@@ -335,7 +334,7 @@
         <div id="mobile-menu-panel" class="md:hidden hidden bg-white shadow-lg">
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                  <a href="#status-dashboard-section" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">📍 行程要覽</a>
-                 <a href="#tip-calculator-section" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">🧮 小費計算機</a>
+                 <a href="#tip-calculator-section" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">� 小費計算機</a>
                  <a href="#links-dashboard" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">🔗 常用連結</a>
                  <button id="mobile-print-btn" class="w-full text-left mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">📄 列印行程</button>
             </div>
@@ -907,6 +906,8 @@
             
             // MODIFICATION: Add listener to close menu when clicking outside
             window.addEventListener('click', (e) => {
+                // Check if the clicked target is NOT the mobile menu button and NOT inside the mobile menu panel
+                // And ensure the menu panel is currently visible
                 if (mobileMenuPanel && !mobileMenuPanel.classList.contains('hidden') && 
                     !mobileMenuBtn.contains(e.target) && 
                     !mobileMenuPanel.contains(e.target)) {
@@ -1019,7 +1020,7 @@
 
                 document.querySelectorAll('[data-weather-city]').forEach(dayEl => {
                     const date = dayEl.dataset.date;
-                    const city = dayEl.dataset.weatherCity;
+                    const city = dayEl.dataset.weather-city;
                     const weatherDisplay = dayEl.querySelector('.weather-display');
                     if (city && allWeatherData[city] && weatherDisplay) {
                         const dayIndex = allWeatherData[city].time.indexOf(date);
