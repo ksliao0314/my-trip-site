@@ -451,7 +451,7 @@
                     <p id="date-chicago" class="text-xs text-gray-400">---</p>
                 </div>
                  <div id="time-taipei-block" class="timezone-block bg-white p-4 rounded-lg shadow text-center">
-                    <h2 class="text-sm font-bold text-gray-500">🇹🇼 台北</h2>
+                    <h2 class="text-sm font-bold text-gray-500">�🇼 台北</h2>
                     <p id="time-taipei" class="text-xl sm:text-2xl font-mono font-bold text-gray-800">--:--:--</p>
                     <p id="date-taipei" class="text-xs text-gray-400">---</p>
                 </div>
@@ -939,10 +939,87 @@
             if (tipSelect) tipSelect.addEventListener('change', calculateTip);
 
             // --- Live Clocks & Weather ---
-            function updateClocks() { /* ... unchanged ... */ }
+            function updateClocks() {
+                const now = new Date();
+                const timezones = {
+                    montreal: 'America/Montreal',
+                    chicago: 'America/Chicago',
+                    taipei: 'Asia/Taipei'
+                };
+
+                for (const [id, tz] of Object.entries(timezones)) {
+                    const timeEl = document.getElementById(`time-${id}`);
+                    const dateEl = document.getElementById(`date-${id}`);
+                    if (timeEl && dateEl) {
+                        try {
+                            timeEl.textContent = now.toLocaleTimeString('en-GB', { timeZone: tz, hour12: false });
+                            dateEl.textContent = now.toLocaleDateString('zh-TW', { timeZone: tz, weekday: 'long' });
+                        } catch (e) {
+                            timeEl.textContent = "N/A";
+                            dateEl.textContent = "時區錯誤";
+                        }
+                    }
+                }
+            }
             const cityCoordinates = { montreal: { lat: 45.50, lon: -73.57 }, quebec: { lat: 46.81, lon: -71.21 }, niagara: { lat: 43.09, lon: -79.08 }, chicago: { lat: 41.88, lon: -87.63 } };
-            function getWeatherIcon(code) { /* ... unchanged ... */ return '🌡️'; }
-            async function fetchAndDisplayWeather() { /* ... unchanged ... */ }
+            function getWeatherIcon(code) {
+                const icons = { 0: '☀️', 1: '🌤️', 2: '⛅️', 3: '☁️', 45: '🌫️', 48: '🌫️', 51: '🌦️', 53: '🌦️', 55: '🌦️', 61: '🌧️', 63: '🌧️', 65: '🌧️', 66: '🌧️', 67: '🌧️', 71: '🌨️', 73: '🌨️', 75: '🌨️', 77: '🌨️', 80: '🌧️', 81: '🌧️', 82: '暴雨', 85: '🌨️', 86: '🌨️', 95: '⛈️', 96: '⛈️', 99: '⛈️' };
+                return icons[code] || '🌡️';
+            }
+            async function fetchAndDisplayWeather() {
+                const dayElements = document.querySelectorAll('[data-weather-city]');
+                const weatherDisplays = document.querySelectorAll('.weather-display');
+
+                if (!navigator.onLine && !navigator.serviceWorker.controller) {
+                    weatherDisplays.forEach(display => {
+                        display.style.display = 'none';
+                    });
+                    console.log("目前處於離線狀態，已隱藏天氣資訊。");
+                    return;
+                }
+
+                weatherDisplays.forEach(display => {
+                    display.style.display = '';
+                });
+
+                const promises = Array.from(new Set(Array.from(dayElements).map(el => el.dataset.weatherCity)))
+                    .filter(Boolean)
+                    .map(city => {
+                        const { lat, lon } = cityCoordinates[city];
+                        const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=weather_code,temperature_2m_max&timezone=auto`;
+                        return fetch(url).then(res => {
+                            if (!res.ok) throw new Error('Network response was not ok');
+                            return res.json();
+                        }).then(data => ({ city, data })).catch(error => {
+                            console.error(`無法取得 ${city} 的天氣資訊:`, error);
+                            return null;
+                        });
+                    });
+
+                const results = await Promise.all(promises);
+                const weatherData = results
+                    .filter(r => r)
+                    .reduce((acc, {city, data}) => ({ ...acc, [city]: data.daily }), {});
+
+                dayElements.forEach(dayEl => {
+                    const date = dayEl.dataset.date;
+                    const city = dayEl.dataset.weatherCity;
+                    const weatherDisplay = dayEl.querySelector('.weather-display');
+                    if (city && weatherData[city] && weatherDisplay) {
+                        const dayIndex = weatherData[city].time.indexOf(date);
+                        if (dayIndex !== -1) {
+                            const temp = Math.round(weatherData[city].temperature_2m_max[dayIndex]);
+                            const icon = getWeatherIcon(weatherData[city].weather_code[dayIndex]);
+                            weatherDisplay.innerHTML = `${icon} ${temp}°C`;
+                        } else {
+                             weatherDisplay.textContent = '無預報';
+                        }
+                    } else if (weatherDisplay) {
+                        weatherDisplay.textContent = 'N/A';
+                    }
+                });
+            }
+
 
             // --- Foodie Modal ---
             const foodieModal = document.getElementById('foodie-modal');
@@ -1067,7 +1144,7 @@
             // --- Kick off initialization ---
             updateClocks();
             setInterval(updateClocks, 1000);
-            fetchAndDisplayWeather(); // You can optimize this to use data from JSON if weather info is added there.
+            fetchAndDisplayWeather();
             initializeTripView();
         }
 
