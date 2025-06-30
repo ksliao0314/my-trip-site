@@ -1,4 +1,9 @@
 {
+  "tripInfo": {
+    "totalDays": 14,
+    "tripStartDate": "2025-07-02",
+    "tripEndDate": "2025-07-15"
+  },
   "hotels": [
     { "name": "InterContinental Montreal By IHG", "checkIn": "2025-07-02", "checkOut": "2025-07-04", "mapLink": "https://maps.apple.com/?q=InterContinental+Montreal", "checkInTime": "下午4:00後", "checkOutTime": "下午12:00前" },
     { "name": "Fairmont Le Château Frontenac (範例)", "checkIn": "2025-07-04", "checkOut": "2025-07-06", "mapLink": "https://maps.apple.com/?q=Fairmont+Le+Château+Frontenac", "checkInTime": "下午4:00後", "checkOutTime": "上午11:00前" },
@@ -74,7 +79,7 @@
     "niagara": {
       "name": "尼加拉瀑布",
       "categories": [
-        { "name": "🥩 景觀牛排／西式主餐", "items": [
+        { "name": "� 景觀牛排／西式主餐", "items": [
           { "name": "旋轉餐廳", "desc": "Skylon Tower 旋轉餐廳提供壯麗的瀑布全景。", "places": [{ "name": "Skylon Tower", "link": "https://maps.apple.com/?q=Skylon+Tower" }] },
           { "name": "瀑布景觀牛排", "desc": "The Keg Steakhouse – Fallsview 享有絕佳的瀑布景觀。", "places": [{ "name": "The Keg Steakhouse – Fallsview", "link": "https://maps.apple.com/?q=The+Keg+Steakhouse+Fallsview" }] }
         ]},
