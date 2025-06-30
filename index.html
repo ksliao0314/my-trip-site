@@ -291,6 +291,61 @@
                 display: block !important;
             }
         }
+
+        /* MODIFICATION: Styles for fixed height and swipe animation for status dashboard */
+        @media (max-width: 768px) {
+            #status-card-content {
+                max-height: 40vh; /* Adjust as needed to fit mobile screen */
+                overflow-y: auto;
+                -webkit-overflow-scrolling: touch; /* Smooth scrolling for iOS */
+                transition: transform 0.3s ease-out, opacity 0.3s ease-out; /* Smooth transition for animation */
+            }
+        }
+        
+        /* Animation keyframes for sliding effect */
+        @keyframes slideOutLeft {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(-20px); opacity: 0; }
+        }
+        @keyframes slideInRight {
+            from { transform: translateX(20px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes slideOutRight {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(20px); opacity: 0; }
+        }
+        @keyframes slideInLeft {
+            from { transform: translateX(-20px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        /* Classes to apply animation */
+        #status-card-content.slide-out-left {
+            animation: slideOutLeft 0.3s forwards;
+        }
+        #status-card-content.slide-in-right {
+            animation: slideInRight 0.3s forwards;
+        }
+        #status-card-content.slide-out-right {
+            animation: slideOutRight 0.3s forwards;
+        }
+        #status-card-content.slide-in-left {
+            animation: slideInLeft 0.3s forwards;
+        }
+
+        /* Styles for pagination dots */
+        .pagination-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #d1d5db; /* gray-300 */
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .pagination-dot.active {
+            background-color: var(--brand-color); /* indigo-600 */
+        }
     </style>
 </head>
 <body class="text-gray-800 leading-relaxed">
@@ -334,7 +389,7 @@
         <div id="mobile-menu-panel" class="md:hidden hidden bg-white shadow-lg">
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                  <a href="#status-dashboard-section" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">📍 行程要覽</a>
-                 <a href="#tip-calculator-section" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">� 小費計算機</a>
+                 <a href="#tip-calculator-section" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">🧮 小費計算機</a>
                  <a href="#links-dashboard" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">🔗 常用連結</a>
                  <button id="mobile-print-btn" class="w-full text-left mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">📄 列印行程</button>
             </div>
@@ -358,11 +413,10 @@
                     <div class="flex items-center gap-x-3">
                         <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 flex items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 mr-3 text-indigo-600" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd" />
-                            </svg>
+                                <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd" /></svg>
                             行程要覽
                         </h2>
-                        <span id="status-travel-day-indicator" class="text-xs font-semibold text-amber-800 bg-amber-100 px-2 py-0.5 rounded-full whitespace-nowrap" style="display: none;"></span>
+                        <span id="status-travel-day-indicator" class="text-xs font-semibold text-amber-800 bg-amber-100 px-2 py-0.5 rounded-full whitespace-now nowrap" style="display: none;"></span>
                     </div>
                     <div class="flex items-center space-x-2 ml-auto">
                         <button id="prev-day-btn" class="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors">
@@ -387,8 +441,7 @@
                             <button type="button" id="status-city-btn" class="inline-flex items-center gap-x-2 text-3xl font-black text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 rounded-lg -ml-2 p-2 transition-colors hover:bg-gray-100">
                                 <span id="status-city-text">蒙特婁</span>
                                 <svg id="status-city-arrow" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500 transition-transform duration-200" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                </svg>
+                                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
                             </button>
                             <div id="city-dropdown" class="origin-top-left absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none hidden z-10" role="menu" aria-orientation="vertical" aria-labelledby="status-city-btn">
                                 <div class="py-1" role="none">
@@ -420,6 +473,11 @@
                     </div>
                 </div>
 
+                <!-- MODIFICATION: Pagination dots for swipe indication -->
+                <div id="status-pagination-dots" class="flex justify-center mt-4 space-x-2">
+                    <!-- Dots will be dynamically generated here -->
+                </div>
+
                  <div class="mt-5 text-center">
                     <button id="view-details-btn" class="w-full md:w-auto bg-indigo-600 text-white font-semibold px-6 py-3 rounded-lg shadow-md hover:bg-indigo-700 transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                         詳細行程
@@ -445,8 +503,7 @@
             <div id="tip-calculator-section" class="trip-card bg-white rounded-2xl shadow-lg p-6 md:p-8 ring-1 ring-gray-200">
                 <h2 class="text-2xl font-bold text-gray-900 mb-4 flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 7h6m0 10v-3.251l-4.71-4.71a1 1 0 00-1.415 0L3 16.251V21h4.75L12 17.25m0 0l6-6m-6 6l-3-3" />
-                    </svg>
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 7h6m0 10v-3.251l-4.71-4.71a1 1 0 00-1.415 0L3 16.251V21h4.75L12 17.25m0 0l6-6m-6 6l-3-3" /></svg>
                     小費計算機 (Tip Calculator)
                 </h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-end">
@@ -683,10 +740,11 @@
             return results.filter(r => r).reduce((acc, {city, data}) => ({ ...acc, [city]: data.daily }), {});
         }
 
-        function updateStatusDashboard(date, data, allWeatherData) {
+        function updateStatusDashboard(date, data, allWeatherData, direction = 0) { // direction: 1 for next, -1 for prev, 0 for no animation
             const { itinerary, hotels, transport, tripInfo } = data;
             const targetDayData = itinerary.find(d => d.date === date);
 
+            const statusCardContentEl = document.getElementById('status-card-content');
             const statusDateEl = document.getElementById('status-date');
             const statusCityTextEl = document.getElementById('status-city-text'); 
             const progressTextEl = document.getElementById('status-progress-text');
@@ -704,118 +762,163 @@
             const travelDayIndicatorEl = document.getElementById('status-travel-day-indicator');
             const timeInfoEl = document.getElementById('status-time-info');
             const timeDiffEl = document.getElementById('status-time-diff');
+            const paginationDotsContainer = document.getElementById('status-pagination-dots');
 
 
-            if (!targetDayData) {
-                if(timeInfoEl) timeInfoEl.style.display = 'none';
-                statusDateEl.textContent = '旅程已結束或未開始';
-                if (statusCityTextEl) statusCityTextEl.textContent = '期待下次旅行！';
-                progressTextEl.textContent = '-';
-                progressBarEl.style.width = '0%';
-                if(viewDetailsBtn) viewDetailsBtn.style.display = 'none';
-                weatherIconEl.textContent = '🏠';
-                weatherTempEl.textContent = '';
-                weatherReminderEl.textContent = '旅程已結束或尚未開始。';
-                accommodationItemEl.style.display = 'none';
-                transportItemEl.style.display = 'none';
-                if (travelDayIndicatorEl) travelDayIndicatorEl.style.display = 'none';
-                return;
-            }
+            // Function to apply and remove animation classes
+            const applyAnimation = (outClass, inClass, callback) => {
+                statusCardContentEl.classList.remove('slide-in-left', 'slide-in-right', 'slide-out-left', 'slide-out-right'); // Clean up previous
+                statusCardContentEl.classList.add(outClass);
 
-            if(timeInfoEl) timeInfoEl.style.display = 'flex';
-            if(viewDetailsBtn) viewDetailsBtn.style.display = 'inline-block';
-            
-            if (travelDayIndicatorEl) {
-                if (targetDayData.isTravelDay) {
-                    travelDayIndicatorEl.textContent = '移動日';
-                    travelDayIndicatorEl.style.display = 'inline-block';
-                } else {
-                    travelDayIndicatorEl.style.display = 'none';
+                const handleOutAnimationEnd = () => {
+                    statusCardContentEl.removeEventListener('animationend', handleOutAnimationEnd);
+                    statusCardContentEl.classList.remove(outClass);
+                    callback(); // Update content
+
+                    // Apply slide-in animation
+                    statusCardContentEl.classList.add(inClass);
+                    const handleInAnimationEnd = () => {
+                        statusCardContentEl.removeEventListener('animationend', handleInAnimationEnd);
+                        statusCardContentEl.classList.remove(inClass);
+                    };
+                    statusCardContentEl.addEventListener('animationend', handleInAnimationEnd);
+                };
+                statusCardContentEl.addEventListener('animationend', handleOutAnimationEnd);
+            };
+
+            const updateContent = () => {
+                if (!targetDayData) {
+                    if(timeInfoEl) timeInfoEl.style.display = 'none';
+                    statusDateEl.textContent = '旅程已結束或未開始';
+                    if (statusCityTextEl) statusCityTextEl.textContent = '期待下次旅行！';
+                    progressTextEl.textContent = '-';
+                    progressBarEl.style.width = '0%';
+                    if(viewDetailsBtn) viewDetailsBtn.style.display = 'none';
+                    weatherIconEl.textContent = '🏠';
+                    weatherTempEl.textContent = '';
+                    weatherReminderEl.textContent = '旅程已結束或尚未開始。';
+                    accommodationItemEl.style.display = 'none';
+                    transportItemEl.style.display = 'none';
+                    if (travelDayIndicatorEl) travelDayIndicatorEl.style.display = 'none';
+                    if (paginationDotsContainer) paginationDotsContainer.innerHTML = ''; // Clear dots
+                    return;
                 }
-            }
-            
-            const [year, month, day] = date.split('-').map(Number);
-            const dateObj = new Date(Date.UTC(year, month - 1, day));
-            const dayOfWeek = dateObj.toLocaleDateString('zh-TW', { weekday: 'long', timeZone: 'UTC' });
-            const datePart = `${month}月${day}日`;
-            statusDateEl.textContent = `${datePart} (${dayOfWeek.replace('星期','週')})`;
-            
-            const city = targetDayData.weatherCity;
-            const cityMap = { montreal: '蒙特婁', quebec: '魁北克市', niagara: '尼加拉瀑布', chicago: '芝加哥', '': '飛行途中' };
-            if (statusCityTextEl) statusCityTextEl.textContent = cityMap[city] || '移動中';
 
-            const progress = (targetDayData.day / tripInfo.totalDays) * 100;
-            progressBarEl.style.width = `${progress}%`;
-            progressTextEl.textContent = `Day ${targetDayData.day} / ${tripInfo.totalDays}`;
-
-            if (timeDiffEl) {
-                const cityTimezoneMap = { montreal: -12, quebec: -12, niagara: -12, chicago: -13 };
-                const localTzKey = targetDayData.weatherCity;
-                let diffText = '✈️ 飛行中';
-                if (cityTimezoneMap[localTzKey]) {
-                    const diff = cityTimezoneMap[localTzKey];
-                    const sign = diff > 0 ? '+' : '';
-                    diffText = `與台灣時差 ${sign}${diff} 小時`;
+                if(timeInfoEl) timeInfoEl.style.display = 'flex';
+                if(viewDetailsBtn) viewDetailsBtn.style.display = 'inline-block';
+                
+                if (travelDayIndicatorEl) {
+                    if (targetDayData.isTravelDay) {
+                        travelDayIndicatorEl.textContent = '移動日';
+                        travelDayIndicatorEl.style.display = 'inline-block';
+                    } else {
+                        travelDayIndicatorEl.style.display = 'none';
+                    }
                 }
-                timeDiffEl.textContent = diffText;
-            }
+                
+                const [year, month, day] = date.split('-').map(Number);
+                const dateObj = new Date(Date.UTC(year, month - 1, day));
+                const dayOfWeek = dateObj.toLocaleDateString('zh-TW', { weekday: 'long', timeZone: 'UTC' });
+                const datePart = `${month}月${day}日`;
+                statusDateEl.textContent = `${datePart} (${dayOfWeek.replace('星期','週')})`;
+                
+                const city = targetDayData.weatherCity;
+                const cityMap = { montreal: '蒙特婁', quebec: '魁北克市', niagara: '尼加拉瀑布', chicago: '芝加哥', '': '飛行途中' };
+                if (statusCityTextEl) statusCityTextEl.textContent = cityMap[city] || '移動中';
 
-            const cityWeather = allWeatherData ? allWeatherData[city] : undefined;
-            weatherItemEl.style.display = 'flex'; 
+                const progress = (targetDayData.day / tripInfo.totalDays) * 100;
+                progressBarEl.style.width = `${progress}%`;
+                progressTextEl.textContent = `Day ${targetDayData.day} / ${tripInfo.totalDays}`;
 
-            if (cityWeather) { 
-                const dayIndex = cityWeather.time.indexOf(date);
-                if (dayIndex !== -1) {
-                    const tempMax = Math.round(cityWeather.temperature_2m_max[dayIndex]);
-                    const tempMin = Math.round(cityWeather.temperature_2m_min[dayIndex]);
-                    const code = cityWeather.weather_code[dayIndex];
-                    weatherIconEl.textContent = getWeatherIcon(code);
-                    weatherTempEl.textContent = `${tempMin}°C / ${tempMax}°C`;
-                    weatherReminderEl.textContent = getWeatherReminder(code);
+                // MODIFICATION: Update pagination dots
+                if (paginationDotsContainer) {
+                    let dotsHtml = '';
+                    for (let i = 0; i < tripInfo.totalDays; i++) {
+                        const dotDay = i + 1;
+                        const isActive = dotDay === targetDayData.day;
+                        dotsHtml += `<div class="pagination-dot ${isActive ? 'active' : ''}" data-day="${dotDay}"></div>`;
+                    }
+                    paginationDotsContainer.innerHTML = dotsHtml;
+                }
+
+                if (timeDiffEl) {
+                    const cityTimezoneMap = { montreal: -12, quebec: -12, niagara: -12, chicago: -13 };
+                    const localTzKey = targetDayData.weatherCity;
+                    let diffText = '✈️ 飛行中';
+                    if (cityTimezoneMap[localTzKey]) {
+                        const diff = cityTimezoneMap[localTzKey];
+                        const sign = diff > 0 ? '+' : '';
+                        diffText = `與台灣時差 ${sign}${diff} 小時`;
+                    }
+                    timeDiffEl.textContent = diffText;
+                }
+
+                const cityWeather = allWeatherData ? allWeatherData[city] : undefined;
+                weatherItemEl.style.display = 'flex'; 
+
+                if (cityWeather) { 
+                    const dayIndex = cityWeather.time.indexOf(date);
+                    if (dayIndex !== -1) {
+                        const tempMax = Math.round(cityWeather.temperature_2m_max[dayIndex]);
+                        const tempMin = Math.round(cityWeather.temperature_2m_min[dayIndex]);
+                        const code = cityWeather.weather_code[dayIndex];
+                        weatherIconEl.textContent = getWeatherIcon(code);
+                        weatherTempEl.textContent = `${tempMin}°C / ${tempMax}°C`;
+                        weatherReminderEl.textContent = getWeatherReminder(code);
+                    } else { 
+                        weatherIconEl.textContent = '❓';
+                        weatherTempEl.textContent = '無預報';
+                        weatherReminderEl.textContent = '無法取得本日天氣資訊。';
+                    }
+                } else if (allWeatherData && !cityWeather) { 
+                    weatherIconEl.textContent = '✈️';
+                    weatherTempEl.textContent = '';
+                    weatherReminderEl.textContent = '飛行日無適用天氣資訊。';
                 } else { 
-                    weatherIconEl.textContent = '❓';
-                    weatherTempEl.textContent = '無預報';
-                    weatherReminderEl.textContent = '無法取得本日天氣資訊。';
+                    weatherIconEl.textContent = '⏳';
+                    weatherTempEl.textContent = '--°C / --°C';
+                    weatherReminderEl.textContent = '正在載入天氣資訊...';
                 }
-            } else if (allWeatherData && !cityWeather) { 
-                weatherIconEl.textContent = '✈️';
-                weatherTempEl.textContent = '';
-                weatherReminderEl.textContent = '飛行日無適用天氣資訊。';
-            } else { 
-                weatherIconEl.textContent = '⏳';
-                weatherTempEl.textContent = '--°C / --°C';
-                weatherReminderEl.textContent = '正在載入天氣資訊...';
-            }
 
-            const checkingIn = hotels.find(h => h.checkIn === date);
-            const checkingOut = hotels.find(h => h.checkOut === date);
-            const stayingAt = hotels.find(h => date >= h.checkIn && date < h.checkOut);
-            let hotelHtml = '';
-            if (checkingOut) {
-                hotelHtml += `<div><span class="font-semibold text-red-600">[退房]</span> <a href="${checkingOut.mapLink}" target="_blank" class="hover:underline">${checkingOut.name}</a></div><div class="text-sm text-gray-600 pl-1">最晚退房：${checkingOut.checkOutTime}</div>`;
-            }
-            if (checkingIn) {
-                const marginTop = checkingOut ? 'mt-2' : '';
-                hotelHtml += `<div class="${marginTop}"><span class="font-semibold text-green-600">[入住]</span> <a href="${checkingIn.mapLink}" target="_blank" class="hover:underline">${checkingIn.name}</a></div><div class="text-sm text-gray-600 pl-1">最早入住：${checkingIn.checkInTime}</div>`;
-            }
-            if (!checkingIn && !checkingOut && stayingAt) {
-                 hotelHtml = `<p>住宿於 <a href="${stayingAt.mapLink}" target="_blank" class="hover:underline">${stayingAt.name}</a></p>`;
-            }
-            if (hotelHtml) {
-                accommodationContentEl.innerHTML = hotelHtml;
-                accommodationItemEl.style.display = 'flex';
-            } else {
-                accommodationItemEl.style.display = 'none';
-            }
+                const checkingIn = hotels.find(h => h.checkIn === date);
+                const checkingOut = hotels.find(h => h.checkOut === date);
+                const stayingAt = hotels.find(h => date >= h.checkIn && date < h.checkOut);
+                let hotelHtml = '';
+                if (checkingOut) {
+                    hotelHtml += `<div><span class="font-semibold text-red-600">[退房]</span> <a href="${checkingOut.mapLink}" target="_blank" class="hover:underline">${checkingOut.name}</a></div><div class="text-sm text-gray-600 pl-1">最晚退房：${checkingOut.checkOutTime}</div>`;
+                }
+                if (checkingIn) {
+                    const marginTop = checkingOut ? 'mt-2' : '';
+                    hotelHtml += `<div class="${marginTop}"><span class="font-semibold text-green-600">[入住]</span> <a href="${checkingIn.mapLink}" target="_blank" class="hover:underline">${checkingIn.name}</a></div><div class="text-sm text-gray-600 pl-1">最早入住：${checkingIn.checkInTime}</div>`;
+                }
+                if (!checkingIn && !checkingOut && stayingAt) {
+                     hotelHtml = `<p>住宿於 <a href="${stayingAt.mapLink}" target="_blank" class="hover:underline">${stayingAt.name}</a></p>`;
+                }
+                if (hotelHtml) {
+                    accommodationContentEl.innerHTML = hotelHtml;
+                    accommodationItemEl.style.display = 'flex';
+                } else {
+                    accommodationItemEl.style.display = 'none';
+                }
 
-            const transportItems = transport.filter(t => t.date === date);
-            if (transportItems.length > 0) {
-                const iconMap = { '航班': '✈️', '火車': '🚄', '巴士': '🚌' };
-                transportIconEl.textContent = iconMap[transportItems[0].type] || '➡️';
-                transportContentEl.innerHTML = transportItems.map(item => `<p>${item.details}</p>`).join('');
-                transportItemEl.style.display = 'flex';
-            } else {
-                transportItemEl.style.display = 'none';
+                const transportItems = transport.filter(t => t.date === date);
+                if (transportItems.length > 0) {
+                    const iconMap = { '航班': '✈️', '火車': '🚄', '巴士': '🚌' };
+                    transportIconEl.textContent = iconMap[transportItems[0].type] || '➡️';
+                    transportContentEl.innerHTML = transportItems.map(item => `<p>${item.details}</p>`).join('');
+                    transportItemEl.style.display = 'flex';
+                } else {
+                    transportItemEl.style.display = 'none';
+                }
+            }; // End of updateContent
+
+            // Apply animation based on direction
+            if (direction === 1) { // Next day, slide out left, slide in right
+                applyAnimation('slide-out-left', 'slide-in-right', updateContent);
+            } else if (direction === -1) { // Previous day, slide out right, slide in left
+                applyAnimation('slide-out-right', 'slide-in-left', updateContent);
+            } else { // No animation
+                updateContent();
             }
         }
 
@@ -860,6 +963,7 @@
             const statusCityBtn = document.getElementById('status-city-btn');
             const cityDropdown = document.getElementById('city-dropdown');
             const statusCityArrow = document.getElementById('status-city-arrow');
+            const paginationDotsContainer = document.getElementById('status-pagination-dots'); // MODIFICATION: Get dots container
 
             if (statusCityBtn && cityDropdown && statusCityArrow) {
                 statusCityBtn.addEventListener('click', (event) => {
@@ -1020,7 +1124,7 @@
 
                 document.querySelectorAll('[data-weather-city]').forEach(dayEl => {
                     const date = dayEl.dataset.date;
-                    const city = dayEl.dataset.weather-city;
+                    const city = dayEl.dataset.weatherCity;
                     const weatherDisplay = dayEl.querySelector('.weather-display');
                     if (city && allWeatherData[city] && weatherDisplay) {
                         const dayIndex = allWeatherData[city].time.indexOf(date);
@@ -1168,8 +1272,10 @@
                 currentDateObj.setUTCDate(currentDateObj.getUTCDate() - 1);
                 const newDate = currentDateObj.toISOString().split('T')[0];
                 if (newDate >= tripInfo.tripStartDate) {
+                    const oldDate = currentDisplayDate;
                     currentDisplayDate = newDate;
-                    updateStatusDashboard(currentDisplayDate, data, window.allWeatherData);
+                    // MODIFICATION: Pass direction for animation
+                    updateStatusDashboard(currentDisplayDate, data, window.allWeatherData, -1); 
                 }
             });
 
@@ -1178,9 +1284,11 @@
                 const currentDateObj = new Date(Date.UTC(year, month - 1, day));
                 currentDateObj.setUTCDate(currentDateObj.getUTCDate() + 1);
                 const newDate = currentDateObj.toISOString().split('T')[0];
-                 if (newDate < tripInfo.tripEndDate) {
+                 if (newDate < tripInfo.tripEndDate) { // Use < tripEndDate to prevent going past the last day
+                    const oldDate = currentDisplayDate;
                     currentDisplayDate = newDate;
-                    updateStatusDashboard(currentDisplayDate, data, window.allWeatherData);
+                    // MODIFICATION: Pass direction for animation
+                    updateStatusDashboard(currentDisplayDate, data, window.allWeatherData, 1);
                 }
             });
 
@@ -1202,9 +1310,9 @@
                 const swipeDistance = touchEndX - touchStartX;
                 if (Math.abs(swipeDistance) < swipeThreshold) return; 
 
-                if (swipeDistance < 0) {
+                if (swipeDistance < 0) { // Swiped left
                     document.getElementById('next-day-btn').click();
-                } else {
+                } else { // Swiped right
                     document.getElementById('prev-day-btn').click();
                 }
             }
