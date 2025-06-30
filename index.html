@@ -403,7 +403,7 @@
                 
                     <div id="status-info-list" class="space-y-4 pt-4 border-t border-gray-200">
                         <div id="status-weather-item" class="flex items-start">
-                            <span id="status-weather-icon" class="text-3xl mr-4 w-8 text-center pt-1">☀️</span>
+                            <span id="status-weather-icon" class="text-3xl mr-4 w-8 text-center pt-1">⏳</span>
                             <div>
                                 <p id="status-weather-temp" class="font-semibold text-gray-800">--°C / --°C</p>
                                 <p id="status-weather-reminder" class="text-sm text-gray-600">正在載入天氣資訊...</p>
@@ -683,6 +683,7 @@
             return results.filter(r => r).reduce((acc, {city, data}) => ({ ...acc, [city]: data.daily }), {});
         }
 
+        // --- MODIFIED: `updateStatusDashboard` to handle loading state ---
         function updateStatusDashboard(date, data, allWeatherData) {
             const { itinerary, hotels, transport, tripInfo } = data;
             const targetDayData = itinerary.find(d => d.date === date);
@@ -713,7 +714,7 @@
                 progressTextEl.textContent = '-';
                 progressBarEl.style.width = '0%';
                 if(viewDetailsBtn) viewDetailsBtn.style.display = 'none';
-                weatherIconEl.textContent = '🏠';
+                weatherIconEl.textContent = '�';
                 weatherTempEl.textContent = '';
                 weatherReminderEl.textContent = '旅程已結束或尚未開始。';
                 accommodationItemEl.style.display = 'none';
@@ -748,14 +749,8 @@
             progressBarEl.style.width = `${progress}%`;
             progressTextEl.textContent = `Day ${targetDayData.day} / ${tripInfo.totalDays}`;
 
-            // --- MODIFICATION START for time difference ---
             if (timeDiffEl) {
-                const cityTimezoneMap = {
-                    montreal: -12, // EDT is UTC-4, Taipei is UTC+8. Diff is -12.
-                    quebec: -12,   // EDT is UTC-4
-                    niagara: -12,  // EDT is UTC-4
-                    chicago: -13,  // CDT is UTC-5. Diff is -13.
-                };
+                const cityTimezoneMap = { montreal: -12, quebec: -12, niagara: -12, chicago: -13 };
                 const localTzKey = targetDayData.weatherCity;
                 let diffText = '✈️ 飛行中';
                 if (cityTimezoneMap[localTzKey]) {
@@ -765,10 +760,12 @@
                 }
                 timeDiffEl.textContent = diffText;
             }
-            // --- MODIFICATION END ---
 
-            const cityWeather = allWeatherData[city];
-            if (cityWeather) {
+            // --- WEATHER SECTION REVISED ---
+            const cityWeather = allWeatherData ? allWeatherData[city] : undefined;
+            weatherItemEl.style.display = 'flex'; // Always show the weather item container
+
+            if (cityWeather) { // State: Loaded and available
                 const dayIndex = cityWeather.time.indexOf(date);
                 if (dayIndex !== -1) {
                     const tempMax = Math.round(cityWeather.temperature_2m_max[dayIndex]);
@@ -777,15 +774,21 @@
                     weatherIconEl.textContent = getWeatherIcon(code);
                     weatherTempEl.textContent = `${tempMin}°C / ${tempMax}°C`;
                     weatherReminderEl.textContent = getWeatherReminder(code);
-                } else {
+                } else { // State: Loaded but no forecast for this day
                     weatherIconEl.textContent = '❓';
                     weatherTempEl.textContent = '無預報';
                     weatherReminderEl.textContent = '無法取得本日天氣資訊。';
                 }
-                 weatherItemEl.style.display = 'flex';
-            } else {
-                 weatherItemEl.style.display = 'none';
+            } else if (allWeatherData && !cityWeather) { // State: Loaded but no weather for this city (e.g. flight day)
+                weatherIconEl.textContent = '✈️';
+                weatherTempEl.textContent = '';
+                weatherReminderEl.textContent = '飛行日無適用天氣資訊。';
+            } else { // State: Loading (allWeatherData is null or undefined)
+                weatherIconEl.textContent = '⏳';
+                weatherTempEl.textContent = '--°C / --°C';
+                weatherReminderEl.textContent = '正在載入天氣資訊...';
             }
+            // --- END REVISION ---
 
             const checkingIn = hotels.find(h => h.checkIn === date);
             const checkingOut = hotels.find(h => h.checkOut === date);
@@ -823,19 +826,33 @@
         // --- Main script execution ---
         let currentDisplayDate;
 
+        // --- MODIFIED: `DOMContentLoaded` for faster initial render ---
         document.addEventListener('DOMContentLoaded', async () => {
             try {
                 const response = await fetch('trip-data.json');
                 if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
                 const data = await response.json();
                 
-                const allWeatherData = await fetchAllWeatherData(data.itinerary);
-                window.allWeatherData = allWeatherData;
-
+                // 1. Render main content immediately
                 const itineraryContainer = document.getElementById('itinerary-container');
                 renderItinerary(data.itinerary, itineraryContainer);
                 
-                initializeApp(data, allWeatherData);
+                // 2. Initialize app with event listeners, but no weather data yet
+                initializeApp(data, null); 
+
+                // 3. Fetch weather in the background and update UI when ready
+                fetchAllWeatherData(data.itinerary)
+                    .then(allWeatherData => {
+                        window.allWeatherData = allWeatherData; // Store globally
+                        populateDayCardWeather(allWeatherData);
+                        updateStatusDashboard(currentDisplayDate, data, allWeatherData);
+                    })
+                    .catch(weatherError => {
+                        console.error("Weather data fetch failed:", weatherError);
+                        // Update UI to show that weather is unavailable
+                        populateDayCardWeather({}); 
+                        updateStatusDashboard(currentDisplayDate, data, {});
+                    });
 
             } catch (error) {
                 console.error("無法載入行程資料:", error);
@@ -844,7 +861,7 @@
             }
         });
 
-        function initializeApp(data, allWeatherData) {
+        function initializeApp(data, allWeatherData) { // `allWeatherData` can be null initially
             window.tripData = data;
             const { hotels: hotelData, transport: transportData, foodie: foodieData, tripInfo, itinerary } = data;
             
@@ -867,7 +884,7 @@
                         
                         if (firstDayInCity) {
                             currentDisplayDate = firstDayInCity.date;
-                            updateStatusDashboard(currentDisplayDate, data, allWeatherData);
+                            updateStatusDashboard(currentDisplayDate, data, window.allWeatherData); // Use global weather data
                             showToast(`已切換至 ${item.textContent}`);
                         }
 
@@ -967,36 +984,29 @@
             if (billInput) billInput.addEventListener('input', calculateTip);
             if (tipSelect) tipSelect.addEventListener('change', calculateTip);
 
-            // --- MODIFICATION START for Taipei Time Display ---
             function updateLiveTaipeiTime() {
                 const taipeiTimeEl = document.getElementById('status-taipei-time');
                 if (!taipeiTimeEl) return;
                 try {
                     const now = new Date();
-                    const dateString = now.toLocaleDateString('zh-TW', {
-                        timeZone: 'Asia/Taipei',
-                        month: '2-digit',
-                        day: '2-digit'
-                    });
-                    const dayOfWeekString = now.toLocaleDateString('zh-TW', {
-                        timeZone: 'Asia/Taipei',
-                        weekday: 'short'
-                    });
-                    const timeString = now.toLocaleTimeString('en-GB', {
-                        timeZone: 'Asia/Taipei',
-                        hour: '2-digit',
-                        minute: '2-digit',
-                        hour12: false
-                    });
+                    const dateString = now.toLocaleDateString('zh-TW', { timeZone: 'Asia/Taipei', month: '2-digit', day: '2-digit' });
+                    const dayOfWeekString = now.toLocaleDateString('zh-TW', { timeZone: 'Asia/Taipei', weekday: 'short' });
+                    const timeString = now.toLocaleTimeString('en-GB', { timeZone: 'Asia/Taipei', hour: '2-digit', minute: '2-digit', hour12: false });
                     taipeiTimeEl.textContent = `🇹🇼 台北 ${dateString}(${dayOfWeekString}) ${timeString}`;
                 } catch(e) {
                     taipeiTimeEl.textContent = `🇹🇼 台北時間 --:--`;
                 }
             }
-            // --- MODIFICATION END ---
             
+            // --- MODIFIED: `populateDayCardWeather` to handle loading state ---
             function populateDayCardWeather(allWeatherData) {
-                 document.querySelectorAll('[data-weather-city]').forEach(dayEl => {
+                const weatherDisplays = document.querySelectorAll('.weather-display');
+                if (!allWeatherData) { // Initial call with null
+                    weatherDisplays.forEach(el => { el.innerHTML = '...'; });
+                    return;
+                }
+
+                document.querySelectorAll('[data-weather-city]').forEach(dayEl => {
                     const date = dayEl.dataset.date;
                     const city = dayEl.dataset.weatherCity;
                     const weatherDisplay = dayEl.querySelector('.weather-display');
@@ -1114,7 +1124,6 @@
                 updateVisibility();
             }
             
-            // MODIFIED: Added scroll observer for nav links
             const navLinks = document.querySelectorAll('.nav-link');
             const sections = document.querySelectorAll('section[id], main > div[id]');
             const sectionObserver = new IntersectionObserver((entries) => {
@@ -1137,30 +1146,36 @@
             initializeTripView();
 
             const todayString = new Date().toISOString().split('T')[0];
-            currentDisplayDate = todayString >= tripInfo.tripStartDate && todayString < tripInfo.tripEndDate ? todayString : tripInfo.tripStartDate;
+            const isTripActive = todayString >= tripInfo.tripStartDate && todayString < tripInfo.tripEndDate;
+            currentDisplayDate = isTripActive ? todayString : tripInfo.tripStartDate;
             updateStatusDashboard(currentDisplayDate, data, allWeatherData);
 
             document.getElementById('prev-day-btn').addEventListener('click', () => {
                 const [year, month, day] = currentDisplayDate.split('-').map(Number);
                 const currentDateObj = new Date(Date.UTC(year, month - 1, day));
                 currentDateObj.setUTCDate(currentDateObj.getUTCDate() - 1);
-                currentDisplayDate = currentDateObj.toISOString().split('T')[0];
-                updateStatusDashboard(currentDisplayDate, data, allWeatherData);
+                const newDate = currentDateObj.toISOString().split('T')[0];
+                if (newDate >= tripInfo.tripStartDate) {
+                    currentDisplayDate = newDate;
+                    updateStatusDashboard(currentDisplayDate, data, window.allWeatherData);
+                }
             });
 
             document.getElementById('next-day-btn').addEventListener('click', () => {
                 const [year, month, day] = currentDisplayDate.split('-').map(Number);
                 const currentDateObj = new Date(Date.UTC(year, month - 1, day));
                 currentDateObj.setUTCDate(currentDateObj.getUTCDate() + 1);
-                currentDisplayDate = currentDateObj.toISOString().split('T')[0];
-                updateStatusDashboard(currentDisplayDate, data, allWeatherData);
+                const newDate = currentDateObj.toISOString().split('T')[0];
+                 if (newDate < tripInfo.tripEndDate) {
+                    currentDisplayDate = newDate;
+                    updateStatusDashboard(currentDisplayDate, data, window.allWeatherData);
+                }
             });
 
-            // --- NEW: Swipe functionality ---
             const statusCard = document.getElementById('status-card-content');
             let touchStartX = 0;
             let touchEndX = 0;
-            const swipeThreshold = 50; // Minimum distance for a swipe
+            const swipeThreshold = 50; 
 
             statusCard.addEventListener('touchstart', (event) => {
                 touchStartX = event.changedTouches[0].screenX;
@@ -1173,20 +1188,14 @@
 
             function handleSwipe() {
                 const swipeDistance = touchEndX - touchStartX;
-                if (Math.abs(swipeDistance) < swipeThreshold) {
-                    return; // Not a swipe
-                }
+                if (Math.abs(swipeDistance) < swipeThreshold) return; 
 
                 if (swipeDistance < 0) {
-                    // Swiped left
                     document.getElementById('next-day-btn').click();
                 } else {
-                    // Swiped right
                     document.getElementById('prev-day-btn').click();
                 }
             }
-            // --- END of Swipe functionality ---
-
 
             document.getElementById('view-details-btn').addEventListener('click', () => {
                 const dayData = data.itinerary.find(d => d.date === currentDisplayDate);
