@@ -195,7 +195,8 @@
             .day-past { display: block !important; }
         }
 
-        #status-card-content { max-height: 400px; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+        /* 更新 #status-card-content 的最大高度 */
+        #status-card-content { max-height: 550px; overflow-y: auto; -webkit-overflow-scrolling: touch; }
         
         /* Slide Animations */
         @keyframes slideOutLeft { from { transform: translateX(0); opacity: 1; } to { transform: translateX(-20px); opacity: 0; } }
@@ -348,8 +349,9 @@
     <!-- Main Container -->
     <div class="container mx-auto p-4 sm:p-6 md:p-8 max-w-6xl">
         
-        <section id="status-dashboard-section" class="mb-12 no-print">
-            <div class="bg-white rounded-2xl shadow-lg p-5 md:p-6 ring-1 ring-gray-200">
+        <!-- 更新：為整個區塊設定最小高度，並使其內部內容彈性填充 -->
+        <section id="status-dashboard-section" class="mb-12 no-print min-h-[600px]">
+            <div class="bg-white rounded-2xl shadow-lg p-5 md:p-6 ring-1 ring-gray-200 h-full flex flex-col">
                 <div id="status-time-info" class="flex justify-between items-center text-xs text-gray-500 mb-4 pb-4 border-b border-gray-200 font-mono">
                     <span id="status-taipei-time"></span>
                     <span id="status-time-diff"></span>
@@ -374,7 +376,8 @@
                     </div>
                 </div>
 
-                <div id="status-card-content" class="space-y-4 mt-4" style="touch-action: pan-y;">
+                <!-- 更新：加入 flex-grow 讓內容彈性填充，並維持 overflow-y: auto -->
+                <div id="status-card-content" class="space-y-4 mt-4 flex-grow" style="touch-action: pan-y;">
                     <div>
                         <div class="flex justify-between items-baseline">
                             <p id="status-date" class="text-lg font-bold text-indigo-700">7月2日 (週三)</p>
@@ -1107,7 +1110,7 @@
                             const icon = getWeatherIcon(allWeatherData[city].weather_code[dayIndex]);
                             weatherDisplay.innerHTML = `${icon} ${temp}°C`;
                         } else { weatherDisplay.textContent = '無預報'; }
-                    } else if (weatherDisplay) { weatherDisplay.textContent = 'N/A'; }
+                    } else { weatherDisplay.textContent = 'N/A'; }
                 });
             }
 
