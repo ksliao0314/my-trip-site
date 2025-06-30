@@ -1333,6 +1333,8 @@
 
                 const details = targetElement.querySelector('details');
                 if (!details) return;
+                
+                const tripCard = details.closest('.trip-card');
 
                 const scrollToTarget = () => {
                     const mainNav = document.getElementById('main-nav');
@@ -1346,17 +1348,19 @@
                     });
                 };
 
-                if (details.open) {
-                    scrollToTarget();
-                } else {
-                    details.addEventListener('toggle', function onToggle() {
-                        // 確保在下一個畫面更新週期才滾動
-                        requestAnimationFrame(scrollToTarget);
-                        // 移除監聽器，避免重複觸發
-                        details.removeEventListener('toggle', onToggle);
-                    });
+                // 1. 手動讓卡片可見，不再依賴 IntersectionObserver
+                if(tripCard) {
+                    tripCard.classList.add('is-visible');
+                }
+
+                // 2. 展開 <details>
+                if (!details.open) {
                     details.open = true;
                 }
+
+                // 3. 使用 requestAnimationFrame 來確保在下一次渲染前執行滾動
+                // 這能保證滾動時，元素已經可見且版面已更新
+                requestAnimationFrame(scrollToTarget);
             });
             
             document.getElementById('today-btn').addEventListener('click', () => {
