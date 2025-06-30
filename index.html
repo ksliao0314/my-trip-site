@@ -447,7 +447,7 @@
     <div id="mobile-menu-panel">
         <div class="p-4 space-y-2">
              <a href="#status-dashboard-section" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">📋 行程要覽</a>
-             <a href="#tip-calculator-section" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">🧮 小費計算機</a>
+             <a href="#tip-calculator-section" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">� 小費計算機</a>
              <a href="#links-dashboard" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">🔗 常用連結</a>
              <button id="mobile-print-btn" class="w-full text-left mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">📄 列印行程</button>
         </div>
@@ -519,11 +519,11 @@
                                 <p id="status-weather-reminder" class="text-sm text-gray-600">正在載入天氣資訊...</p>
                             </div>
                         </div>
-                        <div id="status-accommodation-item" class="flex items-start">
+                        <div id="status-accommodation-item" class="flex items-start min-h-[72px]">
                             <span class="text-3xl mr-4 w-8 text-center pt-1">🏨</span>
                             <div id="status-accommodation-content" class="text-gray-800 font-medium pt-1"></div>
                         </div>
-                        <div id="status-transport-item" class="flex items-start">
+                        <div id="status-transport-item" class="flex items-start min-h-[72px]">
                             <span id="status-transport-icon" class="text-3xl mr-4 w-8 text-center pt-1">✈️</span>
                             <div id="status-transport-content" class="text-gray-800 font-medium pt-1"></div>
                         </div>
@@ -945,11 +945,13 @@
                 if (!checkingIn && !checkingOut && stayingAt) {
                      hotelHtml = `<p>住宿於 <a href="${stayingAt.mapLink}" target="_blank" class="hover:underline">${stayingAt.name}</a></p>`;
                 }
+                
                 if (hotelHtml) {
                     accommodationContentEl.innerHTML = hotelHtml;
-                    accommodationItemEl.style.display = 'flex';
+                    accommodationItemEl.style.visibility = 'visible';
                 } else {
-                    accommodationItemEl.style.display = 'none';
+                    accommodationContentEl.innerHTML = '';
+                    accommodationItemEl.style.visibility = 'hidden';
                 }
 
                 const transportItems = transport.filter(t => t.date === date);
@@ -973,9 +975,10 @@
                         return `<p>${item.details}</p>`;
                     }).join('');
                     transportContentEl.innerHTML = transportHtml;
-                    transportItemEl.style.display = 'flex';
+                    transportItemEl.style.visibility = 'visible';
                 } else {
-                    transportItemEl.style.display = 'none';
+                    transportContentEl.innerHTML = '';
+                    transportItemEl.style.visibility = 'hidden';
                 }
             }; 
 
