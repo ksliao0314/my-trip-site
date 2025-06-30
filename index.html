@@ -116,33 +116,18 @@
             color: #6b7280;
         }
         
-        .nav-pill-group {
-            display: inline-flex;
-            align-items: center;
-            background-color: #e5e7eb;
-            border-radius: 9999px;
-            padding: 0.25rem;
-        }
-        .nav-pill {
-            padding: 0.375rem 1rem;
-            font-size: 0.875rem;
-            font-weight: 500;
-            color: #4b5563;
-            border-radius: 9999px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        .nav-pill.active {
-            background-color: white;
-            color: var(--brand-color);
-            box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-        }
         .nav-link {
             transition: all 0.2s;
             border-bottom: 2px solid transparent;
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+        }
+        .nav-link:hover, .nav-utils:hover {
+             color: var(--brand-color);
         }
         .nav-link.nav-link-active {
             color: var(--brand-color);
+            font-weight: 700;
             border-bottom-color: var(--brand-color);
         }
 
@@ -315,30 +300,17 @@
     <nav id="main-nav" class="sticky-nav bg-white/80 backdrop-blur-lg no-print">
         <div class="container mx-auto max-w-6xl px-4">
             <div class="flex justify-between items-center py-3">
-                <span class="font-bold text-base sm:text-lg text-indigo-700">F＆S飛翔旅行</span>
+                <a href="#" class="font-bold text-base sm:text-lg text-indigo-700">F＆S飛翔旅行</a>
                 
+                <!-- MODIFIED: Simplified Desktop Navigation -->
                 <div class="hidden md:flex flex-grow justify-center items-center space-x-6 text-sm font-medium">
-                    <div id="desktop-nav-pills" class="nav-pill-group">
-                        <div class="nav-pill active" data-tab="days">按天數</div>
-                        <div class="nav-pill" data-tab="cities">按城市</div>
-                    </div>
-                    <div id="desktop-nav-content-days" class="flex items-center space-x-4">
-                        <a href="#day1" data-navlink-day="1" class="py-2 nav-link">Day 1-2</a>
-                        <a href="#day3" data-navlink-day="3" class="py-2 nav-link">Day 3-4</a>
-                        <a href="#day5" data-navlink-day="5" class="py-2 nav-link">Day 5-6</a>
-                        <a href="#day7" data-navlink-day="7" class="py-2 nav-link">Day 7-9</a>
-                        <a href="#day10" data-navlink-day="10" class="py-2 nav-link">Day 10-14</a>
-                    </div>
-                    <div id="desktop-nav-content-cities" class="hidden space-x-4">
-                        <a href="#montreal-section" data-navlink-city="montreal-section" class="py-2 nav-link">蒙特婁</a>
-                        <a href="#quebec-section" data-navlink-city="quebec-section" class="py-2 nav-link">魁北克市</a>
-                        <a href="#niagara-section" data-navlink-city="niagara-section" class="py-2 nav-link">尼加拉瀑布</a>
-                        <a href="#chicago-section" data-navlink-city="chicago-section" class="py-2 nav-link">芝加哥</a>
-                    </div>
+                    <a href="#status-dashboard-section" class="nav-link nav-link-active">行程要覽</a>
+                    <a href="#itinerary-container" class="nav-link">詳細行程</a>
+                    <a href="#tip-calculator-section" class="nav-link">小費計算</a>
+                    <a href="#links-dashboard" class="nav-link">常用連結</a>
                 </div>
-                 <div class="hidden md:flex items-center space-x-4 text-sm">
-                    <a href="#tip-calculator-section" class="nav-utils py-2 text-gray-600 hover:text-indigo-700 transition-colors">🧮 小費計算</a>
-                    <a href="#links-dashboard" class="nav-utils py-2 text-gray-600 hover:text-indigo-700 transition-colors">🔗 常用連結</a>
+
+                <div class="hidden md:flex items-center space-x-4">
                     <button id="print-btn" class="no-print inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" /></svg>
                         列印行程
@@ -354,21 +326,15 @@
                 </div>
             </div>
         </div>
-
+        
+        <!-- MODIFIED: Simplified Mobile Navigation -->
         <div id="mobile-menu-panel" class="md:hidden hidden bg-white shadow-lg">
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <a href="#day1" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">Day 1-2 (蒙特婁)</a>
-                <a href="#day3" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">Day 3-4 (魁北克)</a>
-                <a href="#day5" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">Day 5-6 (尼加拉)</a>
-                <a href="#day7" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">Day 7-9 (芝加哥)</a>
-                <a href="#day10" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">Day 10-14 (返程)</a>
-            </div>
-            <div class="pt-4 pb-3 border-t border-gray-200">
-                <div class="px-2 space-y-1">
-                    <a href="#tip-calculator-section" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">🧮 小費計算機</a>
-                    <a href="#links-dashboard" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">🔗 常用連結</a>
-                    <button id="mobile-print-btn" class="w-full text-left mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">📄 列印行程</button>
-                </div>
+                 <a href="#status-dashboard-section" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">📍 行程要覽</a>
+                 <a href="#itinerary-container" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">🗺️ 詳細行程</a>
+                 <a href="#tip-calculator-section" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">🧮 小費計算機</a>
+                 <a href="#links-dashboard" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">🔗 常用連結</a>
+                 <button id="mobile-print-btn" class="w-full text-left mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">📄 列印行程</button>
             </div>
         </div>
     </nav>
@@ -376,27 +342,24 @@
     <!-- Main Container -->
     <div class="container mx-auto p-4 sm:p-6 md:p-8 max-w-6xl">
         
-        <!-- REMOVED: Independent time dashboard section is removed -->
-
         <!-- ==================================================== -->
-        <!-- ============ 本日狀態總覽 (新功能區塊) ============ -->
+        <!-- ============ 行程要覽 (新功能區塊) ============ -->
         <!-- ==================================================== -->
         <section id="status-dashboard-section" class="mb-12 no-print">
             <div class="bg-white rounded-2xl shadow-lg p-5 md:p-6 ring-1 ring-gray-200">
-                <!-- ADDED: Time info row -->
                 <div id="status-time-info" class="flex justify-between items-center text-xs text-gray-500 mb-4 pb-4 border-b border-gray-200 font-mono">
                     <span id="status-taipei-time"></span>
                     <span id="status-time-diff"></span>
                 </div>
 
-                <!-- Card Header and Date Buttons -->
                 <div class="flex justify-between items-center flex-wrap gap-y-2">
                     <div class="flex items-center gap-x-3">
+                        <!-- MODIFIED: Title changed -->
                         <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 flex items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 mr-3 text-indigo-600" viewBox="0 0 20 20" fill="currentColor">
                                 <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd" />
                             </svg>
-                            本日狀態總覽
+                            行程要覽
                         </h2>
                         <span id="status-travel-day-indicator" class="text-xs font-semibold text-amber-800 bg-amber-100 px-2 py-0.5 rounded-full whitespace-nowrap" style="display: none;"></span>
                     </div>
@@ -410,9 +373,7 @@
                     </div>
                 </div>
 
-                <!-- Main Info Panel -->
                 <div id="status-card-content" class="space-y-4 mt-4">
-                    <!-- Header: Date, City, Progress -->
                     <div>
                         <div class="flex justify-between items-baseline">
                             <p id="status-date" class="text-lg font-bold text-indigo-700">7月2日 (週三)</p>
@@ -439,7 +400,6 @@
                         </div>
                     </div>
                 
-                    <!-- Info List: Weather, Accommodation, Transport -->
                     <div id="status-info-list" class="space-y-4 pt-4 border-t border-gray-200">
                         <div id="status-weather-item" class="flex items-start">
                             <span id="status-weather-icon" class="text-3xl mr-4 w-8 text-center pt-1">☀️</span>
@@ -459,7 +419,6 @@
                     </div>
                 </div>
 
-                 <!-- Action Button -->
                  <div class="mt-5 text-center">
                     <button id="view-details-btn" class="w-full md:w-auto bg-indigo-600 text-white font-semibold px-6 py-3 rounded-lg shadow-md hover:bg-indigo-700 transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                         詳細行程
@@ -467,7 +426,6 @@
                 </div>
             </div>
         </section>
-        <!-- ============ End of New Feature Block ============ -->
 
         <div class="flex justify-end items-center mb-4 no-print">
             <label for="show-past-toggle" class="flex items-center cursor-pointer text-sm font-medium text-gray-700">
@@ -480,7 +438,6 @@
             </label>
         </div>
 
-        <!-- Itinerary Cards will be injected here -->
         <main class="space-y-8">
             <div id="itinerary-container" class="space-y-8"></div>
 
@@ -552,8 +509,9 @@
     </div>
 
     <div class="no-print fixed bottom-4 right-4 z-50">
+        <!-- MODIFIED: Button text changed -->
         <button id="today-btn" class="bg-amber-500 text-white font-semibold px-4 py-3 rounded-full shadow-lg hover:bg-amber-600 transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-400 flex items-center justify-center">
-            本日狀態
+            行程要覽
         </button>
     </div>
 
@@ -647,7 +605,7 @@
             }
             
             if (!isAuto) {
-                showToast('已為您顯示本日狀態！');
+                showToast('已為您顯示行程要覽！');
             }
         }
         
@@ -729,7 +687,6 @@
             const { itinerary, hotels, transport, tripInfo } = data;
             const targetDayData = itinerary.find(d => d.date === date);
 
-            // --- Element Handles ---
             const statusDateEl = document.getElementById('status-date');
             const statusCityTextEl = document.getElementById('status-city-text'); 
             const progressTextEl = document.getElementById('status-progress-text');
@@ -745,12 +702,10 @@
             const transportContentEl = document.getElementById('status-transport-content');
             const transportIconEl = document.getElementById('status-transport-icon');
             const travelDayIndicatorEl = document.getElementById('status-travel-day-indicator');
-            // MODIFIED: Added handles for new time elements
             const timeInfoEl = document.getElementById('status-time-info');
             const timeDiffEl = document.getElementById('status-time-diff');
 
 
-            // --- Handle Off-Trip Dates ---
             if (!targetDayData) {
                 if(timeInfoEl) timeInfoEl.style.display = 'none';
                 statusDateEl.textContent = '旅程已結束或未開始';
@@ -767,7 +722,6 @@
                 return;
             }
 
-            // MODIFIED: Show time info block if a day is active
             if(timeInfoEl) timeInfoEl.style.display = 'flex';
             if(viewDetailsBtn) viewDetailsBtn.style.display = 'inline-block';
             
@@ -780,7 +734,6 @@
                 }
             }
             
-            // 1. Update Date, City, Progress
             const dateObj = new Date(date + 'T00:00:00');
             const dayOfWeek = dateObj.toLocaleDateString('zh-TW', { weekday: 'long', timeZone: 'UTC' });
             const datePart = `${dateObj.getUTCMonth() + 1}月${dateObj.getUTCDate()}日`;
@@ -794,7 +747,6 @@
             progressBarEl.style.width = `${progress}%`;
             progressTextEl.textContent = `Day ${targetDayData.day} / ${tripInfo.totalDays}`;
 
-            // MODIFIED: Update time difference
             if (timeDiffEl) {
                 const cityTimezoneMap = { montreal: 'America/Montreal', quebec: 'America/Montreal', niagara: 'America/Montreal', chicago: 'America/Chicago' };
                 const localTzKey = targetDayData.weatherCity;
@@ -807,7 +759,6 @@
                 timeDiffEl.textContent = diffText;
             }
 
-            // 2. Update Weather
             const cityWeather = allWeatherData[city];
             if (cityWeather) {
                 const dayIndex = cityWeather.time.indexOf(date);
@@ -849,7 +800,6 @@
                 accommodationItemEl.style.display = 'none';
             }
 
-            // 4. Update Transport
             const transportItems = transport.filter(t => t.date === date);
             if (transportItems.length > 0) {
                 const iconMap = { '航班': '✈️', '火車': '🚄', '巴士': '🚌' };
@@ -932,20 +882,6 @@
             if (mobileMenuBtn) mobileMenuBtn.addEventListener('click', () => mobileMenuPanel.classList.toggle('hidden'));
             window.addEventListener('scroll', () => mainNav.classList.toggle('scrolled', window.scrollY > 0));
 
-            const desktopNavPills = document.querySelectorAll('#desktop-nav-pills .nav-pill');
-            const daysContent = document.getElementById('desktop-nav-content-days');
-            const citiesContent = document.getElementById('desktop-nav-content-cities');
-            desktopNavPills.forEach(pill => {
-                pill.addEventListener('click', () => {
-                    desktopNavPills.forEach(p => p.classList.remove('active'));
-                    pill.classList.add('active');
-                    const isCityTab = pill.dataset.tab === 'cities';
-                    daysContent.classList.toggle('hidden', isCityTab);
-                    citiesContent.classList.toggle('hidden', !isCityTab);
-                    citiesContent.classList.toggle('flex', isCityTab);
-                });
-            });
-
             const tripCards = document.querySelectorAll('.trip-card');
             const cardObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -967,18 +903,26 @@
                 } catch (e) { console.error("Navigation error:", e); }
             }
             
-            document.querySelectorAll('a[href^="#"], .nav-utils').forEach(anchor => {
+            // MODIFIED: Updated nav link query selector
+            document.querySelectorAll('a[href^="#"], .nav-utils, .mobile-nav-link').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
+                    // Prevent default for actual links, but not for buttons acting like links
+                    if(this.getAttribute('href')?.startsWith('#')) {
+                       e.preventDefault();
+                    }
                     const hash = this.getAttribute('href');
-                    handleNavigation(hash);
-                    if (history.pushState) history.pushState(null, null, hash); else location.hash = hash;
+                    if (hash) handleNavigation(hash);
+                    if (history.pushState && hash) {
+                        history.pushState(null, null, hash);
+                    } else if (hash) {
+                        location.hash = hash;
+                    }
                     if (mobileMenuPanel && !mobileMenuPanel.classList.contains('hidden')) mobileMenuPanel.classList.add('hidden');
                 });
             });
-            if (window.location.hash) setTimeout(() => handleNavigation(window.location.hash), 100);
-            document.querySelectorAll('.mobile-nav-link').forEach(link => link.addEventListener('click', () => mobileMenuPanel.classList.add('hidden')));
 
+            if (window.location.hash) setTimeout(() => handleNavigation(window.location.hash), 100);
+            
             function triggerPrint() {
                 const allDetails = document.querySelectorAll('#itinerary-container details');
                 const originallyOpen = new WeakMap();
@@ -1017,7 +961,6 @@
             if (billInput) billInput.addEventListener('input', calculateTip);
             if (tipSelect) tipSelect.addEventListener('change', calculateTip);
 
-            // MODIFIED: Function to only update the live Taipei time in the status card
             function updateLiveTaipeiTime() {
                 const taipeiTimeEl = document.getElementById('status-taipei-time');
                 if (!taipeiTimeEl) return;
@@ -1033,7 +976,6 @@
                     taipeiTimeEl.textContent = `🇹🇼 台北時間 --:--`;
                 }
             }
-
             
             function populateDayCardWeather(allWeatherData) {
                  document.querySelectorAll('[data-weather-city]').forEach(dayEl => {
@@ -1148,8 +1090,6 @@
                 updateVisibility();
             }
 
-            // --- Kick off initialization ---
-            // MODIFIED: Start the new live time updater
             updateLiveTaipeiTime();
             setInterval(updateLiveTaipeiTime, 1000); 
 
