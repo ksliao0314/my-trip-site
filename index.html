@@ -364,7 +364,7 @@
             transform: translateX(0); /* Slides into view */
         }
         
-        /* --- Custom Day Slider Styles --- */
+        /* --- NEW: Custom Day Slider Styles --- */
         #day-slider {
             -webkit-appearance: none;
             appearance: none;
@@ -489,6 +489,7 @@
                             <p id="status-progress-text" class="text-sm font-medium text-indigo-600">Day 1 / 14</p>
                         </div>
                         
+                        <!-- NEW: Replaced progress bar with a range slider -->
                         <div class="relative pt-2 pb-1">
                             <label for="day-slider" class="sr-only">行程日選擇拉桿</label>
                             <input type="range" id="day-slider" min="1" max="14" value="1" class="w-full">
@@ -956,23 +957,7 @@
                 if (transportItems.length > 0) {
                     const iconMap = { '航班': '✈️', '火車': '🚄', '巴士': '🚌' };
                     transportIconEl.textContent = iconMap[transportItems[0].type] || '➡️';
-                    const transportHtml = transportItems.map(item => {
-                        if (item.type === '航班' && Array.isArray(item.details)) {
-                            return item.details.map(leg => {
-                                const depTime = new Date(leg.departure.time).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: leg.departure.tz });
-                                const arrTime = new Date(leg.arrival.time).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: leg.arrival.tz });
-                                const arrivalDateStr = new Date(leg.arrival.time).toISOString().split('T')[0];
-                                const departureDateStr = new Date(leg.departure.time).toISOString().split('T')[0];
-                                const dateIndicator = arrivalDateStr > departureDateStr ? ' (+1)' : '';
-                                return `<div class="mb-1">
-                                    <p class="font-semibold">${leg.flightCode}</p>
-                                    <p class="text-sm">${leg.departure.airport} (${depTime}) → ${leg.arrival.airport} (${arrTime}${dateIndicator})</p>
-                                </div>`;
-                            }).join('');
-                        }
-                        return `<p>${item.details}</p>`;
-                    }).join('');
-                    transportContentEl.innerHTML = transportHtml;
+                    transportContentEl.innerHTML = transportItems.map(item => `<p>${item.details}</p>`).join('');
                     transportItemEl.style.display = 'flex';
                 } else {
                     transportItemEl.style.display = 'none';
@@ -1283,26 +1268,8 @@
                         
                         const transportItems = transportData.filter(t => t.date === dateStr);
                         if (transportItems.length > 0) {
-                             const transportListHTML = transportItems.map(item => {
-                                if (item.type === '航班' && Array.isArray(item.details)) {
-                                    const flightsHtml = item.details.map(leg => {
-                                        const depTime = new Date(leg.departure.time).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: leg.departure.tz });
-                                        const arrTime = new Date(leg.arrival.time).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: leg.arrival.tz });
-                                        const arrivalDateStr = new Date(leg.arrival.time).toISOString().split('T')[0];
-                                        const departureDateStr = new Date(leg.departure.time).toISOString().split('T')[0];
-                                        const dateIndicator = arrivalDateStr > departureDateStr ? ' <span class="text-xs text-red-500 font-semibold">(+1)</span>' : '';
-                                        return `<div class="text-gray-700">
-                                            <div class="font-semibold text-gray-800">${leg.flightCode}</div>
-                                            <div class="text-sm pl-2 mt-1">🛫 ${leg.departure.airport} &nbsp; <strong>${depTime}</strong></div>
-                                            <div class="text-sm pl-2">🛬 ${leg.arrival.airport} &nbsp; <strong>${arrTime}</strong>${dateIndicator}</div>
-                                        </div>`;
-                                    }).join('<div class="my-2 border-t border-dashed border-gray-300"></div>');
-                                    return `<li>${flightsHtml}</li>`;
-                                }
-                                return `<li class="text-gray-700">${item.type}：${item.details}</li>`;
-                            }).join('');
-
-                            dayContentContainer.insertAdjacentHTML('afterbegin', `<div class="info-block transportation-info p-4 bg-blue-50 rounded-lg border-l-4 border-blue-400"><h4 class="font-bold text-lg text-blue-800 flex items-center mb-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 3a1 1 0 00-1.447-.894L8.763 6H5a3 3 0 000 6h.085l1.558 2.336A1 1 0 008 15.5V17a1 1 0 001 1h2a1 1 0 001-1v-1.5a1 1 0 00-.237-.664L9.915 12H15a3 3 0 000-6h-3.763L16.553 3.894A1 1 0 0018 3zM5 9a1 1 0 100-2 1 1 0 000 2zm10-2a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" /></svg>本日交通</h4><ul class="list-none space-y-2">${transportListHTML}</ul></div>`);
+                             const transportListHTML = transportItems.map(item => `<li class="text-gray-700">${item.type}：${item.details}</li>`).join('');
+                             dayContentContainer.insertAdjacentHTML('afterbegin', `<div class="info-block transportation-info p-4 bg-blue-50 rounded-lg border-l-4 border-blue-400"><h4 class="font-bold text-lg text-blue-800 flex items-center mb-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 3a1 1 0 00-1.447-.894L8.763 6H5a3 3 0 000 6h.085l1.558 2.336A1 1 0 008 15.5V17a1 1 0 001 1h2a1 1 0 001-1v-1.5a1 1 0 00-.237-.664L9.915 12H15a3 3 0 000-6h-3.763L16.553 3.894A1 1 0 0018 3zM5 9a1 1 0 100-2 1 1 0 000 2zm10-2a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" /></svg>本日交通</h4><ul class="list-none space-y-1">${transportListHTML}</ul></div>`);
                         }
                         
                         const tagContainer = el.querySelector('.my-3');
