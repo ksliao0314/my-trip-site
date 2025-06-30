@@ -362,6 +362,7 @@
             transition: opacity 0.3s ease;
             opacity: 0; /* Start hidden */
             pointer-events: none; /* Allow clicks through when hidden */
+            display: block; /* Always render as block to control visibility via opacity/pointer-events */
         }
         #mobile-menu-overlay.is-open {
             opacity: 1;
@@ -372,7 +373,9 @@
             position: fixed;
             top: 0;
             right: 0;
-            height: 100%;
+            /* MODIFICATION: Change height to auto and add max-height for shorter menu */
+            height: auto; 
+            max-height: 100vh; /* Ensure it doesn't exceed viewport height, in case content grows */
             width: 75%; /* Adjust as needed */
             max-width: 300px; /* Limit width on larger screens */
             background-color: white;
@@ -407,9 +410,9 @@
                         小費計算
                     </a>
                     <a href="#links-dashboard" class="nav-link flex items-center">
-                       <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1.5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0 1 1 0 00-1.414 1.414 4 4 0 005.656 0l3-3a4 4 0 00-5.656-5.656l-1.5 1.5a1 1 0 101.414 1.414l1.5-1.5zm-5 5a2 2 0 012.828 0 1 1 0 101.414-1.414 4 4 0 00-5.656 0l-3 3a4 4 0 105.656 5.656l1.5-1.5a1 1 0 10-1.414-1.414l-1.5 1.5a2 2 0 11-2.828-2.828l3-3z" clip-rule="evenodd" /></svg>
+                       <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1.5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0 1 1 0 00-1.414 1.414 4 4 0 005.656 0l3-3a4 4 0 00-5.656-5.656l-1.5 1.5a1 1 0 101.414 1.414l1.5-1.5a2 2 0 11-2.828-2.828l3-3z" clip-rule="evenodd" /></svg>
                         常用連結
-                    </a>
+                    </a}>
                      <button id="print-btn" class="no-print inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" /></svg>
                         列印行程
@@ -428,7 +431,8 @@
     </nav>
 
     <!-- NEW: Mobile Menu Overlay (Hidden by default, shown when menu opens) -->
-    <div id="mobile-menu-overlay" class="fixed inset-0 bg-black/50 z-[90] hidden"></div>
+    <!-- MODIFICATION: Removed 'hidden' class from HTML, now controlled by CSS opacity/pointer-events -->
+    <div id="mobile-menu-overlay" class="fixed inset-0 bg-black/50 z-[90]"></div>
 
     <!-- Mobile Menu Panel (Hidden by default, slides in from right) -->
     <div id="mobile-menu-panel" class="fixed top-0 right-0 h-full w-3/4 bg-white shadow-lg z-[100] transform translate-x-full transition-transform duration-300 ease-in-out">
@@ -737,7 +741,7 @@
                             <div class="flex items-center space-x-3 sm:space-x-4">
                                 <div class="weather-display flex-shrink-0 text-right"></div>
                                 <div class="summary-arrow flex-shrink-0">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" /></svg>
                                 </div>
                             </div>
                         </summary>
@@ -1050,13 +1054,15 @@
                 mobileMenuBtn.addEventListener('click', (e) => {
                     e.stopPropagation(); // Prevent immediate closing from window click
                     mobileMenuPanel.classList.toggle('is-open'); // Toggle new class for sliding
-                    mobileMenuOverlay.classList.toggle('hidden'); // Toggle overlay visibility
+                    // MODIFICATION: Use 'is-open' for overlay to control opacity/pointer-events
+                    mobileMenuOverlay.classList.toggle('is-open'); 
                     document.body.classList.toggle('modal-open'); // To disable body scroll
                 });
 
                 mobileMenuOverlay.addEventListener('click', () => {
                     mobileMenuPanel.classList.remove('is-open'); // Close menu
-                    mobileMenuOverlay.classList.add('hidden'); // Hide overlay
+                    // MODIFICATION: Use 'is-open' for overlay to control opacity/pointer-events
+                    mobileMenuOverlay.classList.remove('is-open'); 
                     document.body.classList.remove('modal-open'); // Enable body scroll
                 });
 
@@ -1064,7 +1070,8 @@
                 document.querySelectorAll('.mobile-nav-link').forEach(link => {
                     link.addEventListener('click', () => {
                         mobileMenuPanel.classList.remove('is-open');
-                        mobileMenuOverlay.classList.add('hidden');
+                        // MODIFICATION: Use 'is-open' for overlay to control opacity/pointer-events
+                        mobileMenuOverlay.classList.remove('is-open'); 
                         document.body.classList.remove('modal-open');
                     });
                 });
@@ -1105,10 +1112,6 @@
                     } else if (hash) {
                         location.hash = hash;
                     }
-                    // This closing logic is now handled by the mobileMenuOverlay click listener
-                    // if (mobileMenuPanel && !mobileMenuPanel.classList.contains('hidden')) {
-                    //     mobileMenuPanel.classList.add('hidden');
-                    // }
                 });
             });
 
