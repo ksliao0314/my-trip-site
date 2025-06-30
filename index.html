@@ -302,11 +302,12 @@
             -webkit-overflow-scrolling: touch; /* Smooth scrolling for iOS */
         }
         
-        @media (max-width: 768px) {
+        /* MODIFICATION: Removed min-height from media query for consistent height */
+        /* @media (max-width: 768px) {
             #status-card-content {
-                min-height: 300px; /* Ensure a good minimum height on smaller screens like iPhones */
+                min-height: 300px; 
             }
-        }
+        } */
         
         /* Animation keyframes for sliding effect */
         @keyframes slideOutLeft {
@@ -373,17 +374,19 @@
             position: fixed;
             top: 0;
             right: 0;
-            /* MODIFICATION: Change height to auto and add max-height for shorter menu */
+            /* MODIFICATION: Change height to auto for shorter menu */
             height: auto; 
-            max-height: 100vh; /* Ensure it doesn't exceed viewport height, in case content grows */
-            width: 75%; /* Adjust as needed */
-            max-width: 300px; /* Limit width on larger screens */
+            /* MODIFICATION: Adjust max-width for narrower mobile menu */
+            width: auto; /* Let content define width */
+            max-width: 250px; /* Max width to ensure it's not too wide on larger phones */
+            min-width: 180px; /* Minimum width for readability */
             background-color: white;
             box-shadow: -4px 0 10px rgba(0, 0, 0, 0.1);
             z-index: 100; /* Above overlay */
             transform: translateX(100%); /* Start off-screen to the right */
             transition: transform 0.3s ease-in-out;
             display: block; /* Always block, control visibility via transform */
+            padding-top: env(safe-area-inset-top); /* Add padding for notch */
         }
 
         #mobile-menu-panel.is-open {
@@ -412,7 +415,7 @@
                     <a href="#links-dashboard" class="nav-link flex items-center">
                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1.5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0 1 1 0 00-1.414 1.414 4 4 0 005.656 0l3-3a4 4 0 00-5.656-5.656l-1.5 1.5a1 1 0 101.414 1.414l1.5-1.5a2 2 0 11-2.828-2.828l3-3z" clip-rule="evenodd" /></svg>
                         常用連結
-                    </a}>
+                    </a><!-- FIXED: Removed extra closing '>' here -->
                      <button id="print-btn" class="no-print inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" /></svg>
                         列印行程
@@ -437,7 +440,7 @@
     <!-- Mobile Menu Panel (Hidden by default, slides in from right) -->
     <div id="mobile-menu-panel" class="fixed top-0 right-0 h-full w-3/4 bg-white shadow-lg z-[100] transform translate-x-full transition-transform duration-300 ease-in-out">
         <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-             <a href="#status-dashboard-section" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">📍 行程要覽</a>
+             <a href="#status-dashboard-section" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">� 行程要覽</a>
              <a href="#tip-calculator-section" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">🧮 小費計算機</a>
              <a href="#links-dashboard" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">🔗 常用連結</a>
              <button id="mobile-print-btn" class="w-full text-left mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">📄 列印行程</button>
@@ -1316,7 +1319,7 @@
             initializeTripView();
 
             const todayString = new Date().toISOString().split('T')[0];
-            const isTripActive = todayString >= tripInfo.tripStartDate && todayString <= tripInfo.tripEndDate; 
+            const isTripActive = todayString >= tripInfo.tripStartDate && todayInfo.tripStartDate <= tripInfo.tripEndDate; 
             currentDisplayDate = isTripActive ? todayString : tripInfo.tripStartDate;
             updateStatusDashboard(currentDisplayDate, data, allWeatherData);
 
