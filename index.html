@@ -1330,14 +1330,28 @@
                     const targetElement = document.querySelector(`[data-day="${dayData.day}"]`);
                     if (targetElement) {
                         const details = targetElement.querySelector('details');
-                        if (details && !details.open) details.open = true;
-                        
-                        const offset = mainNav ? mainNav.offsetHeight : 60;
-                        const bodyRect = document.body.getBoundingClientRect().top;
-                        const elementRect = targetElement.getBoundingClientRect().top;
-                        const elementPosition = elementRect - bodyRect;
-                        const offsetPosition = elementPosition - offset - 20;
-                        window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+                        // 先確保 <details> 區塊是展開的
+                        if (details && !details.open) {
+                            details.open = true;
+                        }
+
+                        // 使用一個短暫的延遲來等待瀏覽器完成版面重排 (reflow)
+                        // 這樣才能取得元素展開後的正確位置
+                        setTimeout(() => {
+                            const mainNav = document.getElementById('main-nav');
+                            const offset = mainNav ? mainNav.offsetHeight : 60;
+
+                            // 計算元素的絕對頂部位置
+                            const elementTop = targetElement.getBoundingClientRect().top + window.pageYOffset;
+                            
+                            // 計算最終要滾動到的位置 (減去導覽列高度和一些額外間距)
+                            const offsetPosition = elementTop - offset - 20;
+                            
+                            window.scrollTo({
+                                top: offsetPosition,
+                                behavior: 'smooth'
+                            });
+                        }, 100); // 100毫秒的延遲對於版面渲染通常已足夠
                     }
                 }
             });
