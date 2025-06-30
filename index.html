@@ -332,7 +332,7 @@
             background-color: var(--brand-color);
         }
 
-        /* --- MODIFICATION: Mobile Menu Styles Consolidated --- */
+        /* --- Mobile Menu Styles Consolidated --- */
         #mobile-menu-overlay {
             position: fixed;
             inset: 0;
@@ -362,6 +362,43 @@
         }
         #mobile-menu-panel.is-open {
             transform: translateX(0); /* Slides into view */
+        }
+        
+        /* --- NEW: Custom Day Slider Styles --- */
+        #day-slider {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 8px;
+            background: #e5e7eb; /* gray-200 */
+            border-radius: 9999px;
+            outline: none;
+            opacity: 0.9;
+            transition: opacity .2s;
+            cursor: pointer;
+        }
+        #day-slider:hover {
+            opacity: 1;
+        }
+        #day-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 22px;
+            height: 22px;
+            background: var(--brand-color); /* #4f46e5 */
+            border-radius: 50%;
+            cursor: pointer;
+            border: 3px solid white;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        }
+        #day-slider::-moz-range-thumb {
+            width: 22px;
+            height: 22px;
+            background: var(--brand-color);
+            border-radius: 50%;
+            cursor: pointer;
+            border: 3px solid white;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
         }
     </style>
 </head>
@@ -403,10 +440,10 @@
         </div>
     </nav>
 
-    <!-- MODIFICATION: Mobile Menu Overlay (classes removed, controlled by CSS) -->
+    <!-- Mobile Menu Overlay -->
     <div id="mobile-menu-overlay"></div>
 
-    <!-- MODIFICATION: Mobile Menu Panel (classes removed, controlled by CSS) -->
+    <!-- Mobile Menu Panel -->
     <div id="mobile-menu-panel">
         <div class="p-4 space-y-2">
              <a href="#status-dashboard-section" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">📋 行程要覽</a>
@@ -451,9 +488,13 @@
                             <p id="status-date" class="text-lg font-bold text-indigo-700">7月2日 (週三)</p>
                             <p id="status-progress-text" class="text-sm font-medium text-indigo-600">Day 1 / 14</p>
                         </div>
-                        <div class="w-full bg-gray-200 rounded-full h-2 mt-1 mb-2">
-                            <div id="status-progress-bar" class="bg-indigo-600 h-2 rounded-full" style="width: 7%"></div>
+                        
+                        <!-- NEW: Replaced progress bar with a range slider -->
+                        <div class="relative pt-2 pb-1">
+                            <label for="day-slider" class="sr-only">行程日選擇拉桿</label>
+                            <input type="range" id="day-slider" min="1" max="14" value="1" class="w-full">
                         </div>
+
                         <div class="relative">
                             <button type="button" id="status-city-btn" class="inline-flex items-center gap-x-2 text-3xl font-black text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 rounded-lg -ml-2 p-2 transition-colors hover:bg-gray-100">
                                 <span id="status-city-text">蒙特婁</span>
@@ -762,7 +803,7 @@
             const statusDateEl = document.getElementById('status-date');
             const statusCityTextEl = document.getElementById('status-city-text'); 
             const progressTextEl = document.getElementById('status-progress-text');
-            const progressBarEl = document.getElementById('status-progress-bar');
+            const daySlider = document.getElementById('day-slider');
             const viewDetailsBtn = document.getElementById('view-details-btn');
             const weatherItemEl = document.getElementById('status-weather-item');
             const weatherIconEl = document.getElementById('status-weather-icon');
@@ -803,7 +844,7 @@
                     statusDateEl.textContent = '旅程已結束或未開始';
                     if (statusCityTextEl) statusCityTextEl.textContent = '期待下次旅行！';
                     progressTextEl.textContent = '-';
-                    progressBarEl.style.width = '0%';
+                    if(daySlider) daySlider.value = 1;
                     if(viewDetailsBtn) viewDetailsBtn.style.display = 'none';
                     weatherIconEl.textContent = '🏠';
                     weatherTempEl.textContent = '';
@@ -837,9 +878,10 @@
                 const cityMap = { montreal: '蒙特婁', quebec: '魁北克市', niagara: '尼加拉瀑布', chicago: '芝加哥', '': '飛行途中' };
                 if (statusCityTextEl) statusCityTextEl.textContent = cityMap[city] || '移動中';
 
-                const progress = (targetDayData.day / tripInfo.totalDays) * 100;
-                progressBarEl.style.width = `${progress}%`;
                 progressTextEl.textContent = `Day ${targetDayData.day} / ${tripInfo.totalDays}`;
+                if (daySlider) {
+                    daySlider.value = targetDayData.day;
+                }
 
                 if (paginationDotsContainer) {
                     let dotsHtml = '';
@@ -971,6 +1013,19 @@
             const cityDropdown = document.getElementById('city-dropdown');
             const statusCityArrow = document.getElementById('status-city-arrow');
             const paginationDotsContainer = document.getElementById('status-pagination-dots');
+            const daySlider = document.getElementById('day-slider');
+
+            if(daySlider) {
+                daySlider.max = tripInfo.totalDays;
+                daySlider.addEventListener('input', () => {
+                    const targetDay = parseInt(daySlider.value);
+                    const targetDayData = data.itinerary[targetDay - 1];
+                    if (targetDayData) {
+                        currentDisplayDate = targetDayData.date;
+                        updateStatusDashboard(currentDisplayDate, data, window.allWeatherData, 0); 
+                    }
+                });
+            }
 
             if (statusCityBtn && cityDropdown && statusCityArrow) {
                 statusCityBtn.addEventListener('click', (event) => {
@@ -1291,7 +1346,7 @@
                 const currentDateObj = new Date(Date.UTC(year, month - 1, day));
                 currentDateObj.setUTCDate(currentDateObj.getUTCDate() + 1);
                 const newDate = currentDateObj.toISOString().split('T')[0];
-                 if (newDate <= tripInfo.tripEndDate) { 
+                 if (newDate < tripInfo.tripEndDate) { 
                     currentDisplayDate = newDate;
                     updateStatusDashboard(currentDisplayDate, data, window.allWeatherData, 1);
                 }
