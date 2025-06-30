@@ -374,7 +374,7 @@
                     </div>
                 </div>
 
-                <div id="status-card-content" class="space-y-4 mt-4 touch-pan-y">
+                <div id="status-card-content" class="space-y-4 mt-4">
                     <div>
                         <div class="flex justify-between items-baseline">
                             <p id="status-date" class="text-lg font-bold text-indigo-700">7月2日 (週三)</p>
@@ -476,7 +476,7 @@
 
             <div id="links-dashboard" class="trip-card bg-white rounded-2xl shadow-lg p-6 md:p-8 ring-1 ring-gray-200">
                  <h2 class="text-2xl sm:text-3xl font-bold mb-6 text-gray-900 flex items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 mr-3 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 mr-3 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                     實用連結儀表板
                 </h2>
                  <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 text-gray-700">
@@ -597,7 +597,7 @@
             }
 
             const tripData = window.tripData; 
-            const allWeatherData = window.allWeatherData || {}; // Ensure it exists
+            const allWeatherData = window.allWeatherData;
             if (tripData && typeof updateStatusDashboard === 'function') {
                 const isTripActive = todayString >= tripData.tripInfo.tripStartDate && todayString < tripData.tripInfo.tripEndDate;
                 currentDisplayDate = isTripActive ? todayString : tripData.tripInfo.tripStartDate;
@@ -683,8 +683,7 @@
             return results.filter(r => r).reduce((acc, {city, data}) => ({ ...acc, [city]: data.daily }), {});
         }
 
-        // --- MODIFICATION --- Now handles case where allWeatherData is not yet available.
-        function updateStatusDashboard(date, data, allWeatherData = {}) {
+        function updateStatusDashboard(date, data, allWeatherData) {
             const { itinerary, hotels, transport, tripInfo } = data;
             const targetDayData = itinerary.find(d => d.date === date);
 
@@ -735,11 +734,14 @@
                 }
             }
             
+            // --- MODIFICATION START ---
+            // This is the corrected code block to prevent timezone issues.
             const [year, month, day] = date.split('-').map(Number);
             const dateObj = new Date(Date.UTC(year, month - 1, day));
             const dayOfWeek = dateObj.toLocaleDateString('zh-TW', { weekday: 'long', timeZone: 'UTC' });
             const datePart = `${month}月${day}日`;
             statusDateEl.textContent = `${datePart} (${dayOfWeek.replace('星期','週')})`;
+            // --- MODIFICATION END ---
             
             const city = targetDayData.weatherCity;
             const cityMap = { montreal: '蒙特婁', quebec: '魁北克市', niagara: '尼加拉瀑布', chicago: '芝加哥', '': '飛行途中' };
@@ -772,14 +774,13 @@
                     weatherTempEl.textContent = `${tempMin}°C / ${tempMax}°C`;
                     weatherReminderEl.textContent = getWeatherReminder(code);
                 } else {
-                    weatherIconEl.textContent = '🌡️';
+                    weatherIconEl.textContent = '�';
                     weatherTempEl.textContent = '無預報';
                     weatherReminderEl.textContent = '無法取得本日天氣資訊。';
                 }
                  weatherItemEl.style.display = 'flex';
             } else {
-                 weatherReminderEl.textContent = '正在載入天氣資訊...';
-                 weatherItemEl.style.display = 'flex';
+                 weatherItemEl.style.display = 'none';
             }
 
             const checkingIn = hotels.find(h => h.checkIn === date);
@@ -807,41 +808,7 @@
             if (transportItems.length > 0) {
                 const iconMap = { '航班': '✈️', '火車': '🚄', '巴士': '🚌' };
                 transportIconEl.textContent = iconMap[transportItems[0].type] || '➡️';
-
-                const transportHtml = transportItems.map((item, index) => {
-                    let html = `<p class="font-medium">${item.details}</p>`;
-                    
-                    if (item.departureUTC && item.arrivalUTC) {
-                        const departureDate = new Date(item.departureUTC);
-                        const arrivalDate = new Date(item.arrivalUTC);
-
-                        const departurePhase = data.timePhases.find(p => p.endUTC === item.departureUTC && p.timezone);
-                        const arrivalPhase = data.timePhases.find(p => p.startUTC === item.arrivalUTC && p.timezone);
-                        
-                        const timeOptions = { hour: '2-digit', minute: '2-digit', hour12: false };
-                        let timeDetailsHtml = '<div class="text-sm text-gray-600 pl-2 border-l-2 border-gray-200 ml-1 mt-1 space-y-1">';
-                        
-                        if (departurePhase) {
-                             const departureTime = departureDate.toLocaleTimeString('en-CA', { ...timeOptions, timeZone: departurePhase.timezone });
-                             const departureCity = departurePhase.label.split('/')[0].trim();
-                             timeDetailsHtml += `<div><span class="font-semibold text-gray-800">出發：</span>${departureTime} (${departureCity} 時間)</div>`;
-                        }
-
-                        if (arrivalPhase) {
-                             const arrivalTime = arrivalDate.toLocaleTimeString('en-CA', { ...timeOptions, timeZone: arrivalPhase.timezone });
-                             const arrivalCity = arrivalPhase.label.split('/')[0].trim();
-                             timeDetailsHtml += `<div><span class="font-semibold text-gray-800">抵達：</span>${arrivalTime} (${arrivalCity} 時間)</div>`;
-                        }
-                        
-                        timeDetailsHtml += '</div>';
-                        html += timeDetailsHtml;
-                    }
-
-                    const wrapperClass = index > 0 ? 'mt-3' : '';
-                    return `<div class="${wrapperClass}">${html}</div>`;
-                }).join('');
-                
-                transportContentEl.innerHTML = transportHtml;
+                transportContentEl.innerHTML = transportItems.map(item => `<p>${item.details}</p>`).join('');
                 transportItemEl.style.display = 'flex';
             } else {
                 transportItemEl.style.display = 'none';
@@ -852,24 +819,19 @@
         // --- Main script execution ---
         let currentDisplayDate;
 
-        // --- MODIFICATION --- Split data loading and UI rendering for better performance.
         document.addEventListener('DOMContentLoaded', async () => {
             try {
                 const response = await fetch('trip-data.json');
                 if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
                 const data = await response.json();
                 
-                // 1. Render primary content first
-                const itineraryContainer = document.getElementById('itinerary-container');
-                renderItinerary(data.itinerary, itineraryContainer);
-                initializeApp(data);
-
-                // 2. Fetch weather data in the background
                 const allWeatherData = await fetchAllWeatherData(data.itinerary);
                 window.allWeatherData = allWeatherData;
 
-                // 3. Update UI with weather data once it's available
-                updateWeatherUI(allWeatherData);
+                const itineraryContainer = document.getElementById('itinerary-container');
+                renderItinerary(data.itinerary, itineraryContainer);
+                
+                initializeApp(data, allWeatherData);
 
             } catch (error) {
                 console.error("無法載入行程資料:", error);
@@ -878,20 +840,10 @@
             }
         });
 
-        // --- NEW FUNCTION --- This function is called after weather data is fetched.
-        function updateWeatherUI(allWeatherData) {
-            populateDayCardWeather(allWeatherData);
-            // Re-run the dashboard update to fill in the weather details
-            if (window.tripData && currentDisplayDate) {
-                 updateStatusDashboard(currentDisplayDate, window.tripData, allWeatherData);
-            }
-        }
-
-        function initializeApp(data) { // Removed allWeatherData from initial params
+        function initializeApp(data, allWeatherData) {
             window.tripData = data;
             const { hotels: hotelData, transport: transportData, foodie: foodieData, tripInfo, itinerary } = data;
             
-            const statusCard = document.getElementById('status-card-content');
             const statusCityBtn = document.getElementById('status-city-btn');
             const cityDropdown = document.getElementById('city-dropdown');
             const statusCityArrow = document.getElementById('status-city-arrow');
@@ -911,7 +863,7 @@
                         
                         if (firstDayInCity) {
                             currentDisplayDate = firstDayInCity.date;
-                            updateStatusDashboard(currentDisplayDate, data, window.allWeatherData);
+                            updateStatusDashboard(currentDisplayDate, data, allWeatherData);
                             showToast(`已切換至 ${item.textContent}`);
                         }
 
@@ -927,36 +879,6 @@
                     }
                 });
             }
-            
-            // --- MODIFICATION --- Added swipe gesture handlers for the status card
-            if (statusCard) {
-                let touchStartX = 0;
-                let touchEndX = 0;
-                const swipeThreshold = 50; // Minimum distance for a swipe
-
-                statusCard.addEventListener('touchstart', (e) => {
-                    touchStartX = e.changedTouches[0].screenX;
-                }, { passive: true });
-
-                statusCard.addEventListener('touchend', (e) => {
-                    touchEndX = e.changedTouches[0].screenX;
-                    handleSwipe();
-                });
-                
-                function handleSwipe() {
-                    const deltaX = touchEndX - touchStartX;
-                    if (Math.abs(deltaX) > swipeThreshold) {
-                        if (deltaX < 0) {
-                            // Swiped left (next day)
-                            document.getElementById('next-day-btn').click();
-                        } else {
-                            // Swiped right (previous day)
-                            document.getElementById('prev-day-btn').click();
-                        }
-                    }
-                }
-            }
-
 
             const mainNav = document.getElementById('main-nav');
             const mobileMenuBtn = document.getElementById('mobile-menu-btn');
@@ -1176,11 +1098,12 @@
                 updateVisibility();
             }
             
+            // MODIFIED: Added scroll observer for nav links
             const navLinks = document.querySelectorAll('.nav-link');
             const sections = document.querySelectorAll('section[id], main > div[id]');
             const sectionObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
-                    if (entry.isIntersecting) {
+                    if (entry.isintersecting) {
                         const id = entry.target.getAttribute('id');
                         navLinks.forEach(link => {
                             link.classList.toggle('nav-link-active', link.getAttribute('href') === `#${id}`);
@@ -1194,35 +1117,28 @@
             updateLiveTaipeiTime();
             setInterval(updateLiveTaipeiTime, 1000); 
 
-            // Initialize views without weather first
+            populateDayCardWeather(allWeatherData);
             initializeTripView();
+
             const todayString = new Date().toISOString().split('T')[0];
             currentDisplayDate = todayString >= tripInfo.tripStartDate && todayString < tripInfo.tripEndDate ? todayString : tripInfo.tripStartDate;
-            updateStatusDashboard(currentDisplayDate, data); // Initial update without weather
+            updateStatusDashboard(currentDisplayDate, data, allWeatherData);
 
-            // Setup button listeners that will work before and after weather is loaded
-            const prevBtn = document.getElementById('prev-day-btn');
-            const nextBtn = document.getElementById('next-day-btn');
-
-            const goPrevDay = () => {
+            document.getElementById('prev-day-btn').addEventListener('click', () => {
                 const [year, month, day] = currentDisplayDate.split('-').map(Number);
                 const currentDateObj = new Date(Date.UTC(year, month - 1, day));
                 currentDateObj.setUTCDate(currentDateObj.getUTCDate() - 1);
                 currentDisplayDate = currentDateObj.toISOString().split('T')[0];
-                updateStatusDashboard(currentDisplayDate, data, window.allWeatherData);
-            };
+                updateStatusDashboard(currentDisplayDate, data, allWeatherData);
+            });
 
-            const goNextDay = () => {
+            document.getElementById('next-day-btn').addEventListener('click', () => {
                 const [year, month, day] = currentDisplayDate.split('-').map(Number);
                 const currentDateObj = new Date(Date.UTC(year, month - 1, day));
                 currentDateObj.setUTCDate(currentDateObj.getUTCDate() + 1);
                 currentDisplayDate = currentDateObj.toISOString().split('T')[0];
-                updateStatusDashboard(currentDisplayDate, data, window.allWeatherData);
-            };
-
-            prevBtn.addEventListener('click', goPrevDay);
-            nextBtn.addEventListener('click', goNextDay);
-
+                updateStatusDashboard(currentDisplayDate, data, allWeatherData);
+            });
 
             document.getElementById('view-details-btn').addEventListener('click', () => {
                 const dayData = data.itinerary.find(d => d.date === currentDisplayDate);
