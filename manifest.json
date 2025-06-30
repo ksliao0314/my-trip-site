@@ -1,0 +1,20 @@
+{
+  "short_name": "F&S飛翔旅行",
+  "name": "F&S飛翔旅行 | 加拿大東岸 & 芝加哥探索之旅",
+  "icons": [
+    {
+      "src": "https://placehold.co/192x192/4f46e5/ffffff?text=F%26S",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "https://placehold.co/512x512/4f46e5/ffffff?text=F%26S",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#4f46e5",
+  "background_color": "#f8f9fa"
+}
