@@ -44,7 +44,7 @@
         .trip-card {
             opacity: 0;
             transform: translateY(30px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out, box-shadow 0.3s ease-in-out;
             background-color: var(--c-bg-card);
             border: 1px solid var(--c-border);
         }
@@ -52,13 +52,18 @@
             opacity: 1;
             transform: translateY(0);
         }
-        /* --- CSS 修正: 新增 no-trans class --- */
+        /* --- CSS 修正: 新增 no-trans class，用於暫時禁用動畫 --- */
         .trip-card.no-trans {
             transition: none !important;
         }
         .trip-card:hover {
             transform: translateY(-5px) !important;
             box-shadow: 0 10px 20px rgba(29, 53, 87, 0.1), 0 6px 6px rgba(29, 53, 87, 0.12);
+        }
+
+        /* --- CSS 修正: 新增 wrapper class 並設定 scroll-margin-top --- */
+        .trip-card-wrapper {
+            scroll-margin-top: 85px; /* 讓錨點定位時，上方能保留空間給導覽列 */
         }
         
         .activity-block {
@@ -620,7 +625,8 @@
                 let reminderHtml = day.reminder ? `<div class="mt-4 p-4 bg-amber-100/60 rounded-lg border-l-4 border-amber-400"><h4 class="font-bold text-amber-800 flex items-center mb-2">${day.reminder.title}</h4><ul class="list-disc list-inside mt-2 text-amber-900/80 space-y-1">${day.reminder.items.map(item => `<li>${item}</li>`).join('')}</ul></div>` : '';
                 let infoBoxHtml = day.infoBox ? `<div class="mt-4 p-4 bg-teal-100/60 rounded-lg border-l-4 border-teal-400"><h4 class="font-bold text-teal-800 flex items-center mb-2">${day.infoBox.title}</h4><ul class="list-disc list-inside mt-2 text-teal-900/80 space-y-1">${day.infoBox.items.map(item => `<li>${item}</li>`).join('')}</ul></div>` : '';
                 
-                htmlContent += `<div ${sectionIdAttr} data-day="${day.day}" data-date="${day.date}" data-day-group="${day.dayGroup}" data-city-target="${day.cityTarget}" data-weather-city="${day.weatherCity}">
+                // --- JS 修正: 在每日行程卡片外層加上 trip-card-wrapper class ---
+                htmlContent += `<div class="trip-card-wrapper" ${sectionIdAttr} data-day="${day.day}" data-date="${day.date}" data-day-group="${day.dayGroup}" data-city-target="${day.cityTarget}" data-weather-city="${day.weatherCity}">
                     <details class="trip-card bg-white rounded-2xl shadow-lg ring-1 ring-gray-200 overflow-hidden" ${day.day === 1 ? 'open' : ''}>
                         <summary class="${day.isTravelDay ? 'summary-travel-day' : ''} flex justify-between items-center">
                             <div>
@@ -1003,9 +1009,10 @@
                 try {
                     const targetElement = document.querySelector(hash);
                     if (!targetElement) return;
-                    const offset = mainNav ? mainNav.offsetHeight + 20 : 80;
-                    const targetTop = targetElement.getBoundingClientRect().top + window.pageYOffset;
-                    window.scrollTo({ top: targetTop - offset, behavior: 'smooth' });
+                    
+                    // 使用 scrollIntoView 並由 CSS 的 scroll-margin-top 控制偏移
+                    targetElement.scrollIntoView({ behavior: 'smooth' });
+
                     const details = targetElement.closest('details');
                     if (details && !details.open) details.open = true;
                 } catch (e) { console.error("Navigation error:", e); }
@@ -1224,7 +1231,7 @@
             }
             
             const navLinks = document.querySelectorAll('.nav-link');
-            const sections = document.querySelectorAll('section[id], main > div[id]');
+            const sections = document.querySelectorAll('section[id], .trip-card-wrapper[id]');
             const sectionObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -1274,21 +1281,19 @@
             const statusCard = document.getElementById('status-card-content');
             let touchStartX = 0;
             let touchEndX = 0;
-            let isSliderInteraction = false; // 用於追蹤是否正在與拉桿互動
+            let isSliderInteraction = false; 
             const swipeThreshold = 50; 
 
             statusCard.addEventListener('touchstart', (event) => {
-                // 檢查觸控是否起始於日期拉桿
                 if (event.target.id === 'day-slider') {
                     isSliderInteraction = true;
-                    return; // 如果是拉桿，則不記錄滑動起始點
+                    return; 
                 }
                 isSliderInteraction = false;
                 touchStartX = event.changedTouches[0].screenX;
             }, { passive: true });
 
             statusCard.addEventListener('touchend', (event) => {
-                // 如果這次的互動是針對拉桿，則重設旗標並直接返回
                 if (isSliderInteraction) {
                     isSliderInteraction = false;
                     return;
@@ -1327,37 +1332,32 @@
                 });
             }
 
-            // --- JavaScript 修正: 採用您建議的最終方案 ---
+            // --- JavaScript 修正: 採用您建議的最終方案，並移除重複的 handler ---
             document.getElementById('view-details-btn').addEventListener('click', () => {
                 const dayData = data.itinerary.find(d => d.date === currentDisplayDate);
                 if (!dayData) return;
 
-                const wrapper = document.querySelector(`[data-day="${dayData.day}"]`);
+                // 使用 .trip-card-wrapper class 來定位目標元素
+                const wrapper = document.querySelector(`.trip-card-wrapper[data-day="${dayData.day}"]`);
                 if (!wrapper) return;
 
                 const details = wrapper.querySelector('details');
-                const card    = details?.closest('.trip-card');
+                const card = details?.closest('.trip-card');
 
-                /* 1. 立即顯示卡片、不動畫 */
-                card?.classList.add('is-visible');
-                card?.classList.add('no-trans');        // 只在這一次禁止 transition
-                if (details && !details.open) details.open = true;
+                // 1. 立即顯示並展開卡片，同時暫時禁用 transition 動畫
+                card?.classList.add('is-visible', 'no-trans');
+                if (details && !details.open) {
+                    details.open = true;
+                }
 
-                /* 2. 等 layout 完成再捲動 —— 用兩層 rAF */
-                requestAnimationFrame(() => {
-                    requestAnimationFrame(() => {
-                        const navH   = document.getElementById('main-nav')?.offsetHeight ?? 60;
-                        const topAbs = wrapper.getBoundingClientRect().top + window.pageYOffset;
-                        window.scrollTo({ top: topAbs - navH - 20, behavior: 'smooth' });
-                    });
-                });
+                // 2. 執行滾動，偏移量由 CSS 的 scroll-margin-top 處理
+                wrapper.scrollIntoView({ behavior: 'smooth' });
 
-                /* 3. 捲動結束才恢復 transition（用 once 的 scroll 事件） */
-                const onScrollEnd = () => {
+                // 3. 在滾動動畫結束後，重新啟用 transition 動畫
+                // 使用 setTimeout 是一個簡單可靠的方法
+                setTimeout(() => {
                     card?.classList.remove('no-trans');
-                    window.removeEventListener('scroll', onScrollEnd);
-                };
-                window.addEventListener('scroll', onScrollEnd, { passive: true, once: true });
+                }, 1000); // 1秒的時間足夠讓 smooth scroll 完成
             });
             
             document.getElementById('today-btn').addEventListener('click', () => {
