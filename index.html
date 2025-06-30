@@ -259,6 +259,7 @@
             z-index: 2000;
         }
         
+        /* MODIFIED: Updated print styles */
         @media print {
             @page { 
                 size: A4 portrait; 
@@ -268,7 +269,7 @@
                 -webkit-print-color-adjust: exact; 
                 print-color-adjust: exact; 
             }
-            .no-print, .sticky-nav, #today-btn, #mobile-menu-btn, #time-dashboard, #foodie-modal { 
+            .no-print, .sticky-nav, #today-btn, #mobile-menu-btn, #time-dashboard, #foodie-modal, #status-dashboard-section, #tip-calculator-section, #links-dashboard { 
                 display: none !important; 
             }
             .trip-card, .trip-card.is-visible { 
@@ -289,6 +290,9 @@
             }
             details { 
                 page-break-inside: avoid; 
+            }
+            details[open] {
+                page-break-inside: avoid;
             }
             details summary .summary-arrow { 
                 display: none !important; 
@@ -398,7 +402,6 @@
                             <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd" />
                         </svg>
                         本日狀態總覽
-                        <!-- MODIFIED: Added a span for the travel day indicator -->
                         <span id="status-travel-day-indicator" class="text-sm font-medium text-amber-800 ml-3 bg-amber-100 px-3 py-1 rounded-full" style="display: none;"></span>
                     </h2>
                     <div class="flex items-center space-x-2">
@@ -479,57 +482,53 @@
                 <!-- Itinerary cards will be dynamically inserted here by JavaScript -->
             </div>
 
-            <div id="tip-calculator-section">
-                <section class="trip-card bg-white rounded-2xl shadow-lg p-6 md:p-8 ring-1 ring-gray-200">
-                    <h2 class="text-2xl font-bold text-gray-900 mb-4 flex items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 7h6m0 10v-3.251l-4.71-4.71a1 1 0 00-1.415 0L3 16.251V21h4.75L12 17.25m0 0l6-6m-6 6l-3-3" />
-                        </svg>
-                        小費計算機 (Tip Calculator)
-                    </h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-end">
-                        <div class="col-span-1">
-                            <label for="bill-amount" class="block text-sm font-medium text-gray-700">帳單金額 (CAD/USD)</label>
-                            <input type="number" id="bill-amount" placeholder="例如 85.50" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                        </div>
-                        <div class="col-span-1">
-                            <label for="tip-rate" class="block text-sm font-medium text-gray-700">小費比例 (%)</label>
-                            <select id="tip-rate" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                                <option value="15">15% (標準)</option>
-                                <option value="18" selected>18% (推薦)</option>
-                                <option value="20">20% (優質服務)</option>
-                                <option value="10">10% (基本)</option>
-                            </select>
-                        </div>
-                        <div class="text-center bg-indigo-50 p-4 rounded-lg mt-4 md:mt-0">
-                            <label class="block text-sm font-medium text-gray-700">小費金額</label>
-                            <p id="tip-result" class="text-xl font-bold text-indigo-700">-</p>
-                        </div>
-                         <div class="text-center bg-green-50 p-4 rounded-lg mt-4 md:mt-0">
-                            <label class="block text-sm font-medium text-gray-700">含小費總額</label>
-                            <p id="total-result" class="text-xl font-bold text-green-700">-</p>
-                        </div>
+            <div id="tip-calculator-section" class="trip-card bg-white rounded-2xl shadow-lg p-6 md:p-8 ring-1 ring-gray-200">
+                <h2 class="text-2xl font-bold text-gray-900 mb-4 flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 7h6m0 10v-3.251l-4.71-4.71a1 1 0 00-1.415 0L3 16.251V21h4.75L12 17.25m0 0l6-6m-6 6l-3-3" />
+                    </svg>
+                    小費計算機 (Tip Calculator)
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-end">
+                    <div class="col-span-1">
+                        <label for="bill-amount" class="block text-sm font-medium text-gray-700">帳單金額 (CAD/USD)</label>
+                        <input type="number" id="bill-amount" placeholder="例如 85.50" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                     </div>
-                </section>
+                    <div class="col-span-1">
+                        <label for="tip-rate" class="block text-sm font-medium text-gray-700">小費比例 (%)</label>
+                        <select id="tip-rate" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                            <option value="15">15% (標準)</option>
+                            <option value="18" selected>18% (推薦)</option>
+                            <option value="20">20% (優質服務)</option>
+                            <option value="10">10% (基本)</option>
+                        </select>
+                    </div>
+                    <div class="text-center bg-indigo-50 p-4 rounded-lg mt-4 md:mt-0">
+                        <label class="block text-sm font-medium text-gray-700">小費金額</label>
+                        <p id="tip-result" class="text-xl font-bold text-indigo-700">-</p>
+                    </div>
+                     <div class="text-center bg-green-50 p-4 rounded-lg mt-4 md:mt-0">
+                        <label class="block text-sm font-medium text-gray-700">含小費總額</label>
+                        <p id="total-result" class="text-xl font-bold text-green-700">-</p>
+                    </div>
+                </div>
             </div>
 
-            <div id="links-dashboard">
-                <div class="trip-card bg-white rounded-2xl shadow-lg p-6 md:p-8 ring-1 ring-gray-200">
-                     <h2 class="text-2xl sm:text-3xl font-bold mb-6 text-gray-900 flex items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 mr-3 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                        實用連結儀表板
-                    </h2>
-                     <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 text-gray-700">
-                        <a href="https://www.canada.ca/en/immigration-refugees-citizenship/services/visit-canada/eta/apply-zh-tw.html" target="_blank" class="hover:underline">加拿大eTA官網</a>
-                        <a href="https://esta.cbp.dhs.gov/" target="_blank" class="hover:underline">美國ESTA官網</a>
-                        <a href="https://www.viarail.ca/en" target="_blank" class="hover:underline">VIA Rail 火車</a>
-                        <a href="https://www.basiliquenotredame.ca/en" target="_blank" class="hover:underline">蒙特婁聖母大教堂</a>
-                        <a href="https://www.lagranderouedemontreal.com/en" target="_blank" class="hover:underline">蒙特婁摩天輪</a>
-                        <a href="https://www.mcq.org/en/" target="_blank" class="hover:underline">魁北克文明博物館</a>
-                        <a href="https://www.niagaraparks.com/visit/attractions/adventure-pass-classic" target="_blank" class="hover:underline">尼加拉瀑布套票</a>
-                        <a href="https://www.theskydeck.com/" target="_blank" class="hover:underline">芝加哥Skydeck</a>
-                        <a href="https://www.artic.edu/" target="_blank" class="hover:underline">芝加哥藝術學院</a>
-                    </div>
+            <div id="links-dashboard" class="trip-card bg-white rounded-2xl shadow-lg p-6 md:p-8 ring-1 ring-gray-200">
+                 <h2 class="text-2xl sm:text-3xl font-bold mb-6 text-gray-900 flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 mr-3 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    實用連結儀表板
+                </h2>
+                 <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 text-gray-700">
+                    <a href="https://www.canada.ca/en/immigration-refugees-citizenship/services/visit-canada/eta/apply-zh-tw.html" target="_blank" class="hover:underline">加拿大eTA官網</a>
+                    <a href="https://esta.cbp.dhs.gov/" target="_blank" class="hover:underline">美國ESTA官網</a>
+                    <a href="https://www.viarail.ca/en" target="_blank" class="hover:underline">VIA Rail 火車</a>
+                    <a href="https://www.basiliquenotredame.ca/en" target="_blank" class="hover:underline">蒙特婁聖母大教堂</a>
+                    <a href="https://www.lagranderouedemontreal.com/en" target="_blank" class="hover:underline">蒙特婁摩天輪</a>
+                    <a href="https://www.mcq.org/en/" target="_blank" class="hover:underline">魁北克文明博物館</a>
+                    <a href="https://www.niagaraparks.com/visit/attractions/adventure-pass-classic" target="_blank" class="hover:underline">尼加拉瀑布套票</a>
+                    <a href="https://www.theskydeck.com/" target="_blank" class="hover:underline">芝加哥Skydeck</a>
+                    <a href="https://www.artic.edu/" target="_blank" class="hover:underline">芝加哥藝術學院</a>
                 </div>
             </div>
         </main>
@@ -745,7 +744,6 @@
             const transportContentEl = document.getElementById('status-transport-content');
             const transportIconEl = document.getElementById('status-transport-icon');
 
-            // MODIFIED: Get travel day indicator element
             const travelDayIndicatorEl = document.getElementById('status-travel-day-indicator');
 
             // --- Handle Off-Trip Dates ---
@@ -762,14 +760,12 @@
 
                 accommodationItemEl.style.display = 'none';
                 transportItemEl.style.display = 'none';
-                // MODIFIED: Hide indicator on off-trip days
                 if (travelDayIndicatorEl) travelDayIndicatorEl.style.display = 'none';
                 return;
             }
 
             if(viewDetailsBtn) viewDetailsBtn.style.display = 'inline-block';
             
-            // MODIFIED: Update travel day indicator
             if (travelDayIndicatorEl) {
                 if (targetDayData.isTravelDay) {
                     travelDayIndicatorEl.textContent = '移動日';
@@ -932,11 +928,24 @@
             if (window.location.hash) setTimeout(() => handleNavigation(window.location.hash), 100);
             document.querySelectorAll('.mobile-nav-link').forEach(link => link.addEventListener('click', () => mobileMenuPanel.classList.add('hidden')));
 
+            // MODIFIED: Updated print function
             function triggerPrint() {
-                const allDetails = document.querySelectorAll('details');
+                const allDetails = document.querySelectorAll('#itinerary-container details');
                 const originallyOpen = new WeakMap();
-                allDetails.forEach(detail => { originallyOpen.set(detail, detail.open); detail.open = true; });
-                setTimeout(() => { window.print(); allDetails.forEach(detail => detail.open = originallyOpen.get(detail)); }, 100);
+                allDetails.forEach(detail => { 
+                    originallyOpen.set(detail, detail.open); 
+                    detail.open = true; 
+                });
+
+                // Use a short timeout to ensure the browser has time to render the opened details
+                setTimeout(() => { 
+                    window.print(); 
+                    
+                    // Restore the original state after printing dialog is closed
+                    allDetails.forEach(detail => {
+                        detail.open = originallyOpen.get(detail);
+                    });
+                }, 100);
             }
             document.getElementById('print-btn')?.addEventListener('click', triggerPrint);
             document.getElementById('mobile-print-btn')?.addEventListener('click', triggerPrint);
