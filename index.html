@@ -2,7 +2,7 @@
 <html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
-    <!-- MODIFICATION: Disabled page zooming on mobile -->
+    <!-- MODIFICATION: Disabled page zooming on mobile and optimized for iPhone full-screen display -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no">
     <title>F&S飛翔旅行 | 加拿大東岸 & 芝加哥探索之旅</title>
     
@@ -27,6 +27,7 @@
         body { 
             font-family: 'Noto Sans TC', sans-serif; 
             background-color: #f8f9fa;
+            /* Ensure proper padding for iPhone safe areas (notches, home indicator) */
             padding-top: env(safe-area-inset-top);
             padding-bottom: env(safe-area-inset-bottom);
             padding-left: env(safe-area-inset-left);
@@ -66,7 +67,7 @@
 
         .sticky-nav {
             position: sticky;
-            top: env(safe-area-inset-top);
+            top: env(safe-area-inset-top); /* Stick below the notch area on iPhones */
             z-index: 50;
             transition: box-shadow 0.3s;
         }
@@ -293,13 +294,17 @@
         }
 
         /* MODIFICATION: Styles for fixed height and swipe animation for status dashboard */
-        /* Apply min-height, max-height and overflow-y to #status-card-content for mobile only */
+        /* Apply a consistent max-height and overflow-y to #status-card-content for all screen sizes,
+           and ensure a suitable min-height for mobile/iPhone. */
+        #status-card-content {
+            max-height: 400px; /* Adjust this value as needed for a comfortable fixed height */
+            overflow-y: auto; /* Enable vertical scrolling when content exceeds max-height */
+            -webkit-overflow-scrolling: touch; /* Smooth scrolling for iOS */
+        }
+        
         @media (max-width: 768px) {
             #status-card-content {
-                min-height: 300px; /* Adjusted min-height for consistent card size on mobile */
-                max-height: 50vh; /* Retain max-height for larger content, allowing scroll */
-                overflow-y: auto;
-                -webkit-overflow-scrolling: touch; /* Smooth scrolling for iOS */
+                min-height: 300px; /* Ensure a good minimum height on smaller screens like iPhones */
             }
         }
         
