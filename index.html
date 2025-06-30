@@ -72,7 +72,7 @@
 
         .tag { display: inline-block; background-color: var(--brand-color-light); color: #4338ca; padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.8rem; font-weight: 500; margin-right: 0.5rem; margin-bottom: 0.5rem; }
         
-        .activity-block a {
+        .activity-block a, .info-block a {
             font-weight: 600; /* semibold */
             color: #4338ca; /* indigo-700 */
         }
@@ -353,7 +353,7 @@
                     <p id="date-chicago" class="text-xs text-gray-400">---</p>
                 </div>
                  <div id="time-taipei-block" class="timezone-block bg-white p-4 rounded-lg shadow text-center">
-                    <h2 class="text-sm font-bold text-gray-500">�🇼 台北</h2>
+                    <h2 class="text-sm font-bold text-gray-500">🇹🇼 台北</h2>
                     <p id="time-taipei" class="text-xl sm:text-2xl font-mono font-bold text-gray-800">--:--:--</p>
                     <p id="date-taipei" class="text-xs text-gray-400">---</p>
                 </div>
@@ -549,14 +549,6 @@
                     <div class="p-4 sm:p-6 border-t border-gray-200">
                         <div class="my-3"><span class="tag">#火車旅程</span><span class="tag">#古城初探</span><span class="tag">#世界遺產</span></div>
                         <div class="space-y-6">
-                             <div class="activity-block">
-                                <h4 class="font-bold text-lg text-blue-800">🚄 07:30 – 12:00｜搭乘 VIA Rail 前往魁北克</h4>
-                                <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
-                                    <li><strong>早餐：</strong>可至 <a href="https://maps.apple.com/?q=Boulangerie+Première+Moisson,Montreal" target="_blank" class="hover:underline">Première Moisson</a> 外帶可頌＋咖啡。</li>
-                                    <li>搭地鐵至 Bonaventure 站即達<a href="https://maps.apple.com/?q=Gare+Centrale,Montreal" target="_blank" class="hover:underline">中央火車站 (Gare Centrale)</a>。</li>
-                                    <li><strong>建議班次 08:45 – 12:00：</strong>行程約 3 小時 15 分鐘，沿途欣賞鄉間景致。</li>
-                                </ul>
-                            </div>
                             <div class="activity-block">
                                 <h4 class="font-bold text-lg text-green-800">🧳 12:00 – 13:30｜抵達魁北克市 → 入住飯店 → 午餐</h4>
                                 <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
@@ -786,13 +778,6 @@
                                 </ul>
                             </div>
                              <div class="activity-block">
-                                <h4 class="font-bold text-lg text-purple-800">✈️ 15:00 – 16:30｜多倫多 → 芝加哥（ORD）</h4>
-                                <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
-                                    <li><strong>建議航班：</strong>Air Canada AC515（15:00–16:30）或類似班次。</li>
-                                    <li>抵達芝加哥 O’Hare 機場後，入境並搭乘地鐵 Blue Line 前往市中心。</li>
-                                </ul>
-                            </div>
-                             <div class="activity-block">
                                 <h4 class="font-bold text-lg text-red-800">🌇 18:30 – 21:00｜芝加哥河畔散步 + Deep Dish 晚餐</h4>
                                 <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
                                     <li>入住飯店後，可沿 <a href="https://maps.apple.com/?q=Chicago+Riverwalk" target="_blank" class="hover:underline">Chicago Riverwalk</a> 散步至 <a href="https://maps.apple.com/?q=DuSable+Bridge,Chicago" target="_blank" class="hover:underline">DuSable Bridge</a>。</li>
@@ -921,7 +906,7 @@
                         </div>
                     </summary>
                     <div class="p-4 sm:p-6 border-t border-gray-200">
-                        <div class="my-3"><span class="tag">#自由行程</span><span class="tag">#水族館</span><span class="tag">#最後晚餐</span></div>
+                         <div class="my-3"><span class="tag">#自由行程</span><span class="tag">#水族館</span><span class="tag">#最後晚餐</span></div>
                         <div class="space-y-6">
                             <div class="activity-block">
                                 <h4 class="font-bold text-lg text-blue-800">☀️ 09:00 – 12:00｜自由行程：購物 or 市區散步</h4>
@@ -1051,7 +1036,7 @@
                     <div class="p-4 sm:p-6 border-t border-gray-200">
                          <div class="my-3"><span class="tag">#返家之日</span><span class="tag">#跨時區航班</span><span class="tag">#滿載而歸</span></div>
                         <div class="space-y-6">
-                            <div class="activity-block">
+                           <div class="activity-block">
                                 <h4 class="font-bold text-lg text-blue-800">Day 13 (週一): 飛行途中</h4>
                                 <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
                                     <li><strong>航班 JL-009：</strong>01:30 (美國中部時間) 從芝加哥 ORD 機場起飛。</li>
@@ -1211,6 +1196,23 @@
 
         // --- Main script execution after DOM is loaded ---
         document.addEventListener('DOMContentLoaded', () => {
+             // --- Central Data Store ---
+            const hotelData = [
+                { name: 'InterContinental Montreal By IHG', checkIn: '2025-07-02', checkOut: '2025-07-04', mapLink: 'https://maps.apple.com/?q=InterContinental+Montreal', checkInTime: '下午4:00後', checkOutTime: '下午12:00前' },
+                { name: 'Fairmont Le Château Frontenac (範例)', checkIn: '2025-07-04', checkOut: '2025-07-06', mapLink: 'https://maps.apple.com/?q=Fairmont+Le+Château+Frontenac', checkInTime: '下午4:00後', checkOutTime: '上午11:00前' },
+                { name: 'Sheraton Fallsview Hotel', checkIn: '2025-07-06', checkOut: '2025-07-08', mapLink: 'https://maps.apple.com/?q=Sheraton+Fallsview+Hotel', checkInTime: '下午4:00後', checkOutTime: '下午12:00前' },
+                { name: 'The Peninsula Chicago (範例)', checkIn: '2025-07-08', checkOut: '2025-07-13', mapLink: 'https://maps.apple.com/?q=The+Peninsula+Chicago', checkInTime: '下午3:00後', checkOutTime: '中午12:00前' }
+            ];
+             const transportData = [
+                { date: '2025-07-02', type: '航班', details: '長榮 BR198 + 加航 AC6' },
+                { date: '2025-07-02', type: '巴士', details: '747 Express Bus' },
+                { date: '2025-07-04', type: '火車', details: 'VIA Rail (蒙特婁 → 魁北克市)' },
+                { date: '2025-07-06', type: '航班', details: '加航 AC7959 (魁北克 → 多倫多)' },
+                { date: '2025-07-08', type: '航班', details: '加航 AC515 (多倫多 → 芝加哥)' },
+                { date: '2025-07-14', type: '航班', details: '日航 JL009 (芝加哥 → 東京)' },
+                { date: '2025-07-15', type: '航班', details: '日航 JL097 (東京 → 台北)' },
+            ];
+
 
             const mainNav = document.getElementById('main-nav');
             const mobileMenuBtn = document.getElementById('mobile-menu-btn');
@@ -1471,13 +1473,6 @@
             
             // --- Robust Date and View Management ---
             function initializeTripView() {
-                const hotelData = [
-                    { name: 'InterContinental Montreal By IHG', checkIn: '2025-07-02', checkOut: '2025-07-04', mapLink: 'https://maps.apple.com/?q=InterContinental+Montreal', checkInTime: '下午4:00後', checkOutTime: '下午12:00前' },
-                    { name: 'Fairmont Le Château Frontenac (範例)', checkIn: '2025-07-04', checkOut: '2025-07-06', mapLink: 'https://maps.apple.com/?q=Fairmont+Le+Château+Frontenac', checkInTime: '下午4:00後', checkOutTime: '上午11:00前' },
-                    { name: 'Sheraton Fallsview Hotel', checkIn: '2025-07-06', checkOut: '2025-07-08', mapLink: 'https://maps.apple.com/?q=Sheraton+Fallsview+Hotel', checkInTime: '下午4:00後', checkOutTime: '下午12:00前' },
-                    { name: 'The Peninsula Chicago (範例)', checkIn: '2025-07-08', checkOut: '2025-07-13', mapLink: 'https://maps.apple.com/?q=The+Peninsula+Chicago', checkInTime: '下午3:00後', checkOutTime: '中午12:00前' }
-                ];
-
                 const showPastToggle = document.getElementById('show-past-toggle');
                 const mainContainer = document.querySelector('main.space-y-8');
                 if (!mainContainer || !showPastToggle) return;
@@ -1513,37 +1508,51 @@
                     
                     el.classList.remove('day-past');
                     if (el.querySelector('summary')) el.querySelector('summary').classList.remove('summary-today');
-
-                    // --- NEW: Dynamic Hotel Info Injection Logic ---
-                    const dayContent = el.querySelector('.p-4.sm\\:p-6');
+                    
+                    const dayContent = el.querySelector('.p-4.sm\\:p-6 .space-y-6'); 
                     if (dayContent) {
-                        const existingInfo = dayContent.querySelector('.accommodation-info');
-                        if (existingInfo) existingInfo.remove(); // Clear previous info
+                        const existingInfo = dayContent.querySelector('.info-block');
+                        if (existingInfo) existingInfo.parentElement.querySelectorAll('.info-block').forEach(e => e.remove());
 
+                        // Inject Accommodation Info
                         const checkingOut = hotelData.find(h => h.checkOut === dateStr);
                         const checkingIn = hotelData.find(h => h.checkIn === dateStr);
                         const stayingAt = hotelData.find(h => dateStr >= h.checkIn && dateStr < h.checkOut);
-
-                        let infoHTML = '';
+                        
+                        let hotelInfoHTML = '';
                         if (checkingOut) {
-                            infoHTML += `<p class="text-gray-700">今日退房：<a href="${checkingOut.mapLink}" target="_blank" class="font-semibold hover:underline">${checkingOut.name}</a> (${checkingOut.checkOutTime}須退房)</p>`;
+                            hotelInfoHTML += `<p class="text-gray-700">今日退房：<a href="${checkingOut.mapLink}" target="_blank" class="font-semibold hover:underline">${checkingOut.name}</a> <span class="text-sm text-gray-500">(${checkingOut.checkOutTime}須退房)</span></p>`;
                         }
                         if (checkingIn) {
-                             infoHTML += `<p class="text-gray-700 mt-1">今日入住：<a href="${checkingIn.mapLink}" target="_blank" class="font-semibold hover:underline">${checkingIn.name}</a> (${checkingIn.checkInTime}可入住)</p>`;
+                             hotelInfoHTML += `<p class="text-gray-700 mt-1">今日入住：<a href="${checkingIn.mapLink}" target="_blank" class="font-semibold hover:underline">${checkingIn.name}</a> <span class="text-sm text-gray-500">(${checkingIn.checkInTime}可入住)</span></p>`;
                         } else if (!checkingOut && stayingAt) {
-                            infoHTML += `<p class="text-gray-700">今晚入住：<a href="${stayingAt.mapLink}" target="_blank" class="font-semibold hover:underline">${stayingAt.name}</a></p>`;
+                            hotelInfoHTML += `<p class="text-gray-700">今晚入住：<a href="${stayingAt.mapLink}" target="_blank" class="font-semibold hover:underline">${stayingAt.name}</a></p>`;
                         }
 
-                        if (infoHTML) {
-                            const accommodationHTML = `
-                                <div class="accommodation-info mt-0 mb-6 p-4 bg-gray-100 rounded-lg border-l-4 border-indigo-400">
+                        if (hotelInfoHTML) {
+                            dayContent.insertAdjacentHTML('afterbegin', `
+                                <div class="info-block accommodation-info mt-0 mb-6 p-4 bg-gray-50 rounded-lg border-l-4 border-indigo-400">
                                     <h4 class="font-bold text-lg text-indigo-800 flex items-center mb-2">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor"><path d="M19 9.5A2.5 2.5 0 0016.5 7H3.5A2.5 2.5 0 001 9.5v7A2.5 2.5 0 003.5 19h13a2.5 2.5 0 002.5-2.5v-7zM6 13a1 1 0 11-2 0 1 1 0 012 0zm3 0a1 1 0 11-2 0 1 1 0 012 0z" /><path d="M3.5 4A1.5 1.5 0 002 5.5v1A1.5 1.5 0 003.5 8h13A1.5 1.5 0 0018 6.5v-1A1.5 1.5 0 0016.5 4h-13z" /></svg>
                                         住宿資訊
                                     </h4>
-                                    ${infoHTML}
-                                </div>`;
-                            dayContent.insertAdjacentHTML('afterbegin', accommodationHTML);
+                                    ${hotelInfoHTML}
+                                </div>`);
+                        }
+                        
+                        // Inject Transportation Info
+                        const transportItems = transportData.filter(t => t.date === dateStr);
+                        if (transportItems.length > 0) {
+                             const transportListHTML = transportItems.map(item => `<li class="text-gray-700">${item.type}：${item.details}</li>`).join('');
+                             dayContent.insertAdjacentHTML('afterbegin', `
+                                <div class="info-block transportation-info mt-0 mb-6 p-4 bg-blue-50 rounded-lg border-l-4 border-blue-400">
+                                     <h4 class="font-bold text-lg text-blue-800 flex items-center mb-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 3a1 1 0 00-1.447-.894L8.763 6H5a3 3 0 000 6h.085l1.558 2.336A1 1 0 008 15.5V17a1 1 0 001 1h2a1 1 0 001-1v-1.5a1 1 0 00-.237-.664L9.915 12H15a3 3 0 000-6h-3.763L16.553 3.894A1 1 0 0018 3zM5 9a1 1 0 100-2 1 1 0 000 2zm10-2a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" /></svg>
+                                        本日交通
+                                    </h4>
+                                    <ul class="list-none space-y-1">${transportListHTML}</ul>
+                                </div>
+                             `);
                         }
                     }
                     
