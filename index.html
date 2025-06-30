@@ -1346,20 +1346,28 @@
                         top: offsetPosition,
                         behavior: 'smooth'
                     });
+
+                    // Restore the transition after scrolling
+                    if (tripCard) {
+                        setTimeout(() => {
+                            tripCard.style.transition = '';
+                        }, 0);
+                    }
                 };
 
-                // 1. 手動讓卡片可見，不再依賴 IntersectionObserver
-                if(tripCard) {
+                // 1. Manually make the card visible by overriding the IntersectionObserver logic
+                if (tripCard) {
+                    // Temporarily disable the transition to make the change instant
+                    tripCard.style.transition = 'none';
                     tripCard.classList.add('is-visible');
                 }
 
-                // 2. 展開 <details>
+                // 2. Ensure the details are open
                 if (!details.open) {
                     details.open = true;
                 }
 
-                // 3. 使用 requestAnimationFrame 來確保在下一次渲染前執行滾動
-                // 這能保證滾動時，元素已經可見且版面已更新
+                // 3. Use requestAnimationFrame to ensure the scroll happens after the instant DOM changes
                 requestAnimationFrame(scrollToTarget);
             });
             
