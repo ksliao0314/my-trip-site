@@ -18,102 +18,107 @@
     "montreal": {
       "name": "蒙特婁",
       "categories": [
-        { "name": "地道加拿大料理", "items": [
-          { "name": "蒙特婁貝果 (Montreal-style Bagel)", "desc": "薄、脆、帶微甜，有別於紐約貝果。", "places": [{ "name": "St-Viateur Bagel", "link": "https://maps.apple.com/?q=St-Viateur+Bagel" }, { "name": "Fairmount Bagel", "link": "https://maps.apple.com/?q=Fairmount+Bagel" }] },
-          { "name": "煙燻肉三明治 (Smoked Meat Sandwich)", "desc": "牛肉醃製後煙燻，搭配芥末與裸麥麵包。", "places": [{ "name": "Schwartz’s Deli", "link": "https://maps.apple.com/?q=Schwartz’s+Deli" }] },
-          { "name": "布丁地獄 (Pouding Chômeur)", "desc": "楓糖風味的蛋糕甜點，源自魁北克經濟大蕭條時代。", "places": [{ "name": "La Binerie Mont-Royal", "link": "https://maps.apple.com/?q=La+Binerie+Mont-Royal" }] },
-          { "name": "Putin (起司凝乳肉汁薯條)", "desc": "經典魁北克小吃。", "places": [{ "name": "La Banquise", "link": "https://maps.apple.com/?q=La+Banquise" }] }
+        { "name": "🥯 道地加拿大料理", "items": [
+          { "name": "蒙特婁貝果", "desc": "必吃的特色貝果，推薦 St-Viateur 或 Fairmount。", "places": [
+            { "name": "St-Viateur Bagel", "link": "https://maps.apple.com/?q=St-Viateur+Bagel" }, 
+            { "name": "Fairmount Bagel", "link": "https://maps.apple.com/?q=Fairmount+Bagel" }
+          ] },
+          { "name": "煙燻肉三明治", "desc": "Schwartz’s Deli 是蒙特婁的代表性店家。", "places": [{ "name": "Schwartz’s Deli", "link": "https://maps.apple.com/?q=Schwartz’s+Deli" }] },
+          { "name": "布丁地獄", "desc": "傳統魁北克楓糖蛋糕。", "places": [{ "name": "La Binerie Mont-Royal", "link": "https://maps.apple.com/?q=La+Binerie+Mont-Royal" }] },
+          { "name": "Poutine", "desc": "肉汁起司薯條的發源地，La Banquise 是名店。", "places": [{ "name": "La Banquise", "link": "https://maps.apple.com/?q=La+Banquise" }] }
         ]},
-        { "name": "法式/歐陸料理", "items": [
-          { "name": "Jardin Nelson", "desc": "戶外花園餐廳，輕法菜系＋現場音樂。", "places": [{ "name": "Jardin Nelson", "link": "https://maps.apple.com/?q=Jardin+Nelson" }] },
-          { "name": "L’Express", "desc": "經典法式小酒館，深夜供餐。", "places": [{ "name": "L’Express", "link": "https://maps.apple.com/?q=L’Express+Montreal" }] },
-          { "name": "Modavie Bistro", "desc": "爵士音樂現場＋羊排、鴨胸。", "places": [{ "name": "Modavie", "link": "https://maps.apple.com/?q=Modavie" }] }
+        { "name": "🥂 法式／歐陸料理", "items": [
+          { "name": "戶外花園法式餐", "desc": "Jardin Nelson 提供美好的戶外用餐體驗。", "places": [{ "name": "Jardin Nelson", "link": "https://maps.apple.com/?q=Jardin+Nelson" }] },
+          { "name": "經典法式小酒館", "desc": "L’Express 是體驗道地法式小館氛圍的好去處。", "places": [{ "name": "L’Express", "link": "https://maps.apple.com/?q=L’Express+Montreal" }] },
+          { "name": "爵士音樂＋法餐", "desc": "Modavie Bistro 結合現場爵士樂與美味法餐。", "places": [{ "name": "Modavie Bistro", "link": "https://maps.apple.com/?q=Modavie" }] }
         ]},
-        { "name": "甜點 / 法式甜品", "items": [
-          { "name": "Maison Christian Faure", "desc": "法式甜點大師開設的甜塔與可麗露名店。", "places": [{ "name": "Maison Christian Faure", "link": "https://maps.apple.com/?q=Maison+Christian+Faure" }] },
-          { "name": "Pâtisserie Au Kouign Amann", "desc": "傳統法式奶油糕點 Kouign-Amann 專賣。", "places": [{ "name": "Pâtisserie Au Kouign Amann", "link": "https://maps.apple.com/?q=Pâtisserie+Au+Kouign+Amann" }] },
-          { "name": "Chocolats Geneviève Grandbois", "desc": "蒙特婁本地巧克力精品品牌。", "places": [{ "name": "Chocolats Geneviève Grandbois", "link": "https://maps.apple.com/?q=Chocolats+Geneviève+Grandbois" }] }
+        { "name": "🍰 甜點／法式糕點", "items": [
+          { "name": "可麗露", "desc": "法式甜點，可麗露是 ÔFauria 的招牌。", "places": [{ "name": "ÔFauria", "link": "https://maps.apple.com/?q=ÔFauria" }] },
+          { "name": "奶油千層糕", "desc": "Pâtisserie Au Kouign Amann 的千層糕遠近馳名。", "places": [{ "name": "Pâtisserie Au Kouign Amann", "link": "https://maps.apple.com/?q=Pâtisserie+Au+Kouign+Amann" }] },
+          { "name": "精品巧克力", "desc": "Lecavalier-Petrone 是選購精緻巧克力的好地方。", "places": [{ "name": "Lecavalier-Petrone", "link": "https://maps.apple.com/?q=Lecavalier-Petrone" }] },
+          { "name": "高評價法式甜品", "desc": "Fous Desserts 提供各式各樣高水準的法式甜點。", "places": [{ "name": "Fous Desserts", "link": "https://maps.apple.com/?q=Fous+Desserts" }] },
+          { "name": "人氣早午甜點", "desc": "Régine Café 是當地非常受歡迎的早午餐與甜點店。", "places": [{ "name": "Régine Café", "link": "https://maps.apple.com/?q=Régine+Café" }] },
+          { "name": "法式糕點老店", "desc": "Duc de Lorraine 是歷史悠久的法式糕點店。", "places": [{ "name": "Duc de Lorraine", "link": "https://maps.apple.com/?q=Duc+de+Lorraine" }] }
         ]},
-        { "name": "早午餐/咖啡廳", "items": [
-          { "name": "Olive et Gourmando", "desc": "人氣三明治與義式濃縮咖啡。", "places": [{ "name": "Olive et Gourmando", "link": "https://maps.apple.com/?q=Olive+et+Gourmando" }] },
-          { "name": "Café Parvis", "desc": "文青風咖啡廳，植物環繞設計。", "places": [{ "name": "Café Parvis", "link": "https://maps.apple.com/?q=Café+Parvis" }] }
+        { "name": "☕ 早午餐／咖啡廳", "items": [
+          { "name": "三明治＋咖啡", "desc": "Olive et Gourmando 是享用美味三明治與咖啡的名店。", "places": [{ "name": "Olive et Gourmando", "link": "https://maps.apple.com/?q=Olive+et+Gourmando" }] },
+          { "name": "文青風植物系咖啡廳", "desc": "Café Parvis 以其美麗的植物裝潢和舒適氛圍聞名。", "places": [{ "name": "Café Parvis", "link": "https://maps.apple.com/?q=Café+Parvis" }] }
         ]}
       ]
     },
     "quebec": {
       "name": "魁北克市",
       "categories": [
-        { "name": "傳統魁北克料理 / 野味", "items": [
-          { "name": "Chez Boulay", "desc": "融合法餐＋本地野食材（野莓、野豬、楓糖）。", "places": [{ "name": "Chez Boulay – Bistro Boréal", "link": "https://maps.apple.com/?q=Chez+Boulay+–+Bistro+Boréal" }] },
-          { "name": "Aux Anciens Canadiens", "desc": "歷史建築裡的傳統家常料理。", "places": [{ "name": "Aux Anciens Canadiens", "link": "https://maps.apple.com/?q=Aux+Anciens+Canadiens" }] }
+        { "name": "🥩 傳統魁北克料理／野味", "items": [
+          { "name": "野莓、楓糖料理", "desc": "Chez Boulay – Bistro Boréal 擅長使用在地食材。", "places": [{ "name": "Chez Boulay – Bistro Boréal", "link": "https://maps.apple.com/?q=Chez+Boulay+–+Bistro+Boréal" }] },
+          { "name": "歷史建築裡的家常菜", "desc": "Aux Anciens Canadiens 在古老建築中提供傳統菜餚。", "places": [{ "name": "Aux Anciens Canadiens", "link": "https://maps.apple.com/?q=Aux+Anciens+Canadiens" }] }
         ]},
-        { "name": "家常/高人氣餐館", "items": [
-          { "name": "Le Chic Shack", "desc": "創意漢堡與手工薯條。", "places": [{ "name": "Le Chic Shack", "link": "https://maps.apple.com/?q=Le+Chic+Shack" }] },
-          { "name": "Buffet de l’Antiquaire", "desc": "本地風味早午餐經典。", "places": [{ "name": "Buffet de l’Antiquaire", "link": "https://maps.apple.com/?q=Buffet+de+l’Antiquaire" }] }
+        { "name": "🍔 家常／高人氣餐館", "items": [
+          { "name": "創意漢堡＋薯條", "desc": "Le Chic Shack 提供美味的創意漢堡。", "places": [{ "name": "Le Chic Shack", "link": "https://maps.apple.com/?q=Le+Chic+Shack" }] },
+          { "name": "經典魁北克早午餐", "desc": "Buffet de l’Antiquaire 是體驗當地早午餐的好去處。", "places": [{ "name": "Buffet de l’Antiquaire", "link": "https://maps.apple.com/?q=Buffet+de+l’Antiquaire" }] }
         ]},
-        { "name": "主題風味料理", "items": [
-          { "name": "Le Lapin Sauté", "desc": "兔肉主題料理，氣氛浪漫。", "places": [{ "name": "Le Lapin Sauté", "link": "https://maps.apple.com/?q=Le+Lapin+Sauté" }] },
-          { "name": "Cochon Dingue", "desc": "平價創意早午餐（多分店）。", "places": [{ "name": "Cochon Dingue", "link": "https://maps.apple.com/?q=Cochon+Dingue" }] }
+        { "name": "🐇 主題風味料理", "items": [
+          { "name": "兔肉主題餐廳", "desc": "Le Lapin Sauté 以各種兔肉料理聞名。", "places": [{ "name": "Le Lapin Sauté", "link": "https://maps.apple.com/?q=Le+Lapin+Sauté" }] },
+          { "name": "多分店創意早午餐", "desc": "Cochon Dingue 是受歡迎的連鎖早午餐店。", "places": [{ "name": "Cochon Dingue", "link": "https://maps.apple.com/?q=Cochon+Dingue" }] }
         ]},
-        { "name": "夜間餐酒館", "items": [
-          { "name": "Bistro Sous le Fort", "desc": "靠近纜車口的小景觀餐館。", "places": [{ "name": "Bistro Sous le Fort", "link": "https://maps.apple.com/?q=Bistro+Sous+le+Fort" }] },
-          { "name": "La Buche", "desc": "木屋風格 + 音樂與熱鬧氣氛。", "places": [{ "name": "La Buche", "link": "https://maps.apple.com/?q=La+Buche" }] }
+        { "name": "🍷 夜間餐酒館", "items": [
+          { "name": "木屋風格＋音樂熱鬧", "desc": "La Bûche 提供熱鬧的用餐氛圍與魁北克料理。", "places": [{ "name": "La Bûche", "link": "https://maps.apple.com/?q=La+Bûche" }] }
         ]},
-        { "name": "甜點 / 下午茶", "items": [
-          { "name": "Erico – chocolaterie créative", "desc": "巧克力與冰淇淋甜品專門店。", "places": [{ "name": "Erico – chocolaterie créative", "link": "https://maps.apple.com/?q=Erico+–+chocolaterie+créative" }] },
-          { "name": "BILLY", "desc": "下城區文青甜點店，提供手作塔與蛋糕。", "places": [{ "name": "BILLY", "link": "https://maps.apple.com/?q=BILLY+Kwentinn" }] },
-          { "name": "Café Saint-Henri", "desc": "結合精品咖啡與甜點的時尚空間。", "places": [{ "name": "Café Saint-Henri", "link": "https://maps.apple.com/?q=Café+Saint-Henri" }] }
+        { "name": "🍰 甜點／下午茶", "items": [
+          { "name": "巧克力＋冰品", "desc": "Érico – chocolaterie créative 是巧克力愛好者的天堂。", "places": [{ "name": "Érico – chocolaterie créative", "link": "https://maps.apple.com/?q=Érico+–+chocolaterie+créative" }] },
+          { "name": "下城區甜點塔與蛋糕", "desc": "BILLY 提供精緻的法式甜點。", "places": [{ "name": "BILLY", "link": "https://maps.apple.com/?q=BILLY+Kwentinn" }] },
+          { "name": "精品咖啡＋甜品", "desc": "Café Saint-Henri 是品嚐好咖啡與甜點的時尚地點。", "places": [{ "name": "Café Saint-Henri", "link": "https://maps.apple.com/?q=Café+Saint-Henri" }] }
         ]}
       ]
     },
     "niagara": {
       "name": "尼加拉瀑布",
       "categories": [
-        { "name": "景觀牛排 / 西式主餐", "items": [
-          { "name": "Skylon Tower 旋轉餐廳", "desc": "旋轉觀景 + 主餐套餐（需預約）。", "places": [{ "name": "Skylon Tower", "link": "https://maps.apple.com/?q=Skylon+Tower" }] },
-          { "name": "The Keg Steakhouse (Fallsview)", "desc": "有瀑布景觀的牛排餐廳。", "places": [{ "name": "The Keg Steakhouse + Bar - Fallsview", "link": "https://maps.apple.com/?q=The+Keg+Steakhouse+Fallsview" }] }
+        { "name": "🥩 景觀牛排／西式主餐", "items": [
+          { "name": "旋轉餐廳", "desc": "Skylon Tower 旋轉餐廳提供壯麗的瀑布全景。", "places": [{ "name": "Skylon Tower", "link": "https://maps.apple.com/?q=Skylon+Tower" }] },
+          { "name": "瀑布景觀牛排", "desc": "The Keg Steakhouse – Fallsview 享有絕佳的瀑布景觀。", "places": [{ "name": "The Keg Steakhouse – Fallsview", "link": "https://maps.apple.com/?q=The+Keg+Steakhouse+Fallsview" }] }
         ]},
-        { "name": "平價美食 / 家庭餐", "items": [
-          { "name": "Queen Victoria Place Restaurant", "desc": "經典菜色＋瀑布景。", "places": [{ "name": "Queen Victoria Place Restaurant", "link": "https://maps.apple.com/?q=Queen+Victoria+Place+Restaurant" }] },
-          { "name": "The Works Gourmet Burger", "desc": "創意漢堡。", "places": [{ "name": "The Works Gourmet Burger Bistro", "link": "https://maps.apple.com/?q=The+Works+Gourmet+Burger+Bistro+Niagara" }] }
+        { "name": "🍽 家庭餐／平價美食", "items": [
+          { "name": "經典菜色＋瀑布景", "desc": "Queen Victoria Place Restaurant 結合美食與美景。", "places": [{ "name": "Queen Victoria Place Restaurant", "link": "https://maps.apple.com/?q=Queen+Victoria+Place+Restaurant" }] },
+          { "name": "創意漢堡", "desc": "The Works Gourmet Burger Bistro 提供多樣化的漢堡選擇。", "places": [{ "name": "The Works Gourmet Burger Bistro", "link": "https://maps.apple.com/?q=The+Works+Gourmet+Burger+Bistro+Niagara" }] }
         ]},
-        { "name": "甜點 / 冰品", "items": [
-          { "name": "BeaverTails", "desc": "炸麵餅甜點（楓糖、巧克力醬可選）。", "places": [{ "name": "BeaverTails", "link": "https://maps.apple.com/?q=BeaverTails+Niagara+Falls" }] },
-          { "name": "Sweet Jesus", "desc": "超浮誇造型霜淇淋（IG 熱門）。", "places": [{ "name": "Sweet Jesus", "link": "https://maps.apple.com/?q=Sweet+Jesus+Niagara+Falls" }] }
+        { "name": "🍦 甜點／冰品", "items": [
+          { "name": "楓糖炸麵餅", "desc": "BeaverTails 是加拿大必嚐的國民甜點。", "places": [{ "name": "BeaverTails", "link": "https://maps.apple.com/?q=BeaverTails+Niagara+Falls" }] },
+          { "name": "浮誇系霜淇淋", "desc": "Sweet Jesus 以其創意十足的霜淇淋聞名。", "places": [{ "name": "Sweet Jesus", "link": "https://maps.apple.com/?q=Sweet+Jesus+Niagara+Falls" }] }
         ]}
       ]
     },
     "chicago": {
       "name": "芝加哥",
       "categories": [
-        { "name": "芝加哥深盤披薩", "items": [
-          { "name": "Giordano’s", "desc": "起司飽滿、番茄醬香濃。", "places": [{ "name": "Giordano’s", "link": "https://maps.apple.com/?q=Giordano’s" }] },
-          { "name": "Lou Malnati’s", "desc": "皮酥餡厚、比較濃郁口味。", "places": [{ "name": "Lou Malnati’s Pizzeria", "link": "https://maps.apple.com/?q=Lou+Malnati’s+Pizzeria" }] },
-          { "name": "Pequod’s Pizza", "desc": "焦香邊起司，芝加哥當地人最愛。", "places": [{ "name": "Pequod’s Pizza", "link": "https://maps.apple.com/?q=Pequod’s+Pizza" }] }
+        { "name": "🍕 芝加哥深盤披薩", "items": [
+          { "name": "起司飽滿", "desc": "Giordano’s 以其滿滿的起司內餡聞名。", "places": [{ "name": "Giordano’s", "link": "https://maps.apple.com/?q=Giordano’s" }] },
+          { "name": "酥皮濃郁", "desc": "Lou Malnati’s 的奶油酥皮是其特色。", "places": [{ "name": "Lou Malnati’s", "link": "https://maps.apple.com/?q=Lou+Malnati’s+Pizzeria" }] },
+          { "name": "焦香起司邊", "desc": "Pequod’s Pizza 的焦糖化起司邊是一大亮點。", "places": [{ "name": "Pequod’s Pizza", "link": "https://maps.apple.com/?q=Pequod’s+Pizza" }] }
         ]},
-        { "name": "牛排與美式餐廳", "items": [
-          { "name": "The Dearborn", "desc": "氣氛佳，美式經典＋現代料理。", "places": [{ "name": "The Dearborn", "link": "https://maps.apple.com/?q=The+Dearborn" }] },
-          { "name": "RPM Steak", "desc": "高級牛排館，裝潢現代。", "places": [{ "name": "RPM Steak", "link": "https://maps.apple.com/?q=RPM+Steak" }] },
-          { "name": "The Gage", "desc": "帶酒吧氛圍的高檔美式菜系。", "places": [{ "name": "The Gage", "link": "https://maps.apple.com/?q=The+Gage" }] }
+        { "name": "🥩 美式餐廳／牛排", "items": [
+          { "name": "經典美式＋現代", "desc": "The Dearborn 提供經典與現代融合的美式料理。", "places": [{ "name": "The Dearborn", "link": "https://maps.apple.com/?q=The+Dearborn" }] },
+          { "name": "高級牛排館", "desc": "RPM Steak 是享受頂級牛排的絕佳選擇。", "places": [{ "name": "RPM Steak", "link": "https://maps.apple.com/?q=RPM+Steak" }] },
+          { "name": "酒吧氛圍美式餐", "desc": "The Gage 結合了美食與熱鬧的酒吧氛圍。", "places": [{ "name": "The Gage", "link": "https://maps.apple.com/?q=The+Gage" }] }
         ]},
-        { "name": "義大利料理推薦", "items": [
-          { "name": "Eataly Chicago", "desc": "複合式義式超市＋多間餐廳（適合白天/購物順路）。", "places": [{ "name": "Eataly Chicago", "link": "https://maps.apple.com/?q=Eataly+Chicago" }] },
-          { "name": "Quartino Ristorante", "desc": "義式小盤分享餐，氣氛活潑，開胃菜出色。", "places": [{ "name": "Quartino Ristorante", "link": "https://maps.apple.com/?q=Quartino+Ristorante" }] },
-          { "name": "RPM Italian", "desc": "高檔義式料理，適合晚餐約會或壓軸一餐。", "places": [{ "name": "RPM Italian", "link": "https://maps.apple.com/?q=RPM+Italian" }] },
-          { "name": "Volare Ristorante Italiano", "desc": "傳統義式餐廳，正統風味口碑佳。", "places": [{ "name": "Volare Ristorante Italiano", "link": "https://maps.apple.com/?q=Volare+Ristorante+Italiano" }] }
+        { "name": "🍝 義大利料理", "items": [
+          { "name": "複合義式超市＋多餐廳", "desc": "Eataly Chicago 集合了餐廳、市集與學習於一身。", "places": [{ "name": "Eataly Chicago", "link": "https://maps.apple.com/?q=Eataly+Chicago" }] },
+          { "name": "義式小盤分享", "desc": "Quartino Ristorante 適合多人分享，氣氛活潑。", "places": [{ "name": "Quartino Ristorante", "link": "https://maps.apple.com/?q=Quartino+Ristorante" }] },
+          { "name": "高檔義餐", "desc": "RPM Italian 提供精緻的現代義大利料理。", "places": [{ "name": "RPM Italian", "link": "https://maps.apple.com/?q=RPM+Italian" }] },
+          { "name": "傳統義式風味", "desc": "Volare Ristorante Italiano 提供道地的傳統義大利菜。", "places": [{ "name": "Volare Ristorante Italiano", "link": "https://maps.apple.com/?q=Volare+Ristorante+Italiano" }] }
         ]},
-        { "name": "早午餐 / 咖啡甜品", "items": [
-          { "name": "Wildberry Pancakes", "desc": "芝加哥人最愛鬆餅店之一。", "places": [{ "name": "Wildberry Pancakes and Cafe", "link": "https://maps.apple.com/?q=Wildberry+Pancakes+and+Cafe" }] },
-          { "name": "Beatrix", "desc": "輕盈健康早午餐風格。", "places": [{ "name": "Beatrix", "link": "https://maps.apple.com/?q=Beatrix" }] },
-          { "name": "Cindy’s Rooftop", "desc": "位於藝術學院上方，景觀與早午餐並重。", "places": [{ "name": "Cindy’s Rooftop", "link": "https://maps.apple.com/?q=Cindy’s+Rooftop" }] }
+        { "name": "🍳 早午餐／咖啡甜品", "items": [
+          { "name": "人氣鬆餅店", "desc": "Wildberry Pancakes and Cafe 是芝加哥最受歡迎的鬆餅店之一。", "places": [{ "name": "Wildberry Pancakes and Cafe", "link": "https://maps.apple.com/?q=Wildberry+Pancakes+and+Cafe" }] },
+          { "name": "輕盈健康早午餐", "desc": "Beatrix 提供健康且美味的早午餐選擇。", "places": [{ "name": "Beatrix", "link": "https://maps.apple.com/?q=Beatrix" }] },
+          { "name": "早午餐＋景觀", "desc": "Cindy’s Rooftop 享有千禧公園的壯麗景色。", "places": [{ "name": "Cindy’s Rooftop", "link": "https://maps.apple.com/?q=Cindy’s+Rooftop" }] }
         ]},
-        { "name": "Tapas / 輕食類", "items": [
-          { "name": "The Purple Pig", "desc": "西班牙＋義式小盤料理，精緻但不沉重。", "places": [{ "name": "The Purple Pig", "link": "https://maps.apple.com/?q=The+Purple+Pig" }] },
-          { "name": "Ema", "desc": "地中海小盤料理，風味清新。", "places": [{ "name": "Ema", "link": "https://maps.apple.com/?q=Ema" }] }
+        { "name": "🍷 Tapas／輕食類", "items": [
+          { "name": "西班牙＋義式小盤", "desc": "The Purple Pig 提供創意十足的地中海風味小盤料理。", "places": [{ "name": "The Purple Pig", "link": "https://maps.apple.com/?q=The+Purple+Pig" }] },
+          { "name": "地中海風味", "desc": "Ema 提供清新、健康的加州風格地中海料理。", "places": [{ "name": "Ema", "link": "https://maps.apple.com/?q=Ema" }] }
         ]},
-        { "name": "景觀餐廳與湖濱夜景", "items": [
-          { "name": "Riva Crabhouse @ Navy Pier", "desc": "海鮮與湖景完美結合。", "places": [{ "name": "Riva Crabhouse", "link": "https://maps.apple.com/?q=Riva+Crabhouse" }] },
-          { "name": "360 Chicago/Skydeck 餐廳", "desc": "推薦傍晚看夕陽搭配雞尾酒。", "places": [{ "name": "360 CHICAGO", "link": "https://maps.apple.com/?q=360+CHICAGO" }] }
+        { "name": "🌆 景觀餐廳／湖濱夜景", "items": [
+          { "name": "海鮮＋湖景", "desc": "Riva Crabhouse @ Navy Pier 提供美味海鮮與絕佳湖景。", "places": [{ "name": "Riva Crabhouse @ Navy Pier", "link": "https://maps.apple.com/?q=Riva+Crabhouse" }] },
+          { "name": "觀景＋雞尾酒", "desc": "360 Chicago 或 Skydeck 的高空酒吧是欣賞夜景的理想地點。", "places": [{ "name": "360 Chicago／Skydeck 餐廳", "link": "https://maps.apple.com/?q=360+CHICAGO" }] }
         ]}
       ]
     }
