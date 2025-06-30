@@ -302,7 +302,6 @@
             <div class="flex justify-between items-center py-3">
                 <a href="#" class="font-bold text-base sm:text-lg text-indigo-700">F＆S飛翔旅行</a>
                 
-                <!-- MODIFIED: Simplified Desktop Navigation -->
                 <div class="hidden md:flex flex-grow justify-center items-center space-x-6 text-sm font-medium">
                     <a href="#status-dashboard-section" class="nav-link nav-link-active">行程要覽</a>
                     <a href="#itinerary-container" class="nav-link">詳細行程</a>
@@ -327,14 +326,13 @@
             </div>
         </div>
         
-        <!-- MODIFIED: Simplified Mobile Navigation -->
         <div id="mobile-menu-panel" class="md:hidden hidden bg-white shadow-lg">
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                  <a href="#status-dashboard-section" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">📍 行程要覽</a>
                  <a href="#itinerary-container" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">🗺️ 詳細行程</a>
                  <a href="#tip-calculator-section" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">🧮 小費計算機</a>
                  <a href="#links-dashboard" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">🔗 常用連結</a>
-                 <button id="mobile-print-btn" class="w-full text-left mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">📄 列印行程</button>
+                 <button id="mobile-print-btn" class="w-full text-left mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">� 列印行程</button>
             </div>
         </div>
     </nav>
@@ -354,7 +352,6 @@
 
                 <div class="flex justify-between items-center flex-wrap gap-y-2">
                     <div class="flex items-center gap-x-3">
-                        <!-- MODIFIED: Title changed -->
                         <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 flex items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 mr-3 text-indigo-600" viewBox="0 0 20 20" fill="currentColor">
                                 <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd" />
@@ -509,7 +506,6 @@
     </div>
 
     <div class="no-print fixed bottom-4 right-4 z-50">
-        <!-- MODIFIED: Button text changed -->
         <button id="today-btn" class="bg-amber-500 text-white font-semibold px-4 py-3 rounded-full shadow-lg hover:bg-amber-600 transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-400 flex items-center justify-center">
             行程要覽
         </button>
@@ -903,10 +899,8 @@
                 } catch (e) { console.error("Navigation error:", e); }
             }
             
-            // MODIFIED: Updated nav link query selector
             document.querySelectorAll('a[href^="#"], .nav-utils, .mobile-nav-link').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
-                    // Prevent default for actual links, but not for buttons acting like links
                     if(this.getAttribute('href')?.startsWith('#')) {
                        e.preventDefault();
                     }
@@ -1030,12 +1024,19 @@
 
             function initializeTripView() {
                 const showPastToggle = document.getElementById('show-past-toggle');
+                const showPastLabel = showPastToggle.closest('label');
                 const mainContainer = document.querySelector('main.space-y-8');
-                if (!mainContainer || !showPastToggle) return;
+                if (!mainContainer || !showPastToggle || !showPastLabel) return;
                 
                 showPastToggle.checked = false;
                 const todayString = new Date().toISOString().split('T')[0];
                 
+                // MODIFIED: Disable toggle if trip hasn't started
+                if (todayString < tripInfo.tripStartDate) {
+                    showPastToggle.disabled = true;
+                    showPastLabel.classList.add('opacity-50', 'cursor-not-allowed');
+                }
+
                 document.querySelectorAll('[data-date]').forEach(el => {
                     const dateStr = el.dataset.date;
                     if (!dateStr) return;
