@@ -2,7 +2,8 @@
 <html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <!-- MODIFICATION: Disabled page zooming on mobile -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no">
     <title>F&S飛翔旅行 | 加拿大東岸 & 芝加哥探索之旅</title>
     
     <!-- PWA Manifest and Theme Color -->
@@ -683,7 +684,6 @@
             return results.filter(r => r).reduce((acc, {city, data}) => ({ ...acc, [city]: data.daily }), {});
         }
 
-        // --- MODIFIED: `updateStatusDashboard` to handle loading state ---
         function updateStatusDashboard(date, data, allWeatherData) {
             const { itinerary, hotels, transport, tripInfo } = data;
             const targetDayData = itinerary.find(d => d.date === date);
@@ -714,7 +714,7 @@
                 progressTextEl.textContent = '-';
                 progressBarEl.style.width = '0%';
                 if(viewDetailsBtn) viewDetailsBtn.style.display = 'none';
-                weatherIconEl.textContent = '�';
+                weatherIconEl.textContent = '🏠';
                 weatherTempEl.textContent = '';
                 weatherReminderEl.textContent = '旅程已結束或尚未開始。';
                 accommodationItemEl.style.display = 'none';
@@ -761,11 +761,10 @@
                 timeDiffEl.textContent = diffText;
             }
 
-            // --- WEATHER SECTION REVISED ---
             const cityWeather = allWeatherData ? allWeatherData[city] : undefined;
-            weatherItemEl.style.display = 'flex'; // Always show the weather item container
+            weatherItemEl.style.display = 'flex'; 
 
-            if (cityWeather) { // State: Loaded and available
+            if (cityWeather) { 
                 const dayIndex = cityWeather.time.indexOf(date);
                 if (dayIndex !== -1) {
                     const tempMax = Math.round(cityWeather.temperature_2m_max[dayIndex]);
@@ -774,21 +773,20 @@
                     weatherIconEl.textContent = getWeatherIcon(code);
                     weatherTempEl.textContent = `${tempMin}°C / ${tempMax}°C`;
                     weatherReminderEl.textContent = getWeatherReminder(code);
-                } else { // State: Loaded but no forecast for this day
+                } else { 
                     weatherIconEl.textContent = '❓';
                     weatherTempEl.textContent = '無預報';
                     weatherReminderEl.textContent = '無法取得本日天氣資訊。';
                 }
-            } else if (allWeatherData && !cityWeather) { // State: Loaded but no weather for this city (e.g. flight day)
+            } else if (allWeatherData && !cityWeather) { 
                 weatherIconEl.textContent = '✈️';
                 weatherTempEl.textContent = '';
                 weatherReminderEl.textContent = '飛行日無適用天氣資訊。';
-            } else { // State: Loading (allWeatherData is null or undefined)
+            } else { 
                 weatherIconEl.textContent = '⏳';
                 weatherTempEl.textContent = '--°C / --°C';
                 weatherReminderEl.textContent = '正在載入天氣資訊...';
             }
-            // --- END REVISION ---
 
             const checkingIn = hotels.find(h => h.checkIn === date);
             const checkingOut = hotels.find(h => h.checkOut === date);
@@ -826,30 +824,25 @@
         // --- Main script execution ---
         let currentDisplayDate;
 
-        // --- MODIFIED: `DOMContentLoaded` for faster initial render ---
         document.addEventListener('DOMContentLoaded', async () => {
             try {
                 const response = await fetch('trip-data.json');
                 if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
                 const data = await response.json();
                 
-                // 1. Render main content immediately
                 const itineraryContainer = document.getElementById('itinerary-container');
                 renderItinerary(data.itinerary, itineraryContainer);
                 
-                // 2. Initialize app with event listeners, but no weather data yet
                 initializeApp(data, null); 
 
-                // 3. Fetch weather in the background and update UI when ready
                 fetchAllWeatherData(data.itinerary)
                     .then(allWeatherData => {
-                        window.allWeatherData = allWeatherData; // Store globally
+                        window.allWeatherData = allWeatherData; 
                         populateDayCardWeather(allWeatherData);
                         updateStatusDashboard(currentDisplayDate, data, allWeatherData);
                     })
                     .catch(weatherError => {
                         console.error("Weather data fetch failed:", weatherError);
-                        // Update UI to show that weather is unavailable
                         populateDayCardWeather({}); 
                         updateStatusDashboard(currentDisplayDate, data, {});
                     });
@@ -861,7 +854,7 @@
             }
         });
 
-        function initializeApp(data, allWeatherData) { // `allWeatherData` can be null initially
+        function initializeApp(data, allWeatherData) { 
             window.tripData = data;
             const { hotels: hotelData, transport: transportData, foodie: foodieData, tripInfo, itinerary } = data;
             
@@ -884,7 +877,7 @@
                         
                         if (firstDayInCity) {
                             currentDisplayDate = firstDayInCity.date;
-                            updateStatusDashboard(currentDisplayDate, data, window.allWeatherData); // Use global weather data
+                            updateStatusDashboard(currentDisplayDate, data, window.allWeatherData); 
                             showToast(`已切換至 ${item.textContent}`);
                         }
 
@@ -904,7 +897,24 @@
             const mainNav = document.getElementById('main-nav');
             const mobileMenuBtn = document.getElementById('mobile-menu-btn');
             const mobileMenuPanel = document.getElementById('mobile-menu-panel');
-            if (mobileMenuBtn) mobileMenuBtn.addEventListener('click', () => mobileMenuPanel.classList.toggle('hidden'));
+            
+            if (mobileMenuBtn) {
+                mobileMenuBtn.addEventListener('click', (e) => {
+                    e.stopPropagation(); // Prevent the window click listener from firing immediately
+                    mobileMenuPanel.classList.toggle('hidden');
+                });
+            }
+            
+            // MODIFICATION: Add listener to close menu when clicking outside
+            window.addEventListener('click', (e) => {
+                if (mobileMenuPanel && !mobileMenuPanel.classList.contains('hidden') && 
+                    !mobileMenuBtn.contains(e.target) && 
+                    !mobileMenuPanel.contains(e.target)) {
+                    mobileMenuPanel.classList.add('hidden');
+                }
+            });
+
+
             window.addEventListener('scroll', () => mainNav.classList.toggle('scrolled', window.scrollY > 0));
 
             const tripCards = document.querySelectorAll('.trip-card');
@@ -940,7 +950,9 @@
                     } else if (hash) {
                         location.hash = hash;
                     }
-                    if (mobileMenuPanel && !mobileMenuPanel.classList.contains('hidden')) mobileMenuPanel.classList.add('hidden');
+                    if (mobileMenuPanel && !mobileMenuPanel.classList.contains('hidden')) {
+                        mobileMenuPanel.classList.add('hidden');
+                    }
                 });
             });
 
@@ -998,10 +1010,9 @@
                 }
             }
             
-            // --- MODIFIED: `populateDayCardWeather` to handle loading state ---
             function populateDayCardWeather(allWeatherData) {
                 const weatherDisplays = document.querySelectorAll('.weather-display');
-                if (!allWeatherData) { // Initial call with null
+                if (!allWeatherData) { 
                     weatherDisplays.forEach(el => { el.innerHTML = '...'; });
                     return;
                 }
