@@ -178,29 +178,6 @@
         #update-notification > div { background-color: var(--c-primary); }
         #reload-button { background-color: white; color: var(--c-secondary); }
         #reload-button:hover { background-color: var(--c-bg-accent-light); }
-
-        /* 新增：行程資料更新通知樣式 */
-        #data-update-notification {
-            display: none;
-            position: fixed;
-            bottom: 10rem; /* 確保與 Service Worker 更新通知不重疊 */
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 2000;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        #data-update-notification > div {
-            background-color: var(--c-primary);
-            color: white;
-        }
-        #data-reload-button {
-            background-color: white;
-            color: var(--c-secondary);
-        }
-        #data-reload-button:hover {
-            background-color: var(--c-bg-accent-light);
-        }
         
         /* Print Styles */
         @media print {
@@ -316,22 +293,6 @@
         .foodie-btn { background-color: var(--c-accent) !important; color: var(--c-primary) !important; }
         .foodie-btn:hover { background-color: var(--c-secondary) !important; color: white !important; }
 
-        /* 載入疊層的樣式 */
-        #status-loading-overlay {
-            transition: opacity 0.3s ease;
-        }
-        #status-loading-overlay.hidden {
-            opacity: 0;
-            pointer-events: none; /* 允許點擊下層元素 */
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        .animate-spin {
-            animation: spin 1s linear infinite;
-        }
-
     </style>
 </head>
 <body class="text-gray-800 leading-relaxed">
@@ -416,12 +377,7 @@
                 </div>
 
                 <!-- 更新：加入 flex-grow 讓內容彈性填充，並維持 overflow-y: auto -->
-                <div id="status-card-content" class="space-y-4 mt-4 flex-grow relative" style="touch-action: pan-y;">
-                    <!-- 載入疊層 -->
-                    <div id="status-loading-overlay" class="absolute inset-0 flex items-center justify-center bg-white/80 backdrop-blur-sm z-10 hidden">
-                        <div class="animate-spin rounded-full h-12 w-12 border-4 border-t-4 border-indigo-600 border-opacity-25"></div>
-                    </div>
-
+                <div id="status-card-content" class="space-y-4 mt-4 flex-grow" style="touch-action: pan-y;">
                     <div>
                         <div class="flex justify-between items-baseline">
                             <p id="status-date" class="text-lg font-bold text-indigo-700">7月2日 (週三)</p>
@@ -556,14 +512,6 @@
         <div class="bg-indigo-600 text-white rounded-lg shadow-lg p-4 flex items-center justify-between">
             <p class="font-semibold">網站有新內容可更新。</p>
             <button id="reload-button" class="ml-4 px-4 py-2 bg-white text-indigo-600 font-bold rounded-md hover:bg-indigo-100 transition-colors">立即更新</button>
-        </div>
-    </div>
-
-    <!-- 新增：行程資料更新通知 -->
-    <div id="data-update-notification" class="no-print hidden opacity-0 fixed bottom-40 left-1/2 -translate-x-1/2 z-50">
-        <div class="bg-indigo-600 text-white rounded-lg shadow-lg p-4 flex items-center justify-between">
-            <p class="font-semibold">行程資料有新版本可更新。</p>
-            <button id="data-reload-button" class="ml-4 px-4 py-2 bg-white text-indigo-600 font-bold rounded-md hover:bg-indigo-100 transition-colors">立即更新</button>
         </div>
     </div>
 
@@ -941,11 +889,6 @@
         let currentDisplayDate;
 
         document.addEventListener('DOMContentLoaded', async () => {
-            const statusLoadingOverlay = document.getElementById('status-loading-overlay');
-            if (statusLoadingOverlay) {
-                statusLoadingOverlay.classList.remove('hidden'); // 顯示載入指示器
-            }
-
             try {
                 const response = await fetch('trip-data.json');
                 if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
@@ -963,23 +906,15 @@
                         updateStatusDashboard(currentDisplayDate, data, allWeatherData);
                     })
                     .catch(weatherError => {
-                        console.error("無法取得天氣資訊:", weatherError);
+                        console.error("Weather data fetch failed:", weatherError);
                         populateDayCardWeather({}); 
                         updateStatusDashboard(currentDisplayDate, data, {});
-                    })
-                    .finally(() => { 
-                        if (statusLoadingOverlay) {
-                            statusLoadingOverlay.classList.add('hidden'); // 無論成功或失敗，都隱藏載入指示器
-                        }
                     });
 
             } catch (error) {
                 console.error("無法載入行程資料:", error);
                 const container = document.getElementById('itinerary-container');
                 if (container) container.innerHTML = `<p class="text-center text-red-600 font-bold">行程資料載入失敗，請檢查 trip-data.json 檔案。</p>`;
-                if (statusLoadingOverlay) {
-                    statusLoadingOverlay.classList.add('hidden'); // 錯誤時也隱藏載入指示器
-                }
             }
         });
 
@@ -987,31 +922,6 @@
             window.tripData = data;
             const { hotels: hotelData, transport: transportData, foodie: foodieData, tripInfo, itinerary } = data;
             
-            // --- 數據版本檢查與更新通知 ---
-            const currentDataVersion = tripInfo.dataVersion;
-            const lastStoredDataVersion = localStorage.getItem('lastTripDataVersion');
-            const dataUpdateNotification = document.getElementById('data-update-notification');
-            const dataReloadButton = document.getElementById('data-reload-button');
-
-            if (currentDataVersion && lastStoredDataVersion && currentDataVersion !== lastStoredDataVersion) {
-                // 如果當前資料版本與儲存的版本不同，顯示資料更新通知
-                if (dataUpdateNotification) {
-                    dataUpdateNotification.classList.remove('hidden');
-                    // 使用 setTimeout 讓 opacity 變化生效
-                    setTimeout(() => dataUpdateNotification.classList.remove('opacity-0'), 100);
-                }
-            } else if (currentDataVersion && !lastStoredDataVersion) {
-                // 首次載入或 localStorage 已清空，儲存當前版本
-                localStorage.setItem('lastTripDataVersion', currentDataVersion);
-            }
-
-            if (dataReloadButton) {
-                dataReloadButton.addEventListener('click', () => {
-                    localStorage.removeItem('lastTripDataVersion'); // 清除儲存的版本以強制重新載入
-                    window.location.reload(); // 重新載入頁面
-                });
-            }
-
             const statusCityBtn = document.getElementById('status-city-btn');
             const cityDropdown = document.getElementById('city-dropdown');
             const statusCityArrow = document.getElementById('status-city-arrow');
