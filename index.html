@@ -10,7 +10,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="F&S飛翔旅行">
     <meta name="theme-color" content="#4f46e5">
-    <link rel="manifest" href="data:application/manifest+json;base64,ew0KICAic2hvcnRfbmFtZSI6ICJGJlPkvZXlvLpUSEsiLA0KICAibmFtZSI6ICJGJlPkvZXlvLpUSEsiLCANCiAgImljb25zIjogWw0KICAgIHsNCiAgICAgICJzcmMiOiAiaHR0cHM6Ly9wbGFjZWhvbGQuY28vMTkyeDE5Mi80ZjQ2ZTUvZmZmZmZmP3RleHQ9RlMlMjZTIiwNCiAgICAgICJ0eXBlIjogImltYWdlL3BuZyIsDQogICAgICAic2l6ZXMiOiAiMTkyeDE5MiINCiAgICB9LA0KICAgIHsNCiAgICAgICJzcmMiOiAiaHR0cHM6Ly9wbGFjZWhvbGQuY28vNTEyeDUxMi80ZjQ2ZTUvZmZmZmZmP3RleHQ9RlMlMjZTIiwNCiAgICAgICJ0eXBlIjogImltYWdlL3BuZyIsDQogICAgICAic2l6ZXMiOiAiNTEyeDUxMiINCiAgICB9DQogIF0sDQogICJzdGFydF91cmwiOiAiLiIsDQogICJkaXNwbGF5IjogInN0YW5kYWxvbmUiLA0KICAidGhlbWVfY29sb3IiOiAiI0NGY0NmU1IiwNCiAgImJhY2tncm91bmRfY29sb3IiOiAiI2Y4ZjlmYSIgDQp9">
+    <link rel="manifest" href="manifest.json">
     <link rel="apple-touch-icon" href="https://placehold.co/180x180/4f46e5/ffffff?text=F%26S">
 
     <script src="https://cdn.tailwindcss.com"></script>
@@ -325,6 +325,16 @@
             color: #111827;
         }
         
+        /* Update Notification Bar */
+        #update-notification {
+            display: none;
+            position: fixed;
+            bottom: 5rem; /* Adjust based on your layout */
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2000;
+        }
+        
         @media print {
             @page { 
                 size: A4 portrait; 
@@ -628,8 +638,8 @@
                                 <ul class="list-disc list-inside mt-2 text-teal-900/80 space-y-1">
                                     <li>💳 地鐵使用 STM 系統，一日票或 OPUS 卡皆可。</li>
                                     <li>🗣 雖以法語為主，但觀光區英文通用，用「Bonjour / Merci」開場更有禮。</li>
-                                    <li>� 鞋子請選擇適合步行的，舊城區石板路段多。</li>
-                                    <li>🌤 七月天氣約 22–27°C，日夜溫差稍大，建議攜帶薄外套。</li>
+                                    <li>👟 鞋子請選擇適合步行的，舊城區石板路段多。</li>
+                                    <li>� 七月天氣約 22–27°C，日夜溫差稍大，建議攜帶薄外套。</li>
                                 </ul>
                             </div>
                         </div>
@@ -1272,6 +1282,15 @@
         <p id="toast-message"></p>
     </div>
 
+    <!-- Update Available Notification -->
+    <div id="update-notification" class="no-print">
+        <div class="bg-indigo-600 text-white rounded-lg shadow-lg p-4 flex items-center justify-between">
+            <p class="font-semibold">網站有新內容可更新。</p>
+            <button id="reload-button" class="ml-4 px-4 py-2 bg-white text-indigo-600 font-bold rounded-md hover:bg-indigo-100 transition-colors">立即更新</button>
+        </div>
+    </div>
+
+
     <!-- "Today's Itinerary" Button -->
     <div class="no-print fixed bottom-4 right-4 z-50">
         <button id="today-btn" onclick="scrollToToday()" class="bg-amber-500 text-white font-semibold px-4 py-3 rounded-full shadow-lg hover:bg-amber-600 transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-400 flex items-center justify-center">
@@ -1301,6 +1320,49 @@
     </div>
     
     <script>
+        // --- Service Worker Registration ---
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('ServiceWorker 註冊成功，範圍：', registration.scope);
+                        
+                        // 處理更新邏輯
+                        registration.addEventListener('updatefound', () => {
+                            const newWorker = registration.installing;
+                            newWorker.addEventListener('statechange', () => {
+                                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                                    // 新版本已下載完成，顯示更新提示
+                                    const updateBar = document.getElementById('update-notification');
+                                    if (updateBar) updateBar.style.display = 'block';
+                                }
+                            });
+                        });
+                    })
+                    .catch(error => {
+                        console.log('ServiceWorker 註冊失敗：', error);
+                    });
+            });
+
+            // 讓新 Service Worker 接管頁面
+            let refreshing;
+            navigator.serviceWorker.addEventListener('controllerchange', () => {
+                if (refreshing) return;
+                window.location.reload();
+                refreshing = true;
+            });
+
+            // 更新按鈕點擊事件
+            const reloadButton = document.getElementById('reload-button');
+            if(reloadButton) {
+                reloadButton.addEventListener('click', () => {
+                    navigator.serviceWorker.getRegistration().then(reg => {
+                        reg.waiting.postMessage({ type: 'SKIP_WAITING' });
+                    });
+                });
+            }
+        }
+
         // --- Global Functions (callable from HTML onclick) ---
 
         /**
@@ -1717,17 +1779,41 @@
 
             async function fetchAndDisplayWeather() {
                 const dayElements = document.querySelectorAll('[data-weather-city]');
+                const weatherDisplays = document.querySelectorAll('.weather-display');
+
+                // 檢查網路狀態 - 如果 Service Worker 控制中，讓它處理離線
+                if (!navigator.onLine && !navigator.serviceWorker.controller) {
+                    weatherDisplays.forEach(display => {
+                        display.style.display = 'none';
+                    });
+                    console.log("目前處於離線狀態，已隱藏天氣資訊。");
+                    return;
+                }
+
+                // 如果在線，正常抓取天氣
+                weatherDisplays.forEach(display => {
+                    display.style.display = '';
+                });
+
                 const promises = Array.from(new Set(Array.from(dayElements).map(el => el.dataset.weatherCity)))
                     .filter(Boolean)
                     .map(city => {
                         const { lat, lon } = cityCoordinates[city];
                         const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=weather_code,temperature_2m_max&timezone=auto`;
-                        return fetch(url).then(res => res.json()).then(data => ({ city, data }));
+                        return fetch(url).then(res => {
+                            if (!res.ok) throw new Error('Network response was not ok');
+                            return res.json();
+                        }).then(data => ({ city, data })).catch(error => {
+                            console.error(`無法取得 ${city} 的天氣資訊:`, error);
+                            return null;
+                        });
                     });
 
                 const results = await Promise.all(promises);
-                const weatherData = results.reduce((acc, {city, data}) => ({ ...acc, [city]: data.daily }), {});
-                
+                const weatherData = results
+                    .filter(r => r)
+                    .reduce((acc, {city, data}) => ({ ...acc, [city]: data.daily }), {});
+
                 dayElements.forEach(dayEl => {
                     const date = dayEl.dataset.date;
                     const city = dayEl.dataset.weatherCity;
@@ -1739,8 +1825,10 @@
                             const icon = getWeatherIcon(weatherData[city].weather_code[dayIndex]);
                             weatherDisplay.innerHTML = `${icon} ${temp}°C`;
                         } else {
-                             weatherDisplay.textContent = '暫無預報';
+                             weatherDisplay.textContent = '無預報';
                         }
+                    } else if (weatherDisplay) {
+                        weatherDisplay.textContent = 'N/A';
                     }
                 });
             }
