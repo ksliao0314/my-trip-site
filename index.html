@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
@@ -160,6 +159,11 @@
         }
         .show-past .day-past {
             display: block;
+        }
+        
+        /* MODIFIED: Added rotate class for dropdown arrow */
+        #status-city-arrow.rotate-180 {
+            transform: rotate(180deg);
         }
 
         /* --- Foodie Modal Styles --- */
@@ -440,7 +444,23 @@
                         <div class="w-full bg-gray-200 rounded-full h-2 mt-1 mb-2">
                             <div id="status-progress-bar" class="bg-indigo-600 h-2 rounded-full" style="width: 7%"></div>
                         </div>
-                        <p id="status-city" class="text-3xl font-black text-gray-900">蒙特婁</p>
+                        <!-- MODIFIED: City name is now a dropdown button -->
+                        <div class="relative">
+                            <button type="button" id="status-city-btn" class="inline-flex items-center gap-x-2 text-3xl font-black text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 rounded-lg -ml-2 p-2 transition-colors hover:bg-gray-100">
+                                <span id="status-city-text">蒙特婁</span>
+                                <svg id="status-city-arrow" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500 transition-transform duration-200" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                </svg>
+                            </button>
+                            <div id="city-dropdown" class="origin-top-left absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none hidden z-10" role="menu" aria-orientation="vertical" aria-labelledby="status-city-btn">
+                                <div class="py-1" role="none">
+                                    <a href="#" class="city-select-item text-gray-700 block px-4 py-2 text-base font-medium hover:bg-indigo-50 hover:text-indigo-700" role="menuitem" data-city-key="montreal">蒙特婁</a>
+                                    <a href="#" class="city-select-item text-gray-700 block px-4 py-2 text-base font-medium hover:bg-indigo-50 hover:text-indigo-700" role="menuitem" data-city-key="quebec">魁北克市</a>
+                                    <a href="#" class="city-select-item text-gray-700 block px-4 py-2 text-base font-medium hover:bg-indigo-50 hover:text-indigo-700" role="menuitem" data-city-key="niagara">尼加拉瀑布</a>
+                                    <a href="#" class="city-select-item text-gray-700 block px-4 py-2 text-base font-medium hover:bg-indigo-50 hover:text-indigo-700" role="menuitem" data-city-key="chicago">芝加哥</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 
                     <!-- Info List: Weather, Accommodation, Transport -->
@@ -472,8 +492,9 @@
 
                  <!-- 行動按鈕 -->
                  <div class="mt-5 text-center">
+                    <!-- MODIFIED: Button text simplified -->
                     <button id="view-details-btn" class="w-full md:w-auto bg-indigo-600 text-white font-semibold px-6 py-3 rounded-lg shadow-md hover:bg-indigo-700 transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                        查看本日詳細行程
+                        詳細行程
                     </button>
                 </div>
             </div>
@@ -744,7 +765,8 @@
 
             // --- Element Handles ---
             const statusDateEl = document.getElementById('status-date');
-            const statusCityEl = document.getElementById('status-city');
+            // MODIFIED: Get the city text span instead of the old P tag
+            const statusCityTextEl = document.getElementById('status-city-text'); 
             const progressTextEl = document.getElementById('status-progress-text');
             const progressBarEl = document.getElementById('status-progress-bar');
             const viewDetailsBtn = document.getElementById('view-details-btn');
@@ -766,12 +788,12 @@
             // --- Handle Off-Trip Dates ---
             if (!targetDayData) {
                 statusDateEl.textContent = '旅程已結束或未開始';
-                statusCityEl.textContent = '期待下次旅行！';
+                if (statusCityTextEl) statusCityTextEl.textContent = '期待下次旅行！';
                 progressTextEl.textContent = '-';
                 progressBarEl.style.width = '0%';
                 if(viewDetailsBtn) viewDetailsBtn.style.display = 'none';
                 
-                weatherIconEl.textContent = '�';
+                weatherIconEl.textContent = '🏠';
                 weatherTempEl.textContent = '';
                 weatherReminderEl.textContent = '旅程已結束或尚未開始。';
 
@@ -800,7 +822,8 @@
             
             const city = targetDayData.weatherCity;
             const cityMap = { montreal: '蒙特婁', quebec: '魁北克市', niagara: '尼加拉瀑布', chicago: '芝加哥', '': '飛行途中' };
-            statusCityEl.textContent = cityMap[city] || '移動中';
+            // MODIFIED: Update the new city text span
+            if (statusCityTextEl) statusCityTextEl.textContent = cityMap[city] || '移動中';
 
             const progress = (targetDayData.day / tripInfo.totalDays) * 100;
             progressBarEl.style.width = `${progress}%`;
@@ -893,6 +916,43 @@
         function initializeApp(data, allWeatherData) {
             window.tripData = data;
             const { hotels: hotelData, transport: transportData, foodie: foodieData, tripInfo, itinerary } = data;
+            
+            // MODIFIED: New City Dropdown Logic
+            const statusCityBtn = document.getElementById('status-city-btn');
+            const cityDropdown = document.getElementById('city-dropdown');
+            const statusCityArrow = document.getElementById('status-city-arrow');
+
+            if (statusCityBtn && cityDropdown && statusCityArrow) {
+                statusCityBtn.addEventListener('click', (event) => {
+                    event.stopPropagation();
+                    cityDropdown.classList.toggle('hidden');
+                    statusCityArrow.classList.toggle('rotate-180');
+                });
+
+                document.querySelectorAll('.city-select-item').forEach(item => {
+                    item.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const cityKey = item.dataset.cityKey;
+                        const firstDayInCity = data.itinerary.find(d => d.weatherCity === cityKey);
+                        
+                        if (firstDayInCity) {
+                            currentDisplayDate = firstDayInCity.date;
+                            updateStatusDashboard(currentDisplayDate, data, allWeatherData);
+                            showToast(`已切換至 ${item.textContent}`);
+                        }
+
+                        cityDropdown.classList.add('hidden');
+                        statusCityArrow.classList.remove('rotate-180');
+                    });
+                });
+
+                window.addEventListener('click', (e) => {
+                    if (!cityDropdown.classList.contains('hidden') && !statusCityBtn.contains(e.target)) {
+                        cityDropdown.classList.add('hidden');
+                        statusCityArrow.classList.remove('rotate-180');
+                    }
+                });
+            }
 
             const mainNav = document.getElementById('main-nav');
             const mobileMenuBtn = document.getElementById('mobile-menu-btn');
