@@ -76,7 +76,7 @@
 
         .tag { display: inline-block; background-color: var(--brand-color-light); color: #4338ca; padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.8rem; font-weight: 500; margin-right: 0.5rem; margin-bottom: 0.5rem; }
         
-        .activity-block a, .info-block a, .modal-container a {
+        .activity-block a, .info-block a, .modal-container a, #status-info-list a {
             font-weight: 600; /* semibold */
             color: #4338ca; /* indigo-700 */
         }
@@ -116,78 +116,6 @@
             color: #6b7280;
         }
         
-        @keyframes pulse {
-            0%, 100% {
-                transform: scale(1);
-                opacity: 1;
-            }
-            50% {
-                transform: scale(1.5);
-                opacity: 0.7;
-            }
-        }
-
-        /* --- Map Interaction Styles --- */
-        .map-city-link:hover g .map-city-dot, .map-city-link:active g .map-city-dot {
-            r: 7;
-            fill: #f43f5e; /* rose-500 */
-        }
-        .map-city-link:hover g text, .map-city-link:active g text {
-            font-weight: bold;
-        }
-        
-        .map-city-active g .map-city-dot {
-            r: 8;
-            fill: #ef4444; /* red-500 */
-            stroke: rgba(255, 255, 255, 0.7);
-            stroke-width: 1.5px;
-        }
-        .map-city-active g text {
-            font-weight: bold;
-            fill: #ef4444;
-        }
-
-        .map-city-current g .map-city-dot {
-            r: 9;
-            fill: #f59e0b; /* amber-500 */
-            stroke: white;
-            stroke-width: 2px;
-            animation: pulse 2s infinite;
-        }
-        .map-city-current g text {
-            font-weight: 900; /* black */
-            font-size: 11px;
-            fill: #d97706; /* amber-600 */
-        }
-        
-        .route-line {
-            stroke: #fb923c;
-            stroke-width: 2.5px;
-            stroke-dasharray: 5 3;
-            fill: none;
-            stroke-linecap: round;
-            transition: all 0.3s ease-in-out;
-        }
-        .route-line.highlight, .route-line.highlight-scroll {
-            stroke: #ef4444;
-            stroke-width: 4px;
-            stroke-dasharray: none;
-        }
-
-        .transport-icon {
-            opacity: 0;
-            animation: fadeIn 1s ease-in forwards;
-            animation-delay: 2s;
-        }
-        .animated-route {
-            stroke-dasharray: 500;
-            stroke-dashoffset: 500;
-            animation: draw 2s ease-out forwards;
-        }
-        
-        @keyframes draw { to { stroke-dashoffset: 0; } }
-        @keyframes fadeIn { to { opacity: 1; } }
-
         .nav-pill-group {
             display: inline-flex;
             align-items: center;
@@ -451,7 +379,7 @@
                     <p id="date-chicago" class="text-xs text-gray-400">---</p>
                 </div>
                  <div id="time-taipei-block" class="timezone-block bg-white p-4 rounded-lg shadow text-center">
-                    <h2 class="text-sm font-bold text-gray-500">�🇼 台北</h2>
+                    <h2 class="text-sm font-bold text-gray-500">🇹🇼 台北</h2>
                     <p id="time-taipei" class="text-xl sm:text-2xl font-mono font-bold text-gray-800">--:--:--</p>
                     <p id="date-taipei" class="text-xs text-gray-400">---</p>
                 </div>
@@ -464,7 +392,7 @@
         <section id="status-dashboard-section" class="mb-12 no-print">
             <div class="bg-white rounded-2xl shadow-lg p-5 md:p-6 ring-1 ring-gray-200">
                 <!-- 卡片標題和日期切換按鈕 -->
-                <div class="flex justify-between items-center mb-4">
+                <div class="flex justify-between items-center">
                     <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 flex items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 mr-3 text-indigo-600" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd" />
@@ -481,48 +409,49 @@
                     </div>
                 </div>
 
-                <!-- 主要資訊面板 -->
-                <div id="status-dashboard-content" class="grid grid-cols-1 md:grid-cols-5 gap-4">
-                    <!-- 左側：進度與城市 -->
-                    <div class="md:col-span-2 bg-indigo-50 p-4 rounded-xl flex flex-col justify-between">
-                        <div>
+                <!-- 主要資訊面板 (新版UI) -->
+                <div id="status-card-content" class="space-y-4 mt-4">
+                    <!-- Header: Date, City, Progress -->
+                    <div>
+                        <div class="flex justify-between items-baseline">
                             <p id="status-date" class="text-lg font-bold text-indigo-700">7月2日 (週三)</p>
-                            <p id="status-city" class="text-3xl font-black text-indigo-900 mt-1">蒙特婁</p>
+                            <p id="status-progress-text" class="text-sm font-medium text-indigo-600">Day 1 / 14</p>
                         </div>
-                        <div class="mt-4">
-                            <div class="flex justify-between text-sm font-medium text-indigo-600 mb-1">
-                                <span>旅程進度</span>
-                                <span id="status-progress-text">Day 1 / 14</span>
-                            </div>
-                            <div class="w-full bg-indigo-200 rounded-full h-2.5">
-                                <div id="status-progress-bar" class="bg-indigo-600 h-2.5 rounded-full" style="width: 7%"></div>
-                            </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2 mt-1 mb-2">
+                            <div id="status-progress-bar" class="bg-indigo-600 h-2 rounded-full" style="width: 7%"></div>
                         </div>
+                        <p id="status-city" class="text-3xl font-black text-gray-900">蒙特婁</p>
                     </div>
-
-                    <!-- 右側：住宿與交通 -->
-                    <div class="md:col-span-3 bg-gray-50 p-4 rounded-xl">
-                        <!-- 住宿資訊 -->
-                        <div id="status-accommodation">
-                            <h4 class="font-bold text-lg text-gray-800 flex items-center mb-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-gray-500" viewBox="0 0 20 20" fill="currentColor"><path d="M19 9.5A2.5 2.5 0 0016.5 7H3.5A2.5 2.5 0 001 9.5v7A2.5 2.5 0 003.5 19h13a2.5 2.5 0 002.5-2.5v-7zM6 13a1 1 0 11-2 0 1 1 0 012 0zm3 0a1 1 0 11-2 0 1 1 0 012 0z" /><path d="M3.5 4A1.5 1.5 0 002 5.5v1A1.5 1.5 0 003.5 8h13A1.5 1.5 0 0018 6.5v-1A1.5 1.5 0 0016.5 4h-13z" /></svg>
-                                住宿資訊
-                            </h4>
-                            <div id="status-accommodation-content" class="text-gray-700 pl-7">-</div>
+                
+                    <!-- Info List: Weather, Accommodation, Transport -->
+                    <div id="status-info-list" class="space-y-4 pt-4 border-t border-gray-200">
+                        <!-- Weather Item -->
+                        <div id="status-weather-item" class="flex items-start">
+                            <span id="status-weather-icon" class="text-3xl mr-4 w-8 text-center pt-1">☀️</span>
+                            <div>
+                                <p id="status-weather-temp" class="font-semibold text-gray-800">--°C / --°C</p>
+                                <p id="status-weather-reminder" class="text-sm text-gray-600">正在載入天氣資訊...</p>
+                            </div>
                         </div>
-                        <!-- 交通資訊 -->
-                        <div id="status-transport" class="mt-4">
-                            <h4 class="font-bold text-lg text-gray-800 flex items-center mb-2">
-                               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-gray-500" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 3a1 1 0 00-1.447-.894L8.763 6H5a3 3 0 000 6h.085l1.558 2.336A1 1 0 008 15.5V17a1 1 0 001 1h2a1 1 0 001-1v-1.5a1 1 0 00-.237-.664L9.915 12H15a3 3 0 000-6h-3.763L16.553 3.894A1 1 0 0018 3zM5 9a1 1 0 100-2 1 1 0 000 2zm10-2a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" /></svg>
-                               本日交通
-                            </h4>
-                            <div id="status-transport-content" class="text-gray-700 pl-7">-</div>
+                        <!-- Accommodation Item -->
+                        <div id="status-accommodation-item" class="flex items-start">
+                            <span class="text-3xl mr-4 w-8 text-center pt-1">🏨</span>
+                            <div id="status-accommodation-content" class="text-gray-800 font-medium pt-1">
+                                <!-- Content injected by JS -->
+                            </div>
+                        </div>
+                        <!-- Transport Item -->
+                        <div id="status-transport-item" class="flex items-start">
+                            <span id="status-transport-icon" class="text-3xl mr-4 w-8 text-center pt-1">✈️</span>
+                            <div id="status-transport-content" class="text-gray-800 font-medium pt-1">
+                                <!-- Content injected by JS -->
+                            </div>
                         </div>
                     </div>
                 </div>
 
                  <!-- 行動按鈕 -->
-                 <div class="mt-4 text-center">
+                 <div class="mt-5 text-center">
                     <button id="view-details-btn" class="w-full md:w-auto bg-indigo-600 text-white font-semibold px-6 py-3 rounded-lg shadow-md hover:bg-indigo-700 transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                         查看本日詳細行程
                     </button>
@@ -530,38 +459,6 @@
             </div>
         </section>
         <!-- ============ 新功能區塊結束 ============ -->
-
-        <section class="mb-12 sm:mb-16 bg-white rounded-2xl shadow-lg p-4 sm:p-6 md:p-8 ring-1 ring-gray-200 trip-card">
-            <h2 class="text-2xl sm:text-3xl font-bold mb-6 text-gray-900 flex items-center">
-                 <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 mr-3 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l5.447 2.724A1 1 0 0021 16.382V5.618a1 1 0 00-1.447-.894L15 7m0 13V7m0 13L9 7" /></svg>
-                行程總覽地圖
-            </h2>
-            <div class="w-full bg-gray-50 rounded-lg p-2 sm:p-4 border">
-                 <svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto">
-                    <path d="M 20 170 Q 150 180 250 130 T 380 110" stroke="#cae8ff" stroke-width="15" fill="none" stroke-linecap="round" />
-                    <text x="25" y="185" font-size="8" fill="#5b95c2" font-weight="bold">聖羅倫斯河</text>
-                    <path d="M 240 135 C 200 110, 150 100, 100 115" stroke="#cae8ff" stroke-width="25" fill="none" stroke-linecap="round" />
-                    <text x="140" y="105" font-size="8" fill="#5b95c2" font-weight="bold">安大略湖</text>
-                    <g id="map-routes">
-                        <path id="path-qc-mtl" class="route-line animated-route" d="M350 115 L 290 125" style="animation-delay: 0s;"/>
-                        <path id="path-qc-yyz" class="route-line animated-route" d="M350,115 A150,150 0 0,0 230,120" style="animation-delay: 0.5s;"/>
-                        <path id="path-to-nf" class="route-line animated-route" d="M230 120 L 200 110" style="animation-delay: 1s;"/>
-                        <path id="path-nf-chi" class="route-line animated-route" d="M200,110 A150,150 0 0,0 80,100" style="animation-delay: 1.5s;"/>
-                    </g>
-                    <g id="map-icons">
-                        <text x="315" y="125" font-size="12" class="transport-icon" style="animation-delay: 1s;">🚄</text>
-                        <text x="285" y="100" font-size="12" class="transport-icon" style="animation-delay: 1.5s;">✈️</text>
-                        <text x="210" y="119" font-size="12" class="transport-icon" style="animation-delay: 2s;">🚌</text>
-                        <text x="135" y="90" font-size="12" class="transport-icon" style="animation-delay: 2.5s;">✈️</text>
-                    </g>
-                    <a href="#quebec-section" class="map-city-link" data-city-id="quebec-section" data-path-id="path-qc-mtl,path-qc-yyz"><g class="cursor-pointer"><circle cx="350" cy="115" r="5" fill="#1d4ed8" class="map-city-dot"/><text x="355" y="110" font-size="10" fill="#333">魁北克市</text><text x="355" y="122" font-size="7" fill="#666">Day 3-4</text></g></a>
-                    <a href="#montreal-section" class="map-city-link" data-city-id="montreal-section" data-path-id="path-qc-mtl"><g class="cursor-pointer"><circle cx="290" cy="125" r="5" fill="#1d4ed8" class="map-city-dot"/><text x="295" y="138" font-size="10" fill="#333">蒙特婁</text><text x="295" y="150" font-size="7" fill="#666">Day 1-2</text></g></a>
-                    <a href="#niagara-section" class="map-city-link" data-city-id="niagara-section" data-path-id="path-qc-yyz,path-to-nf"><g class="cursor-pointer"><circle cx="230" cy="120" r="5" fill="#1d4ed8" class="map-city-dot"/><text x="235" y="115" font-size="10" fill="#333">多倫多</text><text x="235" y="127" font-size="7" fill="#666">(轉運)</text></g></a>
-                    <a href="#niagara-section" class="map-city-link" data-city-id="niagara-section" data-path-id="path-to-nf,path-nf-chi"><g class="cursor-pointer"><circle cx="200" cy="110" r="5" fill="#1d4ed8" class="map-city-dot"/><text x="145" y="95" font-size="10" fill="#333">尼加拉瀑布</text><text x="175" y="122" font-size="7" fill="#666">Day 5-6</text></g></a>
-                    <a href="#chicago-section" class="map-city-link" data-city-id="chicago-section" data-path-id="path-nf-chi"><g class="cursor-pointer"><circle cx="80" cy="100" r="5" fill="#1d4ed8" class="map-city-dot"/><text x="25" y="105" font-size="10" fill="#333">芝加哥</text><text x="25" y="117" font-size="7" fill="#666">Day 7-12</text></g></a>
-                </svg>
-            </div>
-        </section>
 
         <div class="flex justify-end items-center mb-4 no-print">
             <label for="show-past-toggle" class="flex items-center cursor-pointer text-sm font-medium text-gray-700">
@@ -724,7 +621,6 @@
             }, 3000);
         }
         
-        // --- 新版 scrollToToday 功能 ---
         function scrollToToday(isAuto = false) {
             const todayString = new Date().toISOString().split('T')[0];
             const dashboardSection = document.getElementById('status-dashboard-section');
@@ -739,13 +635,12 @@
                  window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
             }
 
-            // 無論如何，都將儀表板內容切換回“今天”
             const tripData = window.tripData; 
+            const allWeatherData = window.allWeatherData;
             if (tripData && typeof updateStatusDashboard === 'function') {
                 const isTripActive = todayString >= tripData.tripInfo.tripStartDate && todayString < tripData.tripInfo.tripEndDate;
-                // 注意：這裡直接使用全域變數 currentDisplayDate
                 currentDisplayDate = isTripActive ? todayString : tripData.tripInfo.tripStartDate;
-                updateStatusDashboard(currentDisplayDate, tripData);
+                updateStatusDashboard(currentDisplayDate, tripData, allWeatherData);
             }
             
             if (!isAuto) {
@@ -753,188 +648,188 @@
             }
         }
         
-        /**
-         * Renders the entire itinerary based on data from trip-data.json
-         * @param {Array} itineraryData - The array of day objects.
-         * @param {HTMLElement} container - The element to inject the HTML into.
-         */
         function renderItinerary(itineraryData, container) {
             if (!itineraryData || !container) return;
-
             let htmlContent = '';
             let currentCitySection = null;
-
             itineraryData.forEach(day => {
-                // Add a city section anchor if it's a new city
                 if (day.cityTarget && day.cityTarget !== currentCitySection) {
                     currentCitySection = day.cityTarget;
                     htmlContent += `<section id="${currentCitySection}" data-city-section="${currentCitySection}" class="trip-card"></section>`;
                 }
-
                 const tagsHtml = day.tags.map(tag => `<span class="tag">${tag}</span>`).join('');
-                
-                const activitiesHtml = day.activities.map(activity => `
-                    <div class="activity-block">
-                         <h4 class="font-bold text-lg text-blue-800">${activity.title}</h4>
-                        <ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">
-                            ${activity.items.map(item => `<li>${item}</li>`).join('')}
-                        </ul>
-                    </div>
-                `).join('');
-
-                let reminderHtml = '';
-                if (day.reminder) {
-                    reminderHtml = `
-                    <div class="mt-4 p-4 bg-amber-100/60 rounded-lg border-l-4 border-amber-400">
-                        <h4 class="font-bold text-amber-800 flex items-center mb-2">${day.reminder.title}</h4>
-                        <ul class="list-disc list-inside mt-2 text-amber-900/80 space-y-1">
-                             ${day.reminder.items.map(item => `<li>${item}</li>`).join('')}
-                        </ul>
-                    </div>`;
-                }
-
-                let infoBoxHtml = '';
-                if (day.infoBox) {
-                     infoBoxHtml = `
-                    <div class="mt-4 p-4 bg-teal-100/60 rounded-lg border-l-4 border-teal-400">
-                        <h4 class="font-bold text-teal-800 flex items-center mb-2">${day.infoBox.title}</h4>
-                        <ul class="list-disc list-inside mt-2 text-teal-900/80 space-y-1">
-                             ${day.infoBox.items.map(item => `<li>${item}</li>`).join('')}
-                        </ul>
-                    </div>`;
-                }
-                
-                htmlContent += `
-                <div data-day="${day.day}" data-date="${day.date}" data-day-group="${day.dayGroup}" data-city-target="${day.cityTarget}" data-weather-city="${day.weatherCity}">
-                    <details class="trip-card bg-white rounded-2xl shadow-lg ring-1 ring-gray-200 overflow-hidden" ${day.day === 1 ? 'open' : ''}>
-                        <summary class="${day.isTravelDay ? 'summary-travel-day' : ''} flex justify-between items-center">
-                            <div>
-                                <p class="text-sm font-medium ${day.isTravelDay ? 'text-amber-700' : 'text-indigo-600'}">${day.subTitle}</p>
-                                <h3 id="day${day.day}" class="text-xl sm:text-2xl font-bold mt-1 text-gray-900">${day.title}</h3>
-                            </div>
-                            <div class="weather-display flex-shrink-0 ml-4 text-right"></div>
-                            <div class="summary-arrow ml-2 flex-shrink-0">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
-                            </div>
-                        </summary>
-                        <div class="p-4 sm:p-6 border-t border-gray-200">
-                            <div class="my-3 flex flex-wrap justify-between items-start gap-2">
-                                <div>${tagsHtml}</div>
-                            </div>
-                            <div class="space-y-6">
-                                ${activitiesHtml}
-                                ${infoBoxHtml}
-                                ${reminderHtml}
-                            </div>
-                        </div>
-                    </details>
-                </div>
-                `;
+                const activitiesHtml = day.activities.map(activity => `<div class="activity-block"><h4 class="font-bold text-lg text-blue-800">${activity.title}</h4><ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">${activity.items.map(item => `<li>${item}</li>`).join('')}</ul></div>`).join('');
+                let reminderHtml = day.reminder ? `<div class="mt-4 p-4 bg-amber-100/60 rounded-lg border-l-4 border-amber-400"><h4 class="font-bold text-amber-800 flex items-center mb-2">${day.reminder.title}</h4><ul class="list-disc list-inside mt-2 text-amber-900/80 space-y-1">${day.reminder.items.map(item => `<li>${item}</li>`).join('')}</ul></div>` : '';
+                let infoBoxHtml = day.infoBox ? `<div class="mt-4 p-4 bg-teal-100/60 rounded-lg border-l-4 border-teal-400"><h4 class="font-bold text-teal-800 flex items-center mb-2">${day.infoBox.title}</h4><ul class="list-disc list-inside mt-2 text-teal-900/80 space-y-1">${day.infoBox.items.map(item => `<li>${item}</li>`).join('')}</ul></div>` : '';
+                htmlContent += `<div data-day="${day.day}" data-date="${day.date}" data-day-group="${day.dayGroup}" data-city-target="${day.cityTarget}" data-weather-city="${day.weatherCity}"><details class="trip-card bg-white rounded-2xl shadow-lg ring-1 ring-gray-200 overflow-hidden" ${day.day === 1 ? 'open' : ''}><summary class="${day.isTravelDay ? 'summary-travel-day' : ''} flex justify-between items-center"><div><p class="text-sm font-medium ${day.isTravelDay ? 'text-amber-700' : 'text-indigo-600'}">${day.subTitle}</p><h3 id="day${day.day}" class="text-xl sm:text-2xl font-bold mt-1 text-gray-900">${day.title}</h3></div><div class="weather-display flex-shrink-0 ml-4 text-right"></div><div class="summary-arrow ml-2 flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg></div></summary><div class="p-4 sm:p-6 border-t border-gray-200"><div class="my-3 flex flex-wrap justify-between items-start gap-2"><div>${tagsHtml}</div></div><div class="space-y-6">${activitiesHtml}${infoBoxHtml}${reminderHtml}</div></div></details></div>`;
             });
-
             container.innerHTML = htmlContent;
         }
 
-        // ====================================================
-        // ============ 新功能：狀態總覽儀表板函式 ============
-        // ====================================================
-        function updateStatusDashboard(date, data) {
+        const cityCoordinates = { montreal: { lat: 45.50, lon: -73.57 }, quebec: { lat: 46.81, lon: -71.21 }, niagara: { lat: 43.09, lon: -79.08 }, chicago: { lat: 41.88, lon: -87.63 } };
+        function getWeatherIcon(code) {
+            const icons = { 0: '☀️', 1: '🌤️', 2: '⛅️', 3: '☁️', 45: '🌫️', 48: '🌫️', 51: '🌦️', 53: '🌦️', 55: '🌦️', 61: '🌧️', 63: '🌧️', 65: '🌧️', 66: '🌧️', 67: '🌧️', 71: '🌨️', 73: '🌨️', 75: '🌨️', 77: '🌨️', 80: '🌧️', 81: '🌧️', 82: '暴雨', 85: '🌨️', 86: '🌨️', 95: '⛈️', 96: '⛈️', 99: '⛈️' };
+            return icons[code] || '🌡️';
+        }
+        function getWeatherReminder(code) {
+            if ([51, 53, 55, 61, 63, 65, 80, 81, 82, 95, 96, 99].includes(code)) return '今日有雨，記得帶傘！';
+            if ([71, 73, 75, 77, 85, 86].includes(code)) return '可能會下雪，注意保暖！';
+            if ([0, 1].includes(code)) return '天氣晴朗，注意防曬！';
+            if ([2, 3].includes(code)) return '多雲天氣，適合出遊。';
+            if ([45, 48].includes(code)) return '有霧，行車請注意安全。';
+            return '祝您有美好的一天！';
+        }
+
+        async function fetchAllWeatherData(itinerary) {
+            if (!navigator.onLine && !navigator.serviceWorker.controller) {
+                console.log("目前處於離線狀態，無法取得天氣資訊。");
+                return {};
+            }
+            const uniqueCities = [...new Set(itinerary.map(day => day.weatherCity).filter(Boolean))];
+            const promises = uniqueCities.map(city => {
+                const { lat, lon } = cityCoordinates[city];
+                const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=auto`;
+                return fetch(url).then(res => res.ok ? res.json() : Promise.reject(`API error for ${city}`))
+                                 .then(data => ({ city, data }))
+                                 .catch(error => { console.error(`無法取得 ${city} 的天氣資訊:`, error); return null; });
+            });
+            const results = await Promise.all(promises);
+            return results.filter(r => r).reduce((acc, {city, data}) => ({ ...acc, [city]: data.daily }), {});
+        }
+
+        function updateStatusDashboard(date, data, allWeatherData) {
             const { itinerary, hotels, transport, tripInfo } = data;
-            
             const targetDayData = itinerary.find(d => d.date === date);
 
+            // --- Element Handles ---
             const statusDateEl = document.getElementById('status-date');
             const statusCityEl = document.getElementById('status-city');
             const progressTextEl = document.getElementById('status-progress-text');
             const progressBarEl = document.getElementById('status-progress-bar');
-            const accommodationContentEl = document.getElementById('status-accommodation-content');
-            const transportContentEl = document.getElementById('status-transport-content');
             const viewDetailsBtn = document.getElementById('view-details-btn');
+            
+            const weatherItemEl = document.getElementById('status-weather-item');
+            const weatherIconEl = document.getElementById('status-weather-icon');
+            const weatherTempEl = document.getElementById('status-weather-temp');
+            const weatherReminderEl = document.getElementById('status-weather-reminder');
+            
+            const accommodationItemEl = document.getElementById('status-accommodation-item');
+            const accommodationContentEl = document.getElementById('status-accommodation-content');
 
+            const transportItemEl = document.getElementById('status-transport-item');
+            const transportContentEl = document.getElementById('status-transport-content');
+            const transportIconEl = document.getElementById('status-transport-icon');
+
+            // --- Handle Off-Trip Dates ---
             if (!targetDayData) {
                 statusDateEl.textContent = '旅程已結束或未開始';
                 statusCityEl.textContent = '期待下次旅行！';
                 progressTextEl.textContent = '-';
                 progressBarEl.style.width = '0%';
-                accommodationContentEl.innerHTML = '<p>點擊箭頭查看行程安排。</p>';
-                transportContentEl.innerHTML = '';
                 if(viewDetailsBtn) viewDetailsBtn.style.display = 'none';
+                
+                weatherIconEl.textContent = '👋';
+                weatherTempEl.textContent = '';
+                weatherReminderEl.textContent = '旅程已結束或尚未開始。';
+
+                accommodationItemEl.style.display = 'none';
+                transportItemEl.style.display = 'none';
                 return;
             }
 
             if(viewDetailsBtn) viewDetailsBtn.style.display = 'inline-block';
             
-            // 1. 更新日期和城市
+            // 1. 更新日期, 城市, 進度條
             const dayOfWeek = new Date(date + 'T00:00:00').toLocaleDateString('zh-TW', { weekday: 'long', timeZone: 'UTC' });
-            const datePart = targetDayData.subTitle.split('｜')[1] || `${new Date(date + 'T00:00:00').getMonth() + 1}月${new Date(date + 'T00:00:00').getDate()}日`;
+            const datePart = targetDayData.subTitle.split('｜')[1] || `${new Date(date + 'T00:00:00').getUTCMonth() + 1}月${new Date(date + 'T00:00:00').getUTCDate()}日`;
             statusDateEl.textContent = `${datePart} (${dayOfWeek.replace('星期','週')})`;
             const city = targetDayData.weatherCity;
             const cityMap = { montreal: '蒙特婁', quebec: '魁北克市', niagara: '尼加拉瀑布', chicago: '芝加哥', '': '飛行途中' };
             statusCityEl.textContent = cityMap[city] || '移動中';
 
-            // 2. 更新進度條
             const progress = (targetDayData.day / tripInfo.totalDays) * 100;
             progressBarEl.style.width = `${progress}%`;
             progressTextEl.textContent = `Day ${targetDayData.day} / ${tripInfo.totalDays}`;
+
+            // 2. 更新天氣
+            const cityWeather = allWeatherData[city];
+            if (cityWeather) {
+                const dayIndex = cityWeather.time.indexOf(date);
+                if (dayIndex !== -1) {
+                    const tempMax = Math.round(cityWeather.temperature_2m_max[dayIndex]);
+                    const tempMin = Math.round(cityWeather.temperature_2m_min[dayIndex]);
+                    const code = cityWeather.weather_code[dayIndex];
+                    weatherIconEl.textContent = getWeatherIcon(code);
+                    weatherTempEl.textContent = `${tempMin}°C / ${tempMax}°C`;
+                    weatherReminderEl.textContent = getWeatherReminder(code);
+                } else {
+                    weatherIconEl.textContent = '🤷';
+                    weatherTempEl.textContent = '無預報';
+                    weatherReminderEl.textContent = '無法取得本日天氣資訊。';
+                }
+                 weatherItemEl.style.display = 'flex';
+            } else {
+                 weatherItemEl.style.display = 'none';
+            }
 
             // 3. 更新住宿資訊
             const checkingIn = hotels.find(h => h.checkIn === date);
             const checkingOut = hotels.find(h => h.checkOut === date);
             const stayingAt = hotels.find(h => date >= h.checkIn && date < h.checkOut);
             let hotelHtml = '';
-            if (checkingIn) {
-                hotelHtml += `<p><span class="font-semibold text-green-600">[本日入住]</span> <a href="${checkingIn.mapLink}" target="_blank" class="font-bold hover:underline">${checkingIn.name}</a></p>`;
+            if (checkingIn) hotelHtml += `<p><span class="font-semibold text-green-600">[入住]</span> <a href="${checkingIn.mapLink}" target="_blank" class="hover:underline">${checkingIn.name}</a></p>`;
+            if (checkingOut) hotelHtml += `<p class="mt-1"><span class="font-semibold text-red-600">[退房]</span> <a href="${checkingOut.mapLink}" target="_blank" class="hover:underline">${checkingOut.name}</a></p>`;
+            if (!checkingIn && stayingAt) hotelHtml = `<p>住宿於 <a href="${stayingAt.mapLink}" target="_blank" class="hover:underline">${stayingAt.name}</a></p>`;
+            
+            if (hotelHtml) {
+                accommodationContentEl.innerHTML = hotelHtml;
+                accommodationItemEl.style.display = 'flex';
+            } else {
+                accommodationItemEl.style.display = 'none';
             }
-            if (checkingOut) {
-                hotelHtml += `<p class="mt-1"><span class="font-semibold text-red-600">[本日退房]</span> <a href="${checkingOut.mapLink}" target="_blank" class="font-bold hover:underline">${checkingOut.name}</a></p>`;
-            }
-            if (!checkingIn && stayingAt) {
-                 hotelHtml = `<p>今晚入住: <a href="${stayingAt.mapLink}" target="_blank" class="font-bold hover:underline">${stayingAt.name}</a></p>`;
-            }
-            accommodationContentEl.innerHTML = hotelHtml || '<p>無住宿變更</p>';
 
             // 4. 更新交通資訊
             const transportItems = transport.filter(t => t.date === date);
-            let transportHtml = '';
             if (transportItems.length > 0) {
                 const iconMap = { '航班': '✈️', '火車': '🚄', '巴士': '🚌' };
-                transportHtml = transportItems.map(item => 
-                    `<p>${iconMap[item.type] || '➡️'} ${item.details}</p>`
-                ).join('');
+                // Use the icon of the first transport item for the main icon
+                transportIconEl.textContent = iconMap[transportItems[0].type] || '➡️';
+                transportContentEl.innerHTML = transportItems.map(item => `<p>${item.details}</p>`).join('');
+                transportItemEl.style.display = 'flex';
+            } else {
+                transportItemEl.style.display = 'none';
             }
-            transportContentEl.innerHTML = transportHtml || '<p>無長途交通</p>';
         }
 
 
         // --- Main script execution ---
-        let currentDisplayDate; // 全域變數，用於追蹤儀表板顯示的日期
+        let currentDisplayDate;
 
-        document.addEventListener('DOMContentLoaded', () => {
-            fetch('trip-data.json')
-                .then(response => {
-                    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-                    return response.json();
-                })
-                .then(data => {
-                    // --- 1. Render dynamic content from JSON ---
-                    const itineraryContainer = document.getElementById('itinerary-container');
-                    renderItinerary(data.itinerary, itineraryContainer);
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const response = await fetch('trip-data.json');
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                const data = await response.json();
+                
+                const allWeatherData = await fetchAllWeatherData(data.itinerary);
+                window.allWeatherData = allWeatherData;
 
-                    // --- 2. Initialize the rest of the page with data ---
-                    initializeApp(data);
-                })
-                .catch(error => {
-                    console.error("無法載入行程資料:", error);
-                    const container = document.getElementById('itinerary-container');
-                    if (container) container.innerHTML = `<p class="text-center text-red-600 font-bold">行程資料載入失敗，請檢查 trip-data.json 檔案。</p>`;
-                });
+                const itineraryContainer = document.getElementById('itinerary-container');
+                renderItinerary(data.itinerary, itineraryContainer);
+                
+                initializeApp(data, allWeatherData);
+
+            } catch (error) {
+                console.error("無法載入行程資料:", error);
+                const container = document.getElementById('itinerary-container');
+                if (container) container.innerHTML = `<p class="text-center text-red-600 font-bold">行程資料載入失敗，請檢查 trip-data.json 檔案。</p>`;
+            }
         });
 
-        function initializeApp(data) {
-            window.tripData = data; // 讓 tripData 全域可存取
-            const { hotels: hotelData, transport: transportData, foodie: foodieData, tripInfo } = data;
+        function initializeApp(data, allWeatherData) {
+            window.tripData = data;
+            const { hotels: hotelData, transport: transportData, foodie: foodieData, tripInfo, itinerary } = data;
 
-            // --- Navigation and UI elements ---
             const mainNav = document.getElementById('main-nav');
             const mobileMenuBtn = document.getElementById('mobile-menu-btn');
             const mobileMenuPanel = document.getElementById('mobile-menu-panel');
@@ -955,56 +850,24 @@
                 });
             });
 
-            // --- Intersection Observers for animations ---
             const tripCards = document.querySelectorAll('.trip-card');
             const cardObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('is-visible');
-                        const activityBlocks = entry.target.querySelectorAll('.activity-block');
-                        activityBlocks.forEach((block, index) => {
-                            block.style.transitionDelay = `${index * 120}ms`;
-                        });
-                    }
+                    if (entry.isIntersecting) entry.target.classList.add('is-visible');
                 });
             }, { threshold: 0.1 });
             tripCards.forEach(card => cardObserver.observe(card));
 
-            // --- Navigation Logic ---
             function handleNavigation(hash) {
                 if (!hash || hash === '#') return;
                 try {
                     const targetElement = document.querySelector(hash);
                     if (!targetElement) return;
-
-                    const toggle = document.getElementById('show-past-toggle');
-                    if (targetElement.hasAttribute('data-city-section') && toggle && !toggle.checked) {
-                        const cityId = targetElement.id;
-                        const hasPastDay = !!document.querySelector(`[data-city-target="${cityId}"].day-past`);
-                        if (hasPastDay) {
-                            toggle.checked = true;
-                            toggle.dispatchEvent(new Event('change'));
-                            showToast('為您顯示過去行程以查看目的地');
-                        }
-                    }
-                    
                     const offset = mainNav ? mainNav.offsetHeight + 20 : 80;
                     const targetTop = targetElement.getBoundingClientRect().top + window.pageYOffset;
-                     window.scrollTo({ top: targetTop - offset, behavior: 'smooth' });
-
-                    if (targetElement.hasAttribute('data-city-section')) {
-                        let nextElement = targetElement.nextElementSibling;
-                        while (nextElement && !nextElement.hasAttribute('data-city-section')) {
-                            if (nextElement.dataset.cityTarget === targetElement.id) {
-                                const details = nextElement.querySelector('details');
-                                if (details && !details.open) details.open = true;
-                            }
-                            nextElement = nextElement.nextElementSibling;
-                        }
-                    } else {
-                        const details = targetElement.closest('details');
-                        if (details && !details.open) details.open = true;
-                    }
+                    window.scrollTo({ top: targetTop - offset, behavior: 'smooth' });
+                    const details = targetElement.closest('details');
+                    if (details && !details.open) details.open = true;
                 } catch (e) { console.error("Navigation error:", e); }
             }
             
@@ -1013,56 +876,18 @@
                     e.preventDefault();
                     const hash = this.getAttribute('href');
                     handleNavigation(hash);
-                    if (history.pushState) history.pushState(null, null, hash);
-                    else location.hash = hash;
+                    if (history.pushState) history.pushState(null, null, hash); else location.hash = hash;
                     if (mobileMenuPanel && !mobileMenuPanel.classList.contains('hidden')) mobileMenuPanel.classList.add('hidden');
                 });
             });
             if (window.location.hash) setTimeout(() => handleNavigation(window.location.hash), 100);
             document.querySelectorAll('.mobile-nav-link').forEach(link => link.addEventListener('click', () => mobileMenuPanel.classList.add('hidden')));
 
-            // --- Map highlighing based on scroll ---
-            const mapCityLinks = document.querySelectorAll('.map-city-link');
-            const mapRouteLines = document.querySelectorAll('.route-line');
-            const dayCards = document.querySelectorAll('[data-city-target]');
-            mapCityLinks.forEach(link => {
-                const pathIds = (link.dataset.pathId || '').split(',');
-                const highlight = () => pathIds.forEach(id => document.getElementById(id)?.classList.add('highlight'));
-                const unhighlight = () => pathIds.forEach(id => document.getElementById(id)?.classList.remove('highlight'));
-                link.addEventListener('mouseenter', highlight);
-                link.addEventListener('mouseleave', unhighlight);
-            });
-            const mapHighlightObserver = new IntersectionObserver((entries) => {
-                mapCityLinks.forEach(link => link.classList.remove('map-city-active'));
-                mapRouteLines.forEach(line => line.classList.remove('highlight-scroll'));
-                const intersectingEntries = entries.filter(e => e.isIntersecting);
-                if (intersectingEntries.length > 0) {
-                    const latestActiveCity = intersectingEntries[intersectingEntries.length - 1].target.dataset.cityTarget;
-                     mapCityLinks.forEach(link => {
-                        if (link.dataset.cityId === latestActiveCity) {
-                            link.classList.add('map-city-active');
-                            const pathIds = link.dataset.pathId.split(',');
-                            pathIds.forEach(id => document.getElementById(id)?.classList.add('highlight-scroll'));
-                        }
-                    });
-                }
-            }, { rootMargin: `-${mainNav ? mainNav.offsetHeight : 60}px 0px -60% 0px`, threshold: 0 });
-            dayCards.forEach(card => {
-                if (card.dataset.cityTarget) mapHighlightObserver.observe(card);
-            });
-
-            // --- Utilities (Print, Tip Calculator) ---
             function triggerPrint() {
                 const allDetails = document.querySelectorAll('details');
                 const originallyOpen = new WeakMap();
-                allDetails.forEach(detail => {
-                    originallyOpen.set(detail, detail.open);
-                    detail.open = true;
-                });
-                setTimeout(() => {
-                    window.print();
-                    allDetails.forEach(detail => detail.open = originallyOpen.get(detail));
-                }, 100);
+                allDetails.forEach(detail => { originallyOpen.set(detail, detail.open); detail.open = true; });
+                setTimeout(() => { window.print(); allDetails.forEach(detail => detail.open = originallyOpen.get(detail)); }, 100);
             }
             document.getElementById('print-btn')?.addEventListener('click', triggerPrint);
             document.getElementById('mobile-print-btn')?.addEventListener('click', triggerPrint);
@@ -1087,15 +912,9 @@
             if (billInput) billInput.addEventListener('input', calculateTip);
             if (tipSelect) tipSelect.addEventListener('change', calculateTip);
 
-            // --- Live Clocks & Weather ---
             function updateClocks() {
                 const now = new Date();
-                const timezones = {
-                    montreal: 'America/Montreal',
-                    chicago: 'America/Chicago',
-                    taipei: 'Asia/Taipei'
-                };
-
+                const timezones = { montreal: 'America/Montreal', chicago: 'America/Chicago', taipei: 'Asia/Taipei' };
                 for (const [id, tz] of Object.entries(timezones)) {
                     const timeEl = document.getElementById(`time-${id}`);
                     const dateEl = document.getElementById(`date-${id}`);
@@ -1103,73 +922,44 @@
                         try {
                             timeEl.textContent = now.toLocaleTimeString('en-GB', { timeZone: tz, hour12: false });
                             dateEl.textContent = now.toLocaleDateString('zh-TW', { timeZone: tz, weekday: 'long' });
-                        } catch (e) {
-                            timeEl.textContent = "N/A";
-                            dateEl.textContent = "時區錯誤";
-                        }
+                        } catch (e) { /* fail silently */ }
                     }
                 }
             }
-            const cityCoordinates = { montreal: { lat: 45.50, lon: -73.57 }, quebec: { lat: 46.81, lon: -71.21 }, niagara: { lat: 43.09, lon: -79.08 }, chicago: { lat: 41.88, lon: -87.63 } };
-            function getWeatherIcon(code) {
-                const icons = { 0: '☀️', 1: '🌤️', 2: '⛅️', 3: '☁️', 45: '🌫️', 48: '🌫️', 51: '🌦️', 53: '🌦️', 55: '🌦️', 61: '🌧️', 63: '🌧️', 65: '🌧️', 66: '🌧️', 67: '🌧️', 71: '🌨️', 73: '🌨️', 75: '🌨️', 77: '🌨️', 80: '🌧️', 81: '🌧️', 82: '暴雨', 85: '🌨️', 86: '🌨️', 95: '⛈️', 96: '⛈️', 99: '⛈️' };
-                return icons[code] || '🌡️';
-            }
-            async function fetchAndDisplayWeather() {
-                const dayElements = document.querySelectorAll('[data-weather-city]');
-                const weatherDisplays = document.querySelectorAll('.weather-display');
-
-                if (!navigator.onLine && !navigator.serviceWorker.controller) {
-                    weatherDisplays.forEach(display => display.style.display = 'none');
-                    console.log("目前處於離線狀態，已隱藏天氣資訊。");
-                    return;
-                }
-
-                weatherDisplays.forEach(display => display.style.display = '');
-
-                const promises = Array.from(new Set(Array.from(dayElements).map(el => el.dataset.weatherCity)))
-                    .filter(Boolean)
-                    .map(city => {
-                        const { lat, lon } = cityCoordinates[city];
-                        const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=weather_code,temperature_2m_max&timezone=auto`;
-                        return fetch(url).then(res => {
-                            if (!res.ok) throw new Error('Network response was not ok');
-                            return res.json();
-                        }).then(data => ({ city, data })).catch(error => {
-                            console.error(`無法取得 ${city} 的天氣資訊:`, error);
-                            return null;
-                        });
-                    });
-
-                const results = await Promise.all(promises);
-                const weatherData = results
-                    .filter(r => r)
-                    .reduce((acc, {city, data}) => ({ ...acc, [city]: data.daily }), {});
-
-                dayElements.forEach(dayEl => {
+            
+            function populateDayCardWeather(allWeatherData) {
+                 document.querySelectorAll('[data-weather-city]').forEach(dayEl => {
                     const date = dayEl.dataset.date;
                     const city = dayEl.dataset.weatherCity;
                     const weatherDisplay = dayEl.querySelector('.weather-display');
-                    if (city && weatherData[city] && weatherDisplay) {
-                        const dayIndex = weatherData[city].time.indexOf(date);
+                    if (city && allWeatherData[city] && weatherDisplay) {
+                        const dayIndex = allWeatherData[city].time.indexOf(date);
                         if (dayIndex !== -1) {
-                            const temp = Math.round(weatherData[city].temperature_2m_max[dayIndex]);
-                            const icon = getWeatherIcon(weatherData[city].weather_code[dayIndex]);
+                            const temp = Math.round(allWeatherData[city].temperature_2m_max[dayIndex]);
+                            const icon = getWeatherIcon(allWeatherData[city].weather_code[dayIndex]);
                             weatherDisplay.innerHTML = `${icon} ${temp}°C`;
-                        } else {
-                             weatherDisplay.textContent = '無預報';
-                        }
-                    } else if (weatherDisplay) {
-                        weatherDisplay.textContent = 'N/A';
-                    }
+                        } else { weatherDisplay.textContent = '無預報'; }
+                    } else if (weatherDisplay) { weatherDisplay.textContent = 'N/A'; }
                 });
             }
 
-
-            // --- Foodie Modal ---
             const foodieModal = document.getElementById('foodie-modal');
             const modalTabs = document.getElementById('modal-tabs');
             const modalContent = document.getElementById('modal-content');
+            function openFoodieModal(activeCityKey) {
+                if (!foodieModal) return;
+                let tabsHTML = '';
+                Object.keys(foodieData).forEach(cityKey => tabsHTML += `<button class="modal-tab" data-city="${cityKey}">${foodieData[cityKey].name}</button>`);
+                modalTabs.innerHTML = tabsHTML;
+                document.querySelectorAll('.modal-tab').forEach(tab => tab.addEventListener('click', () => switchFoodieTab(tab.dataset.city)));
+                switchFoodieTab(activeCityKey);
+                document.body.classList.add('modal-open');
+                foodieModal.classList.add('active');
+            }
+            function closeFoodieModal() {
+                if(foodieModal) foodieModal.classList.remove('active');
+                document.body.classList.remove('modal-open');
+            }
             function switchFoodieTab(cityKey) {
                 const cityData = foodieData[cityKey];
                 if (!cityData) return;
@@ -1185,26 +975,9 @@
                 });
                 modalContent.innerHTML = contentHTML;
             }
-            function openFoodieModal(activeCityKey) {
-                if (!foodieModal) return;
-                let tabsHTML = '';
-                Object.keys(foodieData).forEach(cityKey => tabsHTML += `<button class="modal-tab" data-city="${cityKey}">${foodieData[cityKey].name}</button>`);
-                modalTabs.innerHTML = tabsHTML;
-                document.querySelectorAll('.modal-tab').forEach(tab => tab.addEventListener('click', () => switchFoodieTab(tab.dataset.city)));
-                switchFoodieTab(activeCityKey);
-                document.body.classList.add('modal-open');
-                document.documentElement.classList.add('modal-open');
-                foodieModal.classList.add('active');
-            }
-            function closeFoodieModal() {
-                if(foodieModal) foodieModal.classList.remove('active');
-                document.body.classList.remove('modal-open');
-                document.documentElement.classList.remove('modal-open');
-            }
             document.querySelectorAll('.modal-close-btn').forEach(btn => btn.addEventListener('click', closeFoodieModal));
             if(foodieModal) foodieModal.addEventListener('click', e => (e.target === foodieModal) && closeFoodieModal());
 
-            // --- Final Initialization Logic (The old `initializeTripView`) ---
             function initializeTripView() {
                 const showPastToggle = document.getElementById('show-past-toggle');
                 const mainContainer = document.querySelector('main.space-y-8');
@@ -1212,7 +985,7 @@
                 
                 showPastToggle.checked = false;
                 const todayString = new Date().toISOString().split('T')[0];
-                let todayElement = null, todayCityTargetId = null, todayWeatherCity = null;
+                let todayWeatherCity = null;
 
                 document.querySelectorAll('[data-date]').forEach(el => {
                     const dateStr = el.dataset.date;
@@ -1228,9 +1001,7 @@
                         if (checkingIn) hotelInfoHTML += `<p class="text-gray-700 mt-1">今日入住：<a href="${checkingIn.mapLink}" target="_blank" class="font-semibold hover:underline">${checkingIn.name}</a> <span class="text-sm text-gray-500">(${checkingIn.checkInTime}可入住)</span></p>`;
                         else if (!checkingOut && stayingAt) hotelInfoHTML += `<p class="text-gray-700">今晚入住：<a href="${stayingAt.mapLink}" target="_blank" class="font-semibold hover:underline">${stayingAt.name}</a></p>`;
 
-                        if (hotelInfoHTML) {
-                            dayContentContainer.insertAdjacentHTML('afterbegin', `<div class="info-block accommodation-info p-4 bg-gray-50 rounded-lg border-l-4 border-indigo-400"><h4 class="font-bold text-lg text-indigo-800 flex items-center mb-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor"><path d="M19 9.5A2.5 2.5 0 0016.5 7H3.5A2.5 2.5 0 001 9.5v7A2.5 2.5 0 003.5 19h13a2.5 2.5 0 002.5-2.5v-7zM6 13a1 1 0 11-2 0 1 1 0 012 0zm3 0a1 1 0 11-2 0 1 1 0 012 0z" /><path d="M3.5 4A1.5 1.5 0 002 5.5v1A1.5 1.5 0 003.5 8h13A1.5 1.5 0 0018 6.5v-1A1.5 1.5 0 0016.5 4h-13z" /></svg>住宿資訊</h4>${hotelInfoHTML}</div>`);
-                        }
+                        if (hotelInfoHTML) dayContentContainer.insertAdjacentHTML('afterbegin', `<div class="info-block accommodation-info p-4 bg-gray-50 rounded-lg border-l-4 border-indigo-400"><h4 class="font-bold text-lg text-indigo-800 flex items-center mb-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor"><path d="M19 9.5A2.5 2.5 0 0016.5 7H3.5A2.5 2.5 0 001 9.5v7A2.5 2.5 0 003.5 19h13a2.5 2.5 0 002.5-2.5v-7zM6 13a1 1 0 11-2 0 1 1 0 012 0zm3 0a1 1 0 11-2 0 1 1 0 012 0z" /><path d="M3.5 4A1.5 1.5 0 002 5.5v1A1.5 1.5 0 003.5 8h13A1.5 1.5 0 0018 6.5v-1A1.5 1.5 0 0016.5 4h-13z" /></svg>住宿資訊</h4>${hotelInfoHTML}</div>`);
                         
                         const transportItems = transportData.filter(t => t.date === dateStr);
                         if (transportItems.length > 0) {
@@ -1241,12 +1012,12 @@
                         const tagContainer = el.querySelector('.my-3');
                         const cityKey = el.dataset.weatherCity;
                         if (tagContainer && cityKey && foodieData[cityKey] && !tagContainer.querySelector('.foodie-btn-wrapper')) {
-                            const wrapper = document.createElement('div');
-                            wrapper.className = "foodie-btn-wrapper flex-shrink-0";
                             const foodieButton = document.createElement('button');
                             foodieButton.className = "foodie-btn bg-amber-100 text-amber-800 text-xs font-semibold px-3 py-1 rounded-full hover:bg-amber-200 transition-colors";
                             foodieButton.innerHTML = "🍽️ 美食清單";
                             foodieButton.onclick = e => { e.stopPropagation(); openFoodieModal(cityKey); };
+                            const wrapper = document.createElement('div');
+                            wrapper.className = "foodie-btn-wrapper flex-shrink-0";
                             wrapper.appendChild(foodieButton);
                             tagContainer.appendChild(wrapper);
                         }
@@ -1256,8 +1027,6 @@
                         el.classList.add('day-past');
                         if (el.querySelector('details')) el.querySelector('details').open = false;
                     } else if (dateStr === todayString) {
-                        todayElement = el;
-                        todayCityTargetId = el.dataset.cityTarget;
                         todayWeatherCity = el.dataset.weatherCity;
                         const summaryElement = el.querySelector('summary');
                         if (summaryElement) {
@@ -1268,9 +1037,6 @@
                     }
                 });
                 
-                document.querySelectorAll('.map-city-link').forEach(link => link.classList.remove('map-city-current'));
-                if (todayCityTargetId) document.querySelector(`.map-city-link[data-city-id="${todayCityTargetId}"]`)?.classList.add('map-city-current');
-
                 document.querySelectorAll('.timezone-block').forEach(block => block.classList.remove('timezone-highlight'));
                 let highlightBlockId = 'time-taipei-block';
                 if (todayWeatherCity) {
@@ -1287,37 +1053,29 @@
             // --- Kick off initialization ---
             updateClocks();
             setInterval(updateClocks, 1000);
-            fetchAndDisplayWeather();
+            populateDayCardWeather(allWeatherData);
             initializeTripView();
 
-            // --- 新增：儀表板事件監聽 ---
             const todayString = new Date().toISOString().split('T')[0];
-            
-            // 決定儀表板初始顯示的日期
             currentDisplayDate = todayString >= tripInfo.tripStartDate && todayString < tripInfo.tripEndDate ? todayString : tripInfo.tripStartDate;
-            
-            updateStatusDashboard(currentDisplayDate, data); // 初始載入
+            updateStatusDashboard(currentDisplayDate, data, allWeatherData);
 
-            // 左右箭頭按鈕事件 (已修正時區問題)
             document.getElementById('prev-day-btn').addEventListener('click', () => {
                 const [year, month, day] = currentDisplayDate.split('-').map(Number);
-                // 月份在Date.UTC中是0-11，所以要-1
                 const currentDateObj = new Date(Date.UTC(year, month - 1, day));
                 currentDateObj.setUTCDate(currentDateObj.getUTCDate() - 1);
                 currentDisplayDate = currentDateObj.toISOString().split('T')[0];
-                updateStatusDashboard(currentDisplayDate, data);
+                updateStatusDashboard(currentDisplayDate, data, allWeatherData);
             });
 
             document.getElementById('next-day-btn').addEventListener('click', () => {
                 const [year, month, day] = currentDisplayDate.split('-').map(Number);
-                // 月份在Date.UTC中是0-11，所以要-1
                 const currentDateObj = new Date(Date.UTC(year, month - 1, day));
                 currentDateObj.setUTCDate(currentDateObj.getUTCDate() + 1);
                 currentDisplayDate = currentDateObj.toISOString().split('T')[0];
-                updateStatusDashboard(currentDisplayDate, data);
+                updateStatusDashboard(currentDisplayDate, data, allWeatherData);
             });
 
-            // "查看本日詳細行程" 按鈕事件
             document.getElementById('view-details-btn').addEventListener('click', () => {
                 const dayData = data.itinerary.find(d => d.date === currentDisplayDate);
                 if (dayData) {
@@ -1336,7 +1094,6 @@
                 }
             });
             
-            // "本日狀態"懸浮按鈕事件
             document.getElementById('today-btn').addEventListener('click', () => {
                 scrollToToday();
             });
