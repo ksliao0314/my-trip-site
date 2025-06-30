@@ -374,7 +374,7 @@
                     </div>
                 </div>
 
-                <div id="status-card-content" class="space-y-4 mt-4">
+                <div id="status-card-content" class="space-y-4 mt-4" style="touch-action: pan-y;"> <!-- NEW: Added touch-action for better scroll handling -->
                     <div>
                         <div class="flex justify-between items-baseline">
                             <p id="status-date" class="text-lg font-bold text-indigo-700">7月2日 (週三)</p>
@@ -734,14 +734,11 @@
                 }
             }
             
-            // --- MODIFICATION START ---
-            // This is the corrected code block to prevent timezone issues.
             const [year, month, day] = date.split('-').map(Number);
             const dateObj = new Date(Date.UTC(year, month - 1, day));
             const dayOfWeek = dateObj.toLocaleDateString('zh-TW', { weekday: 'long', timeZone: 'UTC' });
             const datePart = `${month}月${day}日`;
             statusDateEl.textContent = `${datePart} (${dayOfWeek.replace('星期','週')})`;
-            // --- MODIFICATION END ---
             
             const city = targetDayData.weatherCity;
             const cityMap = { montreal: '蒙特婁', quebec: '魁北克市', niagara: '尼加拉瀑布', chicago: '芝加哥', '': '飛行途中' };
@@ -751,17 +748,24 @@
             progressBarEl.style.width = `${progress}%`;
             progressTextEl.textContent = `Day ${targetDayData.day} / ${tripInfo.totalDays}`;
 
+            // --- MODIFICATION START for time difference ---
             if (timeDiffEl) {
-                const cityTimezoneMap = { montreal: 'America/Montreal', quebec: 'America/Montreal', niagara: 'America/Montreal', chicago: 'America/Chicago' };
+                const cityTimezoneMap = {
+                    montreal: -12, // EDT is UTC-4, Taipei is UTC+8. Diff is -12.
+                    quebec: -12,   // EDT is UTC-4
+                    niagara: -12,  // EDT is UTC-4
+                    chicago: -13,  // CDT is UTC-5. Diff is -13.
+                };
                 const localTzKey = targetDayData.weatherCity;
                 let diffText = '✈️ 飛行中';
-                if (cityTimezoneMap[localTzKey] === 'America/Montreal') {
-                    diffText = '與當地時差 12 小時';
-                } else if (cityTimezoneMap[localTzKey] === 'America/Chicago') {
-                    diffText = '與當地時差 13 小時';
+                if (cityTimezoneMap[localTzKey]) {
+                    const diff = cityTimezoneMap[localTzKey];
+                    const sign = diff > 0 ? '+' : '';
+                    diffText = `與台灣時差 ${sign}${diff} 小時`;
                 }
                 timeDiffEl.textContent = diffText;
             }
+            // --- MODIFICATION END ---
 
             const cityWeather = allWeatherData[city];
             if (cityWeather) {
@@ -774,7 +778,7 @@
                     weatherTempEl.textContent = `${tempMin}°C / ${tempMax}°C`;
                     weatherReminderEl.textContent = getWeatherReminder(code);
                 } else {
-                    weatherIconEl.textContent = '�';
+                    weatherIconEl.textContent = '❓';
                     weatherTempEl.textContent = '無預報';
                     weatherReminderEl.textContent = '無法取得本日天氣資訊。';
                 }
@@ -963,21 +967,33 @@
             if (billInput) billInput.addEventListener('input', calculateTip);
             if (tipSelect) tipSelect.addEventListener('change', calculateTip);
 
+            // --- MODIFICATION START for Taipei Time Display ---
             function updateLiveTaipeiTime() {
                 const taipeiTimeEl = document.getElementById('status-taipei-time');
                 if (!taipeiTimeEl) return;
                 try {
-                    const timeString = new Date().toLocaleTimeString('en-GB', {
+                    const now = new Date();
+                    const dateString = now.toLocaleDateString('zh-TW', {
+                        timeZone: 'Asia/Taipei',
+                        month: '2-digit',
+                        day: '2-digit'
+                    });
+                    const dayOfWeekString = now.toLocaleDateString('zh-TW', {
+                        timeZone: 'Asia/Taipei',
+                        weekday: 'short'
+                    });
+                    const timeString = now.toLocaleTimeString('en-GB', {
                         timeZone: 'Asia/Taipei',
                         hour: '2-digit',
                         minute: '2-digit',
                         hour12: false
                     });
-                    taipeiTimeEl.textContent = `🇹🇼 台北時間 ${timeString}`;
+                    taipeiTimeEl.textContent = `🇹🇼 台北 ${dateString}(${dayOfWeekString}) ${timeString}`;
                 } catch(e) {
                     taipeiTimeEl.textContent = `🇹🇼 台北時間 --:--`;
                 }
             }
+            // --- MODIFICATION END ---
             
             function populateDayCardWeather(allWeatherData) {
                  document.querySelectorAll('[data-weather-city]').forEach(dayEl => {
@@ -1103,7 +1119,7 @@
             const sections = document.querySelectorAll('section[id], main > div[id]');
             const sectionObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
-                    if (entry.isintersecting) {
+                    if (entry.isIntersecting) {
                         const id = entry.target.getAttribute('id');
                         navLinks.forEach(link => {
                             link.classList.toggle('nav-link-active', link.getAttribute('href') === `#${id}`);
@@ -1139,6 +1155,38 @@
                 currentDisplayDate = currentDateObj.toISOString().split('T')[0];
                 updateStatusDashboard(currentDisplayDate, data, allWeatherData);
             });
+
+            // --- NEW: Swipe functionality ---
+            const statusCard = document.getElementById('status-card-content');
+            let touchStartX = 0;
+            let touchEndX = 0;
+            const swipeThreshold = 50; // Minimum distance for a swipe
+
+            statusCard.addEventListener('touchstart', (event) => {
+                touchStartX = event.changedTouches[0].screenX;
+            }, { passive: true });
+
+            statusCard.addEventListener('touchend', (event) => {
+                touchEndX = event.changedTouches[0].screenX;
+                handleSwipe();
+            }, { passive: true });
+
+            function handleSwipe() {
+                const swipeDistance = touchEndX - touchStartX;
+                if (Math.abs(swipeDistance) < swipeThreshold) {
+                    return; // Not a swipe
+                }
+
+                if (swipeDistance < 0) {
+                    // Swiped left
+                    document.getElementById('next-day-btn').click();
+                } else {
+                    // Swiped right
+                    document.getElementById('prev-day-btn').click();
+                }
+            }
+            // --- END of Swipe functionality ---
+
 
             document.getElementById('view-details-btn').addEventListener('click', () => {
                 const dayData = data.itinerary.find(d => d.date === currentDisplayDate);
