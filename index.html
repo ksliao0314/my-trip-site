@@ -249,10 +249,48 @@
         }
         
         /* Day Slider */
-        #day-slider { -webkit-appearance: none; appearance: none; width: 100%; height: 8px; background: var(--c-border); border-radius: 9999px; outline: none; opacity: 0.9; transition: opacity .2s; cursor: pointer; }
+        #day-slider { 
+            -webkit-appearance: none; 
+            appearance: none; 
+            width: 100%; 
+            height: 8px; 
+            background: var(--c-border); 
+            border-radius: 9999px; 
+            outline: none; 
+            opacity: 0.9; 
+            transition: opacity .2s; 
+            cursor: pointer; 
+            /* 新增：滑桿進度條樣式 */
+            background: linear-gradient(to right, var(--c-secondary) 0%, var(--c-secondary) var(--progress-width, 0%), var(--c-border) var(--progress-width, 0%), var(--c-border) 100%);
+        }
         #day-slider:hover { opacity: 1; }
-        #day-slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 22px; height: 22px; background: var(--c-secondary); border-radius: 50%; cursor: pointer; border: 3px solid white; box-shadow: 0 1px 3px rgba(0,0,0,0.2); }
-        #day-slider::-moz-range-thumb { width: 22px; height: 22px; background: var(--c-secondary); border-radius: 50%; cursor: pointer; border: 3px solid white; box-shadow: 0 1px 3px rgba(0,0,0,0.2); }
+        #day-slider::-webkit-slider-thumb { 
+            -webkit-appearance: none; 
+            appearance: none; 
+            width: 22px; 
+            height: 22px; 
+            background: var(--c-secondary); 
+            border-radius: 50%; 
+            cursor: pointer; 
+            border: 3px solid white; 
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2); 
+            margin-top: -7px; /* 調整拇指位置與軌道對齊 */
+        }
+        #day-slider::-moz-range-thumb { 
+            width: 22px; 
+            height: 22px; 
+            background: var(--c-secondary); 
+            border-radius: 50%; 
+            cursor: pointer; 
+            border: 3px solid white; 
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2); 
+        }
+        /* 進度條樣式 for Firefox */
+        #day-slider::-moz-range-track {
+            background: linear-gradient(to right, var(--c-secondary) 0%, var(--c-secondary) var(--progress-width, 0%), var(--c-border) var(--progress-width, 0%), var(--c-border) 100%);
+            border-radius: 9999px;
+        }
+
 
         /* --- New Color Scheme Overrides --- */
         #status-dashboard-section .bg-white {
@@ -386,6 +424,8 @@
                         
                         <div class="relative pt-2 pb-1">
                             <label for="day-slider" class="sr-only">行程日選擇拉桿</label>
+                            <!-- 新增：顯示當前滑桿日期的元素 -->
+                            <span id="current-slider-date" class="absolute -top-4 left-1/2 -translate-x-1/2 text-xs font-semibold text-gray-600 bg-white px-2 py-1 rounded-md shadow-sm whitespace-nowrap"></span>
                             <input type="range" id="day-slider" min="1" max="14" value="1" class="w-full">
                         </div>
 
@@ -698,6 +738,7 @@
             const statusCityTextEl = document.getElementById('status-city-text'); 
             const progressTextEl = document.getElementById('status-progress-text');
             const daySlider = document.getElementById('day-slider');
+            const currentSliderDateEl = document.getElementById('current-slider-date'); // 新增：獲取顯示當前日期的元素
             const viewDetailsBtn = document.getElementById('view-details-btn');
             const weatherItemEl = document.getElementById('status-weather-item');
             const weatherIconEl = document.getElementById('status-weather-icon');
@@ -747,6 +788,7 @@
                     transportItemEl.style.display = 'none';
                     if (travelDayIndicatorEl) travelDayIndicatorEl.style.display = 'none';
                     if (paginationDotsContainer) paginationDotsContainer.innerHTML = '';
+                    if (currentSliderDateEl) currentSliderDateEl.style.display = 'none'; // 隱藏日期顯示
                     return;
                 }
 
@@ -775,6 +817,26 @@
                 progressTextEl.textContent = `Day ${targetDayData.day} / ${tripInfo.totalDays}`;
                 if (daySlider) {
                     daySlider.value = targetDayData.day;
+                    // 更新滑桿進度條顏色
+                    const progress = ((targetDayData.day - daySlider.min) / (daySlider.max - daySlider.min)) * 100;
+                    daySlider.style.setProperty('--progress-width', `${progress}%`);
+
+                    // 更新滑桿上方日期顯示
+                    if (currentSliderDateEl) {
+                        currentSliderDateEl.textContent = `${datePart} (Day ${targetDayData.day})`;
+                        // 計算位置
+                        const thumbWidth = 22; // 滑桿拇指寬度
+                        const sliderWidth = daySlider.offsetWidth;
+                        const trackWidth = sliderWidth - thumbWidth;
+                        const value = targetDayData.day;
+                        const min = parseInt(daySlider.min);
+                        const max = parseInt(daySlider.max);
+                        const percentage = (value - min) / (max - min);
+                        const thumbPosition = percentage * trackWidth + (thumbWidth / 2);
+                        const offset = thumbPosition - (currentSliderDateEl.offsetWidth / 2);
+                        currentSliderDateEl.style.left = `${offset}px`;
+                        currentSliderDateEl.style.display = 'block'; // 確保顯示
+                    }
                 }
 
                 if (paginationDotsContainer) {
@@ -927,6 +989,7 @@
             const statusCityArrow = document.getElementById('status-city-arrow');
             const paginationDotsContainer = document.getElementById('status-pagination-dots');
             const daySlider = document.getElementById('day-slider');
+            const currentSliderDateEl = document.getElementById('current-slider-date'); // 新增：獲取顯示當前日期的元素
 
             if(daySlider) {
                 daySlider.max = tripInfo.totalDays;
@@ -937,6 +1000,13 @@
                         currentDisplayDate = targetDayData.date;
                         updateStatusDashboard(currentDisplayDate, data, window.allWeatherData, 0); 
                     }
+                });
+                // 新增：當滑鼠放開滑桿時隱藏日期顯示
+                daySlider.addEventListener('mouseup', () => {
+                    if (currentSliderDateEl) currentSliderDateEl.style.display = 'none';
+                });
+                daySlider.addEventListener('touchend', () => {
+                    if (currentSliderDateEl) currentSliderDateEl.style.display = 'none';
                 });
             }
 
