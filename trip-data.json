@@ -55,15 +55,46 @@
     { "name": "The Peninsula Chicago (範例)", "checkIn": "2025-07-08", "checkOut": "2025-07-13", "mapLink": "https://maps.apple.com/?q=The+Peninsula+Chicago", "checkInTime": "下午3:00後", "checkOutTime": "中午12:00前" }
   ],
   "transport": [
-    { "date": "2025-07-02", "type": "航班", "details": "長榮 BR198 + 加航 AC6" },
+    {
+      "date": "2025-07-02",
+      "type": "航班",
+      "details": [
+        { "flightCode": "長榮 BR198", "departure": { "airport": "台北松山 (TSA)", "time": "2025-07-02T09:00:00", "tz": "Asia/Taipei" }, "arrival": { "airport": "東京成田 (NRT)", "time": "2025-07-02T13:25:00", "tz": "Asia/Tokyo" } },
+        { "flightCode": "加航 AC6", "departure": { "airport": "東京成田 (NRT)", "time": "2025-07-02T17:35:00", "tz": "Asia/Tokyo" }, "arrival": { "airport": "蒙特婁 (YUL)", "time": "2025-07-02T17:00:00", "tz": "America/Montreal" } }
+      ]
+    },
     { "date": "2025-07-02", "type": "巴士", "details": "747 Express Bus" },
     { "date": "2025-07-04", "type": "火車", "details": "VIA Rail (蒙特婁 → 魁北克市)" },
-    { "date": "2025-07-06", "type": "航班", "details": "加航 AC7959 (魁北克 → 多倫多)" },
-    { "date": "2025-07-08", "type": "航班", "details": "加航 AC515 (多倫多 → 芝加哥)" },
-    { "date": "2025-07-14", "type": "航班", "details": "日航 JL009 (芝加哥 → 東京)" },
-    { "date": "2025-07-15", "type": "航班", "details": "日航 JL097 (東京 → 台北)" }
+    {
+      "date": "2025-07-06",
+      "type": "航班",
+      "details": [
+        { "flightCode": "加航 AC7959", "departure": { "airport": "魁北克 (YQB)", "time": "2025-07-06T13:00:00", "tz": "America/Toronto" }, "arrival": { "airport": "多倫多 (YYZ)", "time": "2025-07-06T14:30:00", "tz": "America/Toronto" } }
+      ]
+    },
+    {
+      "date": "2025-07-08",
+      "type": "航班",
+      "details": [
+        { "flightCode": "加航 AC515", "departure": { "airport": "多倫多 (YYZ)", "time": "2025-07-08T15:00:00", "tz": "America/Toronto" }, "arrival": { "airport": "芝加哥 (ORD)", "time": "2025-07-08T16:00:00", "tz": "America/Chicago" } }
+      ]
+    },
+    {
+      "date": "2025-07-14",
+      "type": "航班",
+      "details": [
+        { "flightCode": "日航 JL009", "departure": { "airport": "芝加哥 (ORD)", "time": "2025-07-14T01:30:00", "tz": "America/Chicago" }, "arrival": { "airport": "東京羽田 (HND)", "time": "2025-07-15T04:20:00", "tz": "Asia/Tokyo" } }
+      ]
+    },
+    {
+      "date": "2025-07-15",
+      "type": "航班",
+      "details": [
+        { "flightCode": "日航 JL097", "departure": { "airport": "東京羽田 (HND)", "time": "2025-07-15T08:55:00", "tz": "Asia/Tokyo" }, "arrival": { "airport": "台北松山 (TSA)", "time": "2025-07-15T11:35:00", "tz": "Asia/Taipei" } }
+      ]
+    }
   ],
- "foodie": {
+  "foodie": {
     "montreal": {
       "name": "蒙特婁",
       "categories": [
@@ -189,7 +220,7 @@
         { "title": "🚕 前往市區飯店", "items": ["<strong>747 Express Bus (24小時營運)：</strong>費用 CA$11，行程約 45–60 分鐘，可直接用信用卡刷進站。", "<strong>Uber／Taxi：</strong>約 CA$45–55，車程約 30–40 分鐘。", "<strong>飯店建議地點：</strong><a href='https://maps.apple.com/?q=Vieux-Montréal' target='_blank' class='hover:underline'>Vieux-Montréal（舊城區）</a>或 <a href='https://maps.apple.com/?q=Berri-UQAM' target='_blank' class='hover:underline'>Berri-UQAM／Quartier Latin</a>。"] },
         { "title": "🌇 19:00–21:00 飯店安頓＋簡單夜間散步", "items": ["<strong>夕陽夜景路線：</strong>沿<a href='https://maps.apple.com/?q=Old+Port+of+Montreal' target='_blank' class='hover:underline'>舊港</a>慢行至 <a href='https://maps.apple.com/?q=La+Grande+Roue+de+Montréal' target='_blank' class='hover:underline'>La Grande Roue 摩天輪區</a>，看聖勞倫斯河夜景。", "<strong>輕食建議：</strong><a href='https://maps.apple.com/?q=Olive+et+Gourmando' target='_blank' class='hover:underline'>Olive et Gourmando</a> 或 <a href='https://maps.apple.com/?q=Maison+Christian+Faure' target='_blank' class='hover:underline'>Maison Christian Faure</a>（甜點塔派）。"] }
       ],
-      "reminder": { "title": "🌙 睡前提醒", "items": ["🧴 建議泡澡放鬆，避免時差影響過大。", "� 盡量調整作息至當地時間，避免太早入睡。", "📦 可順便打開行李，準備第二天城市探索用物（行動網路、地鐵卡、備用雨具）。"] }
+      "reminder": { "title": "🌙 睡前提醒", "items": ["🧴 建議泡澡放鬆，避免時差影響過大。", "🕓 盡量調整作息至當地時間，避免太早入睡。", "📦 可順便打開行李，準備第二天城市探索用物（行動網路、地鐵卡、備用雨具）。"] }
     },
     {
       "day": 2,
@@ -220,7 +251,7 @@
       "isTravelDay": true,
       "tags": ["#火車旅程", "#古城初探", "#世界遺產"],
       "activities": [
-        { "title": "🧳 12:00 – 13:30｜抵達魁北克市 → 入住飯店 → 午餐", "items": ["<strong>抵達站：</strong><a href='https://maps.apple.com/?q=Gare+du+Palais,Quebec' target='_blank' class='hover:underline'>Gare du Palais</a>，位於舊城區北側。", "<strong>建議住宿區域：</strong>上城（Haute-Ville），靠近 <a href='https://maps.apple.com/?q=Fairmont+Le+Château+Frontenac,Quebec' target='_blank' class='hover:underline'>Château Frontenac</a>。", "<strong>午餐建議：</strong><a href='https://maps.apple.com/?q=Le+Chic+Shack,Quebec' target='_blank' class='hover:underline'>Le Chic Shack</a>（漢堡＋奶昔）或 <a href='https://maps.apple.com/?q=Buffet+de+l’Antiquaire,Quebec' target='_blank' class='hover:underline'>Buffet de l’Antiquaire</a>（魁北克家常菜）。"] },
+        { "title": "� 12:00 – 13:30｜抵達魁北克市 → 入住飯店 → 午餐", "items": ["<strong>抵達站：</strong><a href='https://maps.apple.com/?q=Gare+du+Palais,Quebec' target='_blank' class='hover:underline'>Gare du Palais</a>，位於舊城區北側。", "<strong>建議住宿區域：</strong>上城（Haute-Ville），靠近 <a href='https://maps.apple.com/?q=Fairmont+Le+Château+Frontenac,Quebec' target='_blank' class='hover:underline'>Château Frontenac</a>。", "<strong>午餐建議：</strong><a href='https://maps.apple.com/?q=Le+Chic+Shack,Quebec' target='_blank' class='hover:underline'>Le Chic Shack</a>（漢堡＋奶昔）或 <a href='https://maps.apple.com/?q=Buffet+de+l’Antiquaire,Quebec' target='_blank' class='hover:underline'>Buffet de l’Antiquaire</a>（魁北克家常菜）。"] },
         { "title": "� 14:00 – 17:30｜上城區初探路線", "items": ["<strong>步行路線：</strong><a href='https://maps.apple.com/?q=Fairmont+Le+Château+Frontenac,Quebec' target='_blank' class='hover:underline'>芳堤娜城堡</a> → <a href='https://maps.apple.com/?q=Dufferin+Terrace,Quebec' target='_blank' class='hover:underline'>杜費林露台</a> → <a href='https://maps.apple.com/?q=Porte+Saint-Louis,Quebec' target='_blank' class='hover:underline'>聖路易門/古城牆</a> → <a href='https://maps.apple.com/?q=Hôtel+du+Parlement,Quebec' target='_blank' class='hover:underline'>魁北克省議會</a>。"] },
         { "title": "🌃 18:00 – 20:30｜晚餐＋夜景散步", "items": ["<strong>餐廳建議：</strong><a href='https://maps.apple.com/?q=Aux+Anciens+Canadiens,Quebec' target='_blank' class='hover:underline'>Aux Anciens Canadiens</a> (17世紀老宅法餐)。", "飯後可再回到 Dufferin Terrace 拍攝夜景，芳堤娜城堡夜間打燈效果極佳。"] }
       ],
