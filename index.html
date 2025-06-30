@@ -297,6 +297,7 @@
         @media (max-width: 768px) {
             #status-card-content {
                 max-height: 50vh; /* Adjusted for better visibility on mobile */
+                min-height: 250px; /* Added a min-height for consistent card size on mobile */
                 overflow-y: auto;
                 -webkit-overflow-scrolling: touch; /* Smooth scrolling for iOS */
             }
@@ -369,10 +370,6 @@
                     <a href="#links-dashboard" class="nav-link flex items-center">
                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1.5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0 1 1 0 00-1.414 1.414 4 4 0 005.656 0l3-3a4 4 0 00-5.656-5.656l-1.5 1.5a1 1 0 101.414 1.414l1.5-1.5zm-5 5a2 2 0 012.828 0 1 1 0 101.414-1.414 4 4 0 00-5.656 0l-3 3a4 4 0 105.656 5.656l1.5-1.5a1 1 0 10-1.414-1.414l-1.5 1.5a2 2 0 11-2.828-2.828l3-3z" clip-rule="evenodd" /></svg>
                         常用連結
-                    </a>
-                     <button id="print-btn" class="no-print inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" /></svg>
-                        列印行程
                     </button>
                 </div>
 
@@ -389,7 +386,7 @@
         <div id="mobile-menu-panel" class="md:hidden hidden bg-white shadow-lg">
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                  <a href="#status-dashboard-section" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">📍 行程要覽</a>
-                 <a href="#tip-calculator-section" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">� 小費計算機</a>
+                 <a href="#tip-calculator-section" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">🧮 小費計算機</a>
                  <a href="#links-dashboard" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">🔗 常用連結</a>
                  <button id="mobile-print-btn" class="w-full text-left mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">📄 列印行程</button>
             </div>
@@ -1262,7 +1259,7 @@
             initializeTripView();
 
             const todayString = new Date().toISOString().split('T')[0];
-            const isTripActive = todayString >= tripInfo.tripStartDate && todayString < tripInfo.tripEndDate;
+            const isTripActive = todayString >= tripInfo.tripStartDate && todayInfo.tripStartDate <= tripInfo.tripEndDate; // Fixed logic here
             currentDisplayDate = isTripActive ? todayString : tripInfo.tripStartDate;
             updateStatusDashboard(currentDisplayDate, data, allWeatherData);
 
@@ -1279,11 +1276,11 @@
             });
 
             document.getElementById('next-day-btn').addEventListener('click', () => {
-                const [year, month, day] = currentDisplayDate.split('-').map(Number);
+                const [year, month, day] = currentDisplayDate.split('-).map(Number);
                 const currentDateObj = new Date(Date.UTC(year, month - 1, day));
                 currentDateObj.setUTCDate(currentDateObj.getUTCDate() + 1);
                 const newDate = currentDateObj.toISOString().split('T')[0];
-                 if (newDate < tripInfo.tripEndDate) { // Use < tripEndDate to prevent going past the last day
+                 if (newDate <= tripInfo.tripEndDate) { // Changed to <= to include the end date if it's a travel day
                     currentDisplayDate = newDate;
                     // MODIFICATION: Pass direction for animation
                     updateStatusDashboard(currentDisplayDate, data, window.allWeatherData, 1);
