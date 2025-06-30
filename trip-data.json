@@ -55,13 +55,13 @@
     { "name": "The Peninsula Chicago (範例)", "checkIn": "2025-07-08", "checkOut": "2025-07-13", "mapLink": "https://maps.apple.com/?q=The+Peninsula+Chicago", "checkInTime": "下午3:00後", "checkOutTime": "中午12:00前" }
   ],
   "transport": [
-    { "date": "2025-07-02", "type": "航班", "details": "長榮 BR198 + 加航 AC6", "departureUTC": "2025-07-02T01:00:00Z", "arrivalUTC": "2025-07-02T21:00:00Z" },
+    { "date": "2025-07-02", "type": "航班", "details": "長榮 BR198 + 加航 AC6" },
     { "date": "2025-07-02", "type": "巴士", "details": "747 Express Bus" },
     { "date": "2025-07-04", "type": "火車", "details": "VIA Rail (蒙特婁 → 魁北克市)" },
-    { "date": "2025-07-06", "type": "航班", "details": "加航 AC7959 (魁北克 → 多倫多)", "departureUTC": "2025-07-06T17:00:00Z", "arrivalUTC": "2025-07-06T18:30:00Z" },
-    { "date": "2025-07-08", "type": "航班", "details": "加航 AC515 (多倫多 → 芝加哥)", "departureUTC": "2025-07-08T19:00:00Z", "arrivalUTC": "2025-07-08T21:00:00Z" },
-    { "date": "2025-07-14", "type": "航班", "details": "日航 JL009 (芝加哥 → 東京)", "departureUTC": "2025-07-14T06:30:00Z", "arrivalUTC": "2025-07-14T19:20:00Z" },
-    { "date": "2025-07-15", "type": "航班", "details": "日航 JL097 (東京 → 台北)", "departureUTC": "2025-07-14T23:55:00Z", "arrivalUTC": "2025-07-15T03:35:00Z" }
+    { "date": "2025-07-06", "type": "航班", "details": "加航 AC7959 (魁北克 → 多倫多)" },
+    { "date": "2025-07-08", "type": "航班", "details": "加航 AC515 (多倫多 → 芝加哥)" },
+    { "date": "2025-07-14", "type": "航班", "details": "日航 JL009 (芝加哥 → 東京)" },
+    { "date": "2025-07-14", "type": "航班", "details": "日航 JL097 (東京 → 台北)" }
   ],
  "foodie": {
     "montreal": {
@@ -221,7 +221,7 @@
       "tags": ["#火車旅程", "#古城初探", "#世界遺產"],
       "activities": [
         { "title": "🧳 12:00 – 13:30｜抵達魁北克市 → 入住飯店 → 午餐", "items": ["<strong>抵達站：</strong><a href='https://maps.apple.com/?q=Gare+du+Palais,Quebec' target='_blank' class='hover:underline'>Gare du Palais</a>，位於舊城區北側。", "<strong>建議住宿區域：</strong>上城（Haute-Ville），靠近 <a href='https://maps.apple.com/?q=Fairmont+Le+Château+Frontenac,Quebec' target='_blank' class='hover:underline'>Château Frontenac</a>。", "<strong>午餐建議：</strong><a href='https://maps.apple.com/?q=Le+Chic+Shack,Quebec' target='_blank' class='hover:underline'>Le Chic Shack</a>（漢堡＋奶昔）或 <a href='https://maps.apple.com/?q=Buffet+de+l’Antiquaire,Quebec' target='_blank' class='hover:underline'>Buffet de l’Antiquaire</a>（魁北克家常菜）。"] },
-        { "title": "🏰 14:00 – 17:30｜上城區初探路線", "items": ["<strong>步行路線：</strong><a href='https://maps.apple.com/?q=Fairmont+Le+Château+Frontenac,Quebec' target='_blank' class='hover:underline'>芳堤娜城堡</a> → <a href='https://maps.apple.com/?q=Dufferin+Terrace,Quebec' target='_blank' class='hover:underline'>杜費林露台</a> → <a href='https://maps.apple.com/?q=Porte+Saint-Louis,Quebec' target='_blank' class='hover:underline'>聖路易門/古城牆</a> → <a href='https://maps.apple.com/?q=Hôtel+du+Parlement,Quebec' target='_blank' class='hover:underline'>魁北克省議會</a>。"] },
+        { "title": "� 14:00 – 17:30｜上城區初探路線", "items": ["<strong>步行路線：</strong><a href='https://maps.apple.com/?q=Fairmont+Le+Château+Frontenac,Quebec' target='_blank' class='hover:underline'>芳堤娜城堡</a> → <a href='https://maps.apple.com/?q=Dufferin+Terrace,Quebec' target='_blank' class='hover:underline'>杜費林露台</a> → <a href='https://maps.apple.com/?q=Porte+Saint-Louis,Quebec' target='_blank' class='hover:underline'>聖路易門/古城牆</a> → <a href='https://maps.apple.com/?q=Hôtel+du+Parlement,Quebec' target='_blank' class='hover:underline'>魁北克省議會</a>。"] },
         { "title": "🌃 18:00 – 20:30｜晚餐＋夜景散步", "items": ["<strong>餐廳建議：</strong><a href='https://maps.apple.com/?q=Aux+Anciens+Canadiens,Quebec' target='_blank' class='hover:underline'>Aux Anciens Canadiens</a> (17世紀老宅法餐)。", "飯後可再回到 Dufferin Terrace 拍攝夜景，芳堤娜城堡夜間打燈效果極佳。"] }
       ],
       "reminder": { "title": "🛏️ 睡前建議", "items": ["若隔天為重度步行日，建議今晚簡單伸展、早點休息。", "可於便利商店購買簡易點心或隔日早餐儲備。", "如有興趣參加翌日付費導覽 (如鬼怪夜遊、歷史導覽)，可今晚先預約。"] }
@@ -257,7 +257,7 @@
       "activities": [
         { "title": "☕ 08:30 – 10:30｜早餐與最後散步", "items": ["<strong>推薦早餐地點：</strong><a href='https://maps.apple.com/?q=Le+Cochon+Dingue,Quebec' target='_blank' class='hover:underline'>Le Cochon Dingue</a> 或 <a href='https://maps.apple.com/?q=La+Maison+Smith,Quebec' target='_blank' class='hover:underline'>La Maison Smith</a>。", "可選擇短距離散步（如 Place Royale 再訪、沿芳堤娜城堡拍照收尾）。"] },
         { "title": "✈️ 11:00 – 14:30｜退房 → 前往機場 → 搭乘中午航班", "items": ["建議搭乘航班如 Air Canada AC7959（13:00 YQB → 14:30 YYZ）或類似班次。", "從舊城至機場約 20–30 分鐘計程車程。"] },
-        { "title": "� 15:30 – 17:30｜轉乘至尼加拉瀑布", "items": ["<strong>包車：</strong>約 1.5 小時直達飯店。", "<strong>大眾運輸：</strong>YYZ 機場搭 UP Express 至 Union Station，轉 GO Transit 火車/巴士至 Niagara Falls (總程約 2.5–3 小時)。"] },
+        { "title": "🚌 15:30 – 17:30｜轉乘至尼加拉瀑布", "items": ["<strong>包車：</strong>約 1.5 小時直達飯店。", "<strong>大眾運輸：</strong>YYZ 機場搭 UP Express 至 Union Station，轉 GO Transit 火車/巴士至 Niagara Falls (總程約 2.5–3 小時)。"] },
         { "title": "🌇 18:30 – 20:30｜瀑布前散步 + 景觀晚餐", "items": ["入住瀑布景觀飯店後，可前往 <a href='https://maps.apple.com/?q=Table+Rock+Welcome+Centre' target='_blank'>Table Rock Centre</a>，觀察黃昏瀑布光影。", "<strong>晚餐建議：</strong><a href='https://maps.apple.com/?q=Skylon+Tower,Niagara+Falls' target='_blank' class='hover:underline'>Skylon Tower 旋轉餐廳</a> 或 <a href='https://maps.apple.com/?q=The+Keg+Steakhouse,Niagara+Falls' target='_blank' class='hover:underline'>The Keg Steakhouse</a>（靠窗位）。"] }
       ]
     },
@@ -390,8 +390,16 @@
       "isTravelDay": true,
       "tags": ["#返家之日", "#跨時區航班", "#滿載而歸"],
       "activities": [
-        { "title": "Day 13 (週一): 飛行途中", "items": ["<strong>航班 JL-009：</strong>01:30 (美國中部時間) 從芝加哥 ORD 機場起飛。", "飛行時間約 11 小時 50 分鐘。"] },
-        { "title": "Day 14 (週二): 轉機並抵達台北", "items": ["<strong>04:20 (日本時間)：</strong>抵達東京羽田機場 (HND)。", "<strong>轉機時間：</strong>約 4 小時 35 分鐘。", "<strong>航班 JL-0097：</strong>08:55 (日本時間) 從羽田機場轉機。", "<strong>11:35 (台北時間)：</strong>抵達台北松山機場 (TSA)，圓滿結束旅程！"] }
+        { "title": "航班資訊", "items": [
+            "<strong>航班 JL009：</strong>芝加哥(ORD) 01:30 → 東京羽田(HND) 04:20 (+1)",
+            "<strong>航班 JL097：</strong>東京羽田(HND) 08:55 → 台北松山(TSA) 11:35"
+          ] 
+        },
+        { "title": "行程備註", "items": [
+            "返程為跨夜航班，將於隔日 (7/15 週二) 抵達東京轉機。",
+            "抵達台北後，旅程圓滿結束！"
+          ]
+        }
       ]
     }
   ]
