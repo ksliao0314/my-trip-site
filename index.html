@@ -293,12 +293,12 @@
         }
 
         /* MODIFICATION: Styles for fixed height and swipe animation for status dashboard */
+        /* Apply max-height and overflow-y to #status-card-content for mobile only */
         @media (max-width: 768px) {
             #status-card-content {
-                max-height: 40vh; /* Adjust as needed to fit mobile screen */
+                max-height: 50vh; /* Adjusted for better visibility on mobile */
                 overflow-y: auto;
                 -webkit-overflow-scrolling: touch; /* Smooth scrolling for iOS */
-                transition: transform 0.3s ease-out, opacity 0.3s ease-out; /* Smooth transition for animation */
             }
         }
         
@@ -389,7 +389,7 @@
         <div id="mobile-menu-panel" class="md:hidden hidden bg-white shadow-lg">
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                  <a href="#status-dashboard-section" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">📍 行程要覽</a>
-                 <a href="#tip-calculator-section" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">🧮 小費計算機</a>
+                 <a href="#tip-calculator-section" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">� 小費計算機</a>
                  <a href="#links-dashboard" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">🔗 常用連結</a>
                  <button id="mobile-print-btn" class="w-full text-left mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">📄 列印行程</button>
             </div>
@@ -416,7 +416,7 @@
                                 <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd" /></svg>
                             行程要覽
                         </h2>
-                        <span id="status-travel-day-indicator" class="text-xs font-semibold text-amber-800 bg-amber-100 px-2 py-0.5 rounded-full whitespace-now nowrap" style="display: none;"></span>
+                        <span id="status-travel-day-indicator" class="text-xs font-semibold text-amber-800 bg-amber-100 px-2 py-0.5 rounded-full whitespace-nowrap" style="display: none;"></span>
                     </div>
                     <div class="flex items-center space-x-2 ml-auto">
                         <button id="prev-day-btn" class="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors">
@@ -963,7 +963,7 @@
             const statusCityBtn = document.getElementById('status-city-btn');
             const cityDropdown = document.getElementById('city-dropdown');
             const statusCityArrow = document.getElementById('status-city-arrow');
-            const paginationDotsContainer = document.getElementById('status-pagination-dots'); // MODIFICATION: Get dots container
+            const paginationDotsContainer = document.getElementById('status-pagination-dots');
 
             if (statusCityBtn && cityDropdown && statusCityArrow) {
                 statusCityBtn.addEventListener('click', (event) => {
@@ -1272,7 +1272,6 @@
                 currentDateObj.setUTCDate(currentDateObj.getUTCDate() - 1);
                 const newDate = currentDateObj.toISOString().split('T')[0];
                 if (newDate >= tripInfo.tripStartDate) {
-                    const oldDate = currentDisplayDate;
                     currentDisplayDate = newDate;
                     // MODIFICATION: Pass direction for animation
                     updateStatusDashboard(currentDisplayDate, data, window.allWeatherData, -1); 
@@ -1285,7 +1284,6 @@
                 currentDateObj.setUTCDate(currentDateObj.getUTCDate() + 1);
                 const newDate = currentDateObj.toISOString().split('T')[0];
                  if (newDate < tripInfo.tripEndDate) { // Use < tripEndDate to prevent going past the last day
-                    const oldDate = currentDisplayDate;
                     currentDisplayDate = newDate;
                     // MODIFICATION: Pass direction for animation
                     updateStatusDashboard(currentDisplayDate, data, window.allWeatherData, 1);
@@ -1316,6 +1314,31 @@
                     document.getElementById('prev-day-btn').click();
                 }
             }
+
+            // MODIFICATION: Add click listener for pagination dots using event delegation
+            if (paginationDotsContainer) {
+                paginationDotsContainer.addEventListener('click', (event) => {
+                    const clickedDot = event.target.closest('.pagination-dot');
+                    if (clickedDot) {
+                        const targetDay = parseInt(clickedDot.dataset.day);
+                        const targetDate = data.itinerary[targetDay - 1].date; // Days are 1-indexed
+                        
+                        // Determine direction for animation
+                        const currentDayData = data.itinerary.find(d => d.date === currentDisplayDate);
+                        const currentDay = currentDayData ? currentDayData.day : 0;
+                        let direction = 0;
+                        if (targetDay > currentDay) {
+                            direction = 1; // Moving to a later day
+                        } else if (targetDay < currentDay) {
+                            direction = -1; // Moving to an earlier day
+                        }
+
+                        currentDisplayDate = targetDate;
+                        updateStatusDashboard(currentDisplayDate, data, window.allWeatherData, direction);
+                    }
+                });
+            }
+
 
             document.getElementById('view-details-btn').addEventListener('click', () => {
                 const dayData = data.itinerary.find(d => d.date === currentDisplayDate);
