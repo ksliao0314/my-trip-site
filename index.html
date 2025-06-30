@@ -9,9 +9,9 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="F&S飛翔旅行">
-    <meta name="theme-color" content="#4f46e5">
+    <meta name="theme-color" content="#1D3557">
     <link rel="manifest" href="manifest.json">
-    <link rel="apple-touch-icon" href="https://placehold.co/180x180/4f46e5/ffffff?text=F%26S">
+    <link rel="apple-touch-icon" href="https://placehold.co/180x180/1D3557/ffffff?text=F%26S">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,29 +19,34 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --brand-color: #4f46e5;
-            --brand-color-light: #eef2ff;
+            --c-primary: #1D3557;      /* 主色: 深靛藍 */
+            --c-secondary: #457B9D;    /* 輔色: 天空藍 */
+            --c-accent: #A8DADC;       /* 點綴色: 淡綠藍 */
+            --c-bg: #F1FAEE;           /* 背景色 */
+            --c-text: #1D3557;         /* 字體色 */
+            --c-text-light: #457B9D;   /* 輔助字體色 */
+            --c-bg-card: #FFFFFF;      /* 卡片背景 */
+            --c-bg-accent-light: #e7f5f5; /* 點綴色淺版 */
+            --c-border: #dde8f0;       /* 邊框色 */
         }
         html { scroll-behavior: smooth; }
         body { 
             font-family: 'Noto Sans TC', sans-serif; 
-            background-color: #f8f9fa;
-            /* Ensure proper padding for iPhone safe areas (notches, home indicator) */
-            padding-top: env(safe-area-inset-top);
-            padding-bottom: env(safe-area-inset-bottom);
-            padding-left: env(safe-area-inset-left);
-            padding-right: env(safe-area-inset-right);
+            background-color: var(--c-bg);
+            color: var(--c-text);
         }
         html.modal-open,
         body.modal-open {
-            overflow: hidden; /* Prevent scrolling when modal/menu is open */
+            overflow: hidden;
         }
-        h1, h2, h3 { font-family: 'Noto Sans TC', sans-serif; font-weight: 900; }
+        h1, h2, h3 { font-family: 'Noto Sans TC', sans-serif; font-weight: 900; color: var(--c-primary); }
         
         .trip-card {
             opacity: 0;
             transform: translateY(30px);
             transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            background-color: var(--c-bg-card);
+            border: 1px solid var(--c-border);
         }
         .trip-card.is-visible {
             opacity: 1;
@@ -49,7 +54,7 @@
         }
         .trip-card:hover {
             transform: translateY(-5px) !important;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.08), 0 6px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 20px rgba(29, 53, 87, 0.1), 0 6px 6px rgba(29, 53, 87, 0.12);
         }
         
         .activity-block {
@@ -65,19 +70,23 @@
 
         .sticky-nav {
             position: sticky;
-            top: env(safe-area-inset-top); /* Stick below the notch area on iPhones */
+            top: env(safe-area-inset-top);
             z-index: 50;
             transition: box-shadow 0.3s;
+            background-color: rgba(241, 250, 238, 0.9);
         }
         .sticky-nav.scrolled {
-             box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+             box-shadow: 0 4px 6px -1px rgba(29, 53, 87, 0.08), 0 2px 4px -2px rgba(29, 53, 87, 0.08);
         }
 
-        .tag { display: inline-block; background-color: var(--brand-color-light); color: #4338ca; padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.8rem; font-weight: 500; margin-right: 0.5rem; margin-bottom: 0.5rem; }
+        .tag { display: inline-block; background-color: var(--c-accent); color: var(--c-primary); padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.8rem; font-weight: 500; margin-right: 0.5rem; margin-bottom: 0.5rem; }
         
-        .activity-block a, .info-block a, .modal-container a, #status-info-list a {
-            font-weight: 600; /* semibold */
-            color: #4338ca; /* indigo-700 */
+        a, .activity-block a, .info-block a, .modal-container a, #status-info-list a {
+            font-weight: 600;
+            color: var(--c-secondary);
+        }
+        a:hover {
+            text-decoration: underline;
         }
         
         details > summary { 
@@ -91,18 +100,18 @@
         details[open] > summary .summary-arrow { transform: rotate(90deg); }
 
         summary.summary-travel-day {
-            background-color: #fffbeb;
+            background-color: var(--c-bg-accent-light);
             border-radius: 1rem;
-            border: 1px solid #fef3c7;
+            border: 1px solid var(--c-accent);
         }
         summary.summary-travel-day h3 {
-            color: #92400e;
+            color: var(--c-primary);
         }
         
         summary.summary-today {
-            background-color: #f0fdf4;
+            background-color: var(--c-bg-accent-light);
             border-radius: 1rem;
-            border: 2px solid #4ade80;
+            border: 2px solid var(--c-secondary);
             position: relative;
         }
         summary.summary-today h3::before {
@@ -112,7 +121,7 @@
 
         .weather-display {
             font-size: 0.8rem;
-            color: #6b7280;
+            color: var(--c-text-light);
         }
         
         .nav-link {
@@ -120,286 +129,125 @@
             border-bottom: 2px solid transparent;
             padding-top: 0.5rem;
             padding-bottom: 0.5rem;
+            color: var(--c-text-light);
         }
         .nav-link:hover, .nav-utils:hover {
-             color: var(--brand-color);
+             color: var(--c-secondary);
         }
         .nav-link.nav-link-active {
-            color: var(--brand-color);
+            color: var(--c-secondary);
             font-weight: 700;
         }
 
-        .day-past {
-            display: none;
-        }
-        .show-past .day-past {
-            display: block;
-        }
+        .day-past { display: none; }
+        .show-past .day-past { display: block; }
         
-        #status-city-arrow.rotate-180 {
-            transform: rotate(180deg);
-        }
+        #status-city-arrow.rotate-180 { transform: rotate(180deg); }
 
-        /* --- Foodie Modal Styles --- */
+        /* --- Modals & Overlays --- */
         .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.6);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            pointer-events: none;
+            position: fixed; inset: 0; background: rgba(0, 0, 0, 0.6); display: flex; align-items: center; justify-content: center; z-index: 1000; opacity: 0; transition: opacity 0.3s ease; pointer-events: none;
         }
-        .modal-overlay.active {
-            opacity: 1;
-            pointer-events: auto;
-        }
+        .modal-overlay.active { opacity: 1; pointer-events: auto; }
         .modal-container {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 1rem;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            width: 90%;
-            max-width: 500px;
-            max-height: 80vh;
-            transform: scale(0.95);
-            transition: transform 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            overflow-y: auto;
+            background: var(--c-bg-card); padding: 1.5rem; border-radius: 1rem; box-shadow: 0 10px 25px rgba(0,0,0,0.1); width: 90%; max-width: 500px; max-height: 80vh; transform: scale(0.95); transition: transform 0.3s ease; display: flex; flex-direction: column; overflow-y: auto;
         }
-        .modal-overlay.active .modal-container {
-            transform: scale(1);
-        }
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-bottom: 1rem;
-            flex-shrink: 0;
-        }
-        .modal-tabs {
-            display: flex;
-            gap: 0.25rem;
-            background-color: #f3f4f6;
-            padding: 0.25rem;
-            border-radius: 9999px;
-            flex-shrink: 0;
-            margin-bottom: 1rem;
-        }
-        .modal-tab {
-            flex-grow: 1;
-            text-align: center;
-            padding: 0.375rem 0.5rem;
-            font-size: 0.8rem;
-            font-weight: 500;
-            color: #4b5563;
-            border-radius: 9999px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: 1px solid transparent;
-        }
-        .modal-tab.active {
-            background-color: white;
-            color: var(--brand-color);
-            box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-        }
-        .modal-content { }
-        .modal-footer {
-            margin-top: 1.5rem;
-            padding-top: 1rem;
-            border-top: 1px solid #e5e7eb;
-            flex-shrink: 0;
-        }
-        .modal-close-btn {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            font-weight: bold;
-            cursor: pointer;
-            color: #9ca3af;
-        }
-        .modal-close-btn:hover {
-            color: #111827;
-        }
+        .modal-overlay.active .modal-container { transform: scale(1); }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; padding-bottom: 1rem; flex-shrink: 0; }
+        .modal-tabs { display: flex; gap: 0.25rem; background-color: #f3f4f6; padding: 0.25rem; border-radius: 9999px; flex-shrink: 0; margin-bottom: 1rem; }
+        .modal-tab { flex-grow: 1; text-align: center; padding: 0.375rem 0.5rem; font-size: 0.8rem; font-weight: 500; color: #4b5563; border-radius: 9999px; cursor: pointer; transition: all 0.3s ease; border: 1px solid transparent; }
+        .modal-tab.active { background-color: white; color: var(--c-secondary); box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1); }
+        .modal-footer { margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--c-border); flex-shrink: 0; }
+        .modal-close-btn { background: none; border: none; font-size: 1.5rem; font-weight: bold; cursor: pointer; color: #9ca3af; }
+        .modal-close-btn:hover { color: var(--c-text); }
         
-        #update-notification {
-            display: none;
-            position: fixed;
-            bottom: 5rem;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 2000;
-        }
+        #update-notification { display: none; position: fixed; bottom: 5rem; left: 50%; transform: translateX(-50%); z-index: 2000; }
+        #update-notification > div { background-color: var(--c-primary); }
+        #reload-button { background-color: white; color: var(--c-secondary); }
+        #reload-button:hover { background-color: var(--c-bg-accent-light); }
         
+        /* Print Styles */
         @media print {
-            @page { 
-                size: A4 portrait; 
-                margin: 1cm;
-            }
-            body { 
-                -webkit-print-color-adjust: exact; 
-                print-color-adjust: exact; 
-            }
-            .no-print, .sticky-nav, #today-btn, #mobile-menu-btn, #time-dashboard, #foodie-modal, #status-dashboard-section, #tip-calculator-section, #links-dashboard { 
-                display: none !important; 
-            }
-
+            @page { size: A4 portrait; margin: 1cm; }
+            body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .no-print { display: none !important; }
             main.space-y-8 > :not([hidden]) ~ :not([hidden]),
-            #itinerary-container.space-y-8 > :not([hidden]) ~ :not([hidden]) {
-                margin-top: 0 !important;
-            }
-
-            .trip-card, .trip-card.is-visible { 
-                box-shadow: none !important; 
-                border: 1px solid #e5e7eb !important; 
-                opacity: 1 !important; 
-                transform: none !important; 
-            }
-
-            .activity-block {
-                opacity: 1 !important;
-                transform: none !important;
-            }
-
-            main { 
-                padding: 0 !important; 
-                margin: 0 !important; 
-            }
-
-            #itinerary-container > div {
-                page-break-inside: avoid; 
-                margin-bottom: 1rem;
-            }
-
-            #itinerary-container > div:last-child {
-                margin-bottom: 0;
-            }
-            
-            details summary .summary-arrow { 
-                display: none !important; 
-            }
-
-            .day-past {
-                display: block !important;
-            }
+            #itinerary-container.space-y-8 > :not([hidden]) ~ :not([hidden]) { margin-top: 0 !important; }
+            .trip-card, .trip-card.is-visible { box-shadow: none !important; border: 1px solid #e5e7eb !important; opacity: 1 !important; transform: none !important; }
+            .activity-block { opacity: 1 !important; transform: none !important; }
+            main { padding: 0 !important; margin: 0 !important; }
+            #itinerary-container > div { page-break-inside: avoid; margin-bottom: 1rem; }
+            #itinerary-container > div:last-child { margin-bottom: 0; }
+            details summary .summary-arrow { display: none !important; }
+            .day-past { display: block !important; }
         }
 
-        #status-card-content {
-            max-height: 400px; 
-            overflow-y: auto; 
-            -webkit-overflow-scrolling: touch; 
-        }
+        #status-card-content { max-height: 400px; overflow-y: auto; -webkit-overflow-scrolling: touch; }
         
-        /* Animation keyframes for sliding effect */
-        @keyframes slideOutLeft {
-            from { transform: translateX(0); opacity: 1; }
-            to { transform: translateX(-20px); opacity: 0; }
-        }
-        @keyframes slideInRight {
-            from { transform: translateX(20px); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-        @keyframes slideOutRight {
-            from { transform: translateX(0); opacity: 1; }
-            to { transform: translateX(20px); opacity: 0; }
-        }
-        @keyframes slideInLeft {
-            from { transform: translateX(-20px); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-
+        /* Slide Animations */
+        @keyframes slideOutLeft { from { transform: translateX(0); opacity: 1; } to { transform: translateX(-20px); opacity: 0; } }
+        @keyframes slideInRight { from { transform: translateX(20px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        @keyframes slideOutRight { from { transform: translateX(0); opacity: 1; } to { transform: translateX(20px); opacity: 0; } }
+        @keyframes slideInLeft { from { transform: translateX(-20px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
         #status-card-content.slide-out-left { animation: slideOutLeft 0.3s forwards; }
         #status-card-content.slide-in-right { animation: slideInRight 0.3s forwards; }
         #status-card-content.slide-out-right { animation: slideOutRight 0.3s forwards; }
         #status-card-content.slide-in-left { animation: slideInLeft 0.3s forwards; }
 
-        .pagination-dot {
-            width: 8px;
-            height: 8px;
-            background-color: #d1d5db; /* gray-300 */
-            border-radius: 50%;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
+        .pagination-dot { width: 8px; height: 8px; background-color: #d1d5db; border-radius: 50%; cursor: pointer; transition: background-color 0.3s ease; }
+        .pagination-dot.active { background-color: var(--c-secondary); }
+
+        /* Mobile Menu */
+        #mobile-menu-overlay { position: fixed; inset: 0; background-color: rgba(0, 0, 0, 0.5); z-index: 99; opacity: 0; pointer-events: none; transition: opacity 0.3s ease-in-out; }
+        #mobile-menu-overlay.is-open { opacity: 1; pointer-events: auto; }
+        #mobile-menu-panel { position: fixed; top: 0; right: 0; bottom: 0; width: 250px; max-width: 80vw; background-color: white; box-shadow: -4px 0 10px rgba(0, 0, 0, 0.1); z-index: 100; transform: translateX(100%); transition: transform 0.3s ease-in-out; padding-top: env(safe-area-inset-top); }
+        #mobile-menu-panel.is-open { transform: translateX(0); }
+        
+        /* Day Slider */
+        #day-slider { -webkit-appearance: none; appearance: none; width: 100%; height: 8px; background: var(--c-border); border-radius: 9999px; outline: none; opacity: 0.9; transition: opacity .2s; cursor: pointer; }
+        #day-slider:hover { opacity: 1; }
+        #day-slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 22px; height: 22px; background: var(--c-secondary); border-radius: 50%; cursor: pointer; border: 3px solid white; box-shadow: 0 1px 3px rgba(0,0,0,0.2); }
+        #day-slider::-moz-range-thumb { width: 22px; height: 22px; background: var(--c-secondary); border-radius: 50%; cursor: pointer; border: 3px solid white; box-shadow: 0 1px 3px rgba(0,0,0,0.2); }
+
+        /* --- New Color Scheme Overrides --- */
+        #status-dashboard-section .bg-white {
+            background-color: var(--c-bg-card) !important;
         }
-        .pagination-dot.active {
-            background-color: var(--brand-color);
+        .text-gray-800 { color: var(--c-text) !important; }
+        .text-gray-900 { color: var(--c-primary) !important; }
+        .text-gray-700 { color: var(--c-text-light) !important; }
+        .text-gray-600 { color: var(--c-text-light) !important; }
+        .text-gray-500 { color: #8bacc1 !important; }
+        
+        .border-gray-200, .border-gray-300 { border-color: var(--c-border) !important; }
+        .ring-gray-200 { --tw-ring-color: var(--c-border) !important; }
+
+        .bg-gray-100, .bg-indigo-50, .bg-green-50, .bg-amber-100, .bg-blue-50, .bg-gray-50, .bg-teal-100\/60, .bg-amber-100\/60 { 
+            background-color: var(--c-bg-accent-light) !important; 
+        }
+        .bg-gray-200 { background-color: var(--c-border) !important; }
+        
+        .hover\:bg-gray-200:hover { background-color: var(--c-accent) !important; }
+        .hover\:bg-gray-100:hover { background-color: var(--c-bg-accent-light) !important; }
+        .hover\:bg-gray-50:hover { background-color: var(--c-bg-accent-light) !important; }
+
+        .text-indigo-700, .text-blue-800 { color: var(--c-primary) !important; }
+        .text-indigo-600 { color: var(--c-secondary) !important; }
+        .bg-indigo-600, .bg-amber-500 { background-color: var(--c-secondary) !important; }
+        .hover\:bg-indigo-700:hover, .hover\:bg-amber-600:hover { background-color: var(--c-primary) !important; }
+        .focus\:ring-indigo-500:focus, .focus\:ring-amber-400:focus { --tw-ring-color: var(--c-secondary) !important; }
+
+        .text-amber-800 { color: var(--c-primary) !important; }
+        .text-green-700 { color: var(--c-secondary) !important; }
+
+        #show-past-toggle:checked + .peer-checked\\:bg-indigo-300 {
+             background-color: var(--c-accent) !important;
         }
 
-        /* --- Mobile Menu Styles Consolidated --- */
-        #mobile-menu-overlay {
-            position: fixed;
-            inset: 0;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 99;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s ease-in-out;
-        }
-        #mobile-menu-overlay.is-open {
-            opacity: 1;
-            pointer-events: auto;
-        }
-        #mobile-menu-panel {
-            position: fixed;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            width: 250px;
-            max-width: 80vw;
-            background-color: white;
-            box-shadow: -4px 0 10px rgba(0, 0, 0, 0.1);
-            z-index: 100;
-            transform: translateX(100%); /* Hidden off-screen */
-            transition: transform 0.3s ease-in-out;
-            padding-top: env(safe-area-inset-top);
-        }
-        #mobile-menu-panel.is-open {
-            transform: translateX(0); /* Slides into view */
-        }
-        
-        /* --- Custom Day Slider Styles --- */
-        #day-slider {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 100%;
-            height: 8px;
-            background: #e5e7eb; /* gray-200 */
-            border-radius: 9999px;
-            outline: none;
-            opacity: 0.9;
-            transition: opacity .2s;
-            cursor: pointer;
-        }
-        #day-slider:hover {
-            opacity: 1;
-        }
-        #day-slider::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 22px;
-            height: 22px;
-            background: var(--brand-color); /* #4f46e5 */
-            border-radius: 50%;
-            cursor: pointer;
-            border: 3px solid white;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
-        }
-        #day-slider::-moz-range-thumb {
-            width: 22px;
-            height: 22px;
-            background: var(--brand-color);
-            border-radius: 50%;
-            cursor: pointer;
-            border: 3px solid white;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
-        }
+        .info-block { border-left-color: var(--c-secondary) !important; }
+        .foodie-btn { background-color: var(--c-accent) !important; color: var(--c-primary) !important; }
+        .foodie-btn:hover { background-color: var(--c-secondary) !important; color: white !important; }
+
     </style>
 </head>
 <body class="text-gray-800 leading-relaxed">
