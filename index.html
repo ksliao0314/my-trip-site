@@ -1032,7 +1032,6 @@
             const statusCityArrow = document.getElementById('status-city-arrow');
             const paginationDotsContainer = document.getElementById('status-pagination-dots');
             const daySlider = document.getElementById('day-slider');
-            let isSliderActive = false; // Flag to track slider interaction
 
             if(daySlider) {
                 daySlider.max = tripInfo.totalDays;
@@ -1044,9 +1043,6 @@
                         updateStatusDashboard(currentDisplayDate, data, window.allWeatherData, 0); 
                     }
                 });
-                // Add touch event listeners to handle gesture conflicts
-                daySlider.addEventListener('touchstart', () => { isSliderActive = true; }, { passive: true });
-                daySlider.addEventListener('touchend', () => { isSliderActive = false; }, { passive: true });
             }
 
             if (statusCityBtn && cityDropdown && statusCityArrow) {
@@ -1395,19 +1391,30 @@
             const statusCard = document.getElementById('status-card-content');
             let touchStartX = 0;
             let touchEndX = 0;
+            let isSliderInteraction = false; // 用於追蹤是否正在與拉桿互動
             const swipeThreshold = 50; 
 
             statusCard.addEventListener('touchstart', (event) => {
+                // 檢查觸控是否起始於日期拉桿
+                if (event.target.id === 'day-slider') {
+                    isSliderInteraction = true;
+                    return; // 如果是拉桿，則不記錄滑動起始點
+                }
+                isSliderInteraction = false;
                 touchStartX = event.changedTouches[0].screenX;
             }, { passive: true });
 
             statusCard.addEventListener('touchend', (event) => {
+                // 如果這次的互動是針對拉桿，則重設旗標並直接返回
+                if (isSliderInteraction) {
+                    isSliderInteraction = false;
+                    return;
+                }
                 touchEndX = event.changedTouches[0].screenX;
                 handleSwipe();
             }, { passive: true });
 
             function handleSwipe() {
-                if (isSliderActive) return; // Ignore swipe if slider is being used
                 const swipeDistance = touchEndX - touchStartX;
                 if (Math.abs(swipeDistance) < swipeThreshold) return; 
 
