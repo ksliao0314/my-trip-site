@@ -661,7 +661,30 @@
                 const activitiesHtml = day.activities.map(activity => `<div class="activity-block"><h4 class="font-bold text-lg text-blue-800">${activity.title}</h4><ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">${activity.items.map(item => `<li>${item}</li>`).join('')}</ul></div>`).join('');
                 let reminderHtml = day.reminder ? `<div class="mt-4 p-4 bg-amber-100/60 rounded-lg border-l-4 border-amber-400"><h4 class="font-bold text-amber-800 flex items-center mb-2">${day.reminder.title}</h4><ul class="list-disc list-inside mt-2 text-amber-900/80 space-y-1">${day.reminder.items.map(item => `<li>${item}</li>`).join('')}</ul></div>` : '';
                 let infoBoxHtml = day.infoBox ? `<div class="mt-4 p-4 bg-teal-100/60 rounded-lg border-l-4 border-teal-400"><h4 class="font-bold text-teal-800 flex items-center mb-2">${day.infoBox.title}</h4><ul class="list-disc list-inside mt-2 text-teal-900/80 space-y-1">${day.infoBox.items.map(item => `<li>${item}</li>`).join('')}</ul></div>` : '';
-                htmlContent += `<div data-day="${day.day}" data-date="${day.date}" data-day-group="${day.dayGroup}" data-city-target="${day.cityTarget}" data-weather-city="${day.weatherCity}"><details class="trip-card bg-white rounded-2xl shadow-lg ring-1 ring-gray-200 overflow-hidden" ${day.day === 1 ? 'open' : ''}><summary class="${day.isTravelDay ? 'summary-travel-day' : ''} flex justify-between items-center"><div><p class="text-sm font-medium ${day.isTravelDay ? 'text-amber-700' : 'text-indigo-600'}">${day.subTitle}</p><h3 id="day${day.day}" class="text-xl sm:text-2xl font-bold mt-1 text-gray-900">${day.title}</h3></div><div class="weather-display flex-shrink-0 ml-4 text-right"></div><div class="summary-arrow ml-2 flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg></div></summary><div class="p-4 sm:p-6 border-t border-gray-200"><div class="my-3 flex flex-wrap justify-between items-start gap-2"><div>${tagsHtml}</div></div><div class="space-y-6">${activitiesHtml}${infoBoxHtml}${reminderHtml}</div></div></details></div>`;
+                
+                // --- FIXED: Day Card Header Layout ---
+                htmlContent += `<div data-day="${day.day}" data-date="${day.date}" data-day-group="${day.dayGroup}" data-city-target="${day.cityTarget}" data-weather-city="${day.weatherCity}">
+                    <details class="trip-card bg-white rounded-2xl shadow-lg ring-1 ring-gray-200 overflow-hidden" ${day.day === 1 ? 'open' : ''}>
+                        <summary class="${day.isTravelDay ? 'summary-travel-day' : ''} flex justify-between items-center">
+                            <div>
+                                <p class="text-sm font-medium ${day.isTravelDay ? 'text-amber-700' : 'text-indigo-600'}">${day.subTitle}</p>
+                                <h3 id="day${day.day}" class="text-xl sm:text-2xl font-bold mt-1 text-gray-900">${day.title}</h3>
+                            </div>
+                            <div class="flex items-center space-x-3 sm:space-x-4">
+                                <div class="weather-display flex-shrink-0 text-right"></div>
+                                <div class="summary-arrow flex-shrink-0">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                                </div>
+                            </div>
+                        </summary>
+                        <div class="p-4 sm:p-6 border-t border-gray-200">
+                            <div class="my-3 flex flex-wrap justify-between items-start gap-2">
+                                <div>${tagsHtml}</div>
+                            </div>
+                            <div class="space-y-6">${activitiesHtml}${infoBoxHtml}${reminderHtml}</div>
+                        </div>
+                    </details>
+                </div>`;
             });
             container.innerHTML = htmlContent;
         }
@@ -728,7 +751,7 @@
                 progressBarEl.style.width = '0%';
                 if(viewDetailsBtn) viewDetailsBtn.style.display = 'none';
                 
-                weatherIconEl.textContent = '👋';
+                weatherIconEl.textContent = '�';
                 weatherTempEl.textContent = '';
                 weatherReminderEl.textContent = '旅程已結束或尚未開始。';
 
@@ -739,10 +762,12 @@
 
             if(viewDetailsBtn) viewDetailsBtn.style.display = 'inline-block';
             
-            // 1. 更新日期, 城市, 進度條
-            const dayOfWeek = new Date(date + 'T00:00:00').toLocaleDateString('zh-TW', { weekday: 'long', timeZone: 'UTC' });
-            const datePart = targetDayData.subTitle.split('｜')[1] || `${new Date(date + 'T00:00:00').getUTCMonth() + 1}月${new Date(date + 'T00:00:00').getUTCDate()}日`;
+            // 1. 更新日期, 城市, 進度條 (FIXED)
+            const dateObj = new Date(date + 'T00:00:00');
+            const dayOfWeek = dateObj.toLocaleDateString('zh-TW', { weekday: 'long', timeZone: 'UTC' });
+            const datePart = `${dateObj.getUTCMonth() + 1}月${dateObj.getUTCDate()}日`;
             statusDateEl.textContent = `${datePart} (${dayOfWeek.replace('星期','週')})`;
+            
             const city = targetDayData.weatherCity;
             const cityMap = { montreal: '蒙特婁', quebec: '魁北克市', niagara: '尼加拉瀑布', chicago: '芝加哥', '': '飛行途中' };
             statusCityEl.textContent = cityMap[city] || '移動中';
@@ -772,14 +797,21 @@
                  weatherItemEl.style.display = 'none';
             }
 
-            // 3. 更新住宿資訊
+            // 3. 更新住宿資訊 (FIXED)
             const checkingIn = hotels.find(h => h.checkIn === date);
             const checkingOut = hotels.find(h => h.checkOut === date);
             const stayingAt = hotels.find(h => date >= h.checkIn && date < h.checkOut);
             let hotelHtml = '';
-            if (checkingIn) hotelHtml += `<p><span class="font-semibold text-green-600">[入住]</span> <a href="${checkingIn.mapLink}" target="_blank" class="hover:underline">${checkingIn.name}</a></p>`;
-            if (checkingOut) hotelHtml += `<p class="mt-1"><span class="font-semibold text-red-600">[退房]</span> <a href="${checkingOut.mapLink}" target="_blank" class="hover:underline">${checkingOut.name}</a></p>`;
-            if (!checkingIn && stayingAt) hotelHtml = `<p>住宿於 <a href="${stayingAt.mapLink}" target="_blank" class="hover:underline">${stayingAt.name}</a></p>`;
+            if (checkingIn) {
+                hotelHtml += `<div><span class="font-semibold text-green-600">[入住]</span> <a href="${checkingIn.mapLink}" target="_blank" class="hover:underline">${checkingIn.name}</a></div><div class="text-sm text-gray-600 pl-1">最早入住：${checkingIn.checkInTime}</div>`;
+            }
+            if (checkingOut) {
+                const marginTop = checkingIn ? 'mt-2' : '';
+                hotelHtml += `<div class="${marginTop}"><span class="font-semibold text-red-600">[退房]</span> <a href="${checkingOut.mapLink}" target="_blank" class="hover:underline">${checkingOut.name}</a></div><div class="text-sm text-gray-600 pl-1">最晚退房：${checkingOut.checkOutTime}</div>`;
+            }
+            if (!checkingIn && stayingAt) {
+                 hotelHtml = `<p>住宿於 <a href="${stayingAt.mapLink}" target="_blank" class="hover:underline">${stayingAt.name}</a></p>`;
+            }
             
             if (hotelHtml) {
                 accommodationContentEl.innerHTML = hotelHtml;
