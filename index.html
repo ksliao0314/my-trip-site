@@ -72,7 +72,7 @@
 
         .tag { display: inline-block; background-color: var(--brand-color-light); color: #4338ca; padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.8rem; font-weight: 500; margin-right: 0.5rem; margin-bottom: 0.5rem; }
         
-        .activity-block a, .info-block a {
+        .activity-block a, .info-block a, .modal-container a {
             font-weight: 600; /* semibold */
             color: #4338ca; /* indigo-700 */
         }
@@ -228,6 +228,93 @@
         .show-past .day-past {
             display: block;
         }
+
+        /* --- Foodie Modal Styles --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .modal-container {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            width: 90%;
+            max-width: 500px;
+            max-height: 80vh;
+            overflow-y: auto;
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        .modal-overlay.active .modal-container {
+            transform: scale(1);
+        }
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 1rem;
+            margin-bottom: 1rem;
+            flex-shrink: 0;
+        }
+        .modal-tabs {
+            display: flex;
+            gap: 0.25rem;
+            background-color: #f3f4f6;
+            padding: 0.25rem;
+            border-radius: 9999px;
+            flex-shrink: 0;
+            margin-bottom: 1rem;
+        }
+        .modal-tab {
+            flex-grow: 1;
+            text-align: center;
+            padding: 0.375rem 0.5rem;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #4b5563;
+            border-radius: 9999px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+        .modal-tab.active {
+            background-color: white;
+            color: var(--brand-color);
+            box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+        }
+        .modal-content {
+            overflow-y: auto;
+            flex-grow: 1;
+        }
+        .modal-close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            color: #9ca3af;
+        }
+        .modal-close-btn:hover {
+            color: #111827;
+        }
         
         @media print {
             @page { 
@@ -238,7 +325,7 @@
                 -webkit-print-color-adjust: exact; 
                 print-color-adjust: exact; 
             }
-            .no-print, .sticky-nav, #today-btn, #mobile-menu-btn, #time-dashboard, #hotel-status-section { 
+            .no-print, .sticky-nav, #today-btn, #mobile-menu-btn, #time-dashboard, #foodie-modal { 
                 display: none !important; 
             }
             .trip-card, .trip-card.is-visible { 
@@ -1129,6 +1216,22 @@
             📅 今天行程
         </button>
     </div>
+
+    <!-- Foodie Modal -->
+    <div id="foodie-modal" class="modal-overlay no-print">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h2 id="modal-title" class="text-2xl font-bold text-gray-900">美食指南</h2>
+                <button id="modal-close-btn" class="modal-close-btn">&times;</button>
+            </div>
+            <div id="modal-tabs" class="modal-tabs">
+                <!-- Tabs will be injected by JS -->
+            </div>
+            <div id="modal-content" class="space-y-4 mt-4">
+                <!-- Content will be injected by JS -->
+            </div>
+        </div>
+    </div>
     
     <script>
         // --- Global Functions (callable from HTML onclick) ---
@@ -1212,6 +1315,110 @@
                 { date: '2025-07-14', type: '航班', details: '日航 JL009 (芝加哥 → 東京)' },
                 { date: '2025-07-15', type: '航班', details: '日航 JL097 (東京 → 台北)' },
             ];
+            const foodieData = {
+                montreal: {
+                    name: '蒙特婁',
+                    categories: [
+                        { name: '地道加拿大料理', items: [
+                            { name: '蒙特婁貝果 (Montreal-style Bagel)', desc: '薄、脆、帶微甜，有別於紐約貝果。', places: [{ name: 'St-Viateur Bagel', link: 'https://maps.apple.com/?q=St-Viateur+Bagel' }, { name: 'Fairmount Bagel', link: 'https://maps.apple.com/?q=Fairmount+Bagel' }] },
+                            { name: '煙燻肉三明治 (Smoked Meat Sandwich)', desc: '牛肉醃製後煙燻，搭配芥末與裸麥麵包。', places: [{ name: 'Schwartz’s Deli', link: 'https://maps.apple.com/?q=Schwartz’s+Deli' }] },
+                            { name: '布丁地獄 (Pouding Chômeur)', desc: '楓糖風味的蛋糕甜點，源自魁北克經濟大蕭條時代。', places: [{ name: 'La Binerie Mont-Royal', link: 'https://maps.apple.com/?q=La+Binerie+Mont-Royal' }] },
+                            { name: 'Putin (起司凝乳肉汁薯條)', desc: '經典魁北克小吃。', places: [{ name: 'La Banquise', link: 'https://maps.apple.com/?q=La+Banquise' }] },
+                        ]},
+                        { name: '法式/歐陸料理', items: [
+                            { name: 'Jardin Nelson', desc: '戶外花園餐廳，輕法菜系＋現場音樂。', places: [{ name: 'Jardin Nelson', link: 'https://maps.apple.com/?q=Jardin+Nelson' }] },
+                            { name: 'L’Express', desc: '經典法式小酒館，深夜供餐。', places: [{ name: 'L’Express', link: 'https://maps.apple.com/?q=L’Express+Montreal' }] },
+                            { name: 'Modavie Bistro', desc: '爵士音樂現場＋羊排、鴨胸。', places: [{ name: 'Modavie', link: 'https://maps.apple.com/?q=Modavie' }] },
+                        ]},
+                        { name: '甜點 / 法式甜品', items: [
+                            { name: 'Maison Christian Faure', desc: '法式甜點大師開設的甜塔與可麗露名店。', places: [{ name: 'Maison Christian Faure', link: 'https://maps.apple.com/?q=Maison+Christian+Faure' }] },
+                            { name: 'Pâtisserie Au Kouign Amann', desc: '傳統法式奶油糕點 Kouign-Amann 專賣。', places: [{ name: 'Pâtisserie Au Kouign Amann', link: 'https://maps.apple.com/?q=Pâtisserie+Au+Kouign+Amann' }] },
+                            { name: 'Chocolats Geneviève Grandbois', desc: '蒙特婁本地巧克力精品品牌。', places: [{ name: 'Chocolats Geneviève Grandbois', link: 'https://maps.apple.com/?q=Chocolats+Geneviève+Grandbois' }] },
+                        ]},
+                        { name: '早午餐/咖啡廳', items: [
+                            { name: 'Olive et Gourmando', desc: '人氣三明治與義式濃縮咖啡。', places: [{ name: 'Olive et Gourmando', link: 'https://maps.apple.com/?q=Olive+et+Gourmando' }] },
+                            { name: 'Café Parvis', desc: '文青風咖啡廳，植物環繞設計。', places: [{ name: 'Café Parvis', link: 'https://maps.apple.com/?q=Café+Parvis' }] },
+                        ]}
+                    ]
+                },
+                quebec: {
+                    name: '魁北克市',
+                    categories: [
+                         { name: '傳統魁北克料理 / 野味', items: [
+                             { name: 'Chez Boulay', desc: '融合法餐＋本地野食材（野莓、野豬、楓糖）。', places: [{ name: 'Chez Boulay – Bistro Boréal', link: 'https://maps.apple.com/?q=Chez+Boulay+–+Bistro+Boréal' }] },
+                             { name: 'Aux Anciens Canadiens', desc: '歷史建築裡的傳統家常料理。', places: [{ name: 'Aux Anciens Canadiens', link: 'https://maps.apple.com/?q=Aux+Anciens+Canadiens' }] },
+                         ]},
+                         { name: '家常/高人氣餐館', items: [
+                             { name: 'Le Chic Shack', desc: '創意漢堡與手工薯條。', places: [{ name: 'Le Chic Shack', link: 'https://maps.apple.com/?q=Le+Chic+Shack' }] },
+                             { name: 'Buffet de l’Antiquaire', desc: '本地風味早午餐經典。', places: [{ name: 'Buffet de l’Antiquaire', link: 'https://maps.apple.com/?q=Buffet+de+l’Antiquaire' }] },
+                         ]},
+                         { name: '主題風味料理', items: [
+                             { name: 'Le Lapin Sauté', desc: '兔肉主題料理，氣氛浪漫。', places: [{ name: 'Le Lapin Sauté', link: 'https://maps.apple.com/?q=Le+Lapin+Sauté' }] },
+                             { name: 'Cochon Dingue', desc: '平價創意早午餐（多分店）。', places: [{ name: 'Cochon Dingue', link: 'https://maps.apple.com/?q=Cochon+Dingue' }] },
+                         ]},
+                         { name: '夜間餐酒館', items: [
+                             { name: 'Bistro Sous le Fort', desc: '靠近纜車口的小景觀餐館。', places: [{ name: 'Bistro Sous le Fort', link: 'https://maps.apple.com/?q=Bistro+Sous+le+Fort' }] },
+                             { name: 'La Buche', desc: '木屋風格 + 音樂與熱鬧氣氛。', places: [{ name: 'La Buche', link: 'https://maps.apple.com/?q=La+Buche' }] },
+                         ]},
+                         { name: '甜點 / 下午茶', items: [
+                             { name: 'Erico – chocolaterie créative', desc: '巧克力與冰淇淋甜品專門店。', places: [{ name: 'Erico – chocolaterie créative', link: 'https://maps.apple.com/?q=Erico+–+chocolaterie+créative' }] },
+                             { name: 'BILLY', desc: '下城區文青甜點店，提供手作塔與蛋糕。', places: [{ name: 'BILLY', link: 'https://maps.apple.com/?q=BILLY+Kwentinn' }] },
+                             { name: 'Café Saint-Henri', desc: '結合精品咖啡與甜點的時尚空間。', places: [{ name: 'Café Saint-Henri', link: 'https://maps.apple.com/?q=Café+Saint-Henri' }] },
+                         ]}
+                    ]
+                },
+                niagara: {
+                    name: '尼加拉瀑布',
+                    categories: [
+                        { name: '景觀牛排 / 西式主餐', items: [
+                            { name: 'Skylon Tower 旋轉餐廳', desc: '旋轉觀景 + 主餐套餐（需預約）。', places: [{ name: 'Skylon Tower', link: 'https://maps.apple.com/?q=Skylon+Tower' }] },
+                            { name: 'The Keg Steakhouse (Fallsview)', desc: '有瀑布景觀的牛排餐廳。', places: [{ name: 'The Keg Steakhouse + Bar - Fallsview', link: 'https://maps.apple.com/?q=The+Keg+Steakhouse+Fallsview' }] },
+                        ]},
+                        { name: '平價美食 / 家庭餐', items: [
+                            { name: 'Queen Victoria Place Restaurant', desc: '經典菜色＋瀑布景。', places: [{ name: 'Queen Victoria Place Restaurant', link: 'https://maps.apple.com/?q=Queen+Victoria+Place+Restaurant' }] },
+                            { name: 'The Works Gourmet Burger', desc: '創意漢堡。', places: [{ name: 'The Works Gourmet Burger Bistro', link: 'https://maps.apple.com/?q=The+Works+Gourmet+Burger+Bistro+Niagara' }] },
+                        ]},
+                        { name: '甜點 / 冰品', items: [
+                            { name: 'BeaverTails', desc: '炸麵餅甜點（楓糖、巧克力醬可選）。', places: [{ name: 'BeaverTails', link: 'https://maps.apple.com/?q=BeaverTails+Niagara+Falls' }] },
+                            { name: 'Sweet Jesus', desc: '超浮誇造型霜淇淋（IG 熱門）。', places: [{ name: 'Sweet Jesus', link: 'https://maps.apple.com/?q=Sweet+Jesus+Niagara+Falls' }] },
+                        ]}
+                    ]
+                },
+                chicago: {
+                    name: '芝加哥',
+                    categories: [
+                        { name: '芝加哥深盤披薩', items: [
+                             { name: 'Giordano’s', desc: '起司飽滿、番茄醬香濃。', places: [{ name: 'Giordano’s', link: 'https://maps.apple.com/?q=Giordano’s' }] },
+                             { name: 'Lou Malnati’s', desc: '皮酥餡厚、比較濃郁口味。', places: [{ name: 'Lou Malnati’s Pizzeria', link: 'https://maps.apple.com/?q=Lou+Malnati’s+Pizzeria' }] },
+                             { name: 'Pequod’s Pizza', desc: '焦香邊起司，芝加哥當地人最愛。', places: [{ name: 'Pequod’s Pizza', link: 'https://maps.apple.com/?q=Pequod’s+Pizza' }] },
+                        ]},
+                        { name: '牛排與美式餐廳', items: [
+                            { name: 'The Dearborn', desc: '氣氛佳，美式經典＋現代料理。', places: [{ name: 'The Dearborn', link: 'https://maps.apple.com/?q=The+Dearborn' }] },
+                            { name: 'RPM Steak', desc: '高級牛排館，裝潢現代。', places: [{ name: 'RPM Steak', link: 'https://maps.apple.com/?q=RPM+Steak' }] },
+                            { name: 'The Gage', desc: '帶酒吧氛圍的高檔美式菜系。', places: [{ name: 'The Gage', link: 'https://maps.apple.com/?q=The+Gage' }] },
+                        ]},
+                         { name: '義大利料理推薦', items: [
+                             { name: 'Eataly Chicago', desc: '複合式義式超市＋多間餐廳（適合白天/購物順路）。', places: [{ name: 'Eataly Chicago', link: 'https://maps.apple.com/?q=Eataly+Chicago' }] },
+                             { name: 'Quartino Ristorante', desc: '義式小盤分享餐，氣氛活潑，開胃菜出色。', places: [{ name: 'Quartino Ristorante', link: 'https://maps.apple.com/?q=Quartino+Ristorante' }] },
+                             { name: 'RPM Italian', desc: '高檔義式料理，適合晚餐約會或壓軸一餐。', places: [{ name: 'RPM Italian', link: 'https://maps.apple.com/?q=RPM+Italian' }] },
+                             { name: 'Volare Ristorante Italiano', desc: '傳統義式餐廳，正統風味口碑佳。', places: [{ name: 'Volare Ristorante Italiano', link: 'https://maps.apple.com/?q=Volare+Ristorante+Italiano' }] },
+                         ]},
+                         { name: '早午餐 / 咖啡甜品', items: [
+                             { name: 'Wildberry Pancakes', desc: '芝加哥人最愛鬆餅店之一。', places: [{ name: 'Wildberry Pancakes and Cafe', link: 'https://maps.apple.com/?q=Wildberry+Pancakes+and+Cafe' }] },
+                             { name: 'Beatrix', desc: '輕盈健康早午餐風格。', places: [{ name: 'Beatrix', link: 'https://maps.apple.com/?q=Beatrix' }] },
+                             { name: 'Cindy’s Rooftop', desc: '位於藝術學院上方，景觀與早午餐並重。', places: [{ name: 'Cindy’s Rooftop', link: 'https://maps.apple.com/?q=Cindy’s+Rooftop' }] },
+                         ]},
+                          { name: 'Tapas / 輕食類', items: [
+                             { name: 'The Purple Pig', desc: '西班牙＋義式小盤料理，精緻但不沉重。', places: [{ name: 'The Purple Pig', link: 'https://maps.apple.com/?q=The+Purple+Pig' }] },
+                             { name: 'Ema', desc: '地中海小盤料理，風味清新。', places: [{ name: 'Ema', link: 'https://maps.apple.com/?q=Ema' }] },
+                          ]},
+                          { name: '景觀餐廳與湖濱夜景', items: [
+                              { name: 'Riva Crabhouse @ Navy Pier', desc: '海鮮與湖景完美結合。', places: [{ name: 'Riva Crabhouse', link: 'https://maps.apple.com/?q=Riva+Crabhouse' }] },
+                              { name: '360 Chicago/Skydeck 餐廳', desc: '推薦傍晚看夕陽搭配雞尾酒。', places: [{ name: '360 CHICAGO', link: 'https://maps.apple.com/?q=360+CHICAGO' }] },
+                          ]}
+                    ]
+                }
+            };
 
 
             const mainNav = document.getElementById('main-nav');
@@ -1265,7 +1472,7 @@
                     const targetElement = document.querySelector(hash);
                     if (!targetElement) return;
 
-                    // NEW: Smartly handle past itinerary clicks from map
+                    // Smartly handle past itinerary clicks from map
                     const toggle = document.getElementById('show-past-toggle');
                     if (targetElement.hasAttribute('data-city-section') && toggle && !toggle.checked) {
                         const cityId = targetElement.id;
@@ -1471,6 +1678,67 @@
                 });
             }
             
+            // --- Foodie Modal Logic ---
+            const foodieModal = document.getElementById('foodie-modal');
+            const modalTitle = document.getElementById('modal-title');
+            const modalTabs = document.getElementById('modal-tabs');
+            const modalContent = document.getElementById('modal-content');
+            const modalCloseBtn = document.getElementById('modal-close-btn');
+
+            function switchFoodieTab(cityKey) {
+                const cityData = foodieData[cityKey];
+                if (!cityData) return;
+
+                // Update active tab
+                document.querySelectorAll('.modal-tab').forEach(tab => {
+                    tab.classList.toggle('active', tab.dataset.city === cityKey);
+                });
+
+                // Update content
+                let contentHTML = '';
+                cityData.categories.forEach(category => {
+                    contentHTML += `<div class="mb-4"><h3 class="text-lg font-bold text-gray-800 border-b-2 border-indigo-200 pb-1 mb-2">${category.name}</h3>`;
+                    contentHTML += '<div class="space-y-3">';
+                    category.items.forEach(item => {
+                        const placesHTML = item.places.map(p => `<a href="${p.link}" target="_blank" class="hover:underline">${p.name}</a>`).join('、');
+                        contentHTML += `<div><p class="font-semibold text-gray-700">${item.name}</p><p class="text-sm text-gray-500">${item.desc}</p><p class="text-sm text-gray-700">推薦：${placesHTML}</p></div>`;
+                    });
+                    contentHTML += '</div></div>';
+                });
+                modalContent.innerHTML = contentHTML;
+            }
+
+            function openFoodieModal(activeCityKey) {
+                if (!foodieModal) return;
+
+                // Build tabs
+                let tabsHTML = '';
+                Object.keys(foodieData).forEach(cityKey => {
+                    tabsHTML += `<button class="modal-tab" data-city="${cityKey}">${foodieData[cityKey].name}</button>`;
+                });
+                modalTabs.innerHTML = tabsHTML;
+                
+                // Add click listeners to new tabs
+                document.querySelectorAll('.modal-tab').forEach(tab => {
+                    tab.addEventListener('click', () => switchFoodieTab(tab.dataset.city));
+                });
+                
+                // Set initial tab and content
+                switchFoodieTab(activeCityKey);
+
+                foodieModal.classList.add('active');
+            }
+
+            function closeFoodieModal() {
+                if(foodieModal) foodieModal.classList.remove('active');
+            }
+
+            if(modalCloseBtn) modalCloseBtn.addEventListener('click', closeFoodieModal);
+            if(foodieModal) foodieModal.addEventListener('click', (e) => {
+                if (e.target === foodieModal) closeFoodieModal();
+            });
+
+
             // --- Robust Date and View Management ---
             function initializeTripView() {
                 const showPastToggle = document.getElementById('show-past-toggle');
@@ -1509,29 +1777,24 @@
                     el.classList.remove('day-past');
                     if (el.querySelector('summary')) el.querySelector('summary').classList.remove('summary-today');
                     
-                    const dayContent = el.querySelector('.p-4.sm\\:p-6 .space-y-6'); 
-                    if (dayContent) {
-                        const existingInfo = dayContent.querySelector('.info-block');
-                        if (existingInfo) existingInfo.parentElement.querySelectorAll('.info-block').forEach(e => e.remove());
+                    const dayContentContainer = el.querySelector('.p-4.sm\\:p-6'); 
+                    if (dayContentContainer) {
+                        const infoContainer = dayContentContainer.querySelector('.space-y-6');
+                        const existingInfo = dayContentContainer.querySelectorAll('.info-block');
+                        if (existingInfo) existingInfo.forEach(e => e.remove());
 
-                        // Inject Accommodation Info
                         const checkingOut = hotelData.find(h => h.checkOut === dateStr);
                         const checkingIn = hotelData.find(h => h.checkIn === dateStr);
                         const stayingAt = hotelData.find(h => dateStr >= h.checkIn && dateStr < h.checkOut);
                         
                         let hotelInfoHTML = '';
-                        if (checkingOut) {
-                            hotelInfoHTML += `<p class="text-gray-700">今日退房：<a href="${checkingOut.mapLink}" target="_blank" class="font-semibold hover:underline">${checkingOut.name}</a> <span class="text-sm text-gray-500">(${checkingOut.checkOutTime}須退房)</span></p>`;
-                        }
-                        if (checkingIn) {
-                             hotelInfoHTML += `<p class="text-gray-700 mt-1">今日入住：<a href="${checkingIn.mapLink}" target="_blank" class="font-semibold hover:underline">${checkingIn.name}</a> <span class="text-sm text-gray-500">(${checkingIn.checkInTime}可入住)</span></p>`;
-                        } else if (!checkingOut && stayingAt) {
-                            hotelInfoHTML += `<p class="text-gray-700">今晚入住：<a href="${stayingAt.mapLink}" target="_blank" class="font-semibold hover:underline">${stayingAt.name}</a></p>`;
-                        }
+                        if (checkingOut) hotelInfoHTML += `<p class="text-gray-700">今日退房：<a href="${checkingOut.mapLink}" target="_blank" class="font-semibold hover:underline">${checkingOut.name}</a> <span class="text-sm text-gray-500">(${checkingOut.checkOutTime}須退房)</span></p>`;
+                        if (checkingIn) hotelInfoHTML += `<p class="text-gray-700 mt-1">今日入住：<a href="${checkingIn.mapLink}" target="_blank" class="font-semibold hover:underline">${checkingIn.name}</a> <span class="text-sm text-gray-500">(${checkingIn.checkInTime}可入住)</span></p>`;
+                        else if (!checkingOut && stayingAt) hotelInfoHTML += `<p class="text-gray-700">今晚入住：<a href="${stayingAt.mapLink}" target="_blank" class="font-semibold hover:underline">${stayingAt.name}</a></p>`;
 
                         if (hotelInfoHTML) {
-                            dayContent.insertAdjacentHTML('afterbegin', `
-                                <div class="info-block accommodation-info mt-0 mb-6 p-4 bg-gray-50 rounded-lg border-l-4 border-indigo-400">
+                            infoContainer.insertAdjacentHTML('afterbegin', `
+                                <div class="info-block accommodation-info p-4 bg-gray-50 rounded-lg border-l-4 border-indigo-400">
                                     <h4 class="font-bold text-lg text-indigo-800 flex items-center mb-2">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor"><path d="M19 9.5A2.5 2.5 0 0016.5 7H3.5A2.5 2.5 0 001 9.5v7A2.5 2.5 0 003.5 19h13a2.5 2.5 0 002.5-2.5v-7zM6 13a1 1 0 11-2 0 1 1 0 012 0zm3 0a1 1 0 11-2 0 1 1 0 012 0z" /><path d="M3.5 4A1.5 1.5 0 002 5.5v1A1.5 1.5 0 003.5 8h13A1.5 1.5 0 0018 6.5v-1A1.5 1.5 0 0016.5 4h-13z" /></svg>
                                         住宿資訊
@@ -1540,12 +1803,11 @@
                                 </div>`);
                         }
                         
-                        // Inject Transportation Info
                         const transportItems = transportData.filter(t => t.date === dateStr);
                         if (transportItems.length > 0) {
                              const transportListHTML = transportItems.map(item => `<li class="text-gray-700">${item.type}：${item.details}</li>`).join('');
-                             dayContent.insertAdjacentHTML('afterbegin', `
-                                <div class="info-block transportation-info mt-0 mb-6 p-4 bg-blue-50 rounded-lg border-l-4 border-blue-400">
+                             infoContainer.insertAdjacentHTML('afterbegin', `
+                                <div class="info-block transportation-info p-4 bg-blue-50 rounded-lg border-l-4 border-blue-400">
                                      <h4 class="font-bold text-lg text-blue-800 flex items-center mb-2">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 3a1 1 0 00-1.447-.894L8.763 6H5a3 3 0 000 6h.085l1.558 2.336A1 1 0 008 15.5V17a1 1 0 001 1h2a1 1 0 001-1v-1.5a1 1 0 00-.237-.664L9.915 12H15a3 3 0 000-6h-3.763L16.553 3.894A1 1 0 0018 3zM5 9a1 1 0 100-2 1 1 0 000 2zm10-2a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" /></svg>
                                         本日交通
@@ -1553,6 +1815,20 @@
                                     <ul class="list-none space-y-1">${transportListHTML}</ul>
                                 </div>
                              `);
+                        }
+                        
+                        // --- Inject Foodie Button ---
+                        const tagContainer = dayContentContainer.querySelector('.my-3');
+                        const cityKey = el.dataset.weatherCity;
+                        if (tagContainer && cityKey && foodieData[cityKey] && !tagContainer.querySelector('.foodie-btn')) {
+                            const foodieButton = document.createElement('button');
+                            foodieButton.className = "foodie-btn float-right bg-amber-100 text-amber-800 text-xs font-semibold px-3 py-1 rounded-full hover:bg-amber-200 transition-colors";
+                            foodieButton.innerHTML = "🍽️ 美食清單";
+                            foodieButton.onclick = (e) => {
+                                e.stopPropagation();
+                                openFoodieModal(cityKey);
+                            };
+                            tagContainer.appendChild(foodieButton);
                         }
                     }
                     
