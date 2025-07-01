@@ -1089,8 +1089,7 @@
                         
                         if (firstDayInCity) {
                             currentDisplayDate = firstDayInCity.date;
-                            updateStatusDashboard(currentDisplayDate, data, window.allWeatherData); 
-                            showToast(`已切換至 ${item.querySelector('span > span').textContent}`);
+                            updateStatusDashboard(currentDisplayDate, data, window.allWeatherData);
                         }
                         closeCityDropdown();
                     });
