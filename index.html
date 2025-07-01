@@ -180,7 +180,7 @@
         #reload-button { background-color: white; color: var(--c-secondary); }
         #reload-button:hover { background-color: var(--c-bg-accent-light); }
         
-        /* --- [NEW] Full Screen Card Logic --- */
+        /* --- Full Screen Card Logic --- */
         #status-dashboard-section {
             /* Fallback for older browsers */
             height: calc(100vh - var(--nav-h));
@@ -192,7 +192,6 @@
             }
         }
         
-        /* [MODIFIED] Allow content to fill space */
         #status-card-content {
             overflow-y: auto; 
             -webkit-overflow-scrolling: touch; 
@@ -226,6 +225,19 @@
 
         .pagination-dot { width: 8px; height: 8px; background-color: #d1d5db; border-radius: 50%; cursor: pointer; transition: background-color 0.3s ease; }
         .pagination-dot.active { background-color: var(--c-secondary); }
+
+        /* --- [NEW] Today Button Visibility --- */
+        #today-btn {
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(20px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        #today-btn.is-visible {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0);
+        }
 
         /* --- Mobile Menu --- */
         #mobile-menu-overlay { 
@@ -401,7 +413,6 @@
     <!-- Main Container -->
     <div class="container mx-auto p-4 sm:p-6 md:p-8 max-w-6xl">
         
-        <!-- [MODIFIED] Removed min-h-[600px] and added flex display for full screen layout -->
         <section id="status-dashboard-section" class="mb-12 no-print flex flex-col">
             <div class="bg-white rounded-2xl shadow-lg p-5 md:p-6 ring-1 ring-gray-200 h-full flex flex-col">
                 <div id="status-time-info" class="flex justify-between items-center text-xs text-gray-500 mb-4 pb-4 border-b border-gray-200 font-mono">
@@ -1003,15 +1014,13 @@
             window.tripData = data;
             const { hotels: hotelData, transport: transportData, foodie: foodieData, tripInfo, itinerary } = data;
             
-            // --- [NEW] Dynamic Nav Height Calculation ---
             function updateNavHeightVar() {
                 const nav = document.getElementById('main-nav');
-                const navHeight = nav ? nav.offsetHeight : 68; // Fallback height
+                const navHeight = nav ? nav.offsetHeight : 68;
                 document.documentElement.style.setProperty('--nav-h', `${navHeight}px`);
             }
             window.addEventListener('resize', updateNavHeightVar);
-            updateNavHeightVar(); // Initial call
-            // --- End of New Code ---
+            updateNavHeightVar();
 
             const statusCityBtn = document.getElementById('status-city-btn');
             const cityDropdown = document.getElementById('city-dropdown');
@@ -1457,7 +1466,20 @@
                 }, 1000); 
             });
             
-            document.getElementById('today-btn').addEventListener('click', () => {
+            const todayBtn = document.getElementById('today-btn');
+            const dashboardSectionForObserver = document.getElementById('status-dashboard-section');
+
+            if (todayBtn && dashboardSectionForObserver) {
+                const todayBtnObserver = new IntersectionObserver(
+                    ([entry]) => {
+                        todayBtn.classList.toggle('is-visible', !entry.isIntersecting);
+                    },
+                    { root: null, threshold: 0.1 }
+                );
+                todayBtnObserver.observe(dashboardSectionForObserver);
+            }
+            
+            todayBtn.addEventListener('click', () => {
                 scrollToToday();
             });
         }
