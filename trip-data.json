@@ -412,46 +412,26 @@
       ]
     },
     {
-      "day": 13,
-      "date": "2025-07-14",
-      "dayGroup": 10,
-      "cityTarget": "",
-      "weatherCity": "",
-      "title": "✈️ 返家啟程：芝加哥 → 東京",
-      "subTitle": "Day 13 | 7/14(一)",
-      "isTravelDay": true,
-      "tags": ["#返家之日", "#跨時區航班"],
-      "activities": [
-        { "title": "航班資訊", "items": [
-            "<strong>航班 JL009：</strong>芝加哥(ORD) 01:30 → 東京羽田(HND) 04:20 (+1)"
-          ] 
-        },
-        { "title": "行程備註", "items": [
-            "此為跨夜航班，將於隔日 (7/15 週二) 抵達東京轉機。"
-          ]
-        }
+  "day": 13,
+  "date": "2025-07-14",
+  "dayGroup": 10,
+  "cityTarget": "",
+  "weatherCity": "",
+  "title": "✈️ 返家日｜芝加哥 → 台北 (經東京)",
+  "subTitle": "Day 13-14｜7月14日 (一) ~ 7月15日 (二)",
+  "isTravelDay": true,
+  "tags": ["#返家之日", "#東京轉機", "#滿載而歸"],
+  "activities": [
+    { "title": "航班資訊", "items": [
+        "<strong>航班 JL009：</strong>芝加哥(ORD) 01:30 → 東京羽田(HND) 04:20 (+1)",
+        "<strong>航班 JL097：</strong>東京羽田(HND) 08:55 → 台北松山(TSA) 11:35"
       ]
     },
-    {
-      "day": 14,
-      "date": "2025-07-15",
-      "dayGroup": 10,
-      "cityTarget": "",
-      "weatherCity": "",
-      "title": "✈️ 抵達台灣・旅程結束",
-      "subTitle": "Day 14 | 7/15(二)",
-      "isTravelDay": true,
-      "tags": ["#東京轉機", "#滿載而歸"],
-      "activities": [
-        { "title": "航班資訊", "items": [
-            "<strong>航班 JL097：</strong>東京羽田(HND) 08:55 → 台北松山(TSA) 11:35"
-          ] 
-        },
-        { "title": "歡迎回家！", "items": [
-            "抵達台北松山機場後，旅程圓滿結束！"
-          ]
-        }
+    { "title": "歡迎回家！", "items": [
+        "抵達台北松山機場後，旅程圓滿結束！"
       ]
     }
+  ]
+}
   ]
 }
