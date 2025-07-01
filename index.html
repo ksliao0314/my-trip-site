@@ -821,17 +821,36 @@
                     }
                 }
                 
-                const [year, month, day] = date.split('-').map(Number);
-                const dateObj = new Date(Date.UTC(year, month - 1, day));
-                const dayOfWeek = dateObj.toLocaleDateString('zh-TW', { weekday: 'long', timeZone: 'UTC' });
-                const datePart = `${month}月${day}日`;
-                statusDateEl.textContent = `${datePart} (${dayOfWeek.replace('星期','週')})`;
+                // --- MODIFICATION START ---
+                // Handle display for merged last day
+                const isMergedLastDay = targetDayData.subTitle.includes('~');
+
+                if (isMergedLastDay) {
+                    const parts = targetDayData.subTitle.split('｜');
+                    const dayPart = parts[0].trim(); // e.g., "Day 13-14"
+                    const datePart = parts[1].trim(); // e.g., "7月14日 (一) ~ 7月15日 (二)"
+                    
+                    // Replace hyphen with tilde for user-friendliness
+                    const userFriendlyDayPart = dayPart.replace('-', ' ~ '); 
+
+                    statusDateEl.textContent = datePart;
+                    progressTextEl.textContent = `${userFriendlyDayPart} / ${tripInfo.totalDays}`;
+
+                } else {
+                    // Original logic for single days
+                    const [year, month, day] = date.split('-').map(Number);
+                    const dateObj = new Date(Date.UTC(year, month - 1, day));
+                    const dayOfWeek = dateObj.toLocaleDateString('zh-TW', { weekday: 'long', timeZone: 'UTC' });
+                    const datePart = `${month}月${day}日`;
+                    statusDateEl.textContent = `${datePart} (${dayOfWeek.replace('星期','週')})`;
+                    progressTextEl.textContent = `Day ${targetDayData.day} / ${tripInfo.totalDays}`;
+                }
+                // --- MODIFICATION END ---
                 
                 const city = targetDayData.weatherCity;
                 const cityMap = { montreal: '蒙特婁', quebec: '魁北克市', niagara: '尼加拉瀑布', chicago: '芝加哥', '': '飛行途中' };
                 if (statusCityTextEl) statusCityTextEl.textContent = cityMap[city] || '移動中';
 
-                progressTextEl.textContent = `Day ${targetDayData.day} / ${tripInfo.totalDays}`;
                 if (daySlider) {
                     daySlider.value = targetDayData.day;
                     const progress = ((targetDayData.day - daySlider.min) / (daySlider.max - daySlider.min)) * 100;
@@ -910,16 +929,12 @@
                     accommodationItemEl.style.visibility = 'hidden';
                 }
 
-                // --- MODIFICATION START ---
-                // Original line: const transportItems = transport.filter(t => t.date === date);
                 let transportItems = transport.filter(t => t.date === date);
 
-                // Special handling to combine return flights
                 if (date === '2025-07-14') {
                     const nextDayTransport = transport.filter(t => t.date === '2025-07-15');
                     transportItems = transportItems.concat(nextDayTransport);
                 }
-                // --- MODIFICATION END ---
 
                 if (transportItems.length > 0) {
                     const iconMap = { '航班': '✈️', '火車': '🚄', '巴士': '🚌' };
@@ -939,7 +954,7 @@
                             }).join('');
                         }
                         return `<p>${item.details}</p>`;
-                    }).join('<div class="my-2 border-t border-dashed border-gray-300"></div>'); // Add a separator for combined days
+                    }).join('<div class="my-2 border-t border-dashed border-gray-300"></div>');
                     transportContentEl.innerHTML = transportHtml;
                     transportItemEl.style.visibility = 'visible';
                 } else {
@@ -1335,7 +1350,6 @@
             populateDayCardWeather(allWeatherData);
             initializeTripView();
 
-            // --- MODIFICATION START ---
             const todayString = new Date().toISOString().split('T')[0];
             const lastAvailableDate = itinerary[itinerary.length - 1].date;
 
@@ -1352,7 +1366,6 @@
 
             currentDisplayDate = initialDateToShow;
             updateStatusDashboard(currentDisplayDate, data, allWeatherData);
-            // --- MODIFICATION END ---
 
 
             document.getElementById('prev-day-btn').addEventListener('click', () => {
@@ -1371,12 +1384,10 @@
                 const currentDateObj = new Date(Date.UTC(year, month - 1, day));
                 currentDateObj.setUTCDate(currentDateObj.getUTCDate() + 1);
                 const newDate = currentDateObj.toISOString().split('T')[0];
-                // --- MODIFICATION START ---
                  if (newDate <= lastAvailableDate) { 
                     currentDisplayDate = newDate;
                     updateStatusDashboard(currentDisplayDate, data, window.allWeatherData, 1);
                 }
-                // --- MODIFICATION END ---
             });
 
             const statusCard = document.getElementById('status-card-content');
