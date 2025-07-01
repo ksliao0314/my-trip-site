@@ -343,6 +343,9 @@
         .bg-indigo-600, .bg-amber-500 { background-color: var(--c-secondary) !important; }
         .hover\:bg-indigo-700:hover, .hover\:bg-amber-600:hover { background-color: var(--c-primary) !important; }
         
+        /* Removed override for text-amber-800 to restore original color */
+        .text-green-700 { color: var(--c-secondary) !important; }
+
         #show-past-toggle:checked + .peer-checked\\:bg-indigo-300 {
              background-color: var(--c-accent) !important;
         }
@@ -398,7 +401,7 @@
     <div id="mobile-menu-panel">
         <div class="p-4 space-y-2">
              <a href="#status-dashboard-section" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">📋 行程要覽</a>
-             <a href="#tip-calculator-section" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">🧮 小費計算機</a>
+             <a href="#tip-calculator-section" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">� 小費計算機</a>
              <a href="#links-dashboard" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">🔗 常用連結</a>
              <button id="mobile-print-btn" class="w-full text-left mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">📄 列印行程</button>
         </div>
@@ -791,9 +794,7 @@
                     progressTextEl.textContent = '-';
                     if(daySlider) daySlider.value = 1;
                     if(viewDetailsBtn) viewDetailsBtn.style.display = 'none';
-                    weatherIconEl.textContent = '🏠';
-                    weatherTempEl.textContent = '';
-                    weatherReminderEl.textContent = '旅程已結束或尚未開始。';
+                    weatherItemEl.style.display = 'none';
                     accommodationItemEl.style.display = 'none';
                     transportItemEl.style.display = 'none';
                     if (travelDayIndicatorEl) travelDayIndicatorEl.style.display = 'none';
@@ -862,31 +863,32 @@
                 }
 
                 const cityWeather = allWeatherData ? allWeatherData[city] : undefined;
-                weatherItemEl.style.display = 'flex'; 
-
-                if (cityWeather) { 
-                    const dayIndex = cityWeather.time.indexOf(date);
-                    if (dayIndex !== -1) {
-                        const tempMax = Math.round(cityWeather.temperature_2m_max[dayIndex]);
-                        const tempMin = Math.round(cityWeather.temperature_2m_min[dayIndex]);
-                        const code = cityWeather.weather_code[dayIndex];
-                        weatherIconEl.textContent = getWeatherIcon(code);
-                        weatherTempEl.textContent = `${tempMin}°C / ${tempMax}°C`;
-                        weatherReminderEl.textContent = getWeatherReminder(code);
+                
+                if (city) {
+                    weatherItemEl.style.display = 'flex';
+                    if (cityWeather) { 
+                        const dayIndex = cityWeather.time.indexOf(date);
+                        if (dayIndex !== -1) {
+                            const tempMax = Math.round(cityWeather.temperature_2m_max[dayIndex]);
+                            const tempMin = Math.round(cityWeather.temperature_2m_min[dayIndex]);
+                            const code = cityWeather.weather_code[dayIndex];
+                            weatherIconEl.textContent = getWeatherIcon(code);
+                            weatherTempEl.textContent = `${tempMin}°C / ${tempMax}°C`;
+                            weatherReminderEl.textContent = getWeatherReminder(code);
+                        } else { 
+                            weatherIconEl.textContent = '❓';
+                            weatherTempEl.textContent = '無預報';
+                            weatherReminderEl.textContent = '無法取得本日天氣資訊。';
+                        }
                     } else { 
-                        weatherIconEl.textContent = '❓';
-                        weatherTempEl.textContent = '無預報';
-                        weatherReminderEl.textContent = '無法取得本日天氣資訊。';
+                        weatherIconEl.textContent = '⏳';
+                        weatherTempEl.textContent = '--°C / --°C';
+                        weatherReminderEl.textContent = '正在載入天氣資訊...';
                     }
-                } else if (allWeatherData && !cityWeather) { 
-                    weatherIconEl.textContent = '✈️';
-                    weatherTempEl.textContent = '';
-                    weatherReminderEl.textContent = '飛行日無適用天氣資訊。';
-                } else { 
-                    weatherIconEl.textContent = '⏳';
-                    weatherTempEl.textContent = '--°C / --°C';
-                    weatherReminderEl.textContent = '正在載入天氣資訊...';
+                } else {
+                    weatherItemEl.style.display = 'none';
                 }
+
 
                 const checkingIn = hotels.find(h => h.checkIn === date);
                 const checkingOut = hotels.find(h => h.checkOut === date);
