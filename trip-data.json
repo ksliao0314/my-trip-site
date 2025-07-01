@@ -1,9 +1,9 @@
 {
   "tripInfo": {
-    "totalDays": 14,
+    "totalDays": 13,
     "tripStartDate": "2025-07-02",
     "tripEndDate": "2025-07-16",
-    "dataVersion": "20250701-02"
+    "dataVersion": "20250701-03"
   },
   "timePhases": [
     {
@@ -101,7 +101,7 @@
       "categories": [
         { "name": "🥯 道地加拿大料理", "items": [
           { "name": "蒙特婁貝果", "desc": "必吃的特色貝果，推薦 St-Viateur 或 Fairmount。", "places": [
-            { "name": "St-Viateur Bagel", "link": "https://maps.apple.com/?q=St-Viateur+Bagel" }, 
+            { "name": "St-Viateur Bagel", "link": "https://maps.apple.com/?q=St-Viateur+Bagel" },
             { "name": "Fairmount Bagel", "link": "https://maps.apple.com/?q=Fairmount+Bagel" }
           ] },
           { "name": "煙燻肉三明治", "desc": "Schwartz’s Deli 是蒙特婁的代表性店家。", "places": [{ "name": "Schwartz’s Deli", "link": "https://maps.apple.com/?q=Schwartz’s+Deli" }] },
@@ -177,7 +177,7 @@
           { "name": "酥皮濃郁", "desc": "Lou Malnati’s 的奶油酥皮是其特色。", "places": [{ "name": "Lou Malnati’s", "link": "https://maps.apple.com/?q=Lou+Malnati’s+Pizzeria" }] },
           { "name": "焦香起司邊", "desc": "Pequod’s Pizza 的焦糖化起司邊是一大亮點。", "places": [{ "name": "Pequod’s Pizza", "link": "https://maps.apple.com/?q=Pequod’s+Pizza" }] }
         ]},
-        { "name": "� 美式餐廳／牛排", "items": [
+        { "name": "🥩 美式餐廳／牛排", "items": [
           { "name": "經典美式＋現代", "desc": "The Dearborn 提供經典與現代融合的美式料理。", "places": [{ "name": "The Dearborn", "link": "https://maps.apple.com/?q=The+Dearborn" }] },
           { "name": "高級牛排館", "desc": "RPM Steak 是享受頂級牛排的絕佳選擇。", "places": [{ "name": "RPM Steak", "link": "https://maps.apple.com/?q=RPM+Steak" }] },
           { "name": "酒吧氛圍美式餐", "desc": "The Gage 結合了美食與熱鬧的酒吧氛圍。", "places": [{ "name": "The Gage", "link": "https://maps.apple.com/?q=The+Gage" }] }
@@ -375,7 +375,7 @@
       "activities": [
         { "title": "☀️ 09:00 – 12:00｜自由行程：購物 or 市區散步", "items": ["<strong>購物：</strong>前往 <a href='https://maps.apple.com/?q=The+Magnificent+Mile,Chicago' target='_blank' class='hover:underline'>Michigan Avenue (Magnificent Mile)</a>，<a href='https://maps.apple.com/?q=Nordstrom,chicago' target='_blank'>Nordstrom</a>, <a href='https://maps.apple.com/?q=Macy's,chicago' target='_blank'>Macy’s</a>, <a href='https://maps.apple.com/?q=Uniqlo,chicago' target='_blank'>Uniqlo</a> 等品牌集中。", "<strong>散步：</strong>選擇放鬆慢行 <a href='https://maps.apple.com/?q=Millennium+Park,Chicago' target='_blank' class='hover:underline'>Millennium Park</a> → <a href='https://maps.apple.com/?q=Maggie+Daley+Park,Chicago' target='_blank' class='hover:underline'>Maggie Daley Park</a> 綠地。", "<strong>藝術：</strong>參觀<a href='https://mcachicago.org/' target='_blank' class='hover:underline'>芝加哥當代藝術館（MCA）</a>，小而精緻。"] },
         { "title": "🍽️ 12:30 – 14:00｜午餐建議", "items": ["<a href='https://maps.apple.com/?q=Beatrix,Chicago' target='_blank' class='hover:underline'>Beatrix</a>（輕食系健康料理）或 <a href='https://maps.apple.com/?q=The+Purple+Pig,Chicago' target='_blank' class='hover:underline'>The Purple Pig</a>（人氣地中海小酒館）。"] },
-        { "title": "🐟 14:30 – 17:00｜Shedd Aquarium（水族館）選項", "items": ["前往<a href='https://maps.apple.com/?q=Shedd+Aquarium,Chicago' target='_blank' class='hover:underline'>Shedd Aquarium</a>，特展：白鯨、海豚、企鵝、亞馬遜熱帶館區。", "若不參觀水族館，也可回飯店休息或繼續購物。"] },
+        { "title": "🐟 14:30 – 17:00｜Shedd Aquarium（水族館）選項", "items": ["前往<a href='https.apple.com/?q=Shedd+Aquarium,Chicago' target='_blank' class='hover:underline'>Shedd Aquarium</a>，特展：白鯨、海豚、企鵝、亞馬遜熱帶館區。", "若不參觀水族館，也可回飯店休息或繼續購物。"] },
         { "title": "🍽️ 18:00 – 20:30｜最後晚餐收尾", "items": ["<strong>推薦：</strong><a href='https://maps.apple.com/?q=The+Dearborn,Chicago' target='_blank' class='hover:underline'>The Dearborn</a>（現代美式餐酒館）或 <a href='https://maps.apple.com/?q=Cindy's+Rooftop,Chicago' target='_blank' class='hover:underline'>Cindy’s Rooftop</a>（觀景餐廳）。"] }
       ]
     },
@@ -412,26 +412,26 @@
       ]
     },
     {
-  "day": 13,
-  "date": "2025-07-14",
-  "dayGroup": 10,
-  "cityTarget": "",
-  "weatherCity": "",
-  "title": "✈️ 返家日｜芝加哥 → 台北 (經東京)",
-  "subTitle": "Day 13-14｜7月14日 (一) ~ 7月15日 (二)",
-  "isTravelDay": true,
-  "tags": ["#返家之日", "#東京轉機", "#滿載而歸"],
-  "activities": [
-    { "title": "航班資訊", "items": [
-        "<strong>航班 JL009：</strong>芝加哥(ORD) 01:30 → 東京羽田(HND) 04:20 (+1)",
-        "<strong>航班 JL097：</strong>東京羽田(HND) 08:55 → 台北松山(TSA) 11:35"
-      ]
-    },
-    { "title": "歡迎回家！", "items": [
-        "抵達台北松山機場後，旅程圓滿結束！"
+      "day": 13,
+      "date": "2025-07-14",
+      "dayGroup": 10,
+      "cityTarget": "",
+      "weatherCity": "",
+      "title": "✈️ 返家日｜芝加哥 → 台北 (經東京)",
+      "subTitle": "Day 13-14｜7月14日 (一) ~ 7月15日 (二)",
+      "isTravelDay": true,
+      "tags": ["#返家之日", "#東京轉機", "#滿載而歸"],
+      "activities": [
+        { "title": "航班資訊", "items": [
+            "<strong>航班 JL009：</strong>芝加哥(ORD) 01:30 → 東京羽田(HND) 04:20 (+1)",
+            "<strong>航班 JL097：</strong>東京羽田(HND) 08:55 → 台北松山(TSA) 11:35"
+          ]
+        },
+        { "title": "歡迎回家！", "items": [
+            "抵達台北松山機場後，旅程圓滿結束！"
+          ]
+        }
       ]
     }
-  ]
-}
   ]
 }
