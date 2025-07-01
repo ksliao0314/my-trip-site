@@ -182,15 +182,13 @@
         
         /* --- Full Screen Card Logic --- */
         #status-dashboard-section {
-    /* 在計算中再減去 4rem 的底部間距 */
-    height: calc(100vh - var(--nav-h) - 4rem); 
-}
-@supports (height: 100svh) {
-    #status-dashboard-section {
-        /* 同樣應用於支援 svh 的瀏覽器 */
-        height: calc(100svh - var(--nav-h) - 4rem);
-    }
-}
+            height: calc(100vh - var(--nav-h) - 4rem);
+        }
+        @supports (height: 100svh) {
+            #status-dashboard-section {
+                height: calc(100svh - var(--nav-h) - 4rem);
+            }
+        }
         
         #status-card-content {
             overflow-y: auto; 
@@ -912,16 +910,18 @@
                     accommodationItemEl.style.visibility = 'hidden';
                 }
 
-// --- 修改開始 ---
-let transportItems = transport.filter(t => t.date === date);
+                // --- MODIFICATION START ---
+                // Original line: const transportItems = transport.filter(t => t.date === date);
+                let transportItems = transport.filter(t => t.date === date);
 
-// 為了合併顯示返家航班的特別處理
-if (date === '2025-07-14') {
-    const nextDayTransport = transport.filter(t => t.date === '2025-07-15');
-    // 將隔天的航班資訊也加進來
-    transportItems = transportItems.concat(nextDayTransport);
-}
-// --- 修改結束 ---                if (transportItems.length > 0) {
+                // Special handling to combine return flights
+                if (date === '2025-07-14') {
+                    const nextDayTransport = transport.filter(t => t.date === '2025-07-15');
+                    transportItems = transportItems.concat(nextDayTransport);
+                }
+                // --- MODIFICATION END ---
+
+                if (transportItems.length > 0) {
                     const iconMap = { '航班': '✈️', '火車': '🚄', '巴士': '🚌' };
                     transportIconEl.textContent = iconMap[transportItems[0].type] || '➡️';
                     const transportHtml = transportItems.map(item => {
@@ -939,7 +939,7 @@ if (date === '2025-07-14') {
                             }).join('');
                         }
                         return `<p>${item.details}</p>`;
-                    }).join('');
+                    }).join('<div class="my-2 border-t border-dashed border-gray-300"></div>'); // Add a separator for combined days
                     transportContentEl.innerHTML = transportHtml;
                     transportItemEl.style.visibility = 'visible';
                 } else {
