@@ -166,6 +166,7 @@
         #status-date-nav {
             min-height: 3.5rem; /* 設定最小高度，防止雙行日期造成版面跳動 */
             align-items: center;
+            justify-content: center; /* 將日期標題置中 */
         }
         #status-travel-day-indicator {
             background-color: var(--c-accent);
@@ -181,6 +182,44 @@
         }
         #status-city-btn svg { transition: transform 0.2s; }
         #status-city-btn.modal-open svg { transform: rotate(180deg); }
+        
+        /* --- 行動指令區 --- */
+        #action-area {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: 1.25rem;
+        }
+        .action-btn {
+            width: 100%;
+            font-weight: 600;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+            transition: all 0.2s ease-in-out;
+            flex-grow: 1;
+        }
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+        }
+        #view-details-btn {
+            background-color: var(--c-secondary);
+            color: white;
+        }
+        #view-details-btn:hover {
+            background-color: var(--c-primary);
+        }
+        #foodie-list-btn {
+            background-color: var(--c-bg-accent-light);
+            color: var(--c-secondary);
+            border: 1px solid var(--c-border);
+        }
+        #foodie-list-btn:hover {
+            background-color: var(--c-accent);
+            color: var(--c-primary);
+            border-color: var(--c-accent);
+        }
+
 
         /* --- 彈出式視窗 (Modal) & 覆蓋層 --- */
         .modal-overlay {
@@ -450,20 +489,12 @@
 
                 <div id="status-header">
                     <!-- Tier 1: Date Navigation -->
-                    <div id="status-date-nav" class="flex justify-between">
-                        <h2 id="status-date" class="text-2xl sm:text-3xl font-bold text-gray-900">讀取中...</h2>
-                        <div class="flex items-center space-x-2 flex-shrink-0">
-                            <button id="prev-day-btn" class="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
-                            </button>
-                            <button id="next-day-btn" class="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" /></svg>
-                            </button>
-                        </div>
+                    <div id="status-date-nav" class="flex">
+                        <h2 id="status-date" class="text-2xl sm:text-3xl font-bold text-gray-900 text-center">讀取中...</h2>
                     </div>
 
                     <!-- Tier 2: Location & Status -->
-                    <div id="status-location" class="mt-1 flex items-baseline gap-x-3">
+                    <div id="status-location" class="mt-1 flex justify-center items-baseline gap-x-3">
                          <button id="status-city-btn">
                             <h3 id="status-city-name" class="text-3xl font-black text-gray-900"></h3>
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500" viewBox="0 0 20 20" fill="currentColor">
@@ -509,10 +540,10 @@
 
                 <div id="status-pagination-dots" class="flex justify-center mt-4 space-x-2"></div>
 
-                 <div class="mt-5 text-center">
-                    <button id="view-details-btn" class="w-full md:w-auto bg-indigo-600 text-white font-semibold px-6 py-3 rounded-lg shadow-md hover:bg-indigo-700 transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                        詳細行程
-                    </button>
+                 <!-- Action Area -->
+                 <div id="action-area">
+                    <button id="foodie-list-btn" class="action-btn" style="display: none;">🍽️ 美食清單</button>
+                    <button id="view-details-btn" class="action-btn">詳細行程</button>
                 </div>
             </div>
         </section>
@@ -781,7 +812,7 @@
         }
         
         function updateStatusDashboard(date, data, allWeatherData, direction = 0) {
-            const { itinerary, hotels, transport, tripInfo } = data;
+            const { itinerary, hotels, transport, tripInfo, foodie: foodieData } = data;
             const targetDayData = itinerary.find(d => d.date === date);
 
             const statusCardContentEl = document.getElementById('status-card-content');
@@ -790,6 +821,7 @@
             const progressTextEl = document.getElementById('status-progress-text');
             const daySlider = document.getElementById('day-slider');
             const viewDetailsBtn = document.getElementById('view-details-btn');
+            const foodieListBtn = document.getElementById('foodie-list-btn');
             const weatherItemEl = document.getElementById('status-weather-item');
             const weatherIconEl = document.getElementById('status-weather-icon');
             const weatherTempEl = document.getElementById('status-weather-temp');
@@ -831,6 +863,7 @@
                     progressTextEl.textContent = '-';
                     if(daySlider) daySlider.value = 1;
                     if(viewDetailsBtn) viewDetailsBtn.style.display = 'none';
+                    if(foodieListBtn) foodieListBtn.style.display = 'none';
                     weatherItemEl.style.display = 'none';
                     accommodationItemEl.style.display = 'none';
                     transportItemEl.style.display = 'none';
@@ -840,7 +873,7 @@
                 }
 
                 if(timeInfoEl) timeInfoEl.style.display = 'flex';
-                if(viewDetailsBtn) viewDetailsBtn.style.display = 'inline-block';
+                if(viewDetailsBtn) viewDetailsBtn.style.display = 'block';
                 
                 const isMergedLastDay = targetDayData.subTitle.includes('~');
                 if (isMergedLastDay) {
@@ -855,9 +888,9 @@
                     statusDateEl.textContent = `${datePart} (${dayOfWeek.replace('星期','週')})`;
                 }
                 
-                const city = targetDayData.weatherCity;
+                const cityKey = targetDayData.weatherCity;
                 const cityMap = { montreal: '蒙特婁', quebec: '魁北克市', niagara: '尼加拉瀑布', chicago: '芝加哥', '': '飛行途中' };
-                if (statusCityNameEl) statusCityNameEl.textContent = cityMap[city] || '移動中';
+                if (statusCityNameEl) statusCityNameEl.textContent = cityMap[cityKey] || '移動中';
                 
                 if (travelDayIndicatorEl) {
                     travelDayIndicatorEl.style.display = targetDayData.isTravelDay ? 'inline-block' : 'none';
@@ -893,8 +926,8 @@
                     timeDiffEl.textContent = diffText;
                 }
 
-                const cityWeather = allWeatherData ? allWeatherData[city] : undefined;
-                if (city) {
+                const cityWeather = allWeatherData ? allWeatherData[cityKey] : undefined;
+                if (cityKey) {
                     weatherItemEl.style.display = 'flex';
                     if (cityWeather) { 
                         const dayIndex = cityWeather.time.indexOf(date);
@@ -972,6 +1005,14 @@
                 } else {
                     transportContentEl.innerHTML = '';
                     transportItemEl.style.display = 'none';
+                }
+                
+                // Update Action Area
+                if (foodieListBtn && foodieData[cityKey]) {
+                    foodieListBtn.style.display = 'block';
+                    foodieListBtn.onclick = () => window.openFoodieModal(cityKey);
+                } else if (foodieListBtn) {
+                    foodieListBtn.style.display = 'none';
                 }
             }; 
 
@@ -1399,29 +1440,6 @@
             currentDisplayDate = initialDateToShow;
             updateStatusDashboard(currentDisplayDate, data, allWeatherData);
 
-
-            document.getElementById('prev-day-btn').addEventListener('click', () => {
-                const [year, month, day] = currentDisplayDate.split('-').map(Number);
-                const currentDateObj = new Date(Date.UTC(year, month - 1, day));
-                currentDateObj.setUTCDate(currentDateObj.getUTCDate() - 1);
-                const newDate = currentDateObj.toISOString().split('T')[0];
-                if (newDate >= tripInfo.tripStartDate) {
-                    currentDisplayDate = newDate;
-                    updateStatusDashboard(currentDisplayDate, data, window.allWeatherData, -1); 
-                }
-            });
-
-            document.getElementById('next-day-btn').addEventListener('click', () => {
-                const [year, month, day] = currentDisplayDate.split('-').map(Number);
-                const currentDateObj = new Date(Date.UTC(year, month - 1, day));
-                currentDateObj.setUTCDate(currentDateObj.getUTCDate() + 1);
-                const newDate = currentDateObj.toISOString().split('T')[0];
-                 if (newDate <= lastAvailableDate) { 
-                    currentDisplayDate = newDate;
-                    updateStatusDashboard(currentDisplayDate, data, window.allWeatherData, 1);
-                }
-            });
-
             const statusCard = document.getElementById('status-card-content');
             let touchStartX = 0;
             let touchEndX = 0;
@@ -1450,10 +1468,24 @@
                 const swipeDistance = touchEndX - touchStartX;
                 if (Math.abs(swipeDistance) < swipeThreshold) return; 
 
-                if (swipeDistance < 0) {
-                    document.getElementById('next-day-btn').click();
-                } else {
-                    document.getElementById('prev-day-btn').click();
+                if (swipeDistance < 0) { // Swipe Left
+                    const [year, month, day] = currentDisplayDate.split('-').map(Number);
+                    const currentDateObj = new Date(Date.UTC(year, month - 1, day));
+                    currentDateObj.setUTCDate(currentDateObj.getUTCDate() + 1);
+                    const newDate = currentDateObj.toISOString().split('T')[0];
+                     if (newDate <= lastAvailableDate) { 
+                        currentDisplayDate = newDate;
+                        updateStatusDashboard(currentDisplayDate, data, window.allWeatherData, 1);
+                    }
+                } else { // Swipe Right
+                    const [year, month, day] = currentDisplayDate.split('-').map(Number);
+                    const currentDateObj = new Date(Date.UTC(year, month - 1, day));
+                    currentDateObj.setUTCDate(currentDateObj.getUTCDate() - 1);
+                    const newDate = currentDateObj.toISOString().split('T')[0];
+                    if (newDate >= tripInfo.tripStartDate) {
+                        currentDisplayDate = newDate;
+                        updateStatusDashboard(currentDisplayDate, data, window.allWeatherData, -1); 
+                    }
                 }
             }
 
