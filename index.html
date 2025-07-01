@@ -343,7 +343,6 @@
         .bg-indigo-600, .bg-amber-500 { background-color: var(--c-secondary) !important; }
         .hover\:bg-indigo-700:hover, .hover\:bg-amber-600:hover { background-color: var(--c-primary) !important; }
         
-        /* Removed override for text-amber-800 to restore original color */
         .text-green-700 { color: var(--c-secondary) !important; }
 
         #show-past-toggle:checked + .peer-checked\\:bg-indigo-300 {
@@ -353,6 +352,12 @@
         .info-block { border-left-color: var(--c-secondary) !important; }
         .foodie-btn { background-color: var(--c-accent) !important; color: var(--c-primary) !important; }
         .foodie-btn:hover { background-color: var(--c-secondary) !important; color: white !important; }
+        
+        /* Specific style for travel day indicator to override general styles */
+        #status-travel-day-indicator {
+            background-color: #e5e7eb !important; /* gray-200 */
+            color: #4b5563 !important;      /* gray-600 */
+        }
 
     </style>
 </head>
@@ -401,7 +406,7 @@
     <div id="mobile-menu-panel">
         <div class="p-4 space-y-2">
              <a href="#status-dashboard-section" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">📋 行程要覽</a>
-             <a href="#tip-calculator-section" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">� 小費計算機</a>
+             <a href="#tip-calculator-section" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">🧮 小費計算機</a>
              <a href="#links-dashboard" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">🔗 常用連結</a>
              <button id="mobile-print-btn" class="w-full text-left mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">📄 列印行程</button>
         </div>
@@ -420,7 +425,7 @@
                 <div class="flex justify-between items-start flex-wrap gap-y-2">
                     <div class="flex items-center gap-x-3">
                         <h2 id="status-date" class="text-2xl sm:text-3xl font-bold text-gray-900 -mt-1">讀取中...</h2>
-                        <span id="status-travel-day-indicator" class="text-xs font-semibold text-amber-800 bg-amber-100 px-2 py-0.5 rounded-full whitespace-nowrap" style="display: none;"></span>
+                        <span id="status-travel-day-indicator" class="text-xs font-semibold px-2 py-0.5 rounded-full whitespace-nowrap" style="display: none;"></span>
                     </div>
                     <div class="flex items-center space-x-2">
                         <button id="prev-day-btn" class="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors">
@@ -907,10 +912,10 @@
                 
                 if (hotelHtml) {
                     accommodationContentEl.innerHTML = hotelHtml;
-                    accommodationItemEl.style.visibility = 'visible';
+                    accommodationItemEl.style.display = 'flex';
                 } else {
                     accommodationContentEl.innerHTML = '';
-                    accommodationItemEl.style.visibility = 'hidden';
+                    accommodationItemEl.style.display = 'none';
                 }
 
                 let transportItems = transport.filter(t => t.date === date);
@@ -940,10 +945,10 @@
                         return `<p>${item.details}</p>`;
                     }).join('<div class="my-2 border-t border-dashed border-gray-300"></div>');
                     transportContentEl.innerHTML = transportHtml;
-                    transportItemEl.style.visibility = 'visible';
+                    transportItemEl.style.display = 'flex';
                 } else {
                     transportContentEl.innerHTML = '';
-                    transportItemEl.style.visibility = 'hidden';
+                    transportItemEl.style.display = 'none';
                 }
             }; 
 
