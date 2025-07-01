@@ -3,7 +3,7 @@
     "totalDays": 13,
     "tripStartDate": "2025-07-02",
     "tripEndDate": "2025-07-16",
-    "dataVersion": "20250701-04"
+    "dataVersion": "20250701-05"
   },
   "timePhases": [
     {
@@ -53,7 +53,7 @@
     { "name": "InterContinental Montreal By IHG", "checkIn": "2025-07-02", "checkOut": "2025-07-04", "mapLink": "https://maps.apple.com/?q=InterContinental+Montreal", "checkInTime": "下午4:00後", "checkOutTime": "下午12:00前" },
     { "name": "Hotel Manoir Victoria", "checkIn": "2025-07-04", "checkOut": "2025-07-06", "mapLink": "https://maps.apple.com/?q=Hotel+Manoir+Victoria", "checkInTime": "下午4:00後", "checkOutTime": "上午11:00前" },
     { "name": "Sheraton Fallsview Hotel", "checkIn": "2025-07-06", "checkOut": "2025-07-08", "mapLink": "https://maps.apple.com/?q=Sheraton+Fallsview+Hotel", "checkInTime": "下午4:00後", "checkOutTime": "下午12:00前" },
-    { "name": "The Peninsula Chicago (範例)", "checkIn": "2025-07-08", "checkOut": "2025-07-13", "mapLink": "https://maps.apple.com/?q=The+Peninsula+Chicago", "checkInTime": "下午3:00後", "checkOutTime": "中午12:00前" }
+    { "name": "Hilton Garden Inn Chicago Downtown Magnificent Mile", "checkIn": "2025-07-08", "checkOut": "2025-07-13", "mapLink": "https://maps.apple.com/?q=Hilton+Garden+Inn+Chicago+Downtown+Magnificent+Mile", "checkInTime": "下午3:00後", "checkOutTime": "中午12:00前" }
   ],
   "transport": [
     {
@@ -93,6 +93,11 @@
       "details": [
         { "flightCode": "日航 JL097", "departure": { "airport": "東京羽田 (HND)", "time": "2025-07-15T08:55:00", "tz": "Asia/Tokyo" }, "arrival": { "airport": "台北松山 (TSA)", "time": "2025-07-15T11:35:00", "tz": "Asia/Taipei" } }
       ]
+    },
+    {
+      "date": "2025-07-15",
+      "type": "機場接送",
+      "details": "已預約機場接送返家"
     }
   ],
   "foodie": {
@@ -427,8 +432,12 @@
             "<strong>航班 JL097：</strong>東京羽田(HND) 08:55 → 台北松山(TSA) 11:35"
           ]
         },
+        { "title": "� 返家交通", "items": [
+            "抵達台北松山機場後，已預約機場接送返家。"
+          ]
+        },
         { "title": "歡迎回家！", "items": [
-            "抵達台北松山機場後，旅程圓滿結束！"
+            "旅程圓滿結束！"
           ]
         }
       ]
