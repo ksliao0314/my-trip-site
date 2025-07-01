@@ -1335,10 +1335,25 @@
             populateDayCardWeather(allWeatherData);
             initializeTripView();
 
+            // --- MODIFICATION START ---
             const todayString = new Date().toISOString().split('T')[0];
-            const isTripActive = todayString >= tripInfo.tripStartDate && todayString <= tripInfo.tripEndDate; 
-            currentDisplayDate = isTripActive ? todayString : tripInfo.tripStartDate;
+            const lastAvailableDate = itinerary[itinerary.length - 1].date;
+
+            let initialDateToShow = tripInfo.tripStartDate;
+            if (todayString >= tripInfo.tripStartDate && todayString <= tripInfo.tripEndDate) {
+                if (itinerary.find(d => d.date === todayString)) {
+                    initialDateToShow = todayString;
+                } else if (todayString > lastAvailableDate) {
+                    initialDateToShow = lastAvailableDate;
+                }
+            } else if (todayString > tripInfo.tripEndDate) {
+                initialDateToShow = lastAvailableDate;
+            }
+
+            currentDisplayDate = initialDateToShow;
             updateStatusDashboard(currentDisplayDate, data, allWeatherData);
+            // --- MODIFICATION END ---
+
 
             document.getElementById('prev-day-btn').addEventListener('click', () => {
                 const [year, month, day] = currentDisplayDate.split('-').map(Number);
@@ -1356,10 +1371,12 @@
                 const currentDateObj = new Date(Date.UTC(year, month - 1, day));
                 currentDateObj.setUTCDate(currentDateObj.getUTCDate() + 1);
                 const newDate = currentDateObj.toISOString().split('T')[0];
-                 if (newDate < tripInfo.tripEndDate) { 
+                // --- MODIFICATION START ---
+                 if (newDate <= lastAvailableDate) { 
                     currentDisplayDate = newDate;
                     updateStatusDashboard(currentDisplayDate, data, window.allWeatherData, 1);
                 }
+                // --- MODIFICATION END ---
             });
 
             const statusCard = document.getElementById('status-card-content');
