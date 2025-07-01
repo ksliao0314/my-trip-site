@@ -34,6 +34,7 @@
             --c-bg-card: #FFFFFF;      /* 卡片背景 */
             --c-bg-accent-light: #e7f5f5; /* 點綴色淺版 */
             --c-border: #dde8f0;       /* 邊框色 */
+            --nav-h: 68px; /* JS 會更新此變數 */
         }
         html { scroll-behavior: smooth; }
         body { 
@@ -179,6 +180,24 @@
         #reload-button { background-color: white; color: var(--c-secondary); }
         #reload-button:hover { background-color: var(--c-bg-accent-light); }
         
+        /* --- [NEW] Full Screen Card Logic --- */
+        #status-dashboard-section {
+            /* Fallback for older browsers */
+            height: calc(100vh - var(--nav-h));
+        }
+        @supports (height: 100svh) {
+            #status-dashboard-section {
+                /* Modern approach for mobile browsers */
+                height: calc(100svh - var(--nav-h));
+            }
+        }
+        
+        /* [MODIFIED] Allow content to fill space */
+        #status-card-content {
+            overflow-y: auto; 
+            -webkit-overflow-scrolling: touch; 
+        }
+
         /* Print Styles */
         @media print {
             @page { size: A4 portrait; margin: 1cm; }
@@ -194,9 +213,6 @@
             details summary .summary-arrow { display: none !important; }
             .day-past { display: block !important; }
         }
-
-        /* 更新 #status-card-content 的最大高度 */
-        #status-card-content { max-height: 550px; overflow-y: auto; -webkit-overflow-scrolling: touch; }
         
         /* Slide Animations */
         @keyframes slideOutLeft { from { transform: translateX(0); opacity: 1; } to { transform: translateX(-20px); opacity: 0; } }
@@ -260,7 +276,6 @@
             opacity: 0.9; 
             transition: opacity .2s; 
             cursor: pointer; 
-            /* 新增：滑桿進度條樣式 */
             background: linear-gradient(to right, var(--c-secondary) 0%, var(--c-secondary) var(--progress-width, 0%), var(--c-border) var(--progress-width, 0%), var(--c-border) 100%);
         }
         #day-slider:hover { opacity: 1; }
@@ -274,7 +289,7 @@
             cursor: pointer; 
             border: 3px solid white; 
             box-shadow: 0 1px 3px rgba(0,0,0,0.2); 
-            margin-top: -7px; /* 調整拇指位置與軌道對齊 */
+            margin-top: -7px;
         }
         #day-slider::-moz-range-thumb { 
             width: 22px; 
@@ -285,7 +300,6 @@
             border: 3px solid white; 
             box-shadow: 0 1px 3px rgba(0,0,0,0.2); 
         }
-        /* 進度條樣式 for Firefox */
         #day-slider::-moz-range-track {
             background: linear-gradient(to right, var(--c-secondary) 0%, var(--c-secondary) var(--progress-width, 0%), var(--c-border) var(--progress-width, 0%), var(--c-border) 100%);
             border-radius: 9999px;
@@ -387,8 +401,8 @@
     <!-- Main Container -->
     <div class="container mx-auto p-4 sm:p-6 md:p-8 max-w-6xl">
         
-        <!-- 更新：為整個區塊設定最小高度，並使其內部內容彈性填充 -->
-        <section id="status-dashboard-section" class="mb-12 no-print min-h-[600px]">
+        <!-- [MODIFIED] Removed min-h-[600px] and added flex display for full screen layout -->
+        <section id="status-dashboard-section" class="mb-12 no-print flex flex-col">
             <div class="bg-white rounded-2xl shadow-lg p-5 md:p-6 ring-1 ring-gray-200 h-full flex flex-col">
                 <div id="status-time-info" class="flex justify-between items-center text-xs text-gray-500 mb-4 pb-4 border-b border-gray-200 font-mono">
                     <span id="status-taipei-time"></span>
@@ -414,7 +428,6 @@
                     </div>
                 </div>
 
-                <!-- 更新：加入 flex-grow 讓內容彈性填充，並維持 overflow-y: auto -->
                 <div id="status-card-content" class="space-y-4 mt-4 flex-grow" style="touch-action: pan-y;">
                     <div>
                         <div class="flex justify-between items-baseline">
@@ -424,7 +437,6 @@
                         
                         <div class="relative pt-2 pb-1">
                             <label for="day-slider" class="sr-only">行程日選擇拉桿</label>
-                            <!-- 新增：顯示當前滑桿日期的元素 -->
                             <span id="current-slider-date" class="absolute -top-4 left-1/2 -translate-x-1/2 text-xs font-semibold text-gray-600 bg-white px-2 py-1 rounded-md shadow-sm whitespace-nowrap"></span>
                             <input type="range" id="day-slider" min="1" max="14" value="1" class="w-full">
                         </div>
@@ -834,7 +846,6 @@
                         
                         let offset = thumbPosition - (currentSliderDateEl.offsetWidth / 2);
 
-                        // 【修正】確保提示框不會超出邊界
                         if (offset < 0) {
                             offset = 0;
                         }
@@ -992,6 +1003,16 @@
             window.tripData = data;
             const { hotels: hotelData, transport: transportData, foodie: foodieData, tripInfo, itinerary } = data;
             
+            // --- [NEW] Dynamic Nav Height Calculation ---
+            function updateNavHeightVar() {
+                const nav = document.getElementById('main-nav');
+                const navHeight = nav ? nav.offsetHeight : 68; // Fallback height
+                document.documentElement.style.setProperty('--nav-h', `${navHeight}px`);
+            }
+            window.addEventListener('resize', updateNavHeightVar);
+            updateNavHeightVar(); // Initial call
+            // --- End of New Code ---
+
             const statusCityBtn = document.getElementById('status-city-btn');
             const cityDropdown = document.getElementById('city-dropdown');
             const statusCityArrow = document.getElementById('status-city-arrow');
