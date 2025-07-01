@@ -738,7 +738,7 @@
             const statusCityTextEl = document.getElementById('status-city-text'); 
             const progressTextEl = document.getElementById('status-progress-text');
             const daySlider = document.getElementById('day-slider');
-            const currentSliderDateEl = document.getElementById('current-slider-date'); // 新增：獲取顯示當前日期的元素
+            const currentSliderDateEl = document.getElementById('current-slider-date');
             const viewDetailsBtn = document.getElementById('view-details-btn');
             const weatherItemEl = document.getElementById('status-weather-item');
             const weatherIconEl = document.getElementById('status-weather-icon');
@@ -788,7 +788,7 @@
                     transportItemEl.style.display = 'none';
                     if (travelDayIndicatorEl) travelDayIndicatorEl.style.display = 'none';
                     if (paginationDotsContainer) paginationDotsContainer.innerHTML = '';
-                    if (currentSliderDateEl) currentSliderDateEl.style.display = 'none'; // 隱藏日期顯示
+                    if (currentSliderDateEl) currentSliderDateEl.style.display = 'none';
                     return;
                 }
 
@@ -817,15 +817,13 @@
                 progressTextEl.textContent = `Day ${targetDayData.day} / ${tripInfo.totalDays}`;
                 if (daySlider) {
                     daySlider.value = targetDayData.day;
-                    // 更新滑桿進度條顏色
                     const progress = ((targetDayData.day - daySlider.min) / (daySlider.max - daySlider.min)) * 100;
                     daySlider.style.setProperty('--progress-width', `${progress}%`);
 
-                    // 更新滑桿上方日期顯示
                     if (currentSliderDateEl) {
                         currentSliderDateEl.textContent = `${datePart} (Day ${targetDayData.day})`;
-                        // 計算位置
-                        const thumbWidth = 22; // 滑桿拇指寬度
+                        
+                        const thumbWidth = 22;
                         const sliderWidth = daySlider.offsetWidth;
                         const trackWidth = sliderWidth - thumbWidth;
                         const value = targetDayData.day;
@@ -833,9 +831,19 @@
                         const max = parseInt(daySlider.max);
                         const percentage = (value - min) / (max - min);
                         const thumbPosition = percentage * trackWidth + (thumbWidth / 2);
-                        const offset = thumbPosition - (currentSliderDateEl.offsetWidth / 2);
+                        
+                        let offset = thumbPosition - (currentSliderDateEl.offsetWidth / 2);
+
+                        // 【修正】確保提示框不會超出邊界
+                        if (offset < 0) {
+                            offset = 0;
+                        }
+                        if (offset + currentSliderDateEl.offsetWidth > sliderWidth) {
+                            offset = sliderWidth - currentSliderDateEl.offsetWidth;
+                        }
+
                         currentSliderDateEl.style.left = `${offset}px`;
-                        currentSliderDateEl.style.display = 'block'; // 確保顯示
+                        currentSliderDateEl.style.display = 'block';
                     }
                 }
 
@@ -989,7 +997,7 @@
             const statusCityArrow = document.getElementById('status-city-arrow');
             const paginationDotsContainer = document.getElementById('status-pagination-dots');
             const daySlider = document.getElementById('day-slider');
-            const currentSliderDateEl = document.getElementById('current-slider-date'); // 新增：獲取顯示當前日期的元素
+            const currentSliderDateEl = document.getElementById('current-slider-date');
 
             if(daySlider) {
                 daySlider.max = tripInfo.totalDays;
@@ -1001,7 +1009,6 @@
                         updateStatusDashboard(currentDisplayDate, data, window.allWeatherData, 0); 
                     }
                 });
-                // 新增：當滑鼠放開滑桿時隱藏日期顯示
                 daySlider.addEventListener('mouseup', () => {
                     if (currentSliderDateEl) currentSliderDateEl.style.display = 'none';
                 });
