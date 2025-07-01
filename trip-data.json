@@ -1,437 +1,1470 @@
-{
-  "tripInfo": {
-    "totalDays": 13,
-    "tripStartDate": "2025-07-02",
-    "tripEndDate": "2025-07-16",
-    "dataVersion": "20250701-04"
-  },
-  "timePhases": [
-    {
-      "startUTC": "2025-07-02T01:00:00Z",
-      "endUTC": "2025-07-02T21:00:00Z",
-      "type": "flight",
-      "label": "飛行中 (TPE → YUL)"
-    },
-    {
-      "startUTC": "2025-07-02T21:00:00Z",
-      "endUTC": "2025-07-06T17:00:00Z",
-      "timezone": "America/Montreal",
-      "label": "蒙特婁 / 魁北克"
-    },
-    {
-      "startUTC": "2025-07-06T17:00:00Z",
-      "endUTC": "2025-07-06T18:30:00Z",
-      "type": "flight",
-      "label": "飛行中 (YQB → YYZ)"
-    },
-    {
-      "startUTC": "2025-07-06T18:30:00Z",
-      "endUTC": "2025-07-08T19:00:00Z",
-      "timezone": "America/Toronto",
-      "label": "尼加拉瀑布"
-    },
-    {
-      "startUTC": "2025-07-08T19:00:00Z",
-      "endUTC": "2025-07-08T21:00:00Z",
-      "type": "flight",
-      "label": "飛行中 (YYZ → ORD)"
-    },
-    {
-      "startUTC": "2025-07-08T21:00:00Z",
-      "endUTC": "2025-07-14T06:30:00Z",
-      "timezone": "America/Chicago",
-      "label": "芝加哥"
-    },
-    {
-      "startUTC": "2025-07-14T06:30:00Z",
-      "endUTC": "2025-07-15T03:35:00Z",
-      "type": "flight",
-      "label": "返程飛行"
-    }
-  ],
-  "hotels": [
-    { "name": "InterContinental Montreal By IHG", "checkIn": "2025-07-02", "checkOut": "2025-07-04", "mapLink": "https://maps.apple.com/?q=InterContinental+Montreal", "checkInTime": "下午4:00後", "checkOutTime": "下午12:00前" },
-    { "name": "Hotel Manoir Victoria", "checkIn": "2025-07-04", "checkOut": "2025-07-06", "mapLink": "https://maps.apple.com/?q=Hotel+Manoir+Victoria", "checkInTime": "下午4:00後", "checkOutTime": "上午11:00前" },
-    { "name": "Sheraton Fallsview Hotel", "checkIn": "2025-07-06", "checkOut": "2025-07-08", "mapLink": "https://maps.apple.com/?q=Sheraton+Fallsview+Hotel", "checkInTime": "下午4:00後", "checkOutTime": "下午12:00前" },
-    { "name": "The Peninsula Chicago (範例)", "checkIn": "2025-07-08", "checkOut": "2025-07-13", "mapLink": "https://maps.apple.com/?q=The+Peninsula+Chicago", "checkInTime": "下午3:00後", "checkOutTime": "中午12:00前" }
-  ],
-  "transport": [
-    {
-      "date": "2025-07-02",
-      "type": "航班",
-      "details": [
-        { "flightCode": "長榮 BR198", "departure": { "airport": "台北松山 (TSA)", "time": "2025-07-02T09:00:00", "tz": "Asia/Taipei" }, "arrival": { "airport": "東京成田 (NRT)", "time": "2025-07-02T13:25:00", "tz": "Asia/Tokyo" } },
-        { "flightCode": "加航 AC6", "departure": { "airport": "東京成田 (NRT)", "time": "2025-07-02T17:35:00", "tz": "Asia/Tokyo" }, "arrival": { "airport": "蒙特婁 (YUL)", "time": "2025-07-02T17:00:00", "tz": "America/Montreal" } }
-      ]
-    },
-    { "date": "2025-07-02", "type": "巴士", "details": "747 Express Bus" },
-    { "date": "2025-07-04", "type": "火車", "details": "VIA Rail (蒙特婁 → 魁北克市)" },
-    {
-      "date": "2025-07-06",
-      "type": "航班",
-      "details": [
-        { "flightCode": "加航 AC7959", "departure": { "airport": "魁北克 (YQB)", "time": "2025-07-06T13:00:00", "tz": "America/Toronto" }, "arrival": { "airport": "多倫多 (YYZ)", "time": "2025-07-06T14:30:00", "tz": "America/Toronto" } }
-      ]
-    },
-    {
-      "date": "2025-07-08",
-      "type": "航班",
-      "details": [
-        { "flightCode": "加航 AC515", "departure": { "airport": "多倫多 (YYZ)", "time": "2025-07-08T15:00:00", "tz": "America/Toronto" }, "arrival": { "airport": "芝加哥 (ORD)", "time": "2025-07-08T16:00:00", "tz": "America/Chicago" } }
-      ]
-    },
-    {
-      "date": "2025-07-14",
-      "type": "航班",
-      "details": [
-        { "flightCode": "日航 JL009", "departure": { "airport": "芝加哥 (ORD)", "time": "2025-07-14T01:30:00", "tz": "America/Chicago" }, "arrival": { "airport": "東京羽田 (HND)", "time": "2025-07-15T04:20:00", "tz": "Asia/Tokyo" } }
-      ]
-    },
-    {
-      "date": "2025-07-15",
-      "type": "航班",
-      "details": [
-        { "flightCode": "日航 JL097", "departure": { "airport": "東京羽田 (HND)", "time": "2025-07-15T08:55:00", "tz": "Asia/Tokyo" }, "arrival": { "airport": "台北松山 (TSA)", "time": "2025-07-15T11:35:00", "tz": "Asia/Taipei" } }
-      ]
-    }
-  ],
-  "foodie": {
-    "montreal": {
-      "name": "蒙特婁",
-      "categories": [
-        { "name": "🥯 道地加拿大料理", "items": [
-          { "name": "蒙特婁貝果", "desc": "必吃的特色貝果，推薦 St-Viateur 或 Fairmount。", "places": [
-            { "name": "St-Viateur Bagel", "link": "https://maps.apple.com/?q=St-Viateur+Bagel" },
-            { "name": "Fairmount Bagel", "link": "https://maps.apple.com/?q=Fairmount+Bagel" }
-          ] },
-          { "name": "煙燻肉三明治", "desc": "Schwartz’s Deli 是蒙特婁的代表性店家。", "places": [{ "name": "Schwartz’s Deli", "link": "https://maps.apple.com/?q=Schwartz’s+Deli" }] },
-          { "name": "布丁地獄", "desc": "傳統魁北克楓糖蛋糕。", "places": [{ "name": "La Binerie Mont-Royal", "link": "https://maps.apple.com/?q=La+Binerie+Mont-Royal" }] },
-          { "name": "Poutine", "desc": "肉汁起司薯條的發源地，La Banquise 是名店。", "places": [{ "name": "La Banquise", "link": "https://maps.apple.com/?q=La+Banquise" }] }
-        ]},
-        { "name": "🥂 法式／歐陸料理", "items": [
-          { "name": "戶外花園法式餐", "desc": "Jardin Nelson 提供美好的戶外用餐體驗。", "places": [{ "name": "Jardin Nelson", "link": "https://maps.apple.com/?q=Jardin+Nelson" }] },
-          { "name": "經典法式小酒館", "desc": "L’Express 是體驗道地法式小館氛圍的好去處。", "places": [{ "name": "L’Express", "link": "https://maps.apple.com/?q=L’Express+Montreal" }] },
-          { "name": "爵士音樂＋法餐", "desc": "Modavie Bistro 結合現場爵士樂與美味法餐。", "places": [{ "name": "Modavie Bistro", "link": "https://maps.apple.com/?q=Modavie" }] }
-        ]},
-        { "name": "🍰 甜點／法式糕點", "items": [
-          { "name": "可麗露", "desc": "法式甜點，可麗露是 ÔFauria 的招牌。", "places": [{ "name": "ÔFauria", "link": "https://maps.apple.com/?q=ÔFauria" }] },
-          { "name": "奶油千層糕", "desc": "Pâtisserie Au Kouign Amann 的千層糕遠近馳名。", "places": [{ "name": "Pâtisserie Au Kouign Amann", "link": "https://maps.apple.com/?q=Pâtisserie+Au+Kouign+Amann" }] },
-          { "name": "精品巧克力", "desc": "Lecavalier-Petrone 是選購精緻巧克力的好地方。", "places": [{ "name": "Lecavalier-Petrone", "link": "https://maps.apple.com/?q=Lecavalier-Petrone" }] },
-          { "name": "高評價法式甜品", "desc": "Fous Desserts 提供各式各樣高水準的法式甜點。", "places": [{ "name": "Fous Desserts", "link": "https://maps.apple.com/?q=Fous+Desserts" }] },
-          { "name": "人氣早午甜點", "desc": "Régine Café 是當地非常受歡迎的早午餐與甜點店。", "places": [{ "name": "Régine Café", "link": "https://maps.apple.com/?q=Régine+Café" }] },
-          { "name": "法式糕點老店", "desc": "Duc de Lorraine 是歷史悠久的法式糕點店。", "places": [{ "name": "Duc de Lorraine", "link": "https://maps.apple.com/?q=Duc+de+Lorraine" }] }
-        ]},
-        { "name": "☕ 早午餐／咖啡廳", "items": [
-          { "name": "三明治＋咖啡", "desc": "Olive et Gourmando 是享用美味三明治與咖啡的名店。", "places": [{ "name": "Olive et Gourmando", "link": "https://maps.apple.com/?q=Olive+et+Gourmando" }] },
-          { "name": "文青風植物系咖啡廳", "desc": "Café Parvis 以其美麗的植物裝潢和舒適氛圍聞名。", "places": [{ "name": "Café Parvis", "link": "https://maps.apple.com/?q=Café+Parvis" }] }
-        ]}
-      ]
-    },
-    "quebec": {
-      "name": "魁北克市",
-      "categories": [
-        { "name": "🥩 傳統魁北克料理／野味", "items": [
-          { "name": "野莓、楓糖料理", "desc": "Chez Boulay – Bistro Boréal 擅長使用在地食材。", "places": [{ "name": "Chez Boulay – Bistro Boréal", "link": "https://maps.apple.com/?q=Chez+Boulay+–+Bistro+Boréal" }] },
-          { "name": "歷史建築裡的家常菜", "desc": "Aux Anciens Canadiens 在古老建築中提供傳統菜餚。", "places": [{ "name": "Aux Anciens Canadiens", "link": "https://maps.apple.com/?q=Aux+Anciens+Canadiens" }] }
-        ]},
-        { "name": "🍔 家常／高人氣餐館", "items": [
-          { "name": "創意漢堡＋薯條", "desc": "Le Chic Shack 提供美味的創意漢堡。", "places": [{ "name": "Le Chic Shack", "link": "https://maps.apple.com/?q=Le+Chic+Shack" }] },
-          { "name": "經典魁北克早午餐", "desc": "Buffet de l’Antiquaire 是體驗當地早午餐的好去處。", "places": [{ "name": "Buffet de l’Antiquaire", "link": "https://maps.apple.com/?q=Buffet+de+l’Antiquaire" }] }
-        ]},
-        { "name": "🐇 主題風味料理", "items": [
-          { "name": "兔肉主題餐廳", "desc": "Le Lapin Sauté 以各種兔肉料理聞名。", "places": [{ "name": "Le Lapin Sauté", "link": "https://maps.apple.com/?q=Le+Lapin+Sauté" }] },
-          { "name": "多分店創意早午餐", "desc": "Cochon Dingue 是受歡迎的連鎖早午餐店。", "places": [{ "name": "Cochon Dingue", "link": "https://maps.apple.com/?q=Cochon+Dingue" }] }
-        ]},
-        { "name": "🍷 夜間餐酒館", "items": [
-          { "name": "木屋風格＋音樂熱鬧", "desc": "La Bûche 提供熱鬧的用餐氛圍與魁北克料理。", "places": [{ "name": "La Bûche", "link": "https://maps.apple.com/?q=La+Bûche" }] }
-        ]},
-        { "name": "🍰 甜點／下午茶", "items": [
-          { "name": "巧克力＋冰品", "desc": "Érico – chocolaterie créative 是巧克力愛好者的天堂。", "places": [{ "name": "Érico – chocolaterie créative", "link": "https://maps.apple.com/?q=Érico+–+chocolaterie+créative" }] },
-          { "name": "下城區甜點塔與蛋糕", "desc": "BILLY 提供精緻的法式甜點。", "places": [{ "name": "BILLY", "link": "https://maps.apple.com/?q=BILLY+Kwentinn" }] },
-          { "name": "精品咖啡＋甜品", "desc": "Café Saint-Henri 是品嚐好咖啡與甜點的時尚地點。", "places": [{ "name": "Café Saint-Henri", "link": "https://maps.apple.com/?q=Café+Saint-Henri" }] }
-        ]}
-      ]
-    },
-    "niagara": {
-      "name": "尼加拉瀑布",
-      "categories": [
-        { "name": "🍽️ 景觀牛排／西式主餐", "items": [
-          { "name": "旋轉餐廳", "desc": "Skylon Tower 旋轉餐廳提供壯麗的瀑布全景。", "places": [{ "name": "Skylon Tower", "link": "https://maps.apple.com/?q=Skylon+Tower" }] },
-          { "name": "瀑布景觀牛排", "desc": "The Keg Steakhouse – Fallsview 享有絕佳的瀑布景觀。", "places": [{ "name": "The Keg Steakhouse – Fallsview", "link": "https://maps.apple.com/?q=The+Keg+Steakhouse+Fallsview" }] }
-        ]},
-        { "name": "🍽️ 家庭餐／平價美食", "items": [
-          { "name": "經典菜色＋瀑布景", "desc": "Queen Victoria Place Restaurant 結合美食與美景。", "places": [{ "name": "Queen Victoria Place Restaurant", "link": "https://maps.apple.com/?q=Queen+Victoria+Place+Restaurant" }] },
-          { "name": "創意漢堡", "desc": "The Works Gourmet Burger Bistro 提供多樣化的漢堡選擇。", "places": [{ "name": "The Works Gourmet Burger Bistro", "link": "https://maps.apple.com/?q=The+Works+Gourmet+Burger+Bistro+Niagara" }] }
-        ]},
-        { "name": "🍦 甜點／冰品", "items": [
-          { "name": "楓糖炸麵餅", "desc": "BeaverTails 是加拿大必嚐的國民甜點。", "places": [{ "name": "BeaverTails", "link": "https://maps.apple.com/?q=BeaverTails+Niagara+Falls" }] },
-          { "name": "浮誇系霜淇淋", "desc": "Sweet Jesus 以其創意十足的霜淇淋聞名。", "places": [{ "name": "Sweet Jesus", "link": "https://maps.apple.com/?q=Sweet+Jesus+Niagara+Falls" }] }
-        ]}
-      ]
-    },
-    "chicago": {
-      "name": "芝加哥",
-      "categories": [
-        { "name": "🍕 芝加哥深盤披薩", "items": [
-          { "name": "起司飽滿", "desc": "Giordano’s 以其滿滿的起司內餡聞名。", "places": [{ "name": "Giordano’s", "link": "https://maps.apple.com/?q=Giordano’s" }] },
-          { "name": "酥皮濃郁", "desc": "Lou Malnati’s 的奶油酥皮是其特色。", "places": [{ "name": "Lou Malnati’s", "link": "https://maps.apple.com/?q=Lou+Malnati’s+Pizzeria" }] },
-          { "name": "焦香起司邊", "desc": "Pequod’s Pizza 的焦糖化起司邊是一大亮點。", "places": [{ "name": "Pequod’s Pizza", "link": "https://maps.apple.com/?q=Pequod’s+Pizza" }] }
-        ]},
-        { "name": "🥩 美式餐廳／牛排", "items": [
-          { "name": "經典美式＋現代", "desc": "The Dearborn 提供經典與現代融合的美式料理。", "places": [{ "name": "The Dearborn", "link": "https://maps.apple.com/?q=The+Dearborn" }] },
-          { "name": "高級牛排館", "desc": "RPM Steak 是享受頂級牛排的絕佳選擇。", "places": [{ "name": "RPM Steak", "link": "https://maps.apple.com/?q=RPM+Steak" }] },
-          { "name": "酒吧氛圍美式餐", "desc": "The Gage 結合了美食與熱鬧的酒吧氛圍。", "places": [{ "name": "The Gage", "link": "https://maps.apple.com/?q=The+Gage" }] }
-        ]},
-        { "name": "🍝 義大利料理", "items": [
-          { "name": "複合義式超市＋多餐廳", "desc": "Eataly Chicago 集合了餐廳、市集與學習於一身。", "places": [{ "name": "Eataly Chicago", "link": "https://maps.apple.com/?q=Eataly+Chicago" }] },
-          { "name": "義式小盤分享", "desc": "Quartino Ristorante 適合多人分享，氣氛活潑。", "places": [{ "name": "Quartino Ristorante", "link": "https://maps.apple.com/?q=Quartino+Ristorante" }] },
-          { "name": "高檔義餐", "desc": "RPM Italian 提供精緻的現代義大利料理。", "places": [{ "name": "RPM Italian", "link": "https://maps.apple.com/?q=RPM+Italian" }] },
-          { "name": "傳統義式風味", "desc": "Volare Ristorante Italiano 提供道地的傳統義大利菜。", "places": [{ "name": "Volare Ristorante Italiano", "link": "https://maps.apple.com/?q=Volare+Ristorante+Italiano" }] }
-        ]},
-        { "name": "🍳 早午餐／咖啡甜品", "items": [
-          { "name": "人氣鬆餅店", "desc": "Wildberry Pancakes and Cafe 是芝加哥最受歡迎的鬆餅店之一。", "places": [{ "name": "Wildberry Pancakes and Cafe", "link": "https://maps.apple.com/?q=Wildberry+Pancakes+and+Cafe" }] },
-          { "name": "輕盈健康早午餐", "desc": "Beatrix 提供健康且美味的早午餐選擇。", "places": [{ "name": "Beatrix", "link": "https://maps.apple.com/?q=Beatrix" }] },
-          { "name": "早午餐＋景觀", "desc": "Cindy’s Rooftop 享有千禧公園的壯麗景色。", "places": [{ "name": "Cindy’s Rooftop", "link": "https://maps.apple.com/?q=Cindy’s+Rooftop" }] }
-        ]},
-        { "name": "🍷 Tapas／輕食類", "items": [
-          { "name": "西班牙＋義式小盤", "desc": "The Purple Pig 提供創意十足的地中海風味小盤料理。", "places": [{ "name": "The Purple Pig", "link": "https://maps.apple.com/?q=The+Purple+Pig" }] },
-          { "name": "地中海風味", "desc": "Ema 提供清新、健康的加州風格地中海料理。", "places": [{ "name": "Ema", "link": "https://maps.apple.com/?q=Ema" }] }
-        ]},
-        { "name": "🌆 景觀餐廳／湖濱夜景", "items": [
-          { "name": "海鮮＋湖景", "desc": "Riva Crabhouse @ Navy Pier 提供美味海鮮與絕佳湖景。", "places": [{ "name": "Riva Crabhouse @ Navy Pier", "link": "https://maps.apple.com/?q=Riva+Crabhouse" }] },
-          { "name": "觀景＋雞尾酒", "desc": "360 Chicago 或 Skydeck 的高空酒吧是欣賞夜景的理想地點。", "places": [{ "name": "360 Chicago／Skydeck 餐廳", "link": "https://maps.apple.com/?q=360+CHICAGO" }] }
-        ]}
-      ]
-    }
-  },
-  "itinerary": [
-    {
-      "day": 1,
-      "date": "2025-07-02",
-      "dayGroup": 1,
-      "cityTarget": "montreal-section",
-      "weatherCity": "montreal",
-      "title": "蒙特婁抵達日",
-      "subTitle": "Day 1｜7月2日（週三）",
-      "isTravelDay": true,
-      "tags": ["#轉機抵達", "#入境準備", "#時差適應"],
-      "activities": [
-        { "title": "✈️ 航班資訊與抵達安排", "items": ["<strong>航班 BR198：</strong>台北松山(TSA) 09:00 起飛 → 東京成田(NRT) 13:25 抵達。", "<strong>航班 AC6：</strong>東京成田(NRT) 17:35 起飛 → 蒙特婁(YUL) 17:00（同日）抵達。", "※ 因時差關係，會是“時光倒流”的感覺，但實際飛行時間約 12 小時。"] },
-        { "title": "🛂 抵達蒙特婁機場（YUL）", "items": ["<strong>預計通關 + 行李提領時間：</strong>約 60–90 分鐘。", "<strong>建議完成入境後先購買：</strong>📱 SIM 卡（推薦：Bell / Fido 櫃台）、🚇 STM 交通票券（單程票 or OPUS 3日卡）。"] },
-        { "title": "🚕 前往市區飯店", "items": ["<strong>747 Express Bus (24小時營運)：</strong>費用 CA$11，行程約 45–60 分鐘，可直接用信用卡刷進站。", "<strong>Uber／Taxi：</strong>約 CA$45–55，車程約 30–40 分鐘。", "<strong>飯店建議地點：</strong><a href='https://maps.apple.com/?q=Vieux-Montréal' target='_blank' class='hover:underline'>Vieux-Montréal（舊城區）</a>或 <a href='https://maps.apple.com/?q=Berri-UQAM' target='_blank' class='hover:underline'>Berri-UQAM／Quartier Latin</a>。"] },
-        { "title": "🌇 19:00–21:00 飯店安頓＋簡單夜間散步", "items": ["<strong>夕陽夜景路線：</strong>沿<a href='https://maps.apple.com/?q=Old+Port+of+Montreal' target='_blank' class='hover:underline'>舊港</a>慢行至 <a href='https://maps.apple.com/?q=La+Grande+Roue+de+Montréal' target='_blank' class='hover:underline'>La Grande Roue 摩天輪區</a>，看聖勞倫斯河夜景。", "<strong>輕食建議：</strong><a href='https://maps.apple.com/?q=Olive+et+Gourmando' target='_blank' class='hover:underline'>Olive et Gourmando</a> 或 <a href='https://maps.apple.com/?q=Maison+Christian+Faure' target='_blank' class='hover:underline'>Maison Christian Faure</a>（甜點塔派）。"] }
-      ],
-      "reminder": { "title": "🌙 睡前提醒", "items": ["🧴 建議泡澡放鬆，避免時差影響過大。", "🕓 盡量調整作息至當地時間，避免太早入睡。", "📦 可順便打開行李，準備第二天城市探索用物（行動網路、地鐵卡、備用雨具）。"] }
-    },
-    {
-      "day": 2,
-      "date": "2025-07-03",
-      "dayGroup": 1,
-      "cityTarget": "montreal-section",
-      "weatherCity": "montreal",
-      "title": "蒙特婁半日遊｜教堂・市集・港邊漫步",
-      "subTitle": "Day 2｜7月3日（週四）",
-      "isTravelDay": false,
-      "tags": ["#哥德式教堂", "#舊港漫步", "#法式風情"],
-      "activities": [
-        { "title": "☀️ 08:30 – 12:00｜舊城早晨巡禮", "items": ["<strong>🏛️ <a href='https://maps.apple.com/?q=Notre-Dame+Basilica+of+Montreal' target='_blank' class='hover:underline'>諾特丹聖母大教堂</a>：</strong>蒙特婁最具代表性的哥德式教堂。若有英文導覽團（$15 CAD左右）可預約參加。建議停留 40–60 分鐘。", "<strong>🏙️ <a href='https://maps.apple.com/?q=Place+d'Armes,Montreal' target='_blank' class='hover:underline'>Place d’Armes 廣場</a> → <a href='https://maps.apple.com/?q=Rue+Saint-Paul,Montreal' target='_blank' class='hover:underline'>Rue Saint-Paul 步行街</a>：</strong>充滿法式殖民建築與街頭藝人，適合拍照、買紀念品。"] },
-        { "title": "🧺 12:00 – 13:30｜午餐 + 市集小吃", "items": ["<strong><a href='https://maps.apple.com/?q=Marché+Bonsecours,Montreal' target='_blank' class='hover:underline'>Marché Bonsecours（邦斯古爾市場）</a>：</strong>藝品、手工皂、地方食品伴手禮選擇豐富。", "<strong>或前往：</strong><a href='https://maps.apple.com/?q=Modavie,Montreal' target='_blank' class='hover:underline'>Modavie Bistro</a>（音樂法餐）或 <a href='https://maps.apple.com/?q=Tommy+Café,Montreal' target='_blank' class='hover:underline'>Tommy Café</a>（人氣咖啡店）。"] },
-        { "title": "🛍️ 13:30 – 15:30｜舊港區港邊散步 + 摩天輪體驗", "items": ["沿 <a href='https://maps.apple.com/?q=Old+Port+of+Montreal' target='_blank' class='hover:underline'>Vieux-Port de Montréal</a> 河岸漫步，若天氣良好可搭乘 🎡 <a href='https://maps.apple.com/?q=La+Grande+Roue+de+Montréal' target='_blank' class='hover:underline'>La Grande Roue 蒙特婁摩天輪</a>（$25 CAD 左右）。"] },
-        { "title": "🧳 15:30 – 17:00｜飯店小憩・整理行李", "items": ["回飯店稍作休息，或前往超市（如 IGA、Metro）補給。", "整理翌日轉往魁北克的行李（建議提前預訂 VIA Rail 火車）。"] }
-      ],
-      "infoBox": { "title": "⭐ 蒙特婁實用資訊", "items": ["💳 地鐵使用 STM 系統，一日票或 OPUS 卡皆可。", "🗣 雖以法語為主，但觀光區英文通用，用「Bonjour / Merci」開場更有禮。", "👟 鞋子請選擇適合步行的，舊城區石板路段多。", "🌡️ 七月天氣約 22–27°C，日夜溫差稍大，建議攜帶薄外套。"] }
-    },
-    {
-      "day": 3,
-      "date": "2025-07-04",
-      "dayGroup": 3,
-      "cityTarget": "quebec-section",
-      "weatherCity": "quebec",
-      "title": "蒙特婁 → 魁北克市｜VIA Rail 轉移・上城區初探",
-      "subTitle": "Day 3｜7月4日（週五）",
-      "isTravelDay": true,
-      "tags": ["#火車旅程", "#古城初探", "#世界遺產"],
-      "activities": [
-        { "title": " 12:00 – 13:30｜抵達魁北克市 → 入住飯店 → 午餐", "items": ["<strong>抵達站：</strong><a href='https://maps.apple.com/?q=Gare+du+Palais,Quebec' target='_blank' class='hover:underline'>Gare du Palais</a>，位於舊城區北側。", "<strong>午餐建議：</strong><a href='https://maps.apple.com/?q=Le+Chic+Shack,Quebec' target='_blank' class='hover:underline'>Le Chic Shack</a>（漢堡＋奶昔）或 <a href='https://maps.apple.com/?q=Buffet+de+l’Antiquaire,Quebec' target='_blank' class='hover:underline'>Buffet de l’Antiquaire</a>（魁北克家常菜）。"] },
-        { "title": " 14:00 – 17:30｜上城區初探路線", "items": ["<strong>步行路線：</strong><a href='https://maps.apple.com/?q=Hotel+Manoir+Victoria,Quebec' target='_blank' class='hover:underline'>Hotel Manoir Victoria</a> → <a href='https://maps.apple.com/?q=Dufferin+Terrace,Quebec' target='_blank' class='hover:underline'>杜費林露台</a> → <a href='https://maps.apple.com/?q=Porte+Saint-Louis,Quebec' target='_blank' class='hover:underline'>聖路易門/古城牆</a> → <a href='https://maps.apple.com/?q=Hôtel+du+Parlement,Quebec' target='_blank' class='hover:underline'>魁北克省議會</a>。"] },
-        { "title": "🌃 18:00 – 20:30｜晚餐＋夜景散步", "items": ["<strong>餐廳建議：</strong><a href='https://maps.apple.com/?q=Aux+Anciens+Canadiens,Quebec' target='_blank' class='hover:underline'>Aux Anciens Canadiens</a> (17世紀老宅法餐)。", "飯後可再回到 Dufferin Terrace 拍攝夜景，芳堤娜城堡夜間打燈效果極佳。"] }
-      ],
-      "reminder": { "title": "🛏️ 睡前建議", "items": ["若隔天為重度步行日，建議今晚簡單伸展、早點休息。", "可於便利商店購買簡易點心或隔日早餐儲備。", "如有興趣參加翌日付費導覽 (如鬼怪夜遊、歷史導覽)，可今晚先預約。"] }
-    },
-    {
-      "day": 4,
-      "date": "2025-07-05",
-      "dayGroup": 3,
-      "cityTarget": "quebec-section",
-      "weatherCity": "quebec",
-      "title": "魁北克市深度遊｜下城、博物館與觀景台",
-      "subTitle": "Day 4｜7月5日（週六）",
-      "isTravelDay": false,
-      "tags": ["#小尚普蘭街", "#文明博物館", "#亞伯拉罕平原"],
-      "activities": [
-        { "title": "☀️ 08:30 – 12:00｜下城區漫步 + 文明博物館", "items": ["搭乘<a href='https://maps.apple.com/?q=Funiculaire+du+Vieux-Québec' target='_blank' class='hover:underline'>登山纜車</a>或走<a href='https://maps.apple.com/?q=Escalier+Casse-Cou,Quebec' target='_blank'>斷頭階梯</a>前往下城。", "探索<a href='https://maps.apple.com/?q=Rue+du+Petit-Champlain,Quebec' target='_blank' class='hover:underline'>小尚普蘭街</a>與<a href='https://maps.apple.com/?q=Place+Royale,Quebec' target='_blank' class='hover:underline'>Place Royale 廣場</a>。", "<strong>10:30 – 12:00：</strong>參觀<a href='https://www.mcq.org/en/' target='_blank' class='hover:underline'>文明博物館 Musée de la civilisation</a> (建議預留 1.5 小時)。"] },
-        { "title": "🍽 12:00 – 13:30｜午餐時間", "items": ["<strong>推薦餐廳：</strong><a href='https://maps.apple.com/?q=Le+Lapin+Sauté,Quebec' target='_blank' class='hover:underline'>Le Lapin Sauté</a> (兔肉料理) 或 <a href='https://maps.apple.com/?q=Cochon+Dingue,Quebec' target='_blank' class='hover:underline'>Cochon Dingue</a> (人氣早午餐)。"] },
-        { "title": "🌳 14:00 – 17:00｜亞伯拉罕平原 + 城牆巡禮", "items": ["沿<a href='https://maps.apple.com/?q=Promenade+des+Gouverneurs,Quebec+City' target='_blank' class='hover:underline'>總督步道</a>進入<a href='https://maps.apple.com/?q=Plains+of+Abraham,Quebec' target='_blank' class='hover:underline'>亞伯拉罕平原</a>。", "可參觀<a href='https://www.ccbn-nbc.gc.ca/en/plains-of-abraham/plains-of-abraham-museum/' target='_blank' class='hover:underline'>平原博物館</a>，或在<a href='https://maps.apple.com/?q=Artillery+Park,Quebec' target='_blank' class='hover:underline'>城牆(Artillery Park)</a>上散步。", "<strong>備選：</strong><a href='https://www.observatoire-capitale.com/en/' target='_blank' class='hover:underline'>Observatoire de la Capitale</a>（觀景台）俯瞰古城全景。"] },
-        { "title": "🍷 18:00 – 20:30｜晚餐與夜景收尾", "items": ["<strong>晚餐建議：</strong><a href='https://maps.apple.com/?q=Chez+Boulay+–+Bistro+Boréal,Quebec' target='_blank' class='hover:underline'>Chez Boulay – Bistro Boréal</a>（北方林地創意料理）。", "飯後可再次至 Dufferin Terrace 或 Place d’Armes 散步，感受古城夜間氛圍。"] }
-      ],
-      "infoBox": { "title": "⭐ 魁北克市實用資訊", "items": ["🗣 法語為主，但觀光區英文OK；標誌以法語為主。", "🚶‍♀️ 石板坡道多，建議穿防滑鞋、備手杖如有需要。", "💳 商店與餐廳普遍接受信用卡，小費建議 15–18%。", "🌤 白天氣溫約 22°C，夜間可降至 16°C，攜帶薄長袖外套。"] }
-    },
-    {
-      "day": 5,
-      "date": "2025-07-06",
-      "dayGroup": 5,
-      "cityTarget": "niagara-section",
-      "weatherCity": "niagara",
-      "title": "魁北克市 → 尼加拉瀑布｜悠閒出發 + 抵達觀景",
-      "subTitle": "Day 5｜7月6日（週日）",
-      "isTravelDay": true,
-      "tags": ["#國內航班", "#機場轉乘", "#瀑布夜景"],
-      "activities": [
-        { "title": "☕ 08:30 – 10:30｜早餐與最後散步", "items": ["<strong>推薦早餐地點：</strong><a href='https://maps.apple.com/?q=Le+Cochon+Dingue,Quebec' target='_blank' class='hover:underline'>Le Cochon Dingue</a> 或 <a href='https://maps.apple.com/?q=La+Maison+Smith,Quebec' target='_blank' class='hover:underline'>La Maison Smith</a>。", "可選擇短距離散步（如 Place Royale 再訪、沿芳堤娜城堡拍照收尾）。"] },
-        { "title": "✈️ 11:00 – 14:30｜退房 → 前往機場 → 搭乘中午航班", "items": ["建議搭乘航班如 Air Canada AC7959（13:00 YQB → 14:30 YYZ）或類似班次。", "從舊城至機場約 20–30 分鐘計程車程。"] },
-        { "title": "🚌 15:30 – 17:30｜轉乘至尼加拉瀑布", "items": ["<strong>包車：</strong>約 1.5 小時直達飯店。", "<strong>大眾運輸：</strong>YYZ 機場搭 UP Express 至 Union Station，轉 GO Transit 火車/巴士至 Niagara Falls (總程約 2.5–3 小時)。"] },
-        { "title": "🌇 18:30 – 20:30｜瀑布前散步 + 景觀晚餐", "items": ["入住瀑布景觀飯店後，可前往 <a href='https://maps.apple.com/?q=Table+Rock+Welcome+Centre' target='_blank'>Table Rock Centre</a>，觀察黃昏瀑布光影。", "<strong>晚餐建議：</strong><a href='https://maps.apple.com/?q=Skylon+Tower,Niagara+Falls' target='_blank' class='hover:underline'>Skylon Tower 旋轉餐廳</a> 或 <a href='https://maps.apple.com/?q=The+Keg+Steakhouse,Niagara+Falls' target='_blank' class='hover:underline'>The Keg Steakhouse</a>（靠窗位）。"] }
-      ]
-    },
-    {
-      "day": 6,
-      "date": "2025-07-07",
-      "dayGroup": 5,
-      "cityTarget": "niagara-section",
-      "weatherCity": "niagara",
-      "title": "尼加拉瀑布一日體驗｜觀瀑船、煙火、自然景點",
-      "subTitle": "Day 6｜7月7日（一）",
-      "isTravelDay": false,
-      "tags": ["#經典體驗", "#自然奇觀", "#夜間煙火"],
-      "activities": [
-        { "title": "🌊 09:00 – 12:00｜經典瀑布三合一體驗", "items": ["<strong><a href='https://www.niagaraparks.com/visit/attractions/niagara-city-cruises/' target='_blank' class='hover:underline'>Voyage to the Falls 船票體驗</a>：</strong>近距離感受瀑布水勢，建議線上預約上午場。", "<strong><a href='https://www.niagaraparks.com/visit/attractions/journey-behind-the-falls/' target='_blank' class='hover:underline'>Journey Behind the Falls</a>：</strong>進入瀑布後方岩壁隧道觀賞水柱傾瀉。", "<strong><a href='https://www.niagaraparks.com/visit/attractions/niagaras-fury/' target='_blank' class='hover:underline'>Niagara’s Fury 4D 劇場</a>（備選）：</strong>觀看瀑布形成歷史的沉浸式體驗。"] },
-        { "title": "🍽️ 12:30 – 14:00｜午餐建議", "items": ["<a href='https://maps.apple.com/?q=Queen+Victoria+Place+Restaurant,Niagara+Falls' target='_blank' class='hover:underline'>Queen Victoria Place Restaurant</a>（景觀+當地食材）或 Table Rock Centre 美食廣場。"] },
-        { "title": "🦋 14:00 – 17:00｜自然景點探索", "items": ["搭乘 <strong>WEGO 巴士</strong>（建議購買 Niagara Pass）前往：<a href='https://www.niagaraparks.com/visit/attractions/butterfly-conservatory/' target='_blank' class='hover:underline'>Butterfly Conservatory</a>（蝴蝶園）或 <a href='https://www.niagaraparks.com/visit/attractions/white-water-walk/' target='_blank' class='hover:underline'>White Water Walk</a>（激流步道）。"] },
-        { "title": "🍷 18:00 – 21:30｜晚餐 + 夜景 + 煙火", "items": ["<strong>夜間活動：</strong>約 21:00 起瀑布打燈，21:45～22:00 季節性煙火秀（如天氣良好）。", "建議提早至 <a href='https://maps.apple.com/?q=Table+Rock+Welcome+Centre,Niagara+Falls' target='_blank'>Table Rock</a> 或 <a href='https://maps.apple.com/?q=Queen+Victoria+Park,Niagara+Falls' target='_blank'>Queen Victoria Park</a> 卡位拍照。"] }
-      ],
-      "infoBox": { "title": "⭐ 瀑布實用資訊", "items": ["🧥 參加瀑布船與後方通道活動務必攜帶雨衣（現場也會提供）。", "🎫 建議提前線上購買 <a href='https://www.niagaraparks.com/visit/attractions/adventure-pass-classic' target='_blank' class='hover:underline'>Niagara Pass</a>（含票+WEGO車）避免現場排隊。", "📷 相機建議使用防水袋，手機請準備擦拭布。", "☀️ 七月氣溫約 25–29°C，日曬強烈建議塗防曬。"] }
-    },
-    {
-      "day": 7,
-      "date": "2025-07-08",
-      "dayGroup": 7,
-      "cityTarget": "chicago-section",
-      "weatherCity": "chicago",
-      "title": "尼加拉瀑布 → 芝加哥｜輕鬆轉移 + 河畔夜色",
-      "subTitle": "Day 7｜7月8日（二）",
-      "isTravelDay": true,
-      "tags": ["#跨國飛行", "#入境美國", "#芝加哥初印象"],
-      "activities": [
-        { "title": "🧳 08:30 – 10:00｜悠閒早餐 + 退房整備", "items": ["建議睡到自然醒，於飯店內或瀑布區附近享用早餐。", "約 10:00 前退房、整裝前往多倫多機場。"] },
-        { "title": "🚐 10:00 – 12:00｜前往多倫多皮爾遜機場（YYZ）", "items": ["<strong>（時間已提早）</strong>建議包車直達機場，預留充足時間應對路況與美國海關預先清關。"] },
-        { "title": "🌇 18:30 – 21:00｜芝加哥河畔散步 + Deep Dish 晚餐", "items": ["入住飯店後，可沿 <a href='https://maps.apple.com/?q=Chicago+Riverwalk' target='_blank' class='hover:underline'>Chicago Riverwalk</a> 散步至 <a href='https://maps.apple.com/?q=DuSable+Bridge,Chicago' target='_blank' class='hover:underline'>DuSable Bridge</a>。", "<strong>晚餐建議：</strong><a href='https://maps.apple.com/?q=Lou+Malnati's,Chicago' target='_blank' class='hover:underline'>Lou Malnati’s</a> 或 <a href='https://maps.apple.com/?q=Giordano's,Chicago' target='_blank' class='hover:underline'>Giordano’s</a>（芝加哥風味深盤披薩）。"] }
-      ],
-      "reminder": { "title": "🛏️ 睡前提醒", "items": ["明日為建築巡禮與湖濱遊覽日，可自由決定早或晚出發。", "若體力充沛，夜間可短暫前往 <a href='https://maps.apple.com/?q=Millennium+Park,Chicago' target='_blank'>Millennium Park</a> 看夜色中的 The Bean。"] }
-    },
-    {
-      "day": 8,
-      "date": "2025-07-09",
-      "dayGroup": 7,
-      "cityTarget": "chicago-section",
-      "weatherCity": "chicago",
-      "title": "芝加哥建築日｜建築遊船 + 公園藝術 + 湖畔黃昏",
-      "subTitle": "Day 8｜7月9日（三）",
-      "isTravelDay": false,
-      "tags": ["#建築遊船", "#千禧公園", "#高空夜景"],
-      "activities": [
-        { "title": "🛥️ 09:30 – 12:00｜芝加哥建築遊船 + 千禧公園", "items": ["<strong><a href='https://www.architecture.org/tours/chicago-architecture-foundation-center-river-cruise-aboard-chicago-s-first-lady/' target='_blank' class='hover:underline'>Chicago Architecture River Cruise</a>：</strong>建議預約 <a href='https://www.wendellaboats.com/' target='_blank'>Wendella</a> 或 <a href='https://www.cruisechicago.com/first-lady-cruises' target='_blank'>Chicago’s First Lady</a> 上午場。", "遊船後步行至 <a href='https://maps.apple.com/?q=Millennium+Park,Chicago' target='_blank' class='hover:underline'>Millennium Park</a> 拍攝 <a href='https://maps.apple.com/?q=Cloud+Gate,Chicago' target='_blank' class='hover:underline'>Cloud Gate (The Bean)</a>。"] },
-        { "title": "🍽️ 12:30 – 14:00｜午餐建議", "items": ["<a href='https://maps.apple.com/?q=The+Purple+Pig,Chicago' target='_blank' class='hover:underline'>The Purple Pig</a>（地中海風味）或 <a href='https://maps.apple.com/?q=Beatrix,Chicago' target='_blank' class='hover:underline'>Beatrix</a>（人氣早午餐）。"] },
-        { "title": "🎡 14:30 – 17:00｜海軍碼頭 Navy Pier + 湖畔活動", "items": ["登上 <a href='https://navypier.org/things-to-do/rides-attractions/centennial-wheel/' target='_blank' class='hover:underline'>Centennial Wheel 摩天輪</a>，俯瞰密西根湖與天際線。", "或前往<a href='https://mcachicago.org/' target='_blank' class='hover:underline'>當代藝術博物館（MCA）</a>。"] },
-        { "title": "🏙️ 18:00 – 21:00｜夜景體驗 + 高空酒吧或觀景塔", "items": ["<strong>選擇一：</strong><a href='https://360chicago.com/' target='_blank' class='hover:underline'>360 CHICAGO</a>（Hancock Tower），可選附酒吧門票。", "<strong>選擇二：</strong><a href='https://theskydeck.com/' target='_blank' class='hover:underline'>Skydeck Chicago</a>（Willis Tower），體驗懸空玻璃盒。", "<strong>晚餐：</strong><a href='https://www.signatureroom.com/' target='_blank' class='hover:underline'>The Signature Room</a>（Hancock Tower 95樓）或 <a href='https://maps.apple.com/?q=The+Gage,Chicago' target='_blank' class='hover:underline'>The Gage</a>。"] }
-      ],
-      "infoBox": { "title": "⭐ 芝加哥實用資訊", "items": ["🚇 地鐵系統 CTA 可使用 Ventra App 或現場購票。", "📶 網路不穩地點可使用 Starbucks / Target 等店內免費 Wi-Fi。", "💨 芝加哥有「風城」之稱，日夜溫差大且湖邊風強，務必攜帶防風外套。"] }
-    },
-    {
-      "day": 9,
-      "date": "2025-07-10",
-      "dayGroup": 7,
-      "cityTarget": "chicago-section",
-      "weatherCity": "chicago",
-      "title": "芝加哥博物館與夜遊河畔日",
-      "subTitle": "Day 9｜7月10日（週四）",
-      "isTravelDay": false,
-      "tags": ["#自然歷史", "#夜間遊船", "#城市夜景"],
-      "activities": [
-        { "title": "🦖 09:00 – 12:00｜芝加哥自然歷史博物館（Field Museum）", "items": ["前往 <a href='https://maps.apple.com/?q=Field+Museum,Chicago' target='_blank' class='hover:underline'>Field Museum</a>，重點展覽：Sue 暴龍、古埃及木乃伊、北美原住民。", "建議停留約 2.5 小時，可租借語音導覽。"] },
-        { "title": "🌳 12:30 – 17:30｜午餐 + 輕鬆行程", "items": ["<strong>午餐建議：</strong><a href='https://maps.apple.com/?q=The+Gage,Chicago' target='_blank' class='hover:underline'>The Gage</a> 或 <a href='https://maps.apple.com/?q=Wildberry+Pancakes,Chicago' target='_blank' class='hover:underline'>Wildberry Pancakes</a>。", "下午可至 <a href='https://maps.apple.com/?q=The+Magnificent+Mile,Chicago' target='_blank' class='hover:underline'>Magnificent Mile</a> 逛街或在 <a href='https://maps.apple.com/?q=Chicago+Riverwalk' target='_blank' class='hover:underline'>Chicago Riverwalk</a> 放鬆。"] },
-        { "title": "🌙 18:00 – 21:00｜早晚餐 + 夜間建築遊船", "items": ["<strong>晚餐建議：</strong><a href='https://maps.apple.com/?q=The+Dearborn,Chicago' target='_blank' class='hover:underline'>The Dearborn</a>（美式餐酒館）或深盤披薩。", "<strong>夜間建築遊船：</strong>欣賞點燈後的摩天樓，建議選擇 <a href='https://www.wendellaboats.com/' target='_blank'>Wendella</a> / <a href='https://www.shorelinesightseeing.com/' target='_blank'>Shoreline</a> 等船公司並線上預約。"] }
-      ]
-    },
-    {
-      "day": 10,
-      "date": "2025-07-11",
-      "dayGroup": 10,
-      "cityTarget": "chicago-section",
-      "weatherCity": "chicago",
-      "title": "芝加哥購物 or 館所自由日",
-      "subTitle": "Day 10｜7月11日（週五）",
-      "isTravelDay": false,
-      "tags": ["#自由行程", "#水族館", "#彈性安排"],
-      "activities": [
-        { "title": "☀️ 09:00 – 12:00｜自由行程：購物 or 市區散步", "items": ["<strong>購物：</strong>前往 <a href='https://maps.apple.com/?q=The+Magnificent+Mile,Chicago' target='_blank' class='hover:underline'>Michigan Avenue (Magnificent Mile)</a>，<a href='https://maps.apple.com/?q=Nordstrom,chicago' target='_blank'>Nordstrom</a>, <a href='https://maps.apple.com/?q=Macy's,chicago' target='_blank'>Macy’s</a>, <a href='https://maps.apple.com/?q=Uniqlo,chicago' target='_blank'>Uniqlo</a> 等品牌集中。", "<strong>散步：</strong>選擇放鬆慢行 <a href='https://maps.apple.com/?q=Millennium+Park,Chicago' target='_blank' class='hover:underline'>Millennium Park</a> → <a href='https://maps.apple.com/?q=Maggie+Daley+Park,Chicago' target='_blank' class='hover:underline'>Maggie Daley Park</a> 綠地。", "<strong>藝術：</strong>參觀<a href='https://mcachicago.org/' target='_blank' class='hover:underline'>芝加哥當代藝術館（MCA）</a>，小而精緻。"] },
-        { "title": "🍽️ 12:30 – 14:00｜午餐建議", "items": ["<a href='https://maps.apple.com/?q=Beatrix,Chicago' target='_blank' class='hover:underline'>Beatrix</a>（輕食系健康料理）或 <a href='https://maps.apple.com/?q=The+Purple+Pig,Chicago' target='_blank' class='hover:underline'>The Purple Pig</a>（人氣地中海小酒館）。"] },
-        { "title": "🐟 14:30 – 17:00｜Shedd Aquarium（水族館）選項", "items": ["前往<a href='https.apple.com/?q=Shedd+Aquarium,Chicago' target='_blank' class='hover:underline'>Shedd Aquarium</a>，特展：白鯨、海豚、企鵝、亞馬遜熱帶館區。", "若不參觀水族館，也可回飯店休息或繼續購物。"] },
-        { "title": "🍽️ 18:00 – 20:30｜最後晚餐收尾", "items": ["<strong>推薦：</strong><a href='https://maps.apple.com/?q=The+Dearborn,Chicago' target='_blank' class='hover:underline'>The Dearborn</a>（現代美式餐酒館）或 <a href='https://maps.apple.com/?q=Cindy's+Rooftop,Chicago' target='_blank' class='hover:underline'>Cindy’s Rooftop</a>（觀景餐廳）。"] }
-      ]
-    },
-    {
-      "day": 11,
-      "date": "2025-07-12",
-      "dayGroup": 10,
-      "cityTarget": "chicago-section",
-      "weatherCity": "chicago",
-      "title": "芝加哥藝術學院與文化日",
-      "subTitle": "Day 11｜7月12日（六）",
-      "isTravelDay": false,
-      "tags": ["#藝術巡禮", "#世界名畫", "#文化沉浸"],
-      "activities": [
-        { "title": "🎨 09:30 – 13:00｜芝加哥藝術學院（Art Institute of Chicago）", "items": ["前往<a href='https://www.artic.edu/' target='_blank' class='hover:underline'>芝加哥藝術學院</a>，必看莫內《睡蓮》、秀拉《大碗島的星期天下午》、伍德《美國哥德式》。", "建議停留 3 小時，可租借語音導覽，深入了解作品。"] },
-        { "title": "🍽️ 13:00 – 14:30｜午餐建議", "items": ["<a href='https://maps.apple.com/?q=The+Gage,Chicago' target='_blank' class='hover:underline'>The Gage</a>（博物館對面，人氣高）或<a href='https://maps.apple.com/?q=Cindy's+Rooftop,Chicago' target='_blank' class='hover:underline'>Cindy’s Rooftop</a>（景觀餐廳）。"] },
-        { "title": "🛍️ 15:00 onwards｜自由時間", "items": ["可安排購物、回訪喜愛景點或回飯店休息。"] }
-      ]
-    },
-    {
-      "day": 12,
-      "date": "2025-07-13",
-      "dayGroup": 10,
-      "cityTarget": "chicago-section",
-      "weatherCity": "chicago",
-      "title": "🧳 芝加哥收尾日 + 前往機場",
-      "subTitle": "Day 12｜7月13日（日）",
-      "isTravelDay": false,
-      "tags": ["#旅程總結", "#最後巡禮", "#最後晚餐", "#機場準備"],
-      "activities": [
-        { "title": "☕ 09:00 – 12:00｜早午餐 + 輕鬆散步", "items": ["<strong>餐廳建議：</strong><a href='https://maps.apple.com/?q=Wildberry+Pancakes+and+Cafe,Chicago' target='_blank' class='hover:underline'>Wildberry Pancakes</a> 或回訪喜愛的餐廳。", "<strong>行程建議：</strong><a href='https://maps.apple.com/?q=Millennium+Park,Chicago' target='_blank' class='hover:underline'>Millennium Park</a> 最後巡禮，或於 <a href='https://maps.apple.com/?q=Chicago+Riverwalk' target='_blank' class='hover:underline'>Chicago Riverwalk</a> 散步拍照。"] },
-        { "title": "🎒 12:00 – 17:00｜整理行李 + 自由時間", "items": ["回飯店收拾行李，可向櫃檯請求延後退房或寄存行李。", "可至附近商圈採購紀念品（<a href='https://maps.apple.com/?q=Target,Chicago' target='_blank' class='hover:underline'>Target</a>、<a href='https://maps.apple.com/?q=Nordstrom+Rack,Chicago' target='_blank' class='hover:underline'>Nordstrom Rack</a> 等）。"] },
-        { "title": "🧳 18:00 – 21:30｜晚餐 + 前往機場（ORD）", "items": ["晚餐建議選擇飯店周邊輕食餐廳。", "約 21:00 前出發前往 O’Hare 國際機場（ORD）。", "可搭乘地鐵 Blue Line 或 Uber，為凌晨航班做準備。"] }
-      ]
-    },
-    {
-      "day": 13,
-      "date": "2025-07-14",
-      "dayGroup": 10,
-      "cityTarget": "",
-      "weatherCity": "",
-      "title": "✈️ 返家日｜芝加哥 → 台北 (經東京)",
-      "subTitle": "Day 13-14｜7月14日 (一) ~ 7月15日 (二)",
-      "isTravelDay": true,
-      "tags": ["#返家之日", "#東京轉機", "#滿載而歸"],
-      "activities": [
-        { "title": "航班資訊", "items": [
-            "<strong>航班 JL009：</strong>芝加哥(ORD) 01:30 → 東京羽田(HND) 04:20 (+1)",
-            "<strong>航班 JL097：</strong>東京羽田(HND) 08:55 → 台北松山(TSA) 11:35"
-          ]
-        },
-        { "title": "歡迎回家！", "items": [
-            "抵達台北松山機場後，旅程圓滿結束！"
-          ]
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no">
+    <title>F&S飛翔旅行 | 加拿大東岸 & 芝加哥探索之旅</title>
+    
+    <!-- PWA Manifest and Theme Color -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="F&S飛翔旅行">
+    <meta name="theme-color" content="#1D3557">
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- Favicon Links - 這裡已更新 -->
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+    <link rel="icon" href="/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --c-primary: #1D3557;      /* 主色: 深靛藍 */
+            --c-secondary: #457B9D;    /* 輔色: 天空藍 */
+            --c-accent: #A8DADC;       /* 點綴色: 淡綠藍 */
+            --c-bg: #F1FAEE;           /* 背景色 */
+            --c-text: #1D3557;         /* 字體色 */
+            --c-text-light: #457B9D;   /* 輔助字體色 */
+            --c-bg-card: #FFFFFF;      /* 卡片背景 */
+            --c-bg-accent-light: #e7f5f5; /* 點綴色淺版 */
+            --c-border: #dde8f0;       /* 邊框色 */
+            --nav-h: 68px; /* JS 會更新此變數 */
         }
-      ]
-    }
-  ]
-}
+        html { scroll-behavior: smooth; }
+        body { 
+            font-family: 'Noto Sans TC', sans-serif; 
+            background-color: var(--c-bg);
+            color: var(--c-text);
+        }
+        html.modal-open,
+        body.modal-open {
+            overflow: hidden;
+        }
+        h1, h2, h3 { font-family: 'Noto Sans TC', sans-serif; font-weight: 900; color: var(--c-primary); }
+        
+        .trip-card {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out, box-shadow 0.3s ease-in-out;
+            background-color: var(--c-bg-card);
+            border: 1px solid var(--c-border);
+        }
+        .trip-card.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .trip-card.no-trans {
+            transition: none !important;
+        }
+        .trip-card:hover {
+            transform: translateY(-5px) !important;
+            box-shadow: 0 10px 20px rgba(29, 53, 87, 0.1), 0 6px 6px rgba(29, 53, 87, 0.12);
+        }
+
+        .trip-card-wrapper {
+            scroll-margin-top: 85px; 
+        }
+        
+        .activity-block {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+        }
+
+        .is-visible .activity-block {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .sticky-nav {
+            position: sticky;
+            top: env(safe-area-inset-top);
+            z-index: 50;
+            transition: box-shadow 0.3s;
+            background-color: rgba(241, 250, 238, 0.9);
+        }
+        .sticky-nav.scrolled {
+             box-shadow: 0 4px 6px -1px rgba(29, 53, 87, 0.08), 0 2px 4px -2px rgba(29, 53, 87, 0.08);
+        }
+
+        .tag { display: inline-block; background-color: var(--c-accent); color: var(--c-primary); padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.8rem; font-weight: 500; margin-right: 0.5rem; margin-bottom: 0.5rem; }
+        
+        a, .activity-block a, .info-block a, .modal-container a, #status-info-list a {
+            font-weight: 600;
+            color: var(--c-secondary);
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        details > summary { 
+            list-style: none; 
+            cursor: pointer; 
+            padding: 1rem 1.25rem;
+            transition: background-color 0.3s ease;
+        }
+        details > summary::-webkit-details-marker { display: none; }
+        details .summary-arrow { transition: transform 0.3s; }
+        details[open] > summary .summary-arrow { transform: rotate(90deg); }
+
+        summary.summary-travel-day {
+            background-color: var(--c-bg-accent-light);
+            border-radius: 1rem;
+            border: 1px solid var(--c-accent);
+        }
+        summary.summary-travel-day h3 {
+            color: var(--c-primary);
+        }
+        
+        summary.summary-today {
+            background-color: var(--c-bg-accent-light);
+            border-radius: 1rem;
+            border: 2px solid var(--c-secondary);
+            position: relative;
+        }
+        summary.summary-today h3::before {
+             content: '⭐';
+             margin-right: 0.5rem;
+        }
+
+        .weather-display {
+            font-size: 0.8rem;
+            color: var(--c-text-light);
+        }
+        
+        .nav-link {
+            transition: all 0.2s;
+            border-bottom: 2px solid transparent;
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+            color: var(--c-text-light);
+        }
+        .nav-link:hover, .nav-utils:hover {
+             color: var(--c-secondary);
+        }
+        .nav-link.nav-link-active {
+            color: var(--c-secondary);
+            font-weight: 700;
+        }
+
+        .day-past { display: none; }
+        .show-past .day-past { display: block; }
+        
+        #status-city-arrow.rotate-180 { transform: rotate(180deg); }
+
+        /* --- Modals & Overlays --- */
+        .modal-overlay {
+            position: fixed; inset: 0; background: rgba(0, 0, 0, 0.6); display: flex; align-items: center; justify-content: center; z-index: 1000; opacity: 0; transition: opacity 0.3s ease; pointer-events: none;
+        }
+        .modal-overlay.active { opacity: 1; pointer-events: auto; }
+        .modal-container {
+            background: var(--c-bg-card); padding: 1.5rem; border-radius: 1rem; box-shadow: 0 10px 25px rgba(0,0,0,0.1); width: 90%; max-width: 500px; max-height: 80vh; transform: scale(0.95); transition: transform 0.3s ease; display: flex; flex-direction: column; overflow-y: auto;
+        }
+        .modal-overlay.active .modal-container { transform: scale(1); }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; padding-bottom: 1rem; flex-shrink: 0; }
+        .modal-tabs { display: flex; gap: 0.25rem; background-color: #f3f4f6; padding: 0.25rem; border-radius: 9999px; flex-shrink: 0; margin-bottom: 1rem; }
+        .modal-tab { flex-grow: 1; text-align: center; padding: 0.375rem 0.5rem; font-size: 0.8rem; font-weight: 500; color: #4b5563; border-radius: 9999px; cursor: pointer; transition: all 0.3s ease; border: 1px solid transparent; }
+        .modal-tab.active { background-color: white; color: var(--c-secondary); box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1); }
+        .modal-footer { margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--c-border); flex-shrink: 0; }
+        .modal-close-btn { background: none; border: none; font-size: 1.5rem; font-weight: bold; cursor: pointer; color: #9ca3af; }
+        .modal-close-btn:hover { color: var(--c-text); }
+        
+        #update-notification { display: none; position: fixed; bottom: 5rem; left: 50%; transform: translateX(-50%); z-index: 2000; }
+        #update-notification > div { background-color: var(--c-primary); }
+        #reload-button { background-color: white; color: var(--c-secondary); }
+        #reload-button:hover { background-color: var(--c-bg-accent-light); }
+        
+        /* --- Full Screen Card Logic --- */
+        #status-dashboard-section {
+            height: calc(100vh - var(--nav-h) - 4rem);
+        }
+        @supports (height: 100svh) {
+            #status-dashboard-section {
+                height: calc(100svh - var(--nav-h) - 4rem);
+            }
+        }
+        
+        #status-card-content {
+            overflow-y: auto; 
+            -webkit-overflow-scrolling: touch; 
+        }
+
+        /* Print Styles */
+        @media print {
+            @page { size: A4 portrait; margin: 1cm; }
+            body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .no-print { display: none !important; }
+            main.space-y-8 > :not([hidden]) ~ :not([hidden]),
+            #itinerary-container.space-y-8 > :not([hidden]) ~ :not([hidden]) { margin-top: 0 !important; }
+            .trip-card, .trip-card.is-visible { box-shadow: none !important; border: 1px solid #e5e7eb !important; opacity: 1 !important; transform: none !important; }
+            .activity-block { opacity: 1 !important; transform: none !important; }
+            main { padding: 0 !important; margin: 0 !important; }
+            #itinerary-container > div { page-break-inside: avoid; margin-bottom: 1rem; }
+            #itinerary-container > div:last-child { margin-bottom: 0; }
+            details summary .summary-arrow { display: none !important; }
+            .day-past { display: block !important; }
+        }
+        
+        /* Slide Animations */
+        @keyframes slideOutLeft { from { transform: translateX(0); opacity: 1; } to { transform: translateX(-20px); opacity: 0; } }
+        @keyframes slideInRight { from { transform: translateX(20px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        @keyframes slideOutRight { from { transform: translateX(0); opacity: 1; } to { transform: translateX(20px); opacity: 0; } }
+        @keyframes slideInLeft { from { transform: translateX(-20px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        #status-card-content.slide-out-left { animation: slideOutLeft 0.3s forwards; }
+        #status-card-content.slide-in-right { animation: slideInRight 0.3s forwards; }
+        #status-card-content.slide-out-right { animation: slideOutRight 0.3s forwards; }
+        #status-card-content.slide-in-left { animation: slideInLeft 0.3s forwards; }
+
+        .pagination-dot { width: 8px; height: 8px; background-color: #d1d5db; border-radius: 50%; cursor: pointer; transition: background-color 0.3s ease; }
+        .pagination-dot.active { background-color: var(--c-secondary); }
+
+        /* --- Today Button Visibility --- */
+        #today-btn {
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(20px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        #today-btn.is-visible {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0);
+        }
+
+        /* --- Mobile Menu --- */
+        #mobile-menu-overlay { 
+            position: fixed; 
+            inset: 0; 
+            background-color: rgba(29, 53, 87, 0.2);
+            z-index: 99; 
+            opacity: 0; 
+            pointer-events: none; 
+            transition: opacity 0.3s ease-in-out; 
+            backdrop-filter: blur(2px);
+        }
+        #mobile-menu-overlay.is-open { 
+            opacity: 1; 
+            pointer-events: auto; 
+        }
+        #mobile-menu-panel { 
+            position: fixed; 
+            top: 68px; 
+            right: 1rem;
+            width: 240px; 
+            background-color: var(--c-bg-card); 
+            box-shadow: 0 10px 35px rgba(29, 53, 87, 0.1), 0 2px 10px rgba(29, 53, 87, 0.08); 
+            z-index: 100; 
+            border-radius: 12px; 
+            border: 1px solid var(--c-border);
+            transform-origin: top right;
+            transform: scale(0.95) translateY(-5px);
+            opacity: 0;
+            pointer-events: none;
+            transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.15s ease-out;
+        }
+        #mobile-menu-panel.is-open { 
+            transform: scale(1) translateY(0); 
+            opacity: 1; 
+            pointer-events: auto; 
+        }
+        
+        /* Day Slider */
+        #day-slider { 
+            -webkit-appearance: none; 
+            appearance: none; 
+            width: 100%; 
+            height: 8px; 
+            background: var(--c-border); 
+            border-radius: 9999px; 
+            outline: none; 
+            opacity: 0.9; 
+            transition: opacity .2s; 
+            cursor: pointer; 
+            background: linear-gradient(to right, var(--c-secondary) 0%, var(--c-secondary) var(--progress-width, 0%), var(--c-border) var(--progress-width, 0%), var(--c-border) 100%);
+        }
+        #day-slider:hover { opacity: 1; }
+        #day-slider::-webkit-slider-thumb { 
+            -webkit-appearance: none; 
+            appearance: none; 
+            width: 22px; 
+            height: 22px; 
+            background: var(--c-secondary); 
+            border-radius: 50%; 
+            cursor: pointer; 
+            border: 3px solid white; 
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2); 
+            margin-top: -7px;
+        }
+        #day-slider::-moz-range-thumb { 
+            width: 22px; 
+            height: 22px; 
+            background: var(--c-secondary); 
+            border-radius: 50%; 
+            cursor: pointer; 
+            border: 3px solid white; 
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2); 
+        }
+        #day-slider::-moz-range-track {
+            background: linear-gradient(to right, var(--c-secondary) 0%, var(--c-secondary) var(--progress-width, 0%), var(--c-border) var(--progress-width, 0%), var(--c-border) 100%);
+            border-radius: 9999px;
+        }
+
+
+        /* --- New Color Scheme Overrides --- */
+        #status-dashboard-section .bg-white {
+            background-color: var(--c-bg-card) !important;
+        }
+        .text-gray-800 { color: var(--c-text) !important; }
+        .text-gray-900 { color: var(--c-primary) !important; }
+        .text-gray-700 { color: var(--c-text-light) !important; }
+        .text-gray-600 { color: var(--c-text-light) !important; }
+        .text-gray-500 { color: #8bacc1 !important; }
+        
+        .border-gray-200, .border-gray-300 { border-color: var(--c-border) !important; }
+        .ring-gray-200 { --tw-ring-color: var(--c-border) !important; }
+
+        .bg-gray-100, .bg-indigo-50, .bg-green-50, .bg-amber-100, .bg-blue-50, .bg-gray-50, .bg-teal-100\/60, .bg-amber-100\/60 { 
+            background-color: var(--c-bg-accent-light) !important; 
+        }
+        .bg-gray-200 { background-color: var(--c-border) !important; }
+        
+        .hover\:bg-gray-200:hover { background-color: var(--c-accent) !important; }
+        .hover\:bg-gray-100:hover { background-color: var(--c-bg-accent-light) !important; }
+        .hover\:bg-gray-50:hover { background-color: var(--c-bg-accent-light) !important; }
+
+        .text-indigo-700, .text-blue-800 { color: var(--c-primary) !important; }
+        .text-indigo-600 { color: var(--c-secondary) !important; }
+        .bg-indigo-600, .bg-amber-500 { background-color: var(--c-secondary) !important; }
+        .hover\:bg-indigo-700:hover, .hover\:bg-amber-600:hover { background-color: var(--c-primary) !important; }
+        .focus\:ring-indigo-500:focus, .focus\:ring-amber-400:focus { --tw-ring-color: var(--c-secondary) !important; }
+
+        .text-amber-800 { color: var(--c-primary) !important; }
+        .text-green-700 { color: var(--c-secondary) !important; }
+
+        #show-past-toggle:checked + .peer-checked\\:bg-indigo-300 {
+             background-color: var(--c-accent) !important;
+        }
+
+        .info-block { border-left-color: var(--c-secondary) !important; }
+        .foodie-btn { background-color: var(--c-accent) !important; color: var(--c-primary) !important; }
+        .foodie-btn:hover { background-color: var(--c-secondary) !important; color: white !important; }
+
+    </style>
+</head>
+<body class="text-gray-800 leading-relaxed">
+
+    <!-- Sticky Navigation Bar -->
+    <nav id="main-nav" class="sticky-nav bg-white/80 backdrop-blur-lg no-print">
+        <div class="container mx-auto max-w-6xl px-4">
+            <div class="flex justify-between items-center py-2 md:py-3">
+                <a href="#" class="font-bold text-base md:text-lg text-indigo-700">F＆S飛翔旅行</a>
+                
+                <div class="hidden md:flex items-center space-x-6 text-sm font-medium text-gray-600">
+                    <a href="#status-dashboard-section" class="nav-link flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1.5" viewBox="0 0 20 20" fill="currentColor"><path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" /><path fill-rule="evenodd" d="M4 5a2 2 0 012-2h8a2 2 0 012 2v10a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd" /></svg>
+                        行程要覽
+                    </a>
+                    <a href="#tip-calculator-section" class="nav-link flex items-center">
+                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1.5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V4a2 2 0 00-2-2H6zm1 2a1 1 0 00-1 1v1a1 1 0 001 1h6a1 1 0 001-1V5a1 1 0 00-1-1H7zm-1 4a1 1 0 011-1h6a1 1 0 011 1v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-1zm1 3a1 1 0 00-1 1v1a1 1 0 001 1h6a1 1 0 001-1v-1a1 1 0 00-1-1H7z" clip-rule="evenodd" /></svg>
+                        小費計算
+                    </a>
+                    <a href="#links-dashboard" class="nav-link flex items-center">
+                       <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1.5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0 1 1 0 00-1.414 1.414 4 4 0 005.656 0l3-3a4 4 0 00-5.656-5.656l-1.5 1.5a1 1 0 101.414 1.414l1.5-1.5a2 2 0 11-2.828-2.828l3-3z" clip-rule="evenodd" /></svg>
+                        常用連結
+                    </a>
+                     <button id="print-btn" class="no-print inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" /></svg>
+                        列印行程
+                    </button>
+                </div>
+
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="p-2 rounded-md text-gray-500 hover:text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu-overlay"></div>
+
+    <!-- Mobile Menu Panel -->
+    <div id="mobile-menu-panel">
+        <div class="p-4 space-y-2">
+             <a href="#status-dashboard-section" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">📋 行程要覽</a>
+             <a href="#tip-calculator-section" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">🧮 小費計算機</a>
+             <a href="#links-dashboard" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">🔗 常用連結</a>
+             <button id="mobile-print-btn" class="w-full text-left mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">📄 列印行程</button>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container mx-auto p-4 sm:p-6 md:p-8 max-w-6xl">
+        
+        <section id="status-dashboard-section" class="mb-12 no-print flex flex-col">
+            <div class="bg-white rounded-2xl shadow-lg p-5 md:p-6 ring-1 ring-gray-200 h-full flex flex-col">
+                <div id="status-time-info" class="flex justify-between items-center text-xs text-gray-500 mb-4 pb-4 border-b border-gray-200 font-mono">
+                    <span id="status-taipei-time"></span>
+                    <span id="status-time-diff"></span>
+                </div>
+
+                <div class="flex justify-between items-start flex-wrap gap-y-2">
+                    <div class="flex items-center gap-x-3">
+                        <h2 id="status-date" class="text-2xl sm:text-3xl font-bold text-gray-900 -mt-1">讀取中...</h2>
+                        <span id="status-travel-day-indicator" class="text-xs font-semibold text-amber-800 bg-amber-100 px-2 py-0.5 rounded-full whitespace-nowrap" style="display: none;"></span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <button id="prev-day-btn" class="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
+                        </button>
+                        <button id="next-day-btn" class="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" /></svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div id="status-card-content" class="space-y-4 mt-2 flex-grow" style="touch-action: pan-y;">
+                    <div>
+                        <div class="flex justify-end items-baseline">
+                            <p id="status-progress-text" class="text-sm font-medium text-indigo-600"></p>
+                        </div>
+                        
+                        <div class="relative pt-2 pb-1">
+                            <label for="day-slider" class="sr-only">行程日選擇拉桿</label>
+                            <input type="range" id="day-slider" min="1" max="13" value="1" class="w-full">
+                        </div>
+
+                        <div class="relative">
+                            <button type="button" id="status-city-btn" class="inline-flex items-center gap-x-2 text-3xl font-black text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 rounded-lg -ml-2 p-2 transition-colors hover:bg-gray-100">
+                                <span id="status-city-text">蒙特婁</span>
+                                <svg id="status-city-arrow" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500 transition-transform duration-200" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
+                            </button>
+                            <div id="city-dropdown" class="origin-top-left absolute left-2 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none hidden z-40" role="menu" aria-orientation="vertical" aria-labelledby="status-city-btn">
+                                <div class="py-1" role="none">
+                                    <a href="#" class="city-select-item text-gray-700 block px-4 py-2 text-base font-medium hover:bg-indigo-50 hover:text-indigo-700" role="menuitem" data-city-key="montreal">蒙特婁</a>
+                                    <a href="#" class="city-select-item text-gray-700 block px-4 py-2 text-base font-medium hover:bg-indigo-50 hover:text-indigo-700" role="menuitem" data-city-key="quebec">魁北克市</a>
+                                    <a href="#" class="city-select-item text-gray-700 block px-4 py-2 text-base font-medium hover:bg-indigo-50 hover:text-indigo-700" role="menuitem" data-city-key="niagara">尼加拉瀑布</a>
+                                    <a href="#" class="city-select-item text-gray-700 block px-4 py-2 text-base font-medium hover:bg-indigo-50 hover:text-indigo-700" role="menuitem" data-city-key="chicago">芝加哥</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div id="status-info-list" class="space-y-4 pt-4 border-t border-gray-200">
+                        <div id="status-weather-item" class="flex items-start">
+                            <span id="status-weather-icon" class="text-3xl mr-4 w-8 text-center pt-1">⏳</span>
+                            <div>
+                                <p id="status-weather-temp" class="font-semibold text-gray-800">--°C / --°C</p>
+                                <p id="status-weather-reminder" class="text-sm text-gray-600">正在載入天氣資訊...</p>
+                            </div>
+                        </div>
+                        <div id="status-accommodation-item" class="flex items-start min-h-[72px]">
+                            <span class="text-3xl mr-4 w-8 text-center pt-1">🏨</span>
+                            <div id="status-accommodation-content" class="text-gray-800 font-medium pt-1"></div>
+                        </div>
+                        <div id="status-transport-item" class="flex items-start min-h-[72px]">
+                            <span id="status-transport-icon" class="text-3xl mr-4 w-8 text-center pt-1">✈️</span>
+                            <div id="status-transport-content" class="text-gray-800 font-medium pt-1"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="status-pagination-dots" class="flex justify-center mt-4 space-x-2"></div>
+
+                 <div class="mt-5 text-center">
+                    <button id="view-details-btn" class="w-full md:w-auto bg-indigo-600 text-white font-semibold px-6 py-3 rounded-lg shadow-md hover:bg-indigo-700 transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        詳細行程
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <div class="flex justify-end items-center mb-4 no-print">
+            <label for="show-past-toggle" class="flex items-center cursor-pointer text-sm font-medium text-gray-700">
+                <span class="mr-3">顯示過去行程</span>
+                <div class="relative">
+                    <input type="checkbox" id="show-past-toggle" class="sr-only peer">
+                    <div class="block bg-gray-200 w-10 h-6 rounded-full peer-checked:bg-indigo-300 transition-colors"></div>
+                    <div class="dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-transform peer-checked:translate-x-full"></div>
+                </div>
+            </label>
+        </div>
+
+        <main class="space-y-8">
+            <div id="itinerary-container" class="space-y-8"></div>
+
+            <div id="tip-calculator-section" class="trip-card bg-white rounded-2xl shadow-lg p-6 md:p-8 ring-1 ring-gray-200">
+                <h2 class="text-2xl font-bold text-gray-900 mb-4 flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 7h6m0 10v-3.251l-4.71-4.71a1 1 0 00-1.415 0L3 16.251V21h4.75L12 17.25m0 0l6-6m-6 6l-3-3" /></svg>
+                    小費計算機 (Tip Calculator)
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-end">
+                    <div>
+                        <label for="bill-amount" class="block text-sm font-medium text-gray-700">帳單金額 (CAD/USD)</label>
+                        <input type="number" id="bill-amount" placeholder="例如 85.50" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                    </div>
+                    <div>
+                        <label for="tip-rate" class="block text-sm font-medium text-gray-700">小費比例 (%)</label>
+                        <select id="tip-rate" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                            <option value="15">15% (標準)</option>
+                            <option value="18" selected>18% (推薦)</option>
+                            <option value="20">20% (優質服務)</option>
+                            <option value="10">10% (基本)</option>
+                        </select>
+                    </div>
+                    <div class="text-center bg-indigo-50 p-4 rounded-lg mt-4 md:mt-0">
+                        <label class="block text-sm font-medium text-gray-700">小費金額</label>
+                        <p id="tip-result" class="text-xl font-bold text-indigo-700">-</p>
+                    </div>
+                     <div class="text-center bg-green-50 p-4 rounded-lg mt-4 md:mt-0">
+                        <label class="block text-sm font-medium text-gray-700">含小費總額</label>
+                        <p id="total-result" class="text-xl font-bold text-green-700">-</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="links-dashboard" class="trip-card bg-white rounded-2xl shadow-lg p-6 md:p-8 ring-1 ring-gray-200">
+                 <h2 class="text-2xl sm:text-3xl font-bold mb-6 text-gray-900 flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 mr-3 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    實用連結儀表板
+                </h2>
+                 <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 text-gray-700">
+                    <a href="https://www.canada.ca/en/immigration-refugees-citizenship/services/visit-canada/eta/apply-zh-tw.html" target="_blank" class="hover:underline">加拿大eTA官網</a>
+                    <a href="https://esta.cbp.dhs.gov/" target="_blank" class="hover:underline">美國ESTA官網</a>
+                    <a href="https://www.viarail.ca/en" target="_blank" class="hover:underline">VIA Rail 火車</a>
+                    <a href="https://www.basiliquenotredame.ca/en" target="_blank" class="hover:underline">蒙特婁聖母大教堂</a>
+                    <a href="https://www.lagranderouedemontreal.com/en" target="_blank" class="hover:underline">蒙特婁摩天輪</a>
+                    <a href="https://www.mcq.org/en/" target="_blank" class="hover:underline">魁北克文明博物館</a>
+                    <a href="https://www.niagaraparks.com/visit/attractions/adventure-pass-classic" target="_blank" class="hover:underline">尼加拉瀑布套票</a>
+                    <a href="https://www.theskydeck.com/" target="_blank" class="hover:underline">芝加哥Skydeck</a>
+                    <a href="https://www.artic.edu/" target="_blank" class="hover:underline">芝加哥藝術學院</a>
+                </div>
+            </div>
+        </main>
+        
+        <footer class="text-center mt-16 py-8">
+            <p class="text-gray-500">祝您旅途愉快！Bon Voyage!</p>
+        </footer>
+    </div>
+    
+    <div id="toast-notification" class="no-print hidden opacity-0 fixed bottom-24 right-4 bg-gray-800 text-white px-5 py-3 rounded-lg shadow-xl transition-all duration-300 z-[100]">
+        <p id="toast-message"></p>
+    </div>
+
+    <div id="update-notification" class="no-print">
+        <div class="bg-indigo-600 text-white rounded-lg shadow-lg p-4 flex items-center justify-between">
+            <p class="font-semibold">網站有新內容可更新。</p>
+            <button id="reload-button" class="ml-4 px-4 py-2 bg-white text-indigo-600 font-bold rounded-md hover:bg-indigo-100 transition-colors">立即更新</button>
+        </div>
+    </div>
+
+    <div class="no-print fixed bottom-4 right-4 z-50">
+        <button id="today-btn" class="bg-amber-500 text-white font-semibold px-4 py-3 rounded-full shadow-lg hover:bg-amber-600 transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-400 flex items-center justify-center">
+            行程要覽
+        </button>
+    </div>
+
+    <div id="foodie-modal" class="modal-overlay no-print">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h2 id="modal-title" class="text-2xl font-bold text-gray-900">美食指南</h2>
+                <button class="modal-close-btn">&times;</button>
+            </div>
+            <div id="modal-tabs" class="modal-tabs"></div>
+            <div id="modal-content" class="space-y-4 mt-4"></div>
+            <div class="modal-footer">
+                <button class="modal-close-btn w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold py-2 px-4 rounded-lg transition-colors">
+                    關閉
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // --- Service Worker Registration ---
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('ServiceWorker 註冊成功，範圍：', registration.scope);
+                        registration.addEventListener('updatefound', () => {
+                            const newWorker = registration.installing;
+                            newWorker.addEventListener('statechange', () => {
+                                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                                    const updateBar = document.getElementById('update-notification');
+                                    if (updateBar) updateBar.style.display = 'block';
+                                }
+                            });
+                        });
+                    }).catch(error => console.log('ServiceWorker 註冊失敗：', error));
+            });
+
+            let refreshing;
+            navigator.serviceWorker.addEventListener('controllerchange', () => {
+                if (refreshing) return;
+                window.location.reload();
+                refreshing = true;
+            });
+
+            const reloadButton = document.getElementById('reload-button');
+            if(reloadButton) {
+                reloadButton.addEventListener('click', () => {
+                    navigator.serviceWorker.getRegistration().then(reg => {
+                        reg.waiting.postMessage({ type: 'SKIP_WAITING' });
+                    });
+                });
+            }
+        }
+
+        // --- Global Functions ---
+        let toastTimeout;
+        function showToast(message) {
+            const toastEl = document.getElementById('toast-notification');
+            const toastMessageEl = document.getElementById('toast-message');
+            if (!toastEl || !toastMessageEl) return;
+            toastMessageEl.textContent = message;
+            toastEl.classList.remove('hidden', 'opacity-0');
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toastEl.classList.add('opacity-0');
+                setTimeout(() => toastEl.classList.add('hidden'), 300);
+            }, 3000);
+        }
+        
+        function scrollToToday(isAuto = false) {
+            const todayString = new Date().toISOString().split('T')[0];
+            const dashboardSection = document.getElementById('status-dashboard-section');
+
+            if (dashboardSection) {
+                 const mainNav = document.getElementById('main-nav');
+                 const offset = mainNav ? mainNav.offsetHeight : 60;
+                 const bodyRect = document.body.getBoundingClientRect().top;
+                 const elementRect = dashboardSection.getBoundingClientRect().top;
+                 const elementPosition = elementRect - bodyRect;
+                 const offsetPosition = elementPosition - offset;
+                 window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+            }
+
+            const tripData = window.tripData; 
+            const allWeatherData = window.allWeatherData;
+            if (tripData && typeof updateStatusDashboard === 'function') {
+                const isTripActive = todayString >= tripData.tripInfo.tripStartDate && todayString < tripData.tripInfo.tripEndDate;
+                currentDisplayDate = isTripActive ? todayString : tripData.tripInfo.tripStartDate;
+                updateStatusDashboard(currentDisplayDate, tripData, allWeatherData);
+            }
+        }
+        
+        function renderItinerary(itineraryData, container) {
+            if (!itineraryData || !container) return;
+            let htmlContent = '';
+            const renderedCitySections = new Set(); 
+
+            itineraryData.forEach(day => {
+                let sectionIdAttr = '';
+                if (day.cityTarget && !renderedCitySections.has(day.cityTarget)) {
+                    sectionIdAttr = `id="${day.cityTarget}"`;
+                    renderedCitySections.add(day.cityTarget);
+                }
+                
+                const tagsHtml = day.tags.map(tag => `<span class="tag">${tag}</span>`).join('');
+                const activitiesHtml = day.activities.map(activity => `<div class="activity-block"><h4 class="font-bold text-lg text-blue-800">${activity.title}</h4><ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">${activity.items.map(item => `<li>${item}</li>`).join('')}</ul></div>`).join('');
+                let reminderHtml = day.reminder ? `<div class="mt-4 p-4 bg-amber-100/60 rounded-lg border-l-4 border-amber-400"><h4 class="font-bold text-amber-800 flex items-center mb-2">${day.reminder.title}</h4><ul class="list-disc list-inside mt-2 text-amber-900/80 space-y-1">${day.reminder.items.map(item => `<li>${item}</li>`).join('')}</ul></div>` : '';
+                let infoBoxHtml = day.infoBox ? `<div class="mt-4 p-4 bg-teal-100/60 rounded-lg border-l-4 border-teal-400"><h4 class="font-bold text-teal-800 flex items-center mb-2">${day.infoBox.title}</h4><ul class="list-disc list-inside mt-2 text-teal-900/80 space-y-1">${day.infoBox.items.map(item => `<li>${item}</li>`).join('')}</ul></div>` : '';
+                
+                htmlContent += `<div class="trip-card-wrapper" ${sectionIdAttr} data-day="${day.day}" data-date="${day.date}" data-day-group="${day.dayGroup}" data-city-target="${day.cityTarget}" data-weather-city="${day.weatherCity}">
+                    <details class="trip-card bg-white rounded-2xl shadow-lg ring-1 ring-gray-200 overflow-hidden" ${day.day === 1 ? 'open' : ''}>
+                        <summary class="${day.isTravelDay ? 'summary-travel-day' : ''} flex justify-between items-center">
+                            <div>
+                                <p class="text-sm font-medium ${day.isTravelDay ? 'text-amber-700' : 'text-indigo-600'}">${day.subTitle}</p>
+                                <h3 id="day${day.day}" class="text-xl sm:text-2xl font-bold mt-1 text-gray-900">${day.title}</h3>
+                            </div>
+                            <div class="flex items-center space-x-3 sm:space-x-4">
+                                <div class="weather-display flex-shrink-0 text-right"></div>
+                                <div class="summary-arrow flex-shrink-0">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" /></svg>
+                                </div>
+                            </div>
+                        </summary>
+                        <div class="p-4 sm:p-6 border-t border-gray-200">
+                            <div class="my-3 flex flex-wrap justify-between items-start gap-2">
+                                <div>${tagsHtml}</div>
+                            </div>
+                            <div class="space-y-6">${activitiesHtml}${infoBoxHtml}${reminderHtml}</div>
+                        </div>
+                    </details>
+                </div>`;
+            });
+            container.innerHTML = htmlContent;
+        }
+
+        const cityCoordinates = { montreal: { lat: 45.50, lon: -73.57 }, quebec: { lat: 46.81, lon: -71.21 }, niagara: { lat: 43.09, lon: -79.08 }, chicago: { lat: 41.88, lon: -87.63 } };
+        function getWeatherIcon(code) {
+            const icons = { 0: '☀️', 1: '🌤️', 2: '⛅️', 3: '☁️', 45: '🌫️', 48: '🌫️', 51: '🌦️', 53: '🌦️', 55: '🌦️', 61: '🌧️', 63: '🌧️', 65: '🌧️', 66: '🌧️', 67: '🌧️', 71: '🌨️', 73: '🌨️', 75: '🌨️', 77: '🌨️', 80: '🌧️', 81: '🌧️', 82: '暴雨', 85: '🌨️', 86: '🌨️', 95: '⛈️', 96: '⛈️', 99: '⛈️' };
+            return icons[code] || '🌡️';
+        }
+        function getWeatherReminder(code) {
+            if ([51, 53, 55, 61, 63, 65, 80, 81, 82, 95, 96, 99].includes(code)) return '今日有雨，記得帶傘！';
+            if ([71, 73, 75, 77, 85, 86].includes(code)) return '可能會下雪，注意保暖！';
+            if ([0, 1].includes(code)) return '天氣晴朗，注意防曬！';
+            if ([2, 3].includes(code)) return '多雲天氣，適合出遊。';
+            if ([45, 48].includes(code)) return '有霧，行車請注意安全。';
+            return '祝您有美好的一天！';
+        }
+
+        async function fetchAllWeatherData(itinerary) {
+            if (!navigator.onLine && !navigator.serviceWorker.controller) {
+                console.log("目前處於離線狀態，無法取得天氣資訊。");
+                return {};
+            }
+            const uniqueCities = [...new Set(itinerary.map(day => day.weatherCity).filter(Boolean))];
+            const promises = uniqueCities.map(city => {
+                const { lat, lon } = cityCoordinates[city];
+                const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=auto`;
+                return fetch(url).then(res => res.ok ? res.json() : Promise.reject(`API error for ${city}`))
+                                 .then(data => ({ city, data }))
+                                 .catch(error => { console.error(`無法取得 ${city} 的天氣資訊:`, error); return null; });
+            });
+            const results = await Promise.all(promises);
+            return results.filter(r => r).reduce((acc, {city, data}) => ({ ...acc, [city]: data.daily }), {});
+        }
+
+        function updateStatusDashboard(date, data, allWeatherData, direction = 0) {
+            const { itinerary, hotels, transport, tripInfo } = data;
+            const targetDayData = itinerary.find(d => d.date === date);
+
+            const statusCardContentEl = document.getElementById('status-card-content');
+            const statusDateEl = document.getElementById('status-date');
+            const statusCityTextEl = document.getElementById('status-city-text'); 
+            const progressTextEl = document.getElementById('status-progress-text');
+            const daySlider = document.getElementById('day-slider');
+            const viewDetailsBtn = document.getElementById('view-details-btn');
+            const weatherItemEl = document.getElementById('status-weather-item');
+            const weatherIconEl = document.getElementById('status-weather-icon');
+            const weatherTempEl = document.getElementById('status-weather-temp');
+            const weatherReminderEl = document.getElementById('status-weather-reminder');
+            const accommodationItemEl = document.getElementById('status-accommodation-item');
+            const accommodationContentEl = document.getElementById('status-accommodation-content');
+            const transportItemEl = document.getElementById('status-transport-item');
+            const transportContentEl = document.getElementById('status-transport-content');
+            const transportIconEl = document.getElementById('status-transport-icon');
+            const travelDayIndicatorEl = document.getElementById('status-travel-day-indicator');
+            const timeInfoEl = document.getElementById('status-time-info');
+            const timeDiffEl = document.getElementById('status-time-diff');
+            const paginationDotsContainer = document.getElementById('status-pagination-dots');
+
+            const applyAnimation = (outClass, inClass, callback) => {
+                statusCardContentEl.classList.remove('slide-in-left', 'slide-in-right', 'slide-out-left', 'slide-out-right');
+                statusCardContentEl.classList.add(outClass);
+
+                const handleOutAnimationEnd = () => {
+                    statusCardContentEl.removeEventListener('animationend', handleOutAnimationEnd);
+                    statusCardContentEl.classList.remove(outClass);
+                    callback(); 
+
+                    statusCardContentEl.classList.add(inClass);
+                    const handleInAnimationEnd = () => {
+                        statusCardContentEl.removeEventListener('animationend', handleInAnimationEnd);
+                        statusCardContentEl.classList.remove(inClass);
+                    };
+                    statusCardContentEl.addEventListener('animationend', handleInAnimationEnd);
+                };
+                statusCardContentEl.addEventListener('animationend', handleOutAnimationEnd);
+            };
+
+            const updateContent = () => {
+                if (!targetDayData) {
+                    if(timeInfoEl) timeInfoEl.style.display = 'none';
+                    statusDateEl.textContent = '旅程已結束或未開始';
+                    if (statusCityTextEl) statusCityTextEl.textContent = '期待下次旅行！';
+                    progressTextEl.textContent = '-';
+                    if(daySlider) daySlider.value = 1;
+                    if(viewDetailsBtn) viewDetailsBtn.style.display = 'none';
+                    weatherIconEl.textContent = '🏠';
+                    weatherTempEl.textContent = '';
+                    weatherReminderEl.textContent = '旅程已結束或尚未開始。';
+                    accommodationItemEl.style.display = 'none';
+                    transportItemEl.style.display = 'none';
+                    if (travelDayIndicatorEl) travelDayIndicatorEl.style.display = 'none';
+                    if (paginationDotsContainer) paginationDotsContainer.innerHTML = '';
+                    return;
+                }
+
+                if(timeInfoEl) timeInfoEl.style.display = 'flex';
+                if(viewDetailsBtn) viewDetailsBtn.style.display = 'inline-block';
+                
+                if (travelDayIndicatorEl) {
+                    if (targetDayData.isTravelDay) {
+                        travelDayIndicatorEl.textContent = '移動日';
+                        travelDayIndicatorEl.style.display = 'inline-block';
+                    } else {
+                        travelDayIndicatorEl.style.display = 'none';
+                    }
+                }
+                
+                const isMergedLastDay = targetDayData.subTitle.includes('~');
+
+                if (isMergedLastDay) {
+                    const parts = targetDayData.subTitle.split('｜');
+                    const datePart = parts[1].trim();
+                    statusDateEl.textContent = datePart;
+                    progressTextEl.textContent = '返程日';
+                } else {
+                    const [year, month, day] = date.split('-').map(Number);
+                    const dateObj = new Date(Date.UTC(year, month - 1, day));
+                    const dayOfWeek = dateObj.toLocaleDateString('zh-TW', { weekday: 'long', timeZone: 'UTC' });
+                    const datePart = `${month}月${day}日`;
+                    statusDateEl.textContent = `${datePart} (${dayOfWeek.replace('星期','週')})`;
+                    progressTextEl.textContent = `Day ${targetDayData.day} / ${tripInfo.totalDays}`;
+                }
+                
+                const city = targetDayData.weatherCity;
+                const cityMap = { montreal: '蒙特婁', quebec: '魁北克市', niagara: '尼加拉瀑布', chicago: '芝加哥', '': '飛行途中' };
+                if (statusCityTextEl) statusCityTextEl.textContent = cityMap[city] || '移動中';
+
+                if (daySlider) {
+                    daySlider.value = targetDayData.day;
+                    const progress = ((targetDayData.day - daySlider.min) / (daySlider.max - daySlider.min)) * 100;
+                    daySlider.style.setProperty('--progress-width', `${progress}%`);
+                }
+
+                if (paginationDotsContainer) {
+                    let dotsHtml = '';
+                    for (let i = 0; i < tripInfo.totalDays; i++) {
+                        const dotDay = i + 1;
+                        const isActive = dotDay === targetDayData.day;
+                        dotsHtml += `<div class="pagination-dot ${isActive ? 'active' : ''}" data-day="${dotDay}"></div>`;
+                    }
+                    paginationDotsContainer.innerHTML = dotsHtml;
+                }
+
+                if (timeDiffEl) {
+                    const cityTimezoneMap = { montreal: -12, quebec: -12, niagara: -12, chicago: -13 };
+                    const localTzKey = targetDayData.weatherCity;
+                    let diffText = '✈️ 飛行中';
+                    if (cityTimezoneMap[localTzKey]) {
+                        const diff = cityTimezoneMap[localTzKey];
+                        const sign = diff > 0 ? '+' : '';
+                        diffText = `與台灣時差 ${sign}${diff} 小時`;
+                    }
+                    timeDiffEl.textContent = diffText;
+                }
+
+                const cityWeather = allWeatherData ? allWeatherData[city] : undefined;
+                weatherItemEl.style.display = 'flex'; 
+
+                if (cityWeather) { 
+                    const dayIndex = cityWeather.time.indexOf(date);
+                    if (dayIndex !== -1) {
+                        const tempMax = Math.round(cityWeather.temperature_2m_max[dayIndex]);
+                        const tempMin = Math.round(cityWeather.temperature_2m_min[dayIndex]);
+                        const code = cityWeather.weather_code[dayIndex];
+                        weatherIconEl.textContent = getWeatherIcon(code);
+                        weatherTempEl.textContent = `${tempMin}°C / ${tempMax}°C`;
+                        weatherReminderEl.textContent = getWeatherReminder(code);
+                    } else { 
+                        weatherIconEl.textContent = '❓';
+                        weatherTempEl.textContent = '無預報';
+                        weatherReminderEl.textContent = '無法取得本日天氣資訊。';
+                    }
+                } else if (allWeatherData && !cityWeather) { 
+                    weatherIconEl.textContent = '✈️';
+                    weatherTempEl.textContent = '';
+                    weatherReminderEl.textContent = '飛行日無適用天氣資訊。';
+                } else { 
+                    weatherIconEl.textContent = '⏳';
+                    weatherTempEl.textContent = '--°C / --°C';
+                    weatherReminderEl.textContent = '正在載入天氣資訊...';
+                }
+
+                const checkingIn = hotels.find(h => h.checkIn === date);
+                const checkingOut = hotels.find(h => h.checkOut === date);
+                const stayingAt = hotels.find(h => date >= h.checkIn && date < h.checkOut);
+                let hotelHtml = '';
+                if (checkingOut) {
+                    hotelHtml += `<div><span class="font-semibold text-red-600">[退房]</span> <a href="${checkingOut.mapLink}" target="_blank" class="hover:underline">${checkingOut.name}</a></div><div class="text-sm text-gray-600 pl-1">最晚退房：${checkingOut.checkOutTime}</div>`;
+                }
+                if (checkingIn) {
+                    const marginTop = checkingOut ? 'mt-2' : '';
+                    hotelHtml += `<div class="${marginTop}"><span class="font-semibold text-green-600">[入住]</span> <a href="${checkingIn.mapLink}" target="_blank" class="hover:underline">${checkingIn.name}</a></div><div class="text-sm text-gray-600 pl-1">最早入住：${checkingIn.checkInTime}</div>`;
+                }
+                if (!checkingIn && !checkingOut && stayingAt) {
+                     hotelHtml = `<p>住宿於 <a href="${stayingAt.mapLink}" target="_blank" class="hover:underline">${stayingAt.name}</a></p>`;
+                }
+                
+                if (hotelHtml) {
+                    accommodationContentEl.innerHTML = hotelHtml;
+                    accommodationItemEl.style.visibility = 'visible';
+                } else {
+                    accommodationContentEl.innerHTML = '';
+                    accommodationItemEl.style.visibility = 'hidden';
+                }
+
+                let transportItems = transport.filter(t => t.date === date);
+
+                if (date === '2025-07-14') {
+                    const nextDayTransport = transport.filter(t => t.date === '2025-07-15');
+                    transportItems = transportItems.concat(nextDayTransport);
+                }
+
+                if (transportItems.length > 0) {
+                    const iconMap = { '航班': '✈️', '火車': '🚄', '巴士': '🚌' };
+                    transportIconEl.textContent = iconMap[transportItems[0].type] || '➡️';
+                    const transportHtml = transportItems.map(item => {
+                        if (item.type === '航班' && Array.isArray(item.details)) {
+                            return item.details.map(leg => {
+                                const depTime = new Date(leg.departure.time).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: leg.departure.tz });
+                                const arrTime = new Date(leg.arrival.time).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: leg.arrival.tz });
+                                const arrivalDateStr = new Date(leg.arrival.time).toISOString().split('T')[0];
+                                const departureDateStr = new Date(leg.departure.time).toISOString().split('T')[0];
+                                const dateIndicator = arrivalDateStr > departureDateStr ? ' (+1)' : '';
+                                return `<div class="mb-1">
+                                    <p class="font-semibold">${leg.flightCode}</p>
+                                    <p class="text-sm">${leg.departure.airport} (${depTime}) → ${leg.arrival.airport} (${arrTime}${dateIndicator})</p>
+                                </div>`;
+                            }).join('');
+                        }
+                        return `<p>${item.details}</p>`;
+                    }).join('<div class="my-2 border-t border-dashed border-gray-300"></div>');
+                    transportContentEl.innerHTML = transportHtml;
+                    transportItemEl.style.visibility = 'visible';
+                } else {
+                    transportContentEl.innerHTML = '';
+                    transportItemEl.style.visibility = 'hidden';
+                }
+            }; 
+
+            if (direction === 1) { 
+                applyAnimation('slide-out-left', 'slide-in-right', updateContent);
+            } else if (direction === -1) {
+                applyAnimation('slide-out-right', 'slide-in-left', updateContent);
+            } else { 
+                updateContent();
+            }
+        }
+
+        let currentDisplayDate;
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const response = await fetch('trip-data.json');
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                const data = await response.json();
+                
+                const itineraryContainer = document.getElementById('itinerary-container');
+                renderItinerary(data.itinerary, itineraryContainer);
+                
+                initializeApp(data, null); 
+
+                fetchAllWeatherData(data.itinerary)
+                    .then(allWeatherData => {
+                        window.allWeatherData = allWeatherData; 
+                        populateDayCardWeather(allWeatherData);
+                        updateStatusDashboard(currentDisplayDate, data, allWeatherData);
+                    })
+                    .catch(weatherError => {
+                        console.error("Weather data fetch failed:", weatherError);
+                        populateDayCardWeather({}); 
+                        updateStatusDashboard(currentDisplayDate, data, {});
+                    });
+
+            } catch (error) {
+                console.error("無法載入行程資料:", error);
+                const container = document.getElementById('itinerary-container');
+                if (container) container.innerHTML = `<p class="text-center text-red-600 font-bold">行程資料載入失敗，請檢查 trip-data.json 檔案。</p>`;
+            }
+        });
+
+        function initializeApp(data, allWeatherData) { 
+            window.tripData = data;
+            const { hotels: hotelData, transport: transportData, foodie: foodieData, tripInfo, itinerary } = data;
+            
+            function updateNavHeightVar() {
+                const nav = document.getElementById('main-nav');
+                const navHeight = nav ? nav.offsetHeight : 68;
+                document.documentElement.style.setProperty('--nav-h', `${navHeight}px`);
+            }
+            window.addEventListener('resize', updateNavHeightVar);
+            updateNavHeightVar();
+
+            const statusCityBtn = document.getElementById('status-city-btn');
+            const cityDropdown = document.getElementById('city-dropdown');
+            const statusCityArrow = document.getElementById('status-city-arrow');
+            const paginationDotsContainer = document.getElementById('status-pagination-dots');
+            const daySlider = document.getElementById('day-slider');
+
+            if(daySlider) {
+                daySlider.max = tripInfo.totalDays;
+                daySlider.addEventListener('input', () => {
+                    const targetDay = parseInt(daySlider.value);
+                    const targetDayData = data.itinerary[targetDay - 1];
+                    if (targetDayData) {
+                        currentDisplayDate = targetDayData.date;
+                        updateStatusDashboard(currentDisplayDate, data, window.allWeatherData, 0); 
+                    }
+                });
+            }
+
+            if (statusCityBtn && cityDropdown && statusCityArrow) {
+                statusCityBtn.addEventListener('click', (event) => {
+                    event.stopPropagation();
+                    cityDropdown.classList.toggle('hidden');
+                    statusCityArrow.classList.toggle('rotate-180');
+                });
+
+                document.querySelectorAll('.city-select-item').forEach(item => {
+                    item.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const cityKey = item.dataset.cityKey;
+                        const firstDayInCity = data.itinerary.find(d => d.weatherCity === cityKey);
+                        
+                        if (firstDayInCity) {
+                            currentDisplayDate = firstDayInCity.date;
+                            updateStatusDashboard(currentDisplayDate, data, window.allWeatherData); 
+                            showToast(`已切換至 ${item.textContent}`);
+                        }
+
+                        cityDropdown.classList.add('hidden');
+                        statusCityArrow.classList.remove('rotate-180');
+                    });
+                });
+
+                window.addEventListener('click', (e) => {
+                    if (!cityDropdown.classList.contains('hidden') && !statusCityBtn.contains(e.target)) {
+                        cityDropdown.classList.add('hidden');
+                        statusCityArrow.classList.remove('rotate-180');
+                    }
+                });
+            }
+
+            const mainNav = document.getElementById('main-nav');
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenuPanel = document.getElementById('mobile-menu-panel');
+            const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+            
+            if (mobileMenuBtn && mobileMenuPanel && mobileMenuOverlay) { 
+                mobileMenuBtn.addEventListener('click', (e) => {
+                    e.stopPropagation(); 
+                    mobileMenuPanel.classList.toggle('is-open'); 
+                    mobileMenuOverlay.classList.toggle('is-open'); 
+                    document.body.classList.toggle('modal-open');
+                });
+
+                mobileMenuOverlay.addEventListener('click', () => {
+                    mobileMenuPanel.classList.remove('is-open'); 
+                    mobileMenuOverlay.classList.remove('is-open'); 
+                    document.body.classList.remove('modal-open'); 
+                });
+
+                document.querySelectorAll('.mobile-nav-link').forEach(link => {
+                    link.addEventListener('click', () => {
+                        mobileMenuPanel.classList.remove('is-open');
+                        mobileMenuOverlay.classList.remove('is-open'); 
+                        document.body.classList.remove('modal-open');
+                    });
+                });
+            }
+
+            window.addEventListener('scroll', () => mainNav.classList.toggle('scrolled', window.scrollY > 0));
+
+            const tripCards = document.querySelectorAll('.trip-card');
+            const cardObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) entry.target.classList.add('is-visible');
+                });
+            }, { threshold: 0.1 });
+            tripCards.forEach(card => cardObserver.observe(card));
+
+            function handleNavigation(hash) {
+                if (!hash || hash === '#') return;
+                try {
+                    const targetElement = document.querySelector(hash);
+                    if (!targetElement) return;
+                    
+                    targetElement.scrollIntoView({ behavior: 'smooth' });
+
+                    const details = targetElement.closest('details');
+                    if (details && !details.open) details.open = true;
+                } catch (e) { console.error("Navigation error:", e); }
+            }
+            
+            document.querySelectorAll('a[href^="#"], .nav-utils, .mobile-nav-link').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    if(this.getAttribute('href')?.startsWith('#')) {
+                       e.preventDefault();
+                    }
+                    const hash = this.getAttribute('href');
+                    if (hash) handleNavigation(hash);
+                    if (history.pushState && hash) {
+                        history.pushState(null, null, hash);
+                    } else if (hash) {
+                        location.hash = hash;
+                    }
+                });
+            });
+
+            if (window.location.hash) setTimeout(() => handleNavigation(window.location.hash), 100);
+            
+            function triggerPrint() {
+                const allDetails = document.querySelectorAll('#itinerary-container details');
+                const originallyOpen = new WeakMap();
+                allDetails.forEach(detail => { 
+                    originallyOpen.set(detail, detail.open); 
+                    detail.open = true; 
+                });
+
+                setTimeout(() => { 
+                    window.print(); 
+                    allDetails.forEach(detail => {
+                        detail.open = originallyOpen.get(detail);
+                    });
+                }, 100);
+            }
+            document.getElementById('print-btn')?.addEventListener('click', triggerPrint);
+            document.getElementById('mobile-print-btn')?.addEventListener('click', triggerPrint);
+
+            const billInput = document.getElementById('bill-amount');
+            const tipSelect = document.getElementById('tip-rate');
+            const tipResultEl = document.getElementById('tip-result');
+            const totalResultEl = document.getElementById('total-result');
+            function calculateTip() {
+                const bill = parseFloat(billInput.value);
+                const tipPercent = parseFloat(tipSelect.value);
+                if (!isNaN(bill) && bill > 0 && !isNaN(tipPercent)) {
+                    const tip = bill * (tipPercent / 100);
+                    const total = bill + tip;
+                    if(tipResultEl) tipResultEl.textContent = `$${tip.toFixed(2)}`;
+                    if(totalResultEl) totalResultEl.textContent = `$${total.toFixed(2)}`;
+                } else {
+                    if(tipResultEl) tipResultEl.textContent = '-';
+                    if(totalResultEl) totalResultEl.textContent = '-';
+                }
+            }
+            if (billInput) billInput.addEventListener('input', calculateTip);
+            if (tipSelect) tipSelect.addEventListener('change', calculateTip);
+
+            function updateLiveTaipeiTime() {
+                const taipeiTimeEl = document.getElementById('status-taipei-time');
+                if (!taipeiTimeEl) return;
+                try {
+                    const now = new Date();
+                    const dateString = now.toLocaleDateString('zh-TW', { timeZone: 'Asia/Taipei', month: '2-digit', day: '2-digit' });
+                    const dayOfWeekString = now.toLocaleDateString('zh-TW', { timeZone: 'Asia/Taipei', weekday: 'short' });
+                    const timeString = now.toLocaleTimeString('en-GB', { timeZone: 'Asia/Taipei', hour: '2-digit', minute: '2-digit', hour12: false });
+                    taipeiTimeEl.textContent = `🇹🇼 台北 ${dateString}(${dayOfWeekString}) ${timeString}`;
+                } catch(e) {
+                    taipeiTimeEl.textContent = `🇹🇼 台北時間 --:--`;
+                }
+            }
+            
+            function populateDayCardWeather(allWeatherData) {
+                const weatherDisplays = document.querySelectorAll('.weather-display');
+                if (!allWeatherData) { 
+                    weatherDisplays.forEach(el => { el.innerHTML = '...'; });
+                    return;
+                }
+
+                document.querySelectorAll('[data-weather-city]').forEach(dayEl => {
+                    const date = dayEl.dataset.date;
+                    const city = dayEl.dataset.weatherCity;
+                    const weatherDisplay = dayEl.querySelector('.weather-display');
+                    if (city && allWeatherData[city] && weatherDisplay) {
+                        const dayIndex = allWeatherData[city].time.indexOf(date);
+                        if (dayIndex !== -1) {
+                            const temp = Math.round(allWeatherData[city].temperature_2m_max[dayIndex]);
+                            const icon = getWeatherIcon(allWeatherData[city].weather_code[dayIndex]);
+                            weatherDisplay.innerHTML = `${icon} ${temp}°C`;
+                        } else { weatherDisplay.textContent = '無預報'; }
+                    } else { weatherDisplay.textContent = 'N/A'; }
+                });
+            }
+
+            const foodieModal = document.getElementById('foodie-modal');
+            const modalTabs = document.getElementById('modal-tabs');
+            const modalContent = document.getElementById('modal-content');
+            function openFoodieModal(activeCityKey) {
+                if (!foodieModal) return;
+                let tabsHTML = '';
+                Object.keys(foodieData).forEach(cityKey => tabsHTML += `<button class="modal-tab" data-city="${cityKey}">${foodieData[cityKey].name}</button>`);
+                modalTabs.innerHTML = tabsHTML;
+                document.querySelectorAll('.modal-tab').forEach(tab => tab.addEventListener('click', () => switchFoodieTab(tab.dataset.city)));
+                switchFoodieTab(activeCityKey);
+                document.body.classList.add('modal-open');
+                foodieModal.classList.add('active');
+            }
+            function closeFoodieModal() {
+                if(foodieModal) foodieModal.classList.remove('active');
+                document.body.classList.remove('modal-open');
+            }
+            function switchFoodieTab(cityKey) {
+                const cityData = foodieData[cityKey];
+                if (!cityData) return;
+                document.querySelectorAll('.modal-tab').forEach(tab => tab.classList.toggle('active', tab.dataset.city === cityKey));
+                let contentHTML = '';
+                cityData.categories.forEach(category => {
+                    contentHTML += `<div class="mb-4"><h3 class="text-lg font-bold text-gray-800 border-b-2 border-indigo-200 pb-1 mb-2">${category.name}</h3><div class="space-y-3">`;
+                    category.items.forEach(item => {
+                        const placesHTML = item.places.map(p => `<a href="${p.link}" target="_blank" class="hover:underline">${p.name}</a>`).join('、');
+                        contentHTML += `<div><p class="font-semibold text-gray-700">${item.name}</p><p class="text-sm text-gray-500">${item.desc}</p><p class="text-sm text-gray-700">推薦：${placesHTML}</p></div>`;
+                    });
+                    contentHTML += '</div></div>';
+                });
+                modalContent.innerHTML = contentHTML;
+            }
+            document.querySelectorAll('.modal-close-btn').forEach(btn => btn.addEventListener('click', closeFoodieModal));
+            if(foodieModal) foodieModal.addEventListener('click', e => (e.target === foodieModal) && closeFoodieModal());
+
+            function initializeTripView() {
+                const showPastToggle = document.getElementById('show-past-toggle');
+                const showPastLabel = showPastToggle.closest('label');
+                const mainContainer = document.querySelector('main.space-y-8');
+                if (!mainContainer || !showPastToggle || !showPastLabel) return;
+                
+                showPastToggle.checked = false;
+                const todayString = new Date().toISOString().split('T')[0];
+                
+                if (todayString < tripInfo.tripStartDate) {
+                    showPastToggle.disabled = true;
+                    showPastLabel.classList.add('opacity-50', 'cursor-not-allowed');
+                }
+
+                document.querySelectorAll('[data-date]').forEach(el => {
+                    const dateStr = el.dataset.date;
+                    if (!dateStr) return;
+                    
+                    const dayContentContainer = el.querySelector('.p-4.sm\\:p-6 .space-y-6'); 
+                    if (dayContentContainer) {
+                        const checkingOut = hotelData.find(h => h.checkOut === dateStr);
+                        const checkingIn = hotelData.find(h => h.checkIn === dateStr);
+                        const stayingAt = hotelData.find(h => dateStr >= h.checkIn && dateStr < h.checkOut);
+                        let hotelInfoHTML = '';
+                        if (checkingOut) hotelInfoHTML += `<p class="text-gray-700">今日退房：<a href="${checkingOut.mapLink}" target="_blank" class="font-semibold hover:underline">${checkingOut.name}</a> <span class="text-sm text-gray-500">(${checkingOut.checkOutTime}須退房)</span></p>`;
+                        if (checkingIn) hotelInfoHTML += `<p class="text-gray-700 mt-1">今日入住：<a href="${checkingIn.mapLink}" target="_blank" class="font-semibold hover:underline">${checkingIn.name}</a> <span class="text-sm text-gray-500">(${checkingIn.checkInTime}可入住)</span></p>`;
+                        else if (!checkingOut && stayingAt) hotelInfoHTML += `<p class="text-gray-700">今晚入住：<a href="${stayingAt.mapLink}" target="_blank" class="font-semibold hover:underline">${stayingAt.name}</a></p>`;
+
+                        if (hotelInfoHTML) dayContentContainer.insertAdjacentHTML('afterbegin', `<div class="info-block accommodation-info p-4 bg-gray-50 rounded-lg border-l-4 border-indigo-400"><h4 class="font-bold text-lg text-indigo-800 flex items-center mb-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor"><path d="M19 9.5A2.5 2.5 0 0016.5 7H3.5A2.5 2.5 0 001 9.5v7A2.5 2.5 0 003.5 19h13a2.5 2.5 0 002.5-2.5v-7zM6 13a1 1 0 11-2 0 1 1 0 012 0zm3 0a1 1 0 11-2 0 1 1 0 012 0z" /><path d="M3.5 4A1.5 1.5 0 002 5.5v1A1.5 1.5 0 003.5 8h13A1.5 1.5 0 0018 6.5v-1A1.5 1.5 0 0016.5 4h-13z" /></svg>住宿資訊</h4>${hotelInfoHTML}</div>`);
+                        
+                        const transportItems = transportData.filter(t => t.date === dateStr);
+                        if (transportItems.length > 0) {
+                             const transportListHTML = transportItems.map(item => {
+                                if (item.type === '航班' && Array.isArray(item.details)) {
+                                    const flightsHtml = item.details.map(leg => {
+                                        const depTime = new Date(leg.departure.time).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: leg.departure.tz });
+                                        const arrTime = new Date(leg.arrival.time).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: leg.arrival.tz });
+                                        const arrivalDateStr = new Date(leg.arrival.time).toISOString().split('T')[0];
+                                        const departureDateStr = new Date(leg.departure.time).toISOString().split('T')[0];
+                                        const dateIndicator = arrivalDateStr > departureDateStr ? ' <span class="text-xs text-red-500 font-semibold">(+1)</span>' : '';
+                                        return `<div class="text-gray-700">
+                                            <div class="font-semibold text-gray-800">${leg.flightCode}</div>
+                                            <div class="text-sm pl-2 mt-1">🛫 ${leg.departure.airport} &nbsp; <strong>${depTime}</strong></div>
+                                            <div class="text-sm pl-2">🛬 ${leg.arrival.airport} &nbsp; <strong>${arrTime}</strong>${dateIndicator}</div>
+                                        </div>`;
+                                    }).join('<div class="my-2 border-t border-dashed border-gray-300"></div>');
+                                    return `<li>${flightsHtml}</li>`;
+                                }
+                                return `<li class="text-gray-700">${item.type}：${item.details}</li>`;
+                            }).join('');
+
+                            dayContentContainer.insertAdjacentHTML('afterbegin', `<div class="info-block transportation-info p-4 bg-blue-50 rounded-lg border-l-4 border-blue-400"><h4 class="font-bold text-lg text-blue-800 flex items-center mb-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 3a1 1 0 00-1.447-.894L8.763 6H5a3 3 0 000 6h.085l1.558 2.336A1 1 0 008 15.5V17a1 1 0 001 1h2a1 1 0 001-1v-1.5a1 1 0 00-.237-.664L9.915 12H15a3 3 0 000-6h-3.763L16.553 3.894A1 1 0 0018 3zM5 9a1 1 0 100-2 1 1 0 000 2zm10-2a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" /></svg>本日交通</h4><ul class="list-none space-y-2">${transportListHTML}</ul></div>`);
+                        }
+                        
+                        const tagContainer = el.querySelector('.my-3');
+                        const cityKey = el.dataset.weatherCity;
+                        if (tagContainer && cityKey && foodieData[cityKey] && !tagContainer.querySelector('.foodie-btn-wrapper')) {
+                            const foodieButton = document.createElement('button');
+                            foodieButton.className = "foodie-btn bg-amber-100 text-amber-800 text-xs font-semibold px-3 py-1 rounded-full hover:bg-amber-200 transition-colors";
+                            foodieButton.innerHTML = "🍽️ 美食清單";
+                            foodieButton.onclick = e => { e.stopPropagation(); openFoodieModal(cityKey); };
+                            const wrapper = document.createElement('div');
+                            wrapper.className = "foodie-btn-wrapper flex-shrink-0";
+                            wrapper.appendChild(foodieButton);
+                            tagContainer.appendChild(wrapper);
+                        }
+                    }
+                    
+                    if (dateStr < todayString) {
+                        el.classList.add('day-past');
+                        if (el.querySelector('details')) el.querySelector('details').open = false;
+                    } else if (dateStr === todayString) {
+                        const summaryElement = el.querySelector('summary');
+                        if (summaryElement) {
+                            summaryElement.classList.add('summary-today');
+                            const h3 = summaryElement.querySelector('h3');
+                            if(h3 && !h3.querySelector('.today-marker')) h3.insertAdjacentHTML('beforeend', ' <span class="today-marker text-base font-medium text-green-600">(今日行程)</span>');
+                        }
+                    }
+                });
+                
+                const updateVisibility = () => mainContainer.classList.toggle('show-past', showPastToggle.checked);
+                showPastToggle.addEventListener('change', updateVisibility);
+                updateVisibility();
+            }
+            
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('section[id], .trip-card-wrapper[id]');
+            const sectionObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        navLinks.forEach(link => {
+                            link.classList.toggle('nav-link-active', link.getAttribute('href') === `#${id}`);
+                        });
+                    }
+                });
+            }, { rootMargin: "-50% 0px -50% 0px" });
+            sections.forEach(section => sectionObserver.observe(section));
+
+
+            updateLiveTaipeiTime();
+            setInterval(updateLiveTaipeiTime, 1000); 
+
+            populateDayCardWeather(allWeatherData);
+            initializeTripView();
+
+            const todayString = new Date().toISOString().split('T')[0];
+            const lastAvailableDate = itinerary[itinerary.length - 1].date;
+
+            let initialDateToShow = tripInfo.tripStartDate;
+            if (todayString >= tripInfo.tripStartDate && todayString <= tripInfo.tripEndDate) {
+                if (itinerary.find(d => d.date === todayString)) {
+                    initialDateToShow = todayString;
+                } else if (todayString > lastAvailableDate) {
+                    initialDateToShow = lastAvailableDate;
+                }
+            } else if (todayString > tripInfo.tripEndDate) {
+                initialDateToShow = lastAvailableDate;
+            }
+
+            currentDisplayDate = initialDateToShow;
+            updateStatusDashboard(currentDisplayDate, data, allWeatherData);
+
+
+            document.getElementById('prev-day-btn').addEventListener('click', () => {
+                const [year, month, day] = currentDisplayDate.split('-').map(Number);
+                const currentDateObj = new Date(Date.UTC(year, month - 1, day));
+                currentDateObj.setUTCDate(currentDateObj.getUTCDate() - 1);
+                const newDate = currentDateObj.toISOString().split('T')[0];
+                if (newDate >= tripInfo.tripStartDate) {
+                    currentDisplayDate = newDate;
+                    updateStatusDashboard(currentDisplayDate, data, window.allWeatherData, -1); 
+                }
+            });
+
+            document.getElementById('next-day-btn').addEventListener('click', () => {
+                const [year, month, day] = currentDisplayDate.split('-').map(Number);
+                const currentDateObj = new Date(Date.UTC(year, month - 1, day));
+                currentDateObj.setUTCDate(currentDateObj.getUTCDate() + 1);
+                const newDate = currentDateObj.toISOString().split('T')[0];
+                 if (newDate <= lastAvailableDate) { 
+                    currentDisplayDate = newDate;
+                    updateStatusDashboard(currentDisplayDate, data, window.allWeatherData, 1);
+                }
+            });
+
+            const statusCard = document.getElementById('status-card-content');
+            let touchStartX = 0;
+            let touchEndX = 0;
+            let isSliderInteraction = false; 
+            const swipeThreshold = 50; 
+
+            statusCard.addEventListener('touchstart', (event) => {
+                if (event.target.id === 'day-slider') {
+                    isSliderInteraction = true;
+                    return; 
+                }
+                isSliderInteraction = false;
+                touchStartX = event.changedTouches[0].screenX;
+            }, { passive: true });
+
+            statusCard.addEventListener('touchend', (event) => {
+                if (isSliderInteraction) {
+                    isSliderInteraction = false;
+                    return;
+                }
+                touchEndX = event.changedTouches[0].screenX;
+                handleSwipe();
+            }, { passive: true });
+
+            function handleSwipe() {
+                const swipeDistance = touchEndX - touchStartX;
+                if (Math.abs(swipeDistance) < swipeThreshold) return; 
+
+                if (swipeDistance < 0) {
+                    document.getElementById('next-day-btn').click();
+                } else {
+                    document.getElementById('prev-day-btn').click();
+                }
+            }
+
+            if (paginationDotsContainer) {
+                paginationDotsContainer.addEventListener('click', (event) => {
+                    const clickedDot = event.target.closest('.pagination-dot');
+                    if (clickedDot) {
+                        const targetDay = parseInt(clickedDot.dataset.day);
+                        const targetDate = data.itinerary[targetDay - 1].date;
+                        
+                        const currentDayData = data.itinerary.find(d => d.date === currentDisplayDate);
+                        const currentDay = currentDayData ? currentDayData.day : 0;
+                        let direction = 0;
+                        if (targetDay > currentDay) { direction = 1; } 
+                        else if (targetDay < currentDay) { direction = -1; }
+
+                        currentDisplayDate = targetDate;
+                        updateStatusDashboard(currentDisplayDate, data, window.allWeatherData, direction);
+                    }
+                });
+            }
+
+            document.getElementById('view-details-btn').addEventListener('click', () => {
+                const dayData = data.itinerary.find(d => d.date === currentDisplayDate);
+                if (!dayData) return;
+
+                const wrapper = document.querySelector(`.trip-card-wrapper[data-day="${dayData.day}"]`);
+                if (!wrapper) return;
+
+                const details = wrapper.querySelector('details');
+                const card = details?.closest('.trip-card');
+
+                card?.classList.add('is-visible', 'no-trans');
+                if (details && !details.open) {
+                    details.open = true;
+                }
+
+                wrapper.scrollIntoView({ behavior: 'smooth' });
+
+                setTimeout(() => {
+                    card?.classList.remove('no-trans');
+                }, 1000); 
+            });
+            
+            const todayBtn = document.getElementById('today-btn');
+            const dashboardSectionForObserver = document.getElementById('status-dashboard-section');
+
+            if (todayBtn && dashboardSectionForObserver) {
+                const todayBtnObserver = new IntersectionObserver(
+                    ([entry]) => {
+                        todayBtn.classList.toggle('is-visible', !entry.isIntersecting);
+                    },
+                    { root: null, threshold: 0.1 }
+                );
+                todayBtnObserver.observe(dashboardSectionForObserver);
+            }
+            
+            todayBtn.addEventListener('click', () => {
+                scrollToToday();
+            });
+        }
+    </script>
+</body>
+</html>
