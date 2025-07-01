@@ -162,18 +162,37 @@
         .day-past { display: none; }
         .show-past .day-past { display: block; }
         
-        #status-city-arrow.rotate-180 { transform: rotate(180deg); }
+        /* --- 行程要覽卡片標頭優化 --- */
+        #status-date-nav {
+            min-height: 3.5rem; /* 設定最小高度，防止雙行日期造成版面跳動 */
+            align-items: center;
+        }
+        #status-travel-day-indicator {
+            background-color: var(--c-accent);
+            color: var(--c-primary);
+        }
+        #status-city-btn {
+            background: none; border: none; padding: 0; margin: 0; font: inherit; color: inherit; cursor: pointer;
+            display: flex; align-items: center; gap: 0.5rem;
+            padding: 0.25rem 0.5rem; margin-left: -0.5rem; border-radius: 0.5rem; transition: background-color 0.2s;
+        }
+        #status-city-btn:hover {
+            background-color: var(--c-bg-accent-light);
+        }
+        #status-city-btn svg { transition: transform 0.2s; }
+        #status-city-btn.modal-open svg { transform: rotate(180deg); }
 
         /* --- 彈出式視窗 (Modal) & 覆蓋層 --- */
         .modal-overlay {
-            position: fixed; inset: 0; background: rgba(0, 0, 0, 0.6); display: flex; align-items: center; justify-content: center; z-index: 1000; opacity: 0; transition: opacity 0.3s ease; pointer-events: none;
+            position: fixed; inset: 0; background: rgba(29, 53, 87, 0.6); backdrop-filter: blur(4px); display: flex; align-items: center; justify-content: center; z-index: 1000; opacity: 0; transition: opacity 0.3s ease; pointer-events: none;
         }
         .modal-overlay.active { opacity: 1; pointer-events: auto; }
         .modal-container {
-            background: var(--c-bg-card); padding: 1.5rem; border-radius: 1rem; box-shadow: 0 10px 25px rgba(0,0,0,0.1); width: 90%; max-width: 500px; max-height: 80vh; transform: scale(0.95); transition: transform 0.3s ease; display: flex; flex-direction: column; overflow-y: auto;
+            background: var(--c-bg-card); padding: 1.5rem; border-radius: 1rem; box-shadow: 0 10px 25px rgba(0,0,0,0.1); width: 90%; max-width: 500px; max-height: 80vh; transform: scale(0.95); transition: transform 0.3s ease; display: flex; flex-direction: column;
         }
         .modal-overlay.active .modal-container { transform: scale(1); }
-        .modal-header { display: flex; justify-content: space-between; align-items: center; padding-bottom: 1rem; flex-shrink: 0; }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; padding-bottom: 1rem; flex-shrink: 0; border-bottom: 1px solid var(--c-border); }
+        .modal-body { overflow-y: auto; -webkit-overflow-scrolling: touch; }
         .modal-tabs { display: flex; gap: 0.25rem; background-color: #f3f4f6; padding: 0.25rem; border-radius: 9999px; flex-shrink: 0; margin-bottom: 1rem; }
         .modal-tab { flex-grow: 1; text-align: center; padding: 0.375rem 0.5rem; font-size: 0.8rem; font-weight: 500; color: #4b5563; border-radius: 9999px; cursor: pointer; transition: all 0.3s ease; border: 1px solid transparent; }
         .modal-tab.active { background-color: white; color: var(--c-secondary); box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1); }
@@ -181,6 +200,13 @@
         .modal-close-btn { background: none; border: none; font-size: 1.5rem; font-weight: bold; cursor: pointer; color: #9ca3af; }
         .modal-close-btn:hover { color: var(--c-text); }
         
+        .city-select-item {
+            display: block; width: 100%; text-align: left; padding: 1rem 1.25rem; font-size: 1.125rem; font-weight: 700; color: var(--c-primary); background-color: var(--c-bg-accent-light); border-radius: 0.75rem; transition: all 0.2s ease; border: 1px solid var(--c-border);
+        }
+        .city-select-item:hover {
+            background-color: var(--c-accent); color: var(--c-primary); transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+        }
+
         #update-notification { display: none; position: fixed; bottom: 5rem; left: 50%; transform: translateX(-50%); z-index: 2000; }
         #update-notification > div { background-color: var(--c-primary); }
         #reload-button { background-color: white; color: var(--c-secondary); }
@@ -358,12 +384,6 @@
         .info-block { border-left-color: var(--c-secondary) !important; }
         .foodie-btn { background-color: var(--c-accent) !important; color: var(--c-primary) !important; }
         .foodie-btn:hover { background-color: var(--c-secondary) !important; color: white !important; }
-        
-        /* 特定樣式覆蓋，確保元素視覺正確 */
-        #status-travel-day-indicator {
-            background-color: #e5e7eb !important; /* gray-200 */
-            color: #4b5563 !important;      /* gray-600 */
-        }
 
     </style>
 </head>
@@ -428,50 +448,46 @@
                     <span id="status-time-diff"></span>
                 </div>
 
-                <div class="flex justify-between items-start flex-wrap gap-y-2">
-                    <div class="flex items-center gap-x-3">
-                        <h2 id="status-date" class="text-2xl sm:text-3xl font-bold text-gray-900 -mt-1">讀取中...</h2>
-                        <span id="status-travel-day-indicator" class="text-xs font-semibold px-2 py-0.5 rounded-full whitespace-nowrap" style="display: none;"></span>
+                <div id="status-header">
+                    <!-- Tier 1: Date Navigation -->
+                    <div id="status-date-nav" class="flex justify-between">
+                        <h2 id="status-date" class="text-2xl sm:text-3xl font-bold text-gray-900">讀取中...</h2>
+                        <div class="flex items-center space-x-2 flex-shrink-0">
+                            <button id="prev-day-btn" class="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
+                            </button>
+                            <button id="next-day-btn" class="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" /></svg>
+                            </button>
+                        </div>
                     </div>
-                    <div class="flex items-center space-x-2">
-                        <button id="prev-day-btn" class="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
-                        </button>
-                        <button id="next-day-btn" class="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" /></svg>
-                        </button>
+
+                    <!-- Tier 2: Location & Status -->
+                    <div id="status-location" class="mt-1 flex items-baseline gap-x-3">
+                         <button id="status-city-btn">
+                            <h3 id="status-city-name" class="text-3xl font-black text-gray-900"></h3>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                         </button>
+                         <span id="status-travel-day-indicator" class="text-sm font-semibold px-3 py-1 rounded-full whitespace-nowrap" style="display: none;">移動日</span>
                     </div>
                 </div>
 
+
                 <div id="status-card-content" class="space-y-4 mt-2 flex-grow" style="touch-action: pan-y;">
+                    <!-- Tier 3: Progress -->
                     <div>
                         <div class="flex justify-end items-baseline">
                             <p id="status-progress-text" class="text-sm font-medium text-indigo-600"></p>
                         </div>
-                        
                         <div class="relative pt-2 pb-1">
                             <label for="day-slider" class="sr-only">行程日選擇拉桿</label>
                             <input type="range" id="day-slider" min="1" max="13" value="1" class="w-full">
                         </div>
-
-                        <div class="relative z-20">
-                            <button type="button" id="status-city-btn" class="inline-flex items-center gap-x-2 text-3xl font-black text-gray-900 focus:outline-none focus:shadow-[0_0_0_2px_var(--c-secondary)] rounded-lg px-2 py-1 transition-colors hover:bg-gray-100">
-                                <span id="status-city-text">蒙特婁</span>
-                                <svg id="status-city-arrow" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500 transition-transform duration-200" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
-                            </button>
-                            <div id="city-dropdown-overlay" class="fixed inset-0 z-40 hidden"></div>
-                            <div id="city-dropdown" class="origin-top-left absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-gray-200 focus:outline-none hidden z-50" role="menu" aria-orientation="vertical" aria-labelledby="status-city-btn">
-                                <div class="py-1" role="none">
-                                    <a href="#" class="city-select-item text-gray-700 block px-4 py-2 text-base hover:bg-indigo-50" role="menuitem" data-city-key="montreal">蒙特婁</a>
-                                    <a href="#" class="city-select-item text-gray-700 block px-4 py-2 text-base hover:bg-indigo-50" role="menuitem" data-city-key="quebec">魁北克市</a>
-                                    <a href="#" class="city-select-item text-gray-700 block px-4 py-2 text-base hover:bg-indigo-50" role="menuitem" data-city-key="niagara">尼加拉瀑布</a>
-                                    <a href="#" class="city-select-item text-gray-700 block px-4 py-2 text-base hover:bg-indigo-50" role="menuitem" data-city-key="chicago">芝加哥</a>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 
+                    <!-- Info List -->
                     <div id="status-info-list" class="space-y-4 pt-4 border-t border-gray-200">
                         <div id="status-weather-item" class="flex items-start">
                             <span id="status-weather-icon" class="text-3xl mr-4 w-8 text-center pt-1">⏳</span>
@@ -582,23 +598,34 @@
     </div>
 
     <div class="no-print fixed bottom-4 right-4 z-50">
-        <button id="today-btn" class="bg-amber-500 text-white font-semibold px-4 py-3 rounded-full shadow-lg hover:bg-amber-600 transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-400 flex items-center justify-center hidden">
+        <button id="today-btn" class="bg-amber-500 text-white font-semibold px-4 py-3 rounded-full shadow-lg hover:bg-amber-600 transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-400 hidden">
             行程要覽
         </button>
     </div>
 
+    <!-- Foodie Modal -->
     <div id="foodie-modal" class="modal-overlay no-print hidden">
         <div class="modal-container">
             <div class="modal-header">
                 <h2 id="modal-title" class="text-2xl font-bold text-gray-900">美食指南</h2>
                 <button class="modal-close-btn">&times;</button>
             </div>
-            <div id="modal-tabs" class="modal-tabs"></div>
-            <div id="modal-content" class="space-y-4 mt-4"></div>
-            <div class="modal-footer">
-                <button class="modal-close-btn w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold py-2 px-4 rounded-lg transition-colors">
-                    關閉
-                </button>
+            <div class="modal-body">
+                <div id="modal-tabs" class="modal-tabs"></div>
+                <div id="modal-content" class="space-y-4 mt-4"></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- City Select Modal -->
+    <div id="city-select-modal" class="modal-overlay no-print hidden">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h2 class="text-2xl font-bold text-gray-900">快速跳轉至城市</h2>
+                <button class="modal-close-btn">&times;</button>
+            </div>
+            <div id="city-select-list" class="modal-body mt-4 space-y-3">
+                <!-- Cities will be populated by JS -->
             </div>
         </div>
     </div>
@@ -759,7 +786,7 @@
 
             const statusCardContentEl = document.getElementById('status-card-content');
             const statusDateEl = document.getElementById('status-date');
-            const statusCityTextEl = document.getElementById('status-city-text'); 
+            const statusCityNameEl = document.getElementById('status-city-name');
             const progressTextEl = document.getElementById('status-progress-text');
             const daySlider = document.getElementById('day-slider');
             const viewDetailsBtn = document.getElementById('view-details-btn');
@@ -799,8 +826,8 @@
             const updateContent = () => {
                 if (!targetDayData) {
                     if(timeInfoEl) timeInfoEl.style.display = 'none';
-                    statusDateEl.textContent = '旅程已結束或未開始';
-                    if (statusCityTextEl) statusCityTextEl.textContent = '期待下次旅行！';
+                    statusDateEl.textContent = '旅程已結束';
+                    if (statusCityNameEl) statusCityNameEl.textContent = '期待下次旅行！';
                     progressTextEl.textContent = '-';
                     if(daySlider) daySlider.value = 1;
                     if(viewDetailsBtn) viewDetailsBtn.style.display = 'none';
@@ -815,34 +842,28 @@
                 if(timeInfoEl) timeInfoEl.style.display = 'flex';
                 if(viewDetailsBtn) viewDetailsBtn.style.display = 'inline-block';
                 
-                if (travelDayIndicatorEl) {
-                    if (targetDayData.isTravelDay) {
-                        travelDayIndicatorEl.textContent = '移動日';
-                        travelDayIndicatorEl.style.display = 'inline-block';
-                    } else {
-                        travelDayIndicatorEl.style.display = 'none';
-                    }
-                }
-                
                 const isMergedLastDay = targetDayData.subTitle.includes('~');
-
                 if (isMergedLastDay) {
                     const parts = targetDayData.subTitle.split('｜');
                     const datePart = parts[1].trim();
-                    statusDateEl.textContent = datePart;
-                    progressTextEl.textContent = '返程日';
+                    statusDateEl.innerHTML = datePart.replace('~', '<br class="sm:hidden">~ ');
                 } else {
                     const [year, month, day] = date.split('-').map(Number);
                     const dateObj = new Date(Date.UTC(year, month - 1, day));
                     const dayOfWeek = dateObj.toLocaleDateString('zh-TW', { weekday: 'long', timeZone: 'UTC' });
                     const datePart = `${month}月${day}日`;
                     statusDateEl.textContent = `${datePart} (${dayOfWeek.replace('星期','週')})`;
-                    progressTextEl.textContent = `Day ${targetDayData.day} / ${tripInfo.totalDays}`;
                 }
                 
                 const city = targetDayData.weatherCity;
                 const cityMap = { montreal: '蒙特婁', quebec: '魁北克市', niagara: '尼加拉瀑布', chicago: '芝加哥', '': '飛行途中' };
-                if (statusCityTextEl) statusCityTextEl.textContent = cityMap[city] || '移動中';
+                if (statusCityNameEl) statusCityNameEl.textContent = cityMap[city] || '移動中';
+                
+                if (travelDayIndicatorEl) {
+                    travelDayIndicatorEl.style.display = targetDayData.isTravelDay ? 'inline-block' : 'none';
+                }
+                
+                progressTextEl.textContent = `Day ${targetDayData.day} / ${tripInfo.totalDays}`;
                 
                 if (daySlider) {
                     daySlider.value = targetDayData.day;
@@ -873,7 +894,6 @@
                 }
 
                 const cityWeather = allWeatherData ? allWeatherData[city] : undefined;
-                
                 if (city) {
                     weatherItemEl.style.display = 'flex';
                     if (cityWeather) { 
@@ -899,7 +919,6 @@
                     weatherItemEl.style.display = 'none';
                 }
 
-
                 const checkingIn = hotels.find(h => h.checkIn === date);
                 const checkingOut = hotels.find(h => h.checkOut === date);
                 const stayingAt = hotels.find(h => date >= h.checkIn && date < h.checkOut);
@@ -924,7 +943,6 @@
                 }
 
                 let transportItems = transport.filter(t => t.date === date);
-
                 if (date === '2025-07-14') {
                     const nextDayTransport = transport.filter(t => t.date === '2025-07-15');
                     transportItems = transportItems.concat(nextDayTransport);
@@ -1010,10 +1028,6 @@
             window.addEventListener('resize', updateNavHeightVar);
             updateNavHeightVar();
 
-            const statusCityBtn = document.getElementById('status-city-btn');
-            const cityDropdown = document.getElementById('city-dropdown');
-            const statusCityArrow = document.getElementById('status-city-arrow');
-            const cityDropdownOverlay = document.getElementById('city-dropdown-overlay'); 
             const paginationDotsContainer = document.getElementById('status-pagination-dots');
             const daySlider = document.getElementById('day-slider');
 
@@ -1029,43 +1043,6 @@
                 });
             }
 
-            if (statusCityBtn && cityDropdown && statusCityArrow && cityDropdownOverlay) {
-                
-                const closeCityDropdown = () => {
-                    cityDropdown.classList.add('hidden');
-                    cityDropdownOverlay.classList.add('hidden');
-                    statusCityArrow.classList.remove('rotate-180');
-                };
-
-                statusCityBtn.addEventListener('click', (event) => {
-                    event.stopPropagation();
-                    const isHidden = cityDropdown.classList.contains('hidden');
-                    if (isHidden) {
-                        cityDropdown.classList.remove('hidden');
-                        cityDropdownOverlay.classList.remove('hidden');
-                        statusCityArrow.classList.add('rotate-180');
-                    } else {
-                        closeCityDropdown();
-                    }
-                });
-                
-                cityDropdownOverlay.addEventListener('click', closeCityDropdown);
-
-                document.querySelectorAll('.city-select-item').forEach(item => {
-                    item.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        const cityKey = item.dataset.cityKey;
-                        const firstDayInCity = data.itinerary.find(d => d.weatherCity === cityKey);
-                        
-                        if (firstDayInCity) {
-                            currentDisplayDate = firstDayInCity.date;
-                            updateStatusDashboard(currentDisplayDate, data, window.allWeatherData);
-                        }
-                        closeCityDropdown();
-                    });
-                });
-            }
-
             const mainNav = document.getElementById('main-nav');
             const mobileMenuBtn = document.getElementById('mobile-menu-btn');
             const mobileMenuPanel = document.getElementById('mobile-menu-panel');
@@ -1073,9 +1050,10 @@
             
             if (mobileMenuBtn && mobileMenuPanel && mobileMenuOverlay) { 
                 const toggleMenu = () => {
-                    const isOpen = mobileMenuPanel.classList.toggle('is-open');
+                    const isOpen = !mobileMenuPanel.classList.contains('is-open');
+                    mobileMenuPanel.classList.toggle('is-open', isOpen);
                     mobileMenuPanel.classList.toggle('hidden', !isOpen);
-                    mobileMenuOverlay.classList.toggle('is-open');
+                    mobileMenuOverlay.classList.toggle('is-open', isOpen);
                     mobileMenuOverlay.classList.toggle('hidden', !isOpen);
                     document.body.classList.toggle('modal-open', isOpen);
                 };
@@ -1208,44 +1186,94 @@
                 });
             }
 
+            // --- Modal Logic ---
             const foodieModal = document.getElementById('foodie-modal');
-            const modalTabs = document.getElementById('modal-tabs');
-            const modalContent = document.getElementById('modal-content');
-            function openFoodieModal(activeCityKey) {
-                if (!foodieModal) return;
-                let tabsHTML = '';
-                Object.keys(foodieData).forEach(cityKey => tabsHTML += `<button class="modal-tab" data-city="${cityKey}">${foodieData[cityKey].name}</button>`);
-                modalTabs.innerHTML = tabsHTML;
-                document.querySelectorAll('.modal-tab').forEach(tab => tab.addEventListener('click', () => switchFoodieTab(tab.dataset.city)));
-                switchFoodieTab(activeCityKey);
-                document.body.classList.add('modal-open');
-                foodieModal.classList.remove('hidden');
-                setTimeout(() => foodieModal.classList.add('active'), 10);
+            const citySelectModal = document.getElementById('city-select-modal');
+            const statusCityBtn = document.getElementById('status-city-btn');
+
+            function openModal(modal) {
+                if (!modal) return;
+                modal.classList.remove('hidden');
+                setTimeout(() => {
+                    modal.classList.add('active');
+                    document.body.classList.add('modal-open');
+                }, 10);
             }
-            function closeFoodieModal() {
-                if(foodieModal) {
-                    foodieModal.classList.remove('active');
-                    setTimeout(() => foodieModal.classList.add('hidden'), 300);
-                }
+
+            function closeModal(modal) {
+                if (!modal) return;
+                modal.classList.remove('active');
                 document.body.classList.remove('modal-open');
+                setTimeout(() => modal.classList.add('hidden'), 300);
             }
-            function switchFoodieTab(cityKey) {
-                const cityData = foodieData[cityKey];
-                if (!cityData) return;
-                document.querySelectorAll('.modal-tab').forEach(tab => tab.classList.toggle('active', tab.dataset.city === cityKey));
-                let contentHTML = '';
-                cityData.categories.forEach(category => {
-                    contentHTML += `<div class="mb-4"><h3 class="text-lg font-bold text-gray-800 border-b-2 border-indigo-200 pb-1 mb-2">${category.name}</h3><div class="space-y-3">`;
-                    category.items.forEach(item => {
-                        const placesHTML = item.places.map(p => `<a href="${p.link}" target="_blank" class="hover:underline">${p.name}</a>`).join('、');
-                        contentHTML += `<div><p class="font-semibold text-gray-700">${item.name}</p><p class="text-sm text-gray-500">${item.desc}</p><p class="text-sm text-gray-700">推薦：${placesHTML}</p></div>`;
+            
+            // Foodie Modal
+            if (foodieModal) {
+                const modalTabs = foodieModal.querySelector('#modal-tabs');
+                const modalContent = foodieModal.querySelector('#modal-content');
+                
+                window.openFoodieModal = (activeCityKey) => {
+                    let tabsHTML = '';
+                    Object.keys(foodieData).forEach(cityKey => tabsHTML += `<button class="modal-tab" data-city="${cityKey}">${foodieData[cityKey].name}</button>`);
+                    modalTabs.innerHTML = tabsHTML;
+                    modalTabs.querySelectorAll('.modal-tab').forEach(tab => tab.addEventListener('click', () => switchFoodieTab(tab.dataset.city)));
+                    switchFoodieTab(activeCityKey);
+                    openModal(foodieModal);
+                };
+
+                function switchFoodieTab(cityKey) {
+                    const cityData = foodieData[cityKey];
+                    if (!cityData) return;
+                    modalTabs.querySelectorAll('.modal-tab').forEach(tab => tab.classList.toggle('active', tab.dataset.city === cityKey));
+                    let contentHTML = '';
+                    cityData.categories.forEach(category => {
+                        contentHTML += `<div class="mb-4"><h3 class="text-lg font-bold text-gray-800 border-b-2 border-indigo-200 pb-1 mb-2">${category.name}</h3><div class="space-y-3">`;
+                        category.items.forEach(item => {
+                            const placesHTML = item.places.map(p => `<a href="${p.link}" target="_blank" class="hover:underline">${p.name}</a>`).join('、');
+                            contentHTML += `<div><p class="font-semibold text-gray-700">${item.name}</p><p class="text-sm text-gray-500">${item.desc}</p><p class="text-sm text-gray-700">推薦：${placesHTML}</p></div>`;
+                        });
+                        contentHTML += '</div></div>';
                     });
-                    contentHTML += '</div></div>';
-                });
-                modalContent.innerHTML = contentHTML;
+                    modalContent.innerHTML = contentHTML;
+                }
+                
+                foodieModal.querySelectorAll('.modal-close-btn').forEach(btn => btn.addEventListener('click', () => closeModal(foodieModal)));
+                foodieModal.addEventListener('click', e => (e.target === foodieModal) && closeModal(foodieModal));
             }
-            document.querySelectorAll('.modal-close-btn').forEach(btn => btn.addEventListener('click', closeFoodieModal));
-            if(foodieModal) foodieModal.addEventListener('click', e => (e.target === foodieModal) && closeFoodieModal());
+
+            // City Select Modal
+            if (citySelectModal && statusCityBtn) {
+                const cityListContainer = citySelectModal.querySelector('#city-select-list');
+                const cityMap = { montreal: '蒙特婁', quebec: '魁北克市', niagara: '尼加拉瀑布', chicago: '芝加哥' };
+
+                statusCityBtn.addEventListener('click', () => {
+                    const uniqueCities = [...new Set(itinerary.map(day => day.weatherCity).filter(Boolean))];
+                    
+                    cityListContainer.innerHTML = ''; // Clear previous list
+                    
+                    uniqueCities.forEach(cityKey => {
+                        const button = document.createElement('button');
+                        button.className = 'city-select-item';
+                        button.textContent = cityMap[cityKey] || cityKey;
+                        button.dataset.cityKey = cityKey;
+                        button.addEventListener('click', () => {
+                            const firstDayInCity = itinerary.find(d => d.weatherCity === cityKey);
+                            if (firstDayInCity) {
+                                currentDisplayDate = firstDayInCity.date;
+                                updateStatusDashboard(currentDisplayDate, data, window.allWeatherData);
+                            }
+                            closeModal(citySelectModal);
+                        });
+                        cityListContainer.appendChild(button);
+                    });
+                    
+                    openModal(citySelectModal);
+                });
+
+                citySelectModal.querySelectorAll('.modal-close-btn').forEach(btn => btn.addEventListener('click', () => closeModal(citySelectModal)));
+                citySelectModal.addEventListener('click', e => (e.target === citySelectModal) && closeModal(citySelectModal));
+            }
+
 
             function initializeTripView() {
                 const showPastToggle = document.getElementById('show-past-toggle');
@@ -1307,7 +1335,7 @@
                             const foodieButton = document.createElement('button');
                             foodieButton.className = "foodie-btn bg-amber-100 text-amber-800 text-xs font-semibold px-3 py-1 rounded-full hover:bg-amber-200 transition-colors";
                             foodieButton.innerHTML = "🍽️ 美食清單";
-                            foodieButton.onclick = e => { e.stopPropagation(); openFoodieModal(cityKey); };
+                            foodieButton.onclick = e => { e.stopPropagation(); window.openFoodieModal(cityKey); };
                             const wrapper = document.createElement('div');
                             wrapper.className = "foodie-btn-wrapper flex-shrink-0";
                             wrapper.appendChild(foodieButton);
