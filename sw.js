@@ -55,7 +55,27 @@ workbox.routing.registerRoute(
   })
 );
 
-// 3. 針對圖片的快取策略 (CacheFirst)
+// 3. **[新增]** 針對匯率 API 的快取策略 (StaleWhileRevalidate)
+// 優先從快取提供，確保快速回應，同時在背景請求新資料。
+// 這對歷史匯率（不會變）和即時匯率（需要更新）都是一個很好的平衡策略。
+workbox.routing.registerRoute(
+  ({ url }) => url.origin === 'https://api.frankfurter.app',
+  new workbox.strategies.StaleWhileRevalidate({
+    cacheName: 'exchange-rate-api-cache',
+    plugins: [
+      new workbox.expiration.ExpirationPlugin({
+        maxEntries: 20, // 最多快取 20 次匯率請求
+        maxAgeSeconds: 24 * 60 * 60, // 快取 24 小時
+      }),
+      new workbox.cacheableResponse.CacheableResponsePlugin({
+        statuses: [0, 200],
+      }),
+    ],
+  })
+);
+
+
+// 4. 針對圖片的快取策略 (CacheFirst)
 // 優先從快取中讀取圖片，如果快取中沒有，才發出網路請求。
 // 這對不常變更的圖片（如 PWA 圖示）非常有效。
 workbox.routing.registerRoute(
