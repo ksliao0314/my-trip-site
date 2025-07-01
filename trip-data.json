@@ -3,7 +3,7 @@
     "totalDays": 13,
     "tripStartDate": "2025-07-02",
     "tripEndDate": "2025-07-16",
-    "dataVersion": "20250701-07"
+    "dataVersion": "20250702-01"
   },
   "timePhases": [
     {
@@ -60,8 +60,8 @@
       "date": "2025-07-02",
       "type": "航班",
       "details": [
-        { "flightCode": "長榮 BR198", "departure": { "airport": "台北松山 (TSA)", "time": "2025-07-02T09:00:00", "tz": "Asia/Taipei" }, "arrival": { "airport": "東京成田 (NRT)", "time": "2025-07-02T13:25:00", "tz": "Asia/Tokyo" } },
-        { "flightCode": "加航 AC6", "departure": { "airport": "東京成田 (NRT)", "time": "2025-07-02T17:35:00", "tz": "Asia/Tokyo" }, "arrival": { "airport": "蒙特婁 (YUL)", "time": "2025-07-02T17:00:00", "tz": "America/Montreal" } }
+        { "flightCode": "長榮 BR198", "departure": { "airport": "台北松山 (TSA)", "time": "2025-07-02T01:00:00Z", "tz": "Asia/Taipei" }, "arrival": { "airport": "東京成田 (NRT)", "time": "2025-07-02T04:25:00Z", "tz": "Asia/Tokyo" } },
+        { "flightCode": "加航 AC6", "departure": { "airport": "東京成田 (NRT)", "time": "2025-07-02T08:35:00Z", "tz": "Asia/Tokyo" }, "arrival": { "airport": "蒙特婁 (YUL)", "time": "2025-07-02T21:00:00Z", "tz": "America/Montreal" } }
       ]
     },
     { "date": "2025-07-02", "type": "巴士", "details": "747 Express Bus" },
@@ -70,28 +70,28 @@
       "date": "2025-07-06",
       "type": "航班",
       "details": [
-        { "flightCode": "加航 AC7959", "departure": { "airport": "魁北克 (YQB)", "time": "2025-07-06T13:00:00", "tz": "America/Toronto" }, "arrival": { "airport": "多倫多 (YYZ)", "time": "2025-07-06T14:30:00", "tz": "America/Toronto" } }
+        { "flightCode": "加航 AC7959", "departure": { "airport": "魁北克 (YQB)", "time": "2025-07-06T17:00:00Z", "tz": "America/Toronto" }, "arrival": { "airport": "多倫多 (YYZ)", "time": "2025-07-06T18:30:00Z", "tz": "America/Toronto" } }
       ]
     },
     {
       "date": "2025-07-08",
       "type": "航班",
       "details": [
-        { "flightCode": "加航 AC515", "departure": { "airport": "多倫多 (YYZ)", "time": "2025-07-08T15:00:00", "tz": "America/Toronto" }, "arrival": { "airport": "芝加哥 (ORD)", "time": "2025-07-08T16:00:00", "tz": "America/Chicago" } }
+        { "flightCode": "加航 AC515", "departure": { "airport": "多倫多 (YYZ)", "time": "2025-07-08T19:00:00Z", "tz": "America/Toronto" }, "arrival": { "airport": "芝加哥 (ORD)", "time": "2025-07-08T20:00:00Z", "tz": "America/Chicago" } }
       ]
     },
     {
       "date": "2025-07-14",
       "type": "航班",
       "details": [
-        { "flightCode": "日航 JL009", "departure": { "airport": "芝加哥 (ORD)", "time": "2025-07-14T01:30:00", "tz": "America/Chicago" }, "arrival": { "airport": "東京羽田 (HND)", "time": "2025-07-15T04:20:00", "tz": "Asia/Tokyo" } }
+        { "flightCode": "日航 JL009", "departure": { "airport": "芝加哥 (ORD)", "time": "2025-07-14T06:30:00Z", "tz": "America/Chicago" }, "arrival": { "airport": "東京羽田 (HND)", "time": "2025-07-15T07:20:00Z", "tz": "Asia/Tokyo" } }
       ]
     },
     {
       "date": "2025-07-15",
       "type": "航班",
       "details": [
-        { "flightCode": "日航 JL097", "departure": { "airport": "東京羽田 (HND)", "time": "2025-07-15T08:55:00", "tz": "Asia/Tokyo" }, "arrival": { "airport": "台北松山 (TSA)", "time": "2025-07-15T11:35:00", "tz": "Asia/Taipei" } }
+        { "flightCode": "日航 JL097", "departure": { "airport": "東京羽田 (HND)", "time": "2025-07-15T23:55:00Z", "tz": "Asia/Tokyo" }, "arrival": { "airport": "台北松山 (TSA)", "time": "2025-07-16T02:35:00Z", "tz": "Asia/Taipei" } }
       ]
     },
     {
