@@ -3,7 +3,7 @@
     "totalDays": 13,
     "tripStartDate": "2025-07-02",
     "tripEndDate": "2025-07-16",
-    "dataVersion": "20250701-05"
+    "dataVersion": "20250701-07"
   },
   "timePhases": [
     {
@@ -237,6 +237,11 @@
       "title": "蒙特婁半日遊｜教堂・市集・港邊漫步",
       "subTitle": "Day 2｜7月3日（週四）",
       "isTravelDay": false,
+      "theme": {
+        "icon": "⚜️",
+        "title": "法式風情之日",
+        "description": "漫步在舊城的石板路上，感受北美小巴黎的獨特魅力。從莊嚴的聖母大教堂到熱鬧的舊港，今天將沉浸在濃厚的法式氛圍中。"
+      },
       "tags": ["#哥德式教堂", "#舊港漫步", "#法式風情"],
       "activities": [
         { "title": "☀️ 08:30 – 12:00｜舊城早晨巡禮", "items": ["<strong>🏛️ <a href='https://maps.apple.com/?q=Notre-Dame+Basilica+of+Montreal' target='_blank' class='hover:underline'>諾特丹聖母大教堂</a>：</strong>蒙特婁最具代表性的哥德式教堂。若有英文導覽團（$15 CAD左右）可預約參加。建議停留 40–60 分鐘。", "<strong>🏙️ <a href='https://maps.apple.com/?q=Place+d'Armes,Montreal' target='_blank' class='hover:underline'>Place d’Armes 廣場</a> → <a href='https://maps.apple.com/?q=Rue+Saint-Paul,Montreal' target='_blank' class='hover:underline'>Rue Saint-Paul 步行街</a>：</strong>充滿法式殖民建築與街頭藝人，適合拍照、買紀念品。"] },
@@ -272,6 +277,11 @@
       "title": "魁北克市深度遊｜下城、博物館與觀景台",
       "subTitle": "Day 4｜7月5日（週六）",
       "isTravelDay": false,
+      "theme": {
+        "icon": "🏰",
+        "title": "古城探索之日",
+        "description": "深入探索這座世界遺產的上下城區。從充滿藝術氣息的小尚普蘭街，到見證歷史的文明博物館，感受魁北克市的靈魂。"
+      },
       "tags": ["#小尚普蘭街", "#文明博物館", "#亞伯拉罕平原"],
       "activities": [
         { "title": "☀️ 08:30 – 12:00｜下城區漫步 + 文明博物館", "items": ["搭乘<a href='https://maps.apple.com/?q=Funiculaire+du+Vieux-Québec' target='_blank' class='hover:underline'>登山纜車</a>或走<a href='https://maps.apple.com/?q=Escalier+Casse-Cou,Quebec' target='_blank'>斷頭階梯</a>前往下城。", "探索<a href='https://maps.apple.com/?q=Rue+du+Petit-Champlain,Quebec' target='_blank' class='hover:underline'>小尚普蘭街</a>與<a href='https://maps.apple.com/?q=Place+Royale,Quebec' target='_blank' class='hover:underline'>Place Royale 廣場</a>。", "<strong>10:30 – 12:00：</strong>參觀<a href='https://www.mcq.org/en/' target='_blank' class='hover:underline'>文明博物館 Musée de la civilisation</a> (建議預留 1.5 小時)。"] },
@@ -307,6 +317,11 @@
       "title": "尼加拉瀑布一日體驗｜觀瀑船、煙火、自然景點",
       "subTitle": "Day 6｜7月7日（一）",
       "isTravelDay": false,
+      "theme": {
+        "icon": "🌊",
+        "title": "自然震撼之日",
+        "description": "今天，我們將與世界奇觀面對面。無論是搭上觀瀑船感受水霧，還是在瀑布後方聆聽雷鳴，準備好被大自然的磅礴力量所震撼。"
+      },
       "tags": ["#經典體驗", "#自然奇觀", "#夜間煙火"],
       "activities": [
         { "title": "🌊 09:00 – 12:00｜經典瀑布三合一體驗", "items": ["<strong><a href='https://www.niagaraparks.com/visit/attractions/niagara-city-cruises/' target='_blank' class='hover:underline'>Voyage to the Falls 船票體驗</a>：</strong>近距離感受瀑布水勢，建議線上預約上午場。", "<strong><a href='https://www.niagaraparks.com/visit/attractions/journey-behind-the-falls/' target='_blank' class='hover:underline'>Journey Behind the Falls</a>：</strong>進入瀑布後方岩壁隧道觀賞水柱傾瀉。", "<strong><a href='https://www.niagaraparks.com/visit/attractions/niagaras-fury/' target='_blank' class='hover:underline'>Niagara’s Fury 4D 劇場</a>（備選）：</strong>觀看瀑布形成歷史的沉浸式體驗。"] },
@@ -342,6 +357,11 @@
       "title": "芝加哥建築日｜建築遊船 + 公園藝術 + 湖畔黃昏",
       "subTitle": "Day 8｜7月9日（三）",
       "isTravelDay": false,
+      "theme": {
+        "icon": "🏙️",
+        "title": "建築巡禮之日",
+        "description": "今天，我們將深入探索芝加哥的鋼鐵靈魂。從河上仰望經典摩天大樓，再到公園裡欣賞公共藝術，感受這座城市的建築脈動。"
+      },
       "tags": ["#建築遊船", "#千禧公園", "#高空夜景"],
       "activities": [
         { "title": "🛥️ 09:30 – 12:00｜芝加哥建築遊船 + 千禧公園", "items": ["<strong><a href='https://www.architecture.org/tours/chicago-architecture-foundation-center-river-cruise-aboard-chicago-s-first-lady/' target='_blank' class='hover:underline'>Chicago Architecture River Cruise</a>：</strong>建議預約 <a href='https://www.wendellaboats.com/' target='_blank'>Wendella</a> 或 <a href='https://www.cruisechicago.com/first-lady-cruises' target='_blank'>Chicago’s First Lady</a> 上午場。", "遊船後步行至 <a href='https://maps.apple.com/?q=Millennium+Park,Chicago' target='_blank' class='hover:underline'>Millennium Park</a> 拍攝 <a href='https://maps.apple.com/?q=Cloud+Gate,Chicago' target='_blank' class='hover:underline'>Cloud Gate (The Bean)</a>。"] },
@@ -360,6 +380,11 @@
       "title": "芝加哥博物館與夜遊河畔日",
       "subTitle": "Day 9｜7月10日（週四）",
       "isTravelDay": false,
+      "theme": {
+        "icon": "🦖",
+        "title": "博物館奇妙日",
+        "description": "穿越時空，從史前巨獸的世界回到現代都市的璀璨夜晚。今天的主題是知識的探索與光影的饗宴。"
+      },
       "tags": ["#自然歷史", "#夜間遊船", "#城市夜景"],
       "activities": [
         { "title": "🦖 09:00 – 12:00｜芝加哥自然歷史博物館（Field Museum）", "items": ["前往 <a href='https://maps.apple.com/?q=Field+Museum,Chicago' target='_blank' class='hover:underline'>Field Museum</a>，重點展覽：Sue 暴龍、古埃及木乃伊、北美原住民。", "建議停留約 2.5 小時，可租借語音導覽。"] },
@@ -376,6 +401,11 @@
       "title": "芝加哥購物 or 館所自由日",
       "subTitle": "Day 10｜7月11日（週五）",
       "isTravelDay": false,
+      "theme": {
+        "icon": "🛍️",
+        "title": "都會漫遊之日",
+        "description": "今天是屬於您自己的芝加哥時光。無論是穿梭在壯麗一英里的精品店，或是在水族館探索海洋奧秘，隨心所欲地感受這座城市的活力。"
+      },
       "tags": ["#自由行程", "#水族館", "#彈性安排"],
       "activities": [
         { "title": "☀️ 09:00 – 12:00｜自由行程：購物 or 市區散步", "items": ["<strong>購物：</strong>前往 <a href='https://maps.apple.com/?q=The+Magnificent+Mile,Chicago' target='_blank' class='hover:underline'>Michigan Avenue (Magnificent Mile)</a>，<a href='https://maps.apple.com/?q=Nordstrom,chicago' target='_blank'>Nordstrom</a>, <a href='https://maps.apple.com/?q=Macy's,chicago' target='_blank'>Macy’s</a>, <a href='https://maps.apple.com/?q=Uniqlo,chicago' target='_blank'>Uniqlo</a> 等品牌集中。", "<strong>散步：</strong>選擇放鬆慢行 <a href='https://maps.apple.com/?q=Millennium+Park,Chicago' target='_blank' class='hover:underline'>Millennium Park</a> → <a href='https://maps.apple.com/?q=Maggie+Daley+Park,Chicago' target='_blank' class='hover:underline'>Maggie Daley Park</a> 綠地。", "<strong>藝術：</strong>參觀<a href='https://mcachicago.org/' target='_blank' class='hover:underline'>芝加哥當代藝術館（MCA）</a>，小而精緻。"] },
@@ -393,6 +423,11 @@
       "title": "芝加哥藝術學院與文化日",
       "subTitle": "Day 11｜7月12日（六）",
       "isTravelDay": false,
+      "theme": {
+        "icon": "🎨",
+        "title": "藝術沉浸之日",
+        "description": "準備好在世界級的藝術殿堂中度過一個下午。從印象派大師的筆觸到當代藝術的前衛，讓心靈接受一場美的洗禮。"
+      },
       "tags": ["#藝術巡禮", "#世界名畫", "#文化沉浸"],
       "activities": [
         { "title": "🎨 09:30 – 13:00｜芝加哥藝術學院（Art Institute of Chicago）", "items": ["前往<a href='https://www.artic.edu/' target='_blank' class='hover:underline'>芝加哥藝術學院</a>，必看莫內《睡蓮》、秀拉《大碗島的星期天下午》、伍德《美國哥德式》。", "建議停留 3 小時，可租借語音導覽，深入了解作品。"] },
@@ -409,6 +444,11 @@
       "title": "🧳 芝加哥收尾日 + 前往機場",
       "subTitle": "Day 12｜7月13日（日）",
       "isTravelDay": false,
+      "theme": {
+        "icon": "🧳",
+        "title": "回憶打包之日",
+        "description": "旅程即將畫下句點。利用最後的時光，回味最愛的景點、品嚐遺珠美食，將這座城市的美好裝入行囊與心中。"
+      },
       "tags": ["#旅程總結", "#最後巡禮", "#最後晚餐", "#機場準備"],
       "activities": [
         { "title": "☕ 09:00 – 12:00｜早午餐 + 輕鬆散步", "items": ["<strong>餐廳建議：</strong><a href='https://maps.apple.com/?q=Wildberry+Pancakes+and+Cafe,Chicago' target='_blank' class='hover:underline'>Wildberry Pancakes</a> 或回訪喜愛的餐廳。", "<strong>行程建議：</strong><a href='https://maps.apple.com/?q=Millennium+Park,Chicago' target='_blank' class='hover:underline'>Millennium Park</a> 最後巡禮，或於 <a href='https://maps.apple.com/?q=Chicago+Riverwalk' target='_blank' class='hover:underline'>Chicago Riverwalk</a> 散步拍照。"] },
@@ -432,7 +472,7 @@
             "<strong>航班 JL097：</strong>東京羽田(HND) 08:55 → 台北松山(TSA) 11:35"
           ]
         },
-        { "title": "� 返家交通", "items": [
+        { "title": "🚖 返家交通", "items": [
             "抵達台北松山機場後，已預約機場接送返家。"
           ]
         },
