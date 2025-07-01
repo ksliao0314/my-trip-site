@@ -830,11 +830,9 @@
                     const dayPart = parts[0].trim(); // e.g., "Day 13-14"
                     const datePart = parts[1].trim(); // e.g., "7月14日 (一) ~ 7月15日 (二)"
                     
-                    // Replace hyphen with tilde for user-friendliness
-                    const userFriendlyDayPart = dayPart.replace('-', ' ~ '); 
-
                     statusDateEl.textContent = datePart;
-                    progressTextEl.textContent = `${userFriendlyDayPart} / ${tripInfo.totalDays}`;
+                    // Correctly display the progress text for the merged day
+                    progressTextEl.textContent = `Day ${targetDayData.day} / ${tripInfo.totalDays}`;
 
                 } else {
                     // Original logic for single days
