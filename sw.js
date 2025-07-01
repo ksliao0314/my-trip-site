@@ -10,7 +10,7 @@ workbox.core.clientsClaim();
 workbox.precaching.precacheAndRoute([
   { url: '/index.html', revision: '20240709-02' }, // 每次更新 index.html 時，請修改 revision
   { url: '/manifest.json', revision: '20240709-02' },
-  { url: '/trip-data.json', revision: '20250701-03' }, // 新增：預先快取 trip-data.json，請隨資料更新此 revision
+  { url: '/trip-data.json', revision: '20250701-04' }, // 新增：預先快取 trip-data.json，請隨資料更新此 revision
   // 您可以將 CSS 和 JS 檔案存在本地，然後在這裡加入快取
   // { url: '/style.css', revision: 'xxxx' },
   // { url: '/main.js', revision: 'xxxx' },
