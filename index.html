@@ -402,7 +402,7 @@
     <div id="mobile-menu-panel">
         <div class="p-4 space-y-2">
              <a href="#status-dashboard-section" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">📋 行程要覽</a>
-             <a href="#tip-calculator-section" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">🧮 小費計算機</a>
+             <a href="#tip-calculator-section" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">� 小費計算機</a>
              <a href="#links-dashboard" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">🔗 常用連結</a>
              <button id="mobile-print-btn" class="w-full text-left mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">📄 列印行程</button>
         </div>
@@ -482,6 +482,10 @@
                         <div id="status-transport-item" class="flex items-start min-h-[72px]">
                             <span id="status-transport-icon" class="text-3xl mr-4 w-8 text-center pt-1">✈️</span>
                             <div id="status-transport-content" class="text-gray-800 font-medium pt-1"></div>
+                        </div>
+                        <div id="status-exchange-rate-item" class="flex items-start" style="display: none;">
+                            <span class="text-3xl mr-4 w-8 text-center pt-1">💰</span>
+                            <div id="status-exchange-rate-content" class="text-gray-800 font-medium pt-1"></div>
                         </div>
                     </div>
                 </div>
@@ -747,6 +751,24 @@
             const results = await Promise.all(promises);
             return results.filter(r => r).reduce((acc, {city, data}) => ({ ...acc, [city]: data.daily }), {});
         }
+        
+        let exchangeRates = {};
+        async function fetchExchangeRate(baseCurrency) {
+            if (exchangeRates[baseCurrency]) {
+                return exchangeRates[baseCurrency];
+            }
+            try {
+                const response = await fetch(`https://api.frankfurter.app/latest?from=${baseCurrency}&to=TWD`);
+                if (!response.ok) throw new Error('Network response was not ok');
+                const data = await response.json();
+                const rate = data.rates.TWD;
+                exchangeRates[baseCurrency] = rate; // Cache the result
+                return rate;
+            } catch (error) {
+                console.error(`無法獲取 ${baseCurrency} 匯率:`, error);
+                return null;
+            }
+        }
 
         function updateStatusDashboard(date, data, allWeatherData, direction = 0) {
             const { itinerary, hotels, transport, tripInfo } = data;
@@ -771,6 +793,8 @@
             const timeInfoEl = document.getElementById('status-time-info');
             const timeDiffEl = document.getElementById('status-time-diff');
             const paginationDotsContainer = document.getElementById('status-pagination-dots');
+            const exchangeRateItemEl = document.getElementById('status-exchange-rate-item');
+            const exchangeRateContentEl = document.getElementById('status-exchange-rate-content');
 
             const applyAnimation = (outClass, inClass, callback) => {
                 statusCardContentEl.classList.remove('slide-in-left', 'slide-in-right', 'slide-out-left', 'slide-out-right');
@@ -806,6 +830,7 @@
                     transportItemEl.style.display = 'none';
                     if (travelDayIndicatorEl) travelDayIndicatorEl.style.display = 'none';
                     if (paginationDotsContainer) paginationDotsContainer.innerHTML = '';
+                    if (exchangeRateItemEl) exchangeRateItemEl.style.display = 'none';
                     return;
                 }
 
@@ -821,21 +846,14 @@
                     }
                 }
                 
-                // --- MODIFICATION START ---
-                // Handle display for merged last day
                 const isMergedLastDay = targetDayData.subTitle.includes('~');
 
                 if (isMergedLastDay) {
                     const parts = targetDayData.subTitle.split('｜');
-                    const dayPart = parts[0].trim(); // e.g., "Day 13-14"
-                    const datePart = parts[1].trim(); // e.g., "7月14日 (一) ~ 7月15日 (二)"
-                    
+                    const datePart = parts[1].trim(); 
                     statusDateEl.textContent = datePart;
-                    // Correctly display the progress text for the merged day
                     progressTextEl.textContent = `Day ${targetDayData.day} / ${tripInfo.totalDays}`;
-
                 } else {
-                    // Original logic for single days
                     const [year, month, day] = date.split('-').map(Number);
                     const dateObj = new Date(Date.UTC(year, month - 1, day));
                     const dayOfWeek = dateObj.toLocaleDateString('zh-TW', { weekday: 'long', timeZone: 'UTC' });
@@ -843,7 +861,6 @@
                     statusDateEl.textContent = `${datePart} (${dayOfWeek.replace('星期','週')})`;
                     progressTextEl.textContent = `Day ${targetDayData.day} / ${tripInfo.totalDays}`;
                 }
-                // --- MODIFICATION END ---
                 
                 const city = targetDayData.weatherCity;
                 const cityMap = { montreal: '蒙特婁', quebec: '魁北克市', niagara: '尼加拉瀑布', chicago: '芝加哥', '': '飛行途中' };
@@ -958,6 +975,23 @@
                 } else {
                     transportContentEl.innerHTML = '';
                     transportItemEl.style.visibility = 'hidden';
+                }
+                
+                const currencyMap = { montreal: 'CAD', quebec: 'CAD', niagara: 'CAD', chicago: 'USD' };
+                const currentCurrency = currencyMap[targetDayData.weatherCity];
+
+                if (currentCurrency) {
+                    exchangeRateItemEl.style.display = 'flex';
+                    exchangeRateContentEl.innerHTML = `<p class="text-sm text-gray-600">正在載入即時匯率...</p>`;
+                    fetchExchangeRate(currentCurrency).then(rate => {
+                        if (rate) {
+                            exchangeRateContentEl.innerHTML = `<p class="font-semibold">1 ${currentCurrency} ≈ ${rate.toFixed(3)} TWD</p><p class="text-xs text-gray-500">來源: frankfurter.app</p>`;
+                        } else {
+                            exchangeRateContentEl.innerHTML = `<p class="text-sm text-gray-600">無法載入匯率資訊。</p>`;
+                        }
+                    });
+                } else {
+                    exchangeRateItemEl.style.display = 'none';
                 }
             }; 
 
