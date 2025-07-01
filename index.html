@@ -483,10 +483,6 @@
                             <span id="status-transport-icon" class="text-3xl mr-4 w-8 text-center pt-1">✈️</span>
                             <div id="status-transport-content" class="text-gray-800 font-medium pt-1"></div>
                         </div>
-                        <div id="status-exchange-rate-item" class="flex items-start" style="display: none;">
-                            <span class="text-3xl mr-4 w-8 text-center pt-1">💰</span>
-                            <div id="status-exchange-rate-content" class="text-gray-800 font-medium pt-1"></div>
-                        </div>
                     </div>
                 </div>
 
@@ -751,46 +747,6 @@
             const results = await Promise.all(promises);
             return results.filter(r => r).reduce((acc, {city, data}) => ({ ...acc, [city]: data.daily }), {});
         }
-        
-        let exchangeRates = {};
-        /**
-         * 根據貨幣和日期獲取匯率。
-         * @param {string} baseCurrency - 基礎貨幣 (例如 'CAD', 'USD').
-         * @param {string} dateString - YYYY-MM-DD 格式的日期字串.
-         * @returns {Promise<object|null>} - 返回包含匯率和是否為歷史資料的物件，或在失敗時返回 null.
-         */
-        async function fetchExchangeRate(baseCurrency, dateString) {
-            const cacheKey = `${dateString}_${baseCurrency}`;
-            if (exchangeRates[cacheKey]) {
-                return exchangeRates[cacheKey];
-            }
-
-            const today = new Date();
-            today.setHours(0, 0, 0, 0);
-            const targetDate = new Date(dateString);
-            
-            const isHistorical = targetDate < today;
-            const apiEndpoint = isHistorical ? dateString : 'latest';
-            
-            // **[MODIFIED]** 使用代理服務來繞過瀏覽器安全限制
-            const apiUrl = `https://api.frankfurter.app/${apiEndpoint}?from=${baseCurrency}&to=TWD`;
-            const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(apiUrl)}`;
-
-            try {
-                const response = await fetch(proxyUrl); // **[MODIFIED]** 改為請求代理 URL
-                if (!response.ok) throw new Error('Network response was not ok');
-                const data = await response.json();
-                const rate = data.rates.TWD;
-                
-                const result = { rate, isHistorical };
-                exchangeRates[cacheKey] = result;
-
-                return result;
-            } catch (error) {
-                console.error(`無法透過代理獲取 ${baseCurrency} 在 ${dateString} 的匯率:`, error);
-                return null;
-            }
-        }
 
         function updateStatusDashboard(date, data, allWeatherData, direction = 0) {
             const { itinerary, hotels, transport, tripInfo } = data;
@@ -815,8 +771,6 @@
             const timeInfoEl = document.getElementById('status-time-info');
             const timeDiffEl = document.getElementById('status-time-diff');
             const paginationDotsContainer = document.getElementById('status-pagination-dots');
-            const exchangeRateItemEl = document.getElementById('status-exchange-rate-item');
-            const exchangeRateContentEl = document.getElementById('status-exchange-rate-content');
 
             const applyAnimation = (outClass, inClass, callback) => {
                 statusCardContentEl.classList.remove('slide-in-left', 'slide-in-right', 'slide-out-left', 'slide-out-right');
@@ -852,7 +806,6 @@
                     transportItemEl.style.display = 'none';
                     if (travelDayIndicatorEl) travelDayIndicatorEl.style.display = 'none';
                     if (paginationDotsContainer) paginationDotsContainer.innerHTML = '';
-                    if (exchangeRateItemEl) exchangeRateItemEl.style.display = 'none';
                     return;
                 }
 
@@ -868,14 +821,21 @@
                     }
                 }
                 
+                // --- MODIFICATION START ---
+                // Handle display for merged last day
                 const isMergedLastDay = targetDayData.subTitle.includes('~');
 
                 if (isMergedLastDay) {
                     const parts = targetDayData.subTitle.split('｜');
-                    const datePart = parts[1].trim(); 
+                    const dayPart = parts[0].trim(); // e.g., "Day 13-14"
+                    const datePart = parts[1].trim(); // e.g., "7月14日 (一) ~ 7月15日 (二)"
+                    
                     statusDateEl.textContent = datePart;
+                    // Correctly display the progress text for the merged day
                     progressTextEl.textContent = `Day ${targetDayData.day} / ${tripInfo.totalDays}`;
+
                 } else {
+                    // Original logic for single days
                     const [year, month, day] = date.split('-').map(Number);
                     const dateObj = new Date(Date.UTC(year, month - 1, day));
                     const dayOfWeek = dateObj.toLocaleDateString('zh-TW', { weekday: 'long', timeZone: 'UTC' });
@@ -883,6 +843,7 @@
                     statusDateEl.textContent = `${datePart} (${dayOfWeek.replace('星期','週')})`;
                     progressTextEl.textContent = `Day ${targetDayData.day} / ${tripInfo.totalDays}`;
                 }
+                // --- MODIFICATION END ---
                 
                 const city = targetDayData.weatherCity;
                 const cityMap = { montreal: '蒙特婁', quebec: '魁北克市', niagara: '尼加拉瀑布', chicago: '芝加哥', '': '飛行途中' };
@@ -997,26 +958,6 @@
                 } else {
                     transportContentEl.innerHTML = '';
                     transportItemEl.style.visibility = 'hidden';
-                }
-                
-                const currencyMap = { montreal: 'CAD', quebec: 'CAD', niagara: 'CAD', chicago: 'USD' };
-                const currentCurrency = currencyMap[targetDayData.weatherCity];
-
-                if (currentCurrency) {
-                    exchangeRateItemEl.style.display = 'flex';
-                    exchangeRateContentEl.innerHTML = `<p class="text-sm text-gray-600">正在載入匯率資訊...</p>`;
-                    fetchExchangeRate(currentCurrency, date).then(result => {
-                        if (result && result.rate) {
-                            const label = result.isHistorical ? '該日歷史匯率' : '今日參考匯率';
-                            exchangeRateContentEl.innerHTML = `
-                                <p class="font-semibold">1 ${currentCurrency} ≈ ${result.rate.toFixed(3)} TWD</p>
-                                <p class="text-xs text-gray-500">${label} (來源: frankfurter.app)</p>`;
-                        } else {
-                            exchangeRateContentEl.innerHTML = `<p class="text-sm text-gray-600">無法載入匯率資訊。</p>`;
-                        }
-                    });
-                } else {
-                    exchangeRateItemEl.style.display = 'none';
                 }
             }; 
 
