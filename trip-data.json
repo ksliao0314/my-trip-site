@@ -3,7 +3,7 @@
     "totalDays": 13,
     "tripStartDate": "2025-07-02",
     "tripEndDate": "2025-07-16",
-    "dataVersion": "20250701-03"
+    "dataVersion": "20250701-04"
   },
   "timePhases": [
     {
@@ -252,7 +252,7 @@
       "isTravelDay": true,
       "tags": ["#火車旅程", "#古城初探", "#世界遺產"],
       "activities": [
-        { "title": " 12:00 – 13:30｜抵達魁北克市 → 入住飯店 → 午餐", "items": ["<strong>抵達站：</strong><a href='https://maps.apple.com/?q=Gare+du+Palais,Quebec' target='_blank' class='hover:underline'>Gare du Palais</a>，位於舊城區北側。", "<strong>建議住宿區域：</strong>上城（Haute-Ville），靠近 <a href='https://maps.apple.com/?q=Hotel+Manoir+Victoria,Quebec' target='_blank' class='hover:underline'>Hotel Manoir Victoria</a>。", "<strong>午餐建議：</strong><a href='https://maps.apple.com/?q=Le+Chic+Shack,Quebec' target='_blank' class='hover:underline'>Le Chic Shack</a>（漢堡＋奶昔）或 <a href='https://maps.apple.com/?q=Buffet+de+l’Antiquaire,Quebec' target='_blank' class='hover:underline'>Buffet de l’Antiquaire</a>（魁北克家常菜）。"] },
+        { "title": " 12:00 – 13:30｜抵達魁北克市 → 入住飯店 → 午餐", "items": ["<strong>抵達站：</strong><a href='https://maps.apple.com/?q=Gare+du+Palais,Quebec' target='_blank' class='hover:underline'>Gare du Palais</a>，位於舊城區北側。", "<strong>午餐建議：</strong><a href='https://maps.apple.com/?q=Le+Chic+Shack,Quebec' target='_blank' class='hover:underline'>Le Chic Shack</a>（漢堡＋奶昔）或 <a href='https://maps.apple.com/?q=Buffet+de+l’Antiquaire,Quebec' target='_blank' class='hover:underline'>Buffet de l’Antiquaire</a>（魁北克家常菜）。"] },
         { "title": " 14:00 – 17:30｜上城區初探路線", "items": ["<strong>步行路線：</strong><a href='https://maps.apple.com/?q=Hotel+Manoir+Victoria,Quebec' target='_blank' class='hover:underline'>Hotel Manoir Victoria</a> → <a href='https://maps.apple.com/?q=Dufferin+Terrace,Quebec' target='_blank' class='hover:underline'>杜費林露台</a> → <a href='https://maps.apple.com/?q=Porte+Saint-Louis,Quebec' target='_blank' class='hover:underline'>聖路易門/古城牆</a> → <a href='https://maps.apple.com/?q=Hôtel+du+Parlement,Quebec' target='_blank' class='hover:underline'>魁北克省議會</a>。"] },
         { "title": "🌃 18:00 – 20:30｜晚餐＋夜景散步", "items": ["<strong>餐廳建議：</strong><a href='https://maps.apple.com/?q=Aux+Anciens+Canadiens,Quebec' target='_blank' class='hover:underline'>Aux Anciens Canadiens</a> (17世紀老宅法餐)。", "飯後可再回到 Dufferin Terrace 拍攝夜景，芳堤娜城堡夜間打燈效果極佳。"] }
       ],
