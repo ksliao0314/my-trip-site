@@ -8,27 +8,23 @@ workbox.core.clientsClaim();
 // 預先快取核心靜態資源 (Precaching)
 // 這些檔案會在 Service Worker 安裝時就被下載並快取起來
 workbox.precaching.precacheAndRoute([
-  { url: '/index.html', revision: '20250702-01' }, // 每次更新 index.html 時，請修改 revision
-  { url: '/manifest.json', revision: '20250702-01' },
-  { url: '/trip-data.json', revision: '20250702-02' }, // 新增：預先快取 trip-data.json，請隨資料更新此 revision
-  // 您可以將 CSS 和 JS 檔案存在本地，然後在這裡加入快取
-  // { url: '/style.css', revision: 'xxxx' },
-  // { url: '/main.js', revision: 'xxxx' },
+  { url: '/index.html', revision: '20250702-02' }, // 更新版本號
+  { url: '/style.css', revision: '20250702-01' },  // 新增：快取本地樣式檔
+  { url: '/manifest.json', revision: '20240709-02' }, 
+  { url: '/trip-data.json', revision: '20250702-01' },
 ]);
 
 // --------------------------------------------------
 // 運行時快取策略 (Runtime Caching Strategies)
 // --------------------------------------------------
 
-// 1. 針對 Google Fonts 和 Tailwind CDN 的快取策略
+// 1. 針對 Google Fonts 的快取策略
 // 使用 StaleWhileRevalidate：優先從快取提供，同時在背景更新。
-// 這確保了即使離線，字體和樣式也能載入。
 workbox.routing.registerRoute(
   ({ url }) => url.origin === 'https://fonts.googleapis.com' || 
-               url.origin === 'https://fonts.gstatic.com' ||
-               url.origin === 'https://cdn.tailwindcss.com',
+               url.origin === 'https://fonts.gstatic.com',
   new workbox.strategies.StaleWhileRevalidate({
-    cacheName: 'google-fonts-and-tailwind',
+    cacheName: 'google-fonts-cache',
     plugins: [
       new workbox.cacheableResponse.CacheableResponsePlugin({
         statuses: [0, 200],
@@ -57,7 +53,6 @@ workbox.routing.registerRoute(
 
 // 3. 針對圖片的快取策略 (CacheFirst)
 // 優先從快取中讀取圖片，如果快取中沒有，才發出網路請求。
-// 這對不常變更的圖片（如 PWA 圖示）非常有效。
 workbox.routing.registerRoute(
   ({ request }) => request.destination === 'image',
   new workbox.strategies.CacheFirst({
