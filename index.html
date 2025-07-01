@@ -402,7 +402,7 @@
     <div id="mobile-menu-panel">
         <div class="p-4 space-y-2">
              <a href="#status-dashboard-section" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">📋 行程要覽</a>
-             <a href="#tip-calculator-section" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">� 小費計算機</a>
+             <a href="#tip-calculator-section" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">🧮 小費計算機</a>
              <a href="#links-dashboard" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">🔗 常用連結</a>
              <button id="mobile-print-btn" class="w-full text-left mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">📄 列印行程</button>
         </div>
@@ -753,19 +753,40 @@
         }
         
         let exchangeRates = {};
-        async function fetchExchangeRate(baseCurrency) {
-            if (exchangeRates[baseCurrency]) {
-                return exchangeRates[baseCurrency];
+        /**
+         * 根據貨幣和日期獲取匯率。
+         * @param {string} baseCurrency - 基礎貨幣 (例如 'CAD', 'USD').
+         * @param {string} dateString - YYYY-MM-DD 格式的日期字串.
+         * @returns {Promise<object|null>} - 返回包含匯率和是否為歷史資料的物件，或在失敗時返回 null.
+         */
+        async function fetchExchangeRate(baseCurrency, dateString) {
+            // 建立一個複合鍵來快取，避免不同日期但相同貨幣的衝突
+            const cacheKey = `${dateString}_${baseCurrency}`;
+            if (exchangeRates[cacheKey]) {
+                return exchangeRates[cacheKey];
             }
+
+            const today = new Date();
+            today.setHours(0, 0, 0, 0); // 設定為當天零時
+            const targetDate = new Date(dateString);
+            
+            // 判斷是否為歷史日期
+            const isHistorical = targetDate < today;
+            // 如果日期是未來或今天，API 端點為 'latest'；如果是過去，則為指定日期
+            const apiEndpoint = isHistorical ? dateString : 'latest';
+
             try {
-                const response = await fetch(`https://api.frankfurter.app/latest?from=${baseCurrency}&to=TWD`);
+                const response = await fetch(`https://api.frankfurter.app/${apiEndpoint}?from=${baseCurrency}&to=TWD`);
                 if (!response.ok) throw new Error('Network response was not ok');
                 const data = await response.json();
                 const rate = data.rates.TWD;
-                exchangeRates[baseCurrency] = rate; // Cache the result
-                return rate;
+                
+                const result = { rate, isHistorical };
+                exchangeRates[cacheKey] = result; // 快取結果
+
+                return result;
             } catch (error) {
-                console.error(`無法獲取 ${baseCurrency} 匯率:`, error);
+                console.error(`無法獲取 ${baseCurrency} 在 ${dateString} 的匯率:`, error);
                 return null;
             }
         }
@@ -982,10 +1003,15 @@
 
                 if (currentCurrency) {
                     exchangeRateItemEl.style.display = 'flex';
-                    exchangeRateContentEl.innerHTML = `<p class="text-sm text-gray-600">正在載入即時匯率...</p>`;
-                    fetchExchangeRate(currentCurrency).then(rate => {
-                        if (rate) {
-                            exchangeRateContentEl.innerHTML = `<p class="font-semibold">1 ${currentCurrency} ≈ ${rate.toFixed(3)} TWD</p><p class="text-xs text-gray-500">來源: frankfurter.app</p>`;
+                    exchangeRateContentEl.innerHTML = `<p class="text-sm text-gray-600">正在載入匯率資訊...</p>`;
+                    // **[MODIFIED]** 將當前顯示的日期(date)傳入 fetchExchangeRate
+                    fetchExchangeRate(currentCurrency, date).then(result => {
+                        if (result && result.rate) {
+                            // **[MODIFIED]** 根據是否為歷史匯率，決定顯示的標題
+                            const label = result.isHistorical ? '該日歷史匯率' : '今日參考匯率';
+                            exchangeRateContentEl.innerHTML = `
+                                <p class="font-semibold">1 ${currentCurrency} ≈ ${result.rate.toFixed(3)} TWD</p>
+                                <p class="text-xs text-gray-500">${label} (來源: frankfurter.app)</p>`;
                         } else {
                             exchangeRateContentEl.innerHTML = `<p class="text-sm text-gray-600">無法載入匯率資訊。</p>`;
                         }
