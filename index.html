@@ -520,6 +520,14 @@
                 
                     <!-- Info List -->
                     <div id="status-info-list" class="space-y-4 pt-4 border-t border-gray-200">
+                        <!-- 新增：每日主題區塊 -->
+                        <div id="status-theme-item" class="flex items-start" style="display: none;">
+                            <span id="status-theme-icon" class="text-3xl mr-4 w-8 text-center pt-1"></span>
+                            <div>
+                                <p id="status-theme-title" class="font-semibold text-gray-800"></p>
+                                <p id="status-theme-description" class="text-sm text-gray-600"></p>
+                            </div>
+                        </div>
                         <div id="status-weather-item" class="flex items-start">
                             <span id="status-weather-icon" class="text-3xl mr-4 w-8 text-center pt-1">⏳</span>
                             <div>
@@ -812,7 +820,7 @@
         }
         
         function updateStatusDashboard(date, data, allWeatherData, direction = 0) {
-            const { itinerary, hotels, transport, tripInfo, foodie: foodieData } = data;
+            const { itinerary, hotels, transport, tripInfo } = data;
             const targetDayData = itinerary.find(d => d.date === date);
 
             const statusCardContentEl = document.getElementById('status-card-content');
@@ -822,15 +830,26 @@
             const daySlider = document.getElementById('day-slider');
             const viewDetailsBtn = document.getElementById('view-details-btn');
             const foodieListBtn = document.getElementById('foodie-list-btn');
+            
+            // 天氣相關元素
             const weatherItemEl = document.getElementById('status-weather-item');
             const weatherIconEl = document.getElementById('status-weather-icon');
             const weatherTempEl = document.getElementById('status-weather-temp');
             const weatherReminderEl = document.getElementById('status-weather-reminder');
+            
+            // 住宿與交通元素
             const accommodationItemEl = document.getElementById('status-accommodation-item');
             const accommodationContentEl = document.getElementById('status-accommodation-content');
             const transportItemEl = document.getElementById('status-transport-item');
             const transportContentEl = document.getElementById('status-transport-content');
             const transportIconEl = document.getElementById('status-transport-icon');
+            
+            // 新增：每日主題元素
+            const themeItemEl = document.getElementById('status-theme-item');
+            const themeIconEl = document.getElementById('status-theme-icon');
+            const themeTitleEl = document.getElementById('status-theme-title');
+            const themeDescriptionEl = document.getElementById('status-theme-description');
+
             const travelDayIndicatorEl = document.getElementById('status-travel-day-indicator');
             const timeInfoEl = document.getElementById('status-time-info');
             const timeDiffEl = document.getElementById('status-time-diff');
@@ -867,6 +886,7 @@
                     weatherItemEl.style.display = 'none';
                     accommodationItemEl.style.display = 'none';
                     transportItemEl.style.display = 'none';
+                    themeItemEl.style.display = 'none'; // 新增：隱藏主題區塊
                     if (travelDayIndicatorEl) travelDayIndicatorEl.style.display = 'none';
                     if (paginationDotsContainer) paginationDotsContainer.innerHTML = '';
                     return;
@@ -926,6 +946,16 @@
                     timeDiffEl.textContent = diffText;
                 }
 
+                // --- 更新邏輯：每日主題 ---
+                if (targetDayData.theme && !targetDayData.isTravelDay) {
+                    themeItemEl.style.display = 'flex';
+                    themeIconEl.textContent = targetDayData.theme.icon;
+                    themeTitleEl.textContent = targetDayData.theme.title;
+                    themeDescriptionEl.textContent = targetDayData.theme.description;
+                } else {
+                    themeItemEl.style.display = 'none';
+                }
+
                 const cityWeather = allWeatherData ? allWeatherData[cityKey] : undefined;
                 if (cityKey) {
                     weatherItemEl.style.display = 'flex';
@@ -982,7 +1012,7 @@
                 }
 
                 if (transportItems.length > 0) {
-                    const iconMap = { '航班': '✈️', '火車': '🚄', '巴士': '🚌' };
+                    const iconMap = { '航班': '✈️', '火車': '🚄', '巴士': '🚌', '機場接送': '🚖' };
                     transportIconEl.textContent = iconMap[transportItems[0].type] || '➡️';
                     const transportHtml = transportItems.map(item => {
                         if (item.type === '航班' && Array.isArray(item.details)) {
@@ -1008,7 +1038,7 @@
                 }
                 
                 // Update Action Area
-                if (foodieListBtn && foodieData[cityKey]) {
+                if (foodieListBtn && data.foodie && data.foodie[cityKey]) {
                     foodieListBtn.style.display = 'block';
                     foodieListBtn.onclick = () => window.openFoodieModal(cityKey);
                 } else if (foodieListBtn) {
