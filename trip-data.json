@@ -80,18 +80,26 @@
         { "flightCode": "加航 AC515", "departure": { "airport": "多倫多 (YYZ)", "time": "2025-07-08T19:00:00Z", "tz": "America/Toronto" }, "arrival": { "airport": "芝加哥 (ORD)", "time": "2025-07-08T20:00:00Z", "tz": "America/Chicago" } }
       ]
     },
-    {
+   {
       "date": "2025-07-14",
       "type": "航班",
       "details": [
-        { "flightCode": "日航 JL009", "departure": { "airport": "芝加哥 (ORD)", "time": "2025-07-14T06:30:00Z", "tz": "America/Chicago" }, "arrival": { "airport": "東京羽田 (HND)", "time": "2025-07-15T07:20:00Z", "tz": "Asia/Tokyo" } }
+        { 
+          "flightCode": "日航 JL009", 
+          "departure": { "airport": "芝加哥 (ORD)", "time": "2025-07-14T06:30:00Z", "tz": "America/Chicago" }, 
+          "arrival": { "airport": "東京羽田 (HND)", "time": "2025-07-14T19:20:00Z", "tz": "Asia/Tokyo" } 
+        }
       ]
     },
     {
       "date": "2025-07-15",
       "type": "航班",
       "details": [
-        { "flightCode": "日航 JL097", "departure": { "airport": "東京羽田 (HND)", "time": "2025-07-15T23:55:00Z", "tz": "Asia/Tokyo" }, "arrival": { "airport": "台北松山 (TSA)", "time": "2025-07-16T02:35:00Z", "tz": "Asia/Taipei" } }
+        { 
+          "flightCode": "日航 JL097", 
+          "departure": { "airport": "東京羽田 (HND)", "time": "2025-07-14T23:55:00Z", "tz": "Asia/Tokyo" }, 
+          "arrival": { "airport": "台北松山 (TSA)", "time": "2025-07-15T03:35:00Z", "tz": "Asia/Taipei" } 
+        }
       ]
     },
     {
