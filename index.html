@@ -520,14 +520,6 @@
                 
                     <!-- Info List -->
                     <div id="status-info-list" class="space-y-4 pt-4 border-t border-gray-200">
-                        <!-- 新增：每日主題區塊 -->
-                        <div id="status-theme-item" class="flex items-start" style="display: none;">
-                            <span id="status-theme-icon" class="text-3xl mr-4 w-8 text-center pt-1"></span>
-                            <div>
-                                <p id="status-theme-title" class="font-semibold text-gray-800"></p>
-                                <p id="status-theme-description" class="text-sm text-gray-600"></p>
-                            </div>
-                        </div>
                         <div id="status-weather-item" class="flex items-start">
                             <span id="status-weather-icon" class="text-3xl mr-4 w-8 text-center pt-1">⏳</span>
                             <div>
@@ -535,13 +527,21 @@
                                 <p id="status-weather-reminder" class="text-sm text-gray-600">正在載入天氣資訊...</p>
                             </div>
                         </div>
+                        <div id="status-transport-item" class="flex items-start min-h-[72px]">
+                            <span id="status-transport-icon" class="text-3xl mr-4 w-8 text-center pt-1">✈️</span>
+                            <div id="status-transport-content" class="text-gray-800 font-medium pt-1"></div>
+                        </div>
                         <div id="status-accommodation-item" class="flex items-start min-h-[72px]">
                             <span class="text-3xl mr-4 w-8 text-center pt-1">🏨</span>
                             <div id="status-accommodation-content" class="text-gray-800 font-medium pt-1"></div>
                         </div>
-                        <div id="status-transport-item" class="flex items-start min-h-[72px]">
-                            <span id="status-transport-icon" class="text-3xl mr-4 w-8 text-center pt-1">✈️</span>
-                            <div id="status-transport-content" class="text-gray-800 font-medium pt-1"></div>
+                        <!-- 每日主題區塊 -->
+                        <div id="status-theme-item" class="flex items-start" style="display: none;">
+                            <span id="status-theme-icon" class="text-3xl mr-4 w-8 text-center pt-1"></span>
+                            <div>
+                                <p id="status-theme-title" class="font-semibold text-gray-800"></p>
+                                <p id="status-theme-description" class="text-sm text-gray-600"></p>
+                            </div>
                         </div>
                     </div>
                 </div>
