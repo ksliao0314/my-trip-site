@@ -24,6 +24,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
     <style>
+        /* --- 色彩配置 --- */
         :root {
             --c-primary: #1D3557;      /* 主色: 深靛藍 */
             --c-secondary: #457B9D;    /* 輔色: 天空藍 */
@@ -36,6 +37,8 @@
             --c-border: #dde8f0;       /* 邊框色 */
             --nav-h: 68px; /* JS 會更新此變數 */
         }
+
+        /* --- 基本樣式 --- */
         html { scroll-behavior: smooth; }
         body { 
             font-family: 'Noto Sans TC', sans-serif; 
@@ -48,6 +51,7 @@
         }
         h1, h2, h3 { font-family: 'Noto Sans TC', sans-serif; font-weight: 900; color: var(--c-primary); }
         
+        /* --- 卡片與動畫 --- */
         .trip-card {
             opacity: 0;
             transform: translateY(30px);
@@ -82,17 +86,34 @@
             transform: translateY(0);
         }
 
+        /* --- 導覽列 --- */
         .sticky-nav {
             position: sticky;
             top: env(safe-area-inset-top);
             z-index: 50;
             transition: box-shadow 0.3s;
-            background-color: rgba(241, 250, 238, 0.9);
+            background-color: rgba(241, 250, 238, 0.9); /* 使用背景色的 RGBA */
+            backdrop-filter: blur(8px);
         }
         .sticky-nav.scrolled {
              box-shadow: 0 4px 6px -1px rgba(29, 53, 87, 0.08), 0 2px 4px -2px rgba(29, 53, 87, 0.08);
         }
+        .nav-link {
+            transition: all 0.2s;
+            border-bottom: 2px solid transparent;
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+            color: var(--c-text-light);
+        }
+        .nav-link:hover, .nav-utils:hover {
+             color: var(--c-secondary);
+        }
+        .nav-link.nav-link-active {
+            color: var(--c-secondary);
+            font-weight: 700;
+        }
 
+        /* --- 通用元件 --- */
         .tag { display: inline-block; background-color: var(--c-accent); color: var(--c-primary); padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.8rem; font-weight: 500; margin-right: 0.5rem; margin-bottom: 0.5rem; }
         
         a, .activity-block a, .info-block a, .modal-container a, #status-info-list a {
@@ -138,27 +159,12 @@
             color: var(--c-text-light);
         }
         
-        .nav-link {
-            transition: all 0.2s;
-            border-bottom: 2px solid transparent;
-            padding-top: 0.5rem;
-            padding-bottom: 0.5rem;
-            color: var(--c-text-light);
-        }
-        .nav-link:hover, .nav-utils:hover {
-             color: var(--c-secondary);
-        }
-        .nav-link.nav-link-active {
-            color: var(--c-secondary);
-            font-weight: 700;
-        }
-
         .day-past { display: none; }
         .show-past .day-past { display: block; }
         
         #status-city-arrow.rotate-180 { transform: rotate(180deg); }
 
-        /* --- Modals & Overlays --- */
+        /* --- 彈出式視窗 (Modal) & 覆蓋層 --- */
         .modal-overlay {
             position: fixed; inset: 0; background: rgba(0, 0, 0, 0.6); display: flex; align-items: center; justify-content: center; z-index: 1000; opacity: 0; transition: opacity 0.3s ease; pointer-events: none;
         }
@@ -180,7 +186,7 @@
         #reload-button { background-color: white; color: var(--c-secondary); }
         #reload-button:hover { background-color: var(--c-bg-accent-light); }
         
-        /* --- Full Screen Card Logic --- */
+        /* --- 狀態儀表板全螢幕邏輯 --- */
         #status-dashboard-section {
             height: calc(100vh - var(--nav-h) - 4rem);
         }
@@ -195,7 +201,7 @@
             -webkit-overflow-scrolling: touch; 
         }
 
-        /* Print Styles */
+        /* --- 列印樣式 --- */
         @media print {
             @page { size: A4 portrait; margin: 1cm; }
             body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
@@ -211,7 +217,7 @@
             .day-past { display: block !important; }
         }
         
-        /* Slide Animations */
+        /* --- 滑動動畫 --- */
         @keyframes slideOutLeft { from { transform: translateX(0); opacity: 1; } to { transform: translateX(-20px); opacity: 0; } }
         @keyframes slideInRight { from { transform: translateX(20px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
         @keyframes slideOutRight { from { transform: translateX(0); opacity: 1; } to { transform: translateX(20px); opacity: 0; } }
@@ -224,7 +230,7 @@
         .pagination-dot { width: 8px; height: 8px; background-color: #d1d5db; border-radius: 50%; cursor: pointer; transition: background-color 0.3s ease; }
         .pagination-dot.active { background-color: var(--c-secondary); }
 
-        /* --- Today Button Visibility --- */
+        /* --- "回到今日" 按鈕可見度 --- */
         #today-btn {
             opacity: 0;
             pointer-events: none;
@@ -237,7 +243,7 @@
             transform: translateY(0);
         }
 
-        /* --- Mobile Menu --- */
+        /* --- 手機版選單 --- */
         #mobile-menu-overlay { 
             position: fixed; 
             inset: 0; 
@@ -274,7 +280,7 @@
             pointer-events: auto; 
         }
         
-        /* Day Slider */
+        /* --- 日期滑桿 --- */
         #day-slider { 
             -webkit-appearance: none; 
             appearance: none; 
@@ -314,23 +320,62 @@
             background: linear-gradient(to right, var(--c-secondary) 0%, var(--c-secondary) var(--progress-width, 0%), var(--c-border) var(--progress-width, 0%), var(--c-border) 100%);
             border-radius: 9999px;
         }
+
+
+        /* --- 覆蓋 Tailwind 樣式以使用新配色 --- */
+        #status-dashboard-section .bg-white {
+            background-color: var(--c-bg-card) !important;
+        }
+        .text-gray-800 { color: var(--c-text) !important; }
+        .text-gray-900 { color: var(--c-primary) !important; }
+        .text-gray-700 { color: var(--c-text-light) !important; }
+        .text-gray-600 { color: var(--c-text-light) !important; }
+        .text-gray-500 { color: #8bacc1 !important; } /* 淺一點的輔助文字色 */
         
-        /* Specific style for travel day indicator to override general styles */
+        .border-gray-200, .border-gray-300 { border-color: var(--c-border) !important; }
+        .ring-gray-200 { --tw-ring-color: var(--c-border) !important; }
+
+        .bg-gray-100, .bg-indigo-50, .bg-green-50, .bg-amber-100, .bg-blue-50, .bg-gray-50, .bg-teal-100\/60, .bg-amber-100\/60 { 
+            background-color: var(--c-bg-accent-light) !important; 
+        }
+        .bg-gray-200 { background-color: var(--c-border) !important; }
+        
+        .hover\:bg-gray-200:hover { background-color: var(--c-accent) !important; }
+        .hover\:bg-gray-100:hover { background-color: var(--c-bg-accent-light) !important; }
+        .hover\:bg-gray-50:hover { background-color: var(--c-bg-accent-light) !important; }
+
+        .text-indigo-700, .text-blue-800 { color: var(--c-primary) !important; }
+        .text-indigo-600 { color: var(--c-secondary) !important; }
+        .bg-indigo-600, .bg-amber-500 { background-color: var(--c-secondary) !important; }
+        .hover\:bg-indigo-700:hover, .hover\:bg-amber-600:hover { background-color: var(--c-primary) !important; }
+        
+        .text-green-700 { color: var(--c-secondary) !important; }
+
+        #show-past-toggle:checked + .peer-checked\\:bg-indigo-300 {
+             background-color: var(--c-accent) !important;
+        }
+
+        .info-block { border-left-color: var(--c-secondary) !important; }
+        .foodie-btn { background-color: var(--c-accent) !important; color: var(--c-primary) !important; }
+        .foodie-btn:hover { background-color: var(--c-secondary) !important; color: white !important; }
+        
+        /* 特定樣式覆蓋，確保元素視覺正確 */
         #status-travel-day-indicator {
             background-color: #e5e7eb !important; /* gray-200 */
             color: #4b5563 !important;      /* gray-600 */
         }
+
     </style>
 </head>
-<body class="text-gray-800 leading-relaxed" style="color: var(--c-text);">
+<body class="text-gray-800 leading-relaxed">
 
     <!-- Sticky Navigation Bar -->
-    <nav id="main-nav" class="sticky-nav bg-white/80 backdrop-blur-lg no-print">
+    <nav id="main-nav" class="sticky-nav no-print">
         <div class="container mx-auto max-w-6xl px-4">
             <div class="flex justify-between items-center py-2 md:py-3">
-                <a href="#" class="font-bold text-base md:text-lg" style="color: var(--c-primary);">F＆S飛翔旅行</a>
+                <a href="#" class="font-bold text-base md:text-lg text-indigo-700">F＆S飛翔旅行</a>
                 
-                <div class="hidden md:flex items-center space-x-6 text-sm font-medium">
+                <div class="hidden md:flex items-center space-x-6 text-sm font-medium text-gray-600">
                     <a href="#status-dashboard-section" class="nav-link flex items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1.5" viewBox="0 0 20 20" fill="currentColor"><path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" /><path fill-rule="evenodd" d="M4 5a2 2 0 012-2h8a2 2 0 012 2v10a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd" /></svg>
                         行程要覽
@@ -343,14 +388,14 @@
                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1.5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0 1 1 0 00-1.414 1.414 4 4 0 005.656 0l3-3a4 4 0 00-5.656-5.656l-1.5 1.5a1 1 0 101.414 1.414l1.5-1.5a2 2 0 11-2.828-2.828l3-3z" clip-rule="evenodd" /></svg>
                         常用連結
                     </a>
-                     <button id="print-btn" class="no-print inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white focus:outline-none focus:ring-2 focus:ring-offset-2" style="background-color: var(--c-secondary); --tw-ring-color: var(--c-secondary);">
+                     <button id="print-btn" class="no-print inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" /></svg>
                         列印行程
                     </button>
                 </div>
 
                 <div class="md:hidden">
-                    <button id="mobile-menu-btn" class="p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-inset" style="color: var(--c-text-light); --tw-ring-color: var(--c-secondary);">
+                    <button id="mobile-menu-btn" class="p-2 rounded-md text-gray-500 hover:text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
                         <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
                         </svg>
@@ -361,15 +406,15 @@
     </nav>
 
     <!-- Mobile Menu Overlay -->
-    <div id="mobile-menu-overlay"></div>
+    <div id="mobile-menu-overlay" class="hidden"></div>
 
     <!-- Mobile Menu Panel -->
-    <div id="mobile-menu-panel">
+    <div id="mobile-menu-panel" class="hidden">
         <div class="p-4 space-y-2">
-             <a href="#status-dashboard-section" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium" style="color: var(--c-text-light);">📋 行程要覽</a>
-             <a href="#tip-calculator-section" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium" style="color: var(--c-text-light);">🧮 小費計算機</a>
-             <a href="#links-dashboard" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium" style="color: var(--c-text-light);">🔗 常用連結</a>
-             <button id="mobile-print-btn" class="w-full text-left mobile-nav-link block px-3 py-3 rounded-md text-base font-medium" style="color: var(--c-text-light);">📄 列印行程</button>
+             <a href="#status-dashboard-section" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">📋 行程要覽</a>
+             <a href="#tip-calculator-section" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">🧮 小費計算機</a>
+             <a href="#links-dashboard" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">🔗 常用連結</a>
+             <button id="mobile-print-btn" class="w-full text-left mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">📄 列印行程</button>
         </div>
     </div>
 
@@ -377,22 +422,22 @@
     <div class="container mx-auto p-4 sm:p-6 md:p-8 max-w-6xl">
         
         <section id="status-dashboard-section" class="mb-12 no-print flex flex-col">
-            <div class="rounded-2xl shadow-lg p-5 md:p-6 h-full flex flex-col" style="background-color: var(--c-bg-card); border: 1px solid var(--c-border);">
-                <div id="status-time-info" class="flex justify-between items-center text-xs mb-4 pb-4 border-b font-mono" style="color: var(--c-text-light); border-color: var(--c-border);">
+            <div class="bg-white rounded-2xl shadow-lg p-5 md:p-6 ring-1 ring-gray-200 h-full flex flex-col">
+                <div id="status-time-info" class="flex justify-between items-center text-xs text-gray-500 mb-4 pb-4 border-b border-gray-200 font-mono">
                     <span id="status-taipei-time"></span>
                     <span id="status-time-diff"></span>
                 </div>
 
                 <div class="flex justify-between items-start flex-wrap gap-y-2">
                     <div class="flex items-center gap-x-3">
-                        <h2 id="status-date" class="text-2xl sm:text-3xl font-bold -mt-1" style="color: var(--c-primary);">讀取中...</h2>
+                        <h2 id="status-date" class="text-2xl sm:text-3xl font-bold text-gray-900 -mt-1">讀取中...</h2>
                         <span id="status-travel-day-indicator" class="text-xs font-semibold px-2 py-0.5 rounded-full whitespace-nowrap" style="display: none;"></span>
                     </div>
                     <div class="flex items-center space-x-2">
-                        <button id="prev-day-btn" class="p-2 rounded-full transition-colors" style="background-color: var(--c-bg-accent-light);">
+                        <button id="prev-day-btn" class="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
                         </button>
-                        <button id="next-day-btn" class="p-2 rounded-full transition-colors" style="background-color: var(--c-bg-accent-light);">
+                        <button id="next-day-btn" class="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" /></svg>
                         </button>
                     </div>
@@ -401,7 +446,7 @@
                 <div id="status-card-content" class="space-y-4 mt-2 flex-grow" style="touch-action: pan-y;">
                     <div>
                         <div class="flex justify-end items-baseline">
-                            <p id="status-progress-text" class="text-sm font-medium" style="color: var(--c-secondary);"></p>
+                            <p id="status-progress-text" class="text-sm font-medium text-indigo-600"></p>
                         </div>
                         
                         <div class="relative pt-2 pb-1">
@@ -410,38 +455,38 @@
                         </div>
 
                         <div class="relative z-20">
-                            <button type="button" id="status-city-btn" class="inline-flex items-center gap-x-2 text-3xl font-black focus:outline-none rounded-lg px-2 py-1 transition-colors hover:bg-gray-100" style="color: var(--c-primary); box-shadow: 0 0 0 2px var(--c-secondary);">
+                            <button type="button" id="status-city-btn" class="inline-flex items-center gap-x-2 text-3xl font-black text-gray-900 focus:outline-none focus:shadow-[0_0_0_2px_var(--c-secondary)] rounded-lg px-2 py-1 transition-colors hover:bg-gray-100">
                                 <span id="status-city-text">蒙特婁</span>
-                                <svg id="status-city-arrow" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 transition-transform duration-200" viewBox="0 0 20 20" fill="currentColor" style="color: var(--c-text-light);">
+                                <svg id="status-city-arrow" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500 transition-transform duration-200" viewBox="0 0 20 20" fill="currentColor">
                                     <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
                             </button>
                             <div id="city-dropdown-overlay" class="fixed inset-0 z-40 hidden"></div>
-                            <div id="city-dropdown" class="origin-top-left absolute left-0 mt-2 w-48 rounded-md shadow-lg ring-1 focus:outline-none hidden z-50" role="menu" aria-orientation="vertical" aria-labelledby="status-city-btn" style="background-color: var(--c-bg-card); border-color: var(--c-border);">
+                            <div id="city-dropdown" class="origin-top-left absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-gray-200 focus:outline-none hidden z-50" role="menu" aria-orientation="vertical" aria-labelledby="status-city-btn">
                                 <div class="py-1" role="none">
-                                    <a href="#" class="city-select-item block px-4 py-2 text-base" role="menuitem" data-city-key="montreal" style="color: var(--c-text-light);">蒙特婁</a>
-                                    <a href="#" class="city-select-item block px-4 py-2 text-base" role="menuitem" data-city-key="quebec" style="color: var(--c-text-light);">魁北克市</a>
-                                    <a href="#" class="city-select-item block px-4 py-2 text-base" role="menuitem" data-city-key="niagara" style="color: var(--c-text-light);">尼加拉瀑布</a>
-                                    <a href="#" class="city-select-item block px-4 py-2 text-base" role="menuitem" data-city-key="chicago" style="color: var(--c-text-light);">芝加哥</a>
+                                    <a href="#" class="city-select-item text-gray-700 block px-4 py-2 text-base hover:bg-indigo-50" role="menuitem" data-city-key="montreal">蒙特婁</a>
+                                    <a href="#" class="city-select-item text-gray-700 block px-4 py-2 text-base hover:bg-indigo-50" role="menuitem" data-city-key="quebec">魁北克市</a>
+                                    <a href="#" class="city-select-item text-gray-700 block px-4 py-2 text-base hover:bg-indigo-50" role="menuitem" data-city-key="niagara">尼加拉瀑布</a>
+                                    <a href="#" class="city-select-item text-gray-700 block px-4 py-2 text-base hover:bg-indigo-50" role="menuitem" data-city-key="chicago">芝加哥</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 
-                    <div id="status-info-list" class="space-y-4 pt-4 border-t" style="border-color: var(--c-border);">
+                    <div id="status-info-list" class="space-y-4 pt-4 border-t border-gray-200">
                         <div id="status-weather-item" class="flex items-start">
                             <span id="status-weather-icon" class="text-3xl mr-4 w-8 text-center pt-1">⏳</span>
                             <div>
-                                <p id="status-weather-temp" class="font-semibold" style="color: var(--c-text);">--°C / --°C</p>
-                                <p id="status-weather-reminder" class="text-sm" style="color: var(--c-text-light);">正在載入天氣資訊...</p>
+                                <p id="status-weather-temp" class="font-semibold text-gray-800">--°C / --°C</p>
+                                <p id="status-weather-reminder" class="text-sm text-gray-600">正在載入天氣資訊...</p>
                             </div>
                         </div>
                         <div id="status-accommodation-item" class="flex items-start min-h-[72px]">
                             <span class="text-3xl mr-4 w-8 text-center pt-1">🏨</span>
-                            <div id="status-accommodation-content" class="font-medium pt-1" style="color: var(--c-text);"></div>
+                            <div id="status-accommodation-content" class="text-gray-800 font-medium pt-1"></div>
                         </div>
                         <div id="status-transport-item" class="flex items-start min-h-[72px]">
                             <span id="status-transport-icon" class="text-3xl mr-4 w-8 text-center pt-1">✈️</span>
-                            <div id="status-transport-content" class="font-medium pt-1" style="color: var(--c-text);"></div>
+                            <div id="status-transport-content" class="text-gray-800 font-medium pt-1"></div>
                         </div>
                     </div>
                 </div>
@@ -449,7 +494,7 @@
                 <div id="status-pagination-dots" class="flex justify-center mt-4 space-x-2"></div>
 
                  <div class="mt-5 text-center">
-                    <button id="view-details-btn" class="w-full md:w-auto text-white font-semibold px-6 py-3 rounded-lg shadow-md transition-all focus:outline-none focus:ring-2 focus:ring-offset-2" style="background-color: var(--c-secondary); --tw-ring-color: var(--c-secondary);">
+                    <button id="view-details-btn" class="w-full md:w-auto bg-indigo-600 text-white font-semibold px-6 py-3 rounded-lg shadow-md hover:bg-indigo-700 transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                         詳細行程
                     </button>
                 </div>
@@ -457,11 +502,11 @@
         </section>
 
         <div class="flex justify-end items-center mb-4 no-print">
-            <label for="show-past-toggle" class="flex items-center cursor-pointer text-sm font-medium" style="color: var(--c-text-light);">
+            <label for="show-past-toggle" class="flex items-center cursor-pointer text-sm font-medium text-gray-700">
                 <span class="mr-3">顯示過去行程</span>
                 <div class="relative">
                     <input type="checkbox" id="show-past-toggle" class="sr-only peer">
-                    <div class="block w-10 h-6 rounded-full transition-colors" style="background-color: var(--c-border);"></div>
+                    <div class="block bg-gray-200 w-10 h-6 rounded-full peer-checked:bg-indigo-300 transition-colors"></div>
                     <div class="dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-transform peer-checked:translate-x-full"></div>
                 </div>
             </label>
@@ -470,42 +515,43 @@
         <main class="space-y-8">
             <div id="itinerary-container" class="space-y-8"></div>
 
-            <div id="tip-calculator-section" class="trip-card rounded-2xl shadow-lg p-6 md:p-8">
-                <h2 class="text-2xl font-bold mb-4 flex items-center" style="color: var(--c-primary);">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="color: var(--c-secondary);"><path stroke-linecap="round" stroke-linejoin="round" d="M9 7h6m0 10v-3.251l-4.71-4.71a1 1 0 00-1.415 0L3 16.251V21h4.75L12 17.25m0 0l6-6m-6 6l-3-3" /></svg>
+            <div id="tip-calculator-section" class="trip-card bg-white rounded-2xl shadow-lg p-6 md:p-8 ring-1 ring-gray-200">
+                <h2 class="text-2xl font-bold text-gray-900 mb-4 flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 7h6m0 10v-3.251l-4.71-4.71a1 1 0 00-1.415 0L3 16.251V21h4.75L12 17.25m0 0l6-6m-6 6l-3-3" /></svg>
                     小費計算機 (Tip Calculator)
                 </h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-end">
                     <div>
-                        <label for="bill-amount" class="block text-sm font-medium" style="color: var(--c-text-light);">帳單金額 (CAD/USD)</label>
-                        <input type="number" id="bill-amount" placeholder="例如 85.50" class="mt-1 block w-full rounded-md shadow-sm sm:text-sm focus:ring-indigo-500 focus:border-indigo-500" style="border-color: var(--c-border);">
+                        <label for="bill-amount" class="block text-sm font-medium text-gray-700">帳單金額 (CAD/USD)</label>
+                        <input type="number" id="bill-amount" placeholder="例如 85.50" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                     </div>
                     <div>
-                        <label for="tip-rate" class="block text-sm font-medium" style="color: var(--c-text-light);">小費比例 (%)</label>
-                        <select id="tip-rate" class="mt-1 block w-full rounded-md shadow-sm sm:text-sm focus:ring-indigo-500 focus:border-indigo-500" style="border-color: var(--c-border);">
+                        <label for="tip-rate" class="block text-sm font-medium text-gray-700">小費比例 (%)</label>
+                        <select id="tip-rate" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                             <option value="15">15% (標準)</option>
                             <option value="18" selected>18% (推薦)</option>
                             <option value="20">20% (優質服務)</option>
                             <option value="10">10% (基本)</option>
                         </select>
                     </div>
-                    <div class="text-center p-4 rounded-lg mt-4 md:mt-0" style="background-color: var(--c-bg-accent-light);">
-                        <label class="block text-sm font-medium" style="color: var(--c-text-light);">小費金額</label>
-                        <p id="tip-result" class="text-xl font-bold" style="color: var(--c-secondary);">-</p>
+                    <div class="text-center bg-indigo-50 p-4 rounded-lg mt-4 md:mt-0">
+                        <label class="block text-sm font-medium text-gray-700">小費金額</label>
+                        <p id="tip-result" class="text-xl font-bold text-indigo-700">-</p>
                     </div>
-                     <div class="text-center p-4 rounded-lg mt-4 md:mt-0" style="background-color: #e7f5f5;">
-                        <label class="block text-sm font-medium" style="color: var(--c-text-light);">含小費總額</label>
-                        <p id="total-result" class="text-xl font-bold" style="color: var(--c-primary);">-</p>
+                     <div class="text-center bg-green-50 p-4 rounded-lg mt-4 md:mt-0">
+                        <label class="block text-sm font-medium text-gray-700">含小費總額</label>
+                        <p id="total-result" class="text-xl font-bold text-green-700">-</p>
                     </div>
                 </div>
             </div>
 
-            <div id="links-dashboard" class="trip-card rounded-2xl shadow-lg p-6 md:p-8">
-                 <h2 class="text-2xl sm:text-3xl font-bold mb-6 flex items-center" style="color: var(--c-primary);">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="color: var(--c-secondary);"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            <div id="links-dashboard" class="trip-card bg-white rounded-2xl shadow-lg p-6 md:p-8 ring-1 ring-gray-200">
+                 <h2 class="text-2xl sm:text-3xl font-bold mb-6 text-gray-900 flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 mr-3 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                     實用連結儀表板
                 </h2>
-                 <div class="grid grid-cols-2 sm:grid-cols-3 gap-4" style="color: var(--c-text-light);">
+                 <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 text-gray-700">
                     <a href="https://www.canada.ca/en/immigration-refugees-citizenship/services/visit-canada/eta/apply-zh-tw.html" target="_blank" class="hover:underline">加拿大eTA官網</a>
                     <a href="https://esta.cbp.dhs.gov/" target="_blank" class="hover:underline">美國ESTA官網</a>
                     <a href="https://www.viarail.ca/en" target="_blank" class="hover:underline">VIA Rail 火車</a>
@@ -520,37 +566,37 @@
         </main>
         
         <footer class="text-center mt-16 py-8">
-            <p style="color: var(--c-text-light);">祝您旅途愉快！Bon Voyage!</p>
+            <p class="text-gray-500">祝您旅途愉快！Bon Voyage!</p>
         </footer>
     </div>
     
-    <div id="toast-notification" class="no-print hidden opacity-0 fixed bottom-24 right-4 text-white px-5 py-3 rounded-lg shadow-xl transition-all duration-300 z-[100]" style="background-color: var(--c-primary);">
+    <div id="toast-notification" class="no-print hidden opacity-0 fixed bottom-24 right-4 bg-gray-800 text-white px-5 py-3 rounded-lg shadow-xl transition-all duration-300 z-[100]">
         <p id="toast-message"></p>
     </div>
 
-    <div id="update-notification" class="no-print">
-        <div class="text-white rounded-lg shadow-lg p-4 flex items-center justify-between" style="background-color: var(--c-secondary);">
+    <div id="update-notification" class="no-print hidden">
+        <div class="bg-indigo-600 text-white rounded-lg shadow-lg p-4 flex items-center justify-between">
             <p class="font-semibold">網站有新內容可更新。</p>
-            <button id="reload-button" class="ml-4 px-4 py-2 font-bold rounded-md transition-colors" style="background-color: white; color: var(--c-secondary);">立即更新</button>
+            <button id="reload-button" class="ml-4 px-4 py-2 bg-white text-indigo-600 font-bold rounded-md hover:bg-indigo-100 transition-colors">立即更新</button>
         </div>
     </div>
 
     <div class="no-print fixed bottom-4 right-4 z-50">
-        <button id="today-btn" class="text-white font-semibold px-4 py-3 rounded-full shadow-lg transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 flex items-center justify-center" style="background-color: #F59E0B; --tw-ring-color: #FBBF24;">
+        <button id="today-btn" class="bg-amber-500 text-white font-semibold px-4 py-3 rounded-full shadow-lg hover:bg-amber-600 transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-400 flex items-center justify-center hidden">
             行程要覽
         </button>
     </div>
 
-    <div id="foodie-modal" class="modal-overlay no-print">
+    <div id="foodie-modal" class="modal-overlay no-print hidden">
         <div class="modal-container">
             <div class="modal-header">
-                <h2 id="modal-title" class="text-2xl font-bold" style="color: var(--c-primary);">美食指南</h2>
+                <h2 id="modal-title" class="text-2xl font-bold text-gray-900">美食指南</h2>
                 <button class="modal-close-btn">&times;</button>
             </div>
             <div id="modal-tabs" class="modal-tabs"></div>
             <div id="modal-content" class="space-y-4 mt-4"></div>
             <div class="modal-footer">
-                <button class="modal-close-btn w-full font-bold py-2 px-4 rounded-lg transition-colors" style="background-color: var(--c-bg-accent-light); color: var(--c-text-light);">
+                <button class="modal-close-btn w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold py-2 px-4 rounded-lg transition-colors">
                     關閉
                 </button>
             </div>
@@ -558,7 +604,7 @@
     </div>
     
     <script>
-        // --- Service Worker Registration ---
+        // --- Service Worker 註冊 ---
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('/sw.js')
@@ -587,13 +633,15 @@
             if(reloadButton) {
                 reloadButton.addEventListener('click', () => {
                     navigator.serviceWorker.getRegistration().then(reg => {
-                        reg.waiting.postMessage({ type: 'SKIP_WAITING' });
+                        if (reg && reg.waiting) {
+                            reg.waiting.postMessage({ type: 'SKIP_WAITING' });
+                        }
                     });
                 });
             }
         }
 
-        // --- Global Functions ---
+        // --- 全域函式 ---
         let toastTimeout;
         function showToast(message) {
             const toastEl = document.getElementById('toast-notification');
@@ -644,25 +692,25 @@
                 }
                 
                 const tagsHtml = day.tags.map(tag => `<span class="tag">${tag}</span>`).join('');
-                const activitiesHtml = day.activities.map(activity => `<div class="activity-block"><h4 class="font-bold text-lg" style="color: var(--c-primary);">${activity.title}</h4><ul class="list-disc list-inside mt-2 space-y-1" style="color: var(--c-text-light);">${activity.items.map(item => `<li>${item}</li>`).join('')}</ul></div>`).join('');
-                let reminderHtml = day.reminder ? `<div class="mt-4 p-4 rounded-lg border-l-4" style="background-color: var(--c-bg-accent-light); border-color: var(--c-accent);"><h4 class="font-bold flex items-center mb-2" style="color: var(--c-primary);">${day.reminder.title}</h4><ul class="list-disc list-inside mt-2 space-y-1" style="color: var(--c-text);">${day.reminder.items.map(item => `<li>${item}</li>`).join('')}</ul></div>` : '';
-                let infoBoxHtml = day.infoBox ? `<div class="mt-4 p-4 rounded-lg border-l-4" style="background-color: var(--c-bg-accent-light); border-color: var(--c-accent);"><h4 class="font-bold flex items-center mb-2" style="color: var(--c-primary);">${day.infoBox.title}</h4><ul class="list-disc list-inside mt-2 space-y-1" style="color: var(--c-text);">${day.infoBox.items.map(item => `<li>${item}</li>`).join('')}</ul></div>` : '';
+                const activitiesHtml = day.activities.map(activity => `<div class="activity-block"><h4 class="font-bold text-lg text-blue-800">${activity.title}</h4><ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">${activity.items.map(item => `<li>${item}</li>`).join('')}</ul></div>`).join('');
+                let reminderHtml = day.reminder ? `<div class="mt-4 p-4 bg-amber-100/60 rounded-lg border-l-4 border-amber-400"><h4 class="font-bold text-amber-800 flex items-center mb-2">${day.reminder.title}</h4><ul class="list-disc list-inside mt-2 text-amber-900/80 space-y-1">${day.reminder.items.map(item => `<li>${item}</li>`).join('')}</ul></div>` : '';
+                let infoBoxHtml = day.infoBox ? `<div class="mt-4 p-4 bg-teal-100/60 rounded-lg border-l-4 border-teal-400"><h4 class="font-bold text-teal-800 flex items-center mb-2">${day.infoBox.title}</h4><ul class="list-disc list-inside mt-2 text-teal-900/80 space-y-1">${day.infoBox.items.map(item => `<li>${item}</li>`).join('')}</ul></div>` : '';
                 
                 htmlContent += `<div class="trip-card-wrapper" ${sectionIdAttr} data-day="${day.day}" data-date="${day.date}" data-day-group="${day.dayGroup}" data-city-target="${day.cityTarget}" data-weather-city="${day.weatherCity}">
                     <details class="trip-card bg-white rounded-2xl shadow-lg ring-1 ring-gray-200 overflow-hidden" ${day.day === 1 ? 'open' : ''}>
                         <summary class="${day.isTravelDay ? 'summary-travel-day' : ''} flex justify-between items-center">
                             <div>
-                                <p class="text-sm font-medium" style="color: ${day.isTravelDay ? 'var(--c-text-light)' : 'var(--c-secondary)'};">${day.subTitle}</p>
-                                <h3 id="day${day.day}" class="text-xl sm:text-2xl font-bold mt-1" style="color: var(--c-primary);">${day.title}</h3>
+                                <p class="text-sm font-medium ${day.isTravelDay ? 'text-amber-700' : 'text-indigo-600'}">${day.subTitle}</p>
+                                <h3 id="day${day.day}" class="text-xl sm:text-2xl font-bold mt-1 text-gray-900">${day.title}</h3>
                             </div>
                             <div class="flex items-center space-x-3 sm:space-x-4">
                                 <div class="weather-display flex-shrink-0 text-right"></div>
                                 <div class="summary-arrow flex-shrink-0">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="color: var(--c-text-light);"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" /></svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" /></svg>
                                 </div>
                             </div>
                         </summary>
-                        <div class="p-4 sm:p-6 border-t" style="border-color: var(--c-border);">
+                        <div class="p-4 sm:p-6 border-t border-gray-200">
                             <div class="my-3 flex flex-wrap justify-between items-start gap-2">
                                 <div>${tagsHtml}</div>
                             </div>
@@ -857,11 +905,11 @@
                 const stayingAt = hotels.find(h => date >= h.checkIn && date < h.checkOut);
                 let hotelHtml = '';
                 if (checkingOut) {
-                    hotelHtml += `<div><span class="font-semibold text-red-600">[退房]</span> <a href="${checkingOut.mapLink}" target="_blank" class="hover:underline">${checkingOut.name}</a></div><div class="text-sm" style="color: var(--c-text-light);">最晚退房：${checkingOut.checkOutTime}</div>`;
+                    hotelHtml += `<div><span class="font-semibold text-red-600">[退房]</span> <a href="${checkingOut.mapLink}" target="_blank" class="hover:underline">${checkingOut.name}</a></div><div class="text-sm text-gray-600 pl-1">最晚退房：${checkingOut.checkOutTime}</div>`;
                 }
                 if (checkingIn) {
                     const marginTop = checkingOut ? 'mt-2' : '';
-                    hotelHtml += `<div class="${marginTop}"><span class="font-semibold text-green-600">[入住]</span> <a href="${checkingIn.mapLink}" target="_blank" class="hover:underline">${checkingIn.name}</a></div><div class="text-sm" style="color: var(--c-text-light);">最早入住：${checkingIn.checkInTime}</div>`;
+                    hotelHtml += `<div class="${marginTop}"><span class="font-semibold text-green-600">[入住]</span> <a href="${checkingIn.mapLink}" target="_blank" class="hover:underline">${checkingIn.name}</a></div><div class="text-sm text-gray-600 pl-1">最早入住：${checkingIn.checkInTime}</div>`;
                 }
                 if (!checkingIn && !checkingOut && stayingAt) {
                      hotelHtml = `<p>住宿於 <a href="${stayingAt.mapLink}" target="_blank" class="hover:underline">${stayingAt.name}</a></p>`;
@@ -900,7 +948,7 @@
                             }).join('');
                         }
                         return `<p>${item.details}</p>`;
-                    }).join('<div class="my-2 border-t border-dashed" style="border-color: var(--c-border);"></div>');
+                    }).join('<div class="my-2 border-t border-dashed border-gray-300"></div>');
                     transportContentEl.innerHTML = transportHtml;
                     transportItemEl.style.display = 'flex';
                 } else {
@@ -965,7 +1013,7 @@
             const statusCityBtn = document.getElementById('status-city-btn');
             const cityDropdown = document.getElementById('city-dropdown');
             const statusCityArrow = document.getElementById('status-city-arrow');
-            const cityDropdownOverlay = document.getElementById('city-dropdown-overlay');
+            const cityDropdownOverlay = document.getElementById('city-dropdown-overlay'); 
             const paginationDotsContainer = document.getElementById('status-pagination-dots');
             const daySlider = document.getElementById('day-slider');
 
@@ -1024,25 +1072,23 @@
             const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
             
             if (mobileMenuBtn && mobileMenuPanel && mobileMenuOverlay) { 
+                const toggleMenu = () => {
+                    const isOpen = mobileMenuPanel.classList.toggle('is-open');
+                    mobileMenuPanel.classList.toggle('hidden', !isOpen);
+                    mobileMenuOverlay.classList.toggle('is-open');
+                    mobileMenuOverlay.classList.toggle('hidden', !isOpen);
+                    document.body.classList.toggle('modal-open', isOpen);
+                };
+
                 mobileMenuBtn.addEventListener('click', (e) => {
                     e.stopPropagation(); 
-                    mobileMenuPanel.classList.toggle('is-open'); 
-                    mobileMenuOverlay.classList.toggle('is-open'); 
-                    document.body.classList.toggle('modal-open');
+                    toggleMenu();
                 });
 
-                mobileMenuOverlay.addEventListener('click', () => {
-                    mobileMenuPanel.classList.remove('is-open'); 
-                    mobileMenuOverlay.classList.remove('is-open'); 
-                    document.body.classList.remove('modal-open'); 
-                });
+                mobileMenuOverlay.addEventListener('click', toggleMenu);
 
                 document.querySelectorAll('.mobile-nav-link').forEach(link => {
-                    link.addEventListener('click', () => {
-                        mobileMenuPanel.classList.remove('is-open');
-                        mobileMenuOverlay.classList.remove('is-open'); 
-                        document.body.classList.remove('modal-open');
-                    });
+                    link.addEventListener('click', toggleMenu);
                 });
             }
 
@@ -1156,7 +1202,9 @@
                             const icon = getWeatherIcon(allWeatherData[city].weather_code[dayIndex]);
                             weatherDisplay.innerHTML = `${icon} ${temp}°C`;
                         } else { weatherDisplay.textContent = '無預報'; }
-                    } else { weatherDisplay.textContent = 'N/A'; }
+                    } else if (weatherDisplay) { 
+                        weatherDisplay.textContent = 'N/A'; 
+                    }
                 });
             }
 
@@ -1171,10 +1219,14 @@
                 document.querySelectorAll('.modal-tab').forEach(tab => tab.addEventListener('click', () => switchFoodieTab(tab.dataset.city)));
                 switchFoodieTab(activeCityKey);
                 document.body.classList.add('modal-open');
-                foodieModal.classList.add('active');
+                foodieModal.classList.remove('hidden');
+                setTimeout(() => foodieModal.classList.add('active'), 10);
             }
             function closeFoodieModal() {
-                if(foodieModal) foodieModal.classList.remove('active');
+                if(foodieModal) {
+                    foodieModal.classList.remove('active');
+                    setTimeout(() => foodieModal.classList.add('hidden'), 300);
+                }
                 document.body.classList.remove('modal-open');
             }
             function switchFoodieTab(cityKey) {
@@ -1183,10 +1235,10 @@
                 document.querySelectorAll('.modal-tab').forEach(tab => tab.classList.toggle('active', tab.dataset.city === cityKey));
                 let contentHTML = '';
                 cityData.categories.forEach(category => {
-                    contentHTML += `<div class="mb-4"><h3 class="text-lg font-bold" style="color: var(--c-primary); border-bottom: 2px solid var(--c-accent); padding-bottom: 0.25rem; margin-bottom: 0.5rem;">${category.name}</h3><div class="space-y-3">`;
+                    contentHTML += `<div class="mb-4"><h3 class="text-lg font-bold text-gray-800 border-b-2 border-indigo-200 pb-1 mb-2">${category.name}</h3><div class="space-y-3">`;
                     category.items.forEach(item => {
                         const placesHTML = item.places.map(p => `<a href="${p.link}" target="_blank" class="hover:underline">${p.name}</a>`).join('、');
-                        contentHTML += `<div><p class="font-semibold" style="color: var(--c-text-light);">${item.name}</p><p class="text-sm" style="color: var(--c-text);">${item.desc}</p><p class="text-sm" style="color: var(--c-text-light);">推薦：${placesHTML}</p></div>`;
+                        contentHTML += `<div><p class="font-semibold text-gray-700">${item.name}</p><p class="text-sm text-gray-500">${item.desc}</p><p class="text-sm text-gray-700">推薦：${placesHTML}</p></div>`;
                     });
                     contentHTML += '</div></div>';
                 });
@@ -1197,7 +1249,7 @@
 
             function initializeTripView() {
                 const showPastToggle = document.getElementById('show-past-toggle');
-                const showPastLabel = showPastToggle.closest('label');
+                const showPastLabel = showPastToggle ? showPastToggle.closest('label') : null;
                 const mainContainer = document.querySelector('main.space-y-8');
                 if (!mainContainer || !showPastToggle || !showPastLabel) return;
                 
@@ -1217,13 +1269,13 @@
                     if (dayContentContainer) {
                         const checkingOut = hotelData.find(h => h.checkOut === dateStr);
                         const checkingIn = hotelData.find(h => h.checkIn === dateStr);
-                        const stayingAt = hotelData.find(h => date >= h.checkIn && date < h.checkOut);
+                        const stayingAt = hotelData.find(h => dateStr >= h.checkIn && dateStr < h.checkOut);
                         let hotelInfoHTML = '';
-                        if (checkingOut) hotelInfoHTML += `<p>今日退房：<a href="${checkingOut.mapLink}" target="_blank" class="font-semibold hover:underline">${checkingOut.name}</a> <span class="text-sm" style="color: var(--c-text-light);">(${checkingOut.checkOutTime}須退房)</span></p>`;
-                        if (checkingIn) hotelInfoHTML += `<p class="mt-1">今日入住：<a href="${checkingIn.mapLink}" target="_blank" class="font-semibold hover:underline">${checkingIn.name}</a> <span class="text-sm" style="color: var(--c-text-light);">(${checkingIn.checkInTime}可入住)</span></p>`;
-                        else if (!checkingOut && stayingAt) hotelInfoHTML += `<p>今晚入住：<a href="${stayingAt.mapLink}" target="_blank" class="font-semibold hover:underline">${stayingAt.name}</a></p>`;
+                        if (checkingOut) hotelInfoHTML += `<p class="text-gray-700">今日退房：<a href="${checkingOut.mapLink}" target="_blank" class="font-semibold hover:underline">${checkingOut.name}</a> <span class="text-sm text-gray-500">(${checkingOut.checkOutTime}須退房)</span></p>`;
+                        if (checkingIn) hotelInfoHTML += `<p class="text-gray-700 mt-1">今日入住：<a href="${checkingIn.mapLink}" target="_blank" class="font-semibold hover:underline">${checkingIn.name}</a> <span class="text-sm text-gray-500">(${checkingIn.checkInTime}可入住)</span></p>`;
+                        else if (!checkingOut && stayingAt) hotelInfoHTML += `<p class="text-gray-700">今晚入住：<a href="${stayingAt.mapLink}" target="_blank" class="font-semibold hover:underline">${stayingAt.name}</a></p>`;
 
-                        if (hotelInfoHTML) dayContentContainer.insertAdjacentHTML('afterbegin', `<div class="info-block p-4 rounded-lg border-l-4" style="background-color: var(--c-bg-accent-light); border-color: var(--c-secondary);"><h4 class="font-bold text-lg flex items-center mb-2" style="color: var(--c-primary);"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor"><path d="M19 9.5A2.5 2.5 0 0016.5 7H3.5A2.5 2.5 0 001 9.5v7A2.5 2.5 0 003.5 19h13a2.5 2.5 0 002.5-2.5v-7zM6 13a1 1 0 11-2 0 1 1 0 012 0zm3 0a1 1 0 11-2 0 1 1 0 012 0z" /><path d="M3.5 4A1.5 1.5 0 002 5.5v1A1.5 1.5 0 003.5 8h13A1.5 1.5 0 0018 6.5v-1A1.5 1.5 0 0016.5 4h-13z" /></svg>住宿資訊</h4>${hotelInfoHTML}</div>`);
+                        if (hotelInfoHTML) dayContentContainer.insertAdjacentHTML('afterbegin', `<div class="info-block accommodation-info p-4 bg-gray-50 rounded-lg border-l-4 border-indigo-400"><h4 class="font-bold text-lg text-indigo-800 flex items-center mb-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor"><path d="M19 9.5A2.5 2.5 0 0016.5 7H3.5A2.5 2.5 0 001 9.5v7A2.5 2.5 0 003.5 19h13a2.5 2.5 0 002.5-2.5v-7zM6 13a1 1 0 11-2 0 1 1 0 012 0zm3 0a1 1 0 11-2 0 1 1 0 012 0z" /><path d="M3.5 4A1.5 1.5 0 002 5.5v1A1.5 1.5 0 003.5 8h13A1.5 1.5 0 0018 6.5v-1A1.5 1.5 0 0016.5 4h-13z" /></svg>住宿資訊</h4>${hotelInfoHTML}</div>`);
                         
                         const transportItems = transportData.filter(t => t.date === dateStr);
                         if (transportItems.length > 0) {
@@ -1235,25 +1287,25 @@
                                         const arrivalDateStr = new Date(leg.arrival.time).toISOString().split('T')[0];
                                         const departureDateStr = new Date(leg.departure.time).toISOString().split('T')[0];
                                         const dateIndicator = arrivalDateStr > departureDateStr ? ' <span class="text-xs text-red-500 font-semibold">(+1)</span>' : '';
-                                        return `<div style="color: var(--c-text-light);">
-                                            <div class="font-semibold" style="color: var(--c-text);">${leg.flightCode}</div>
+                                        return `<div class="text-gray-700">
+                                            <div class="font-semibold text-gray-800">${leg.flightCode}</div>
                                             <div class="text-sm pl-2 mt-1">🛫 ${leg.departure.airport} &nbsp; <strong>${depTime}</strong></div>
                                             <div class="text-sm pl-2">🛬 ${leg.arrival.airport} &nbsp; <strong>${arrTime}</strong>${dateIndicator}</div>
                                         </div>`;
-                                    }).join('<div class="my-2 border-t border-dashed" style="border-color: var(--c-border);"></div>');
+                                    }).join('<div class="my-2 border-t border-dashed border-gray-300"></div>');
                                     return `<li>${flightsHtml}</li>`;
                                 }
-                                return `<li style="color: var(--c-text-light);">${item.type}：${item.details}</li>`;
+                                return `<li class="text-gray-700">${item.type}：${item.details}</li>`;
                             }).join('');
 
-                            dayContentContainer.insertAdjacentHTML('afterbegin', `<div class="info-block p-4 rounded-lg border-l-4" style="background-color: var(--c-bg-accent-light); border-color: var(--c-secondary);"><h4 class="font-bold text-lg flex items-center mb-2" style="color: var(--c-primary);"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 3a1 1 0 00-1.447-.894L8.763 6H5a3 3 0 000 6h.085l1.558 2.336A1 1 0 008 15.5V17a1 1 0 001 1h2a1 1 0 001-1v-1.5a1 1 0 00-.237-.664L9.915 12H15a3 3 0 000-6h-3.763L16.553 3.894A1 1 0 0018 3zM5 9a1 1 0 100-2 1 1 0 000 2zm10-2a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" /></svg>本日交通</h4><ul class="list-none space-y-2">${transportListHTML}</ul></div>`);
+                            dayContentContainer.insertAdjacentHTML('afterbegin', `<div class="info-block transportation-info p-4 bg-blue-50 rounded-lg border-l-4 border-blue-400"><h4 class="font-bold text-lg text-blue-800 flex items-center mb-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 3a1 1 0 00-1.447-.894L8.763 6H5a3 3 0 000 6h.085l1.558 2.336A1 1 0 008 15.5V17a1 1 0 001 1h2a1 1 0 001-1v-1.5a1 1 0 00-.237-.664L9.915 12H15a3 3 0 000-6h-3.763L16.553 3.894A1 1 0 0018 3zM5 9a1 1 0 100-2 1 1 0 000 2zm10-2a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" /></svg>本日交通</h4><ul class="list-none space-y-2">${transportListHTML}</ul></div>`);
                         }
                         
                         const tagContainer = el.querySelector('.my-3');
                         const cityKey = el.dataset.weatherCity;
                         if (tagContainer && cityKey && foodieData[cityKey] && !tagContainer.querySelector('.foodie-btn-wrapper')) {
                             const foodieButton = document.createElement('button');
-                            foodieButton.className = "foodie-btn text-xs font-semibold px-3 py-1 rounded-full transition-colors";
+                            foodieButton.className = "foodie-btn bg-amber-100 text-amber-800 text-xs font-semibold px-3 py-1 rounded-full hover:bg-amber-200 transition-colors";
                             foodieButton.innerHTML = "🍽️ 美食清單";
                             foodieButton.onclick = e => { e.stopPropagation(); openFoodieModal(cityKey); };
                             const wrapper = document.createElement('div');
@@ -1271,7 +1323,7 @@
                         if (summaryElement) {
                             summaryElement.classList.add('summary-today');
                             const h3 = summaryElement.querySelector('h3');
-                            if(h3 && !h3.querySelector('.today-marker')) h3.insertAdjacentHTML('beforeend', ' <span class="today-marker text-base font-medium" style="color: var(--c-secondary);">(今日行程)</span>');
+                            if(h3 && !h3.querySelector('.today-marker')) h3.insertAdjacentHTML('beforeend', ' <span class="today-marker text-base font-medium text-green-600">(今日行程)</span>');
                         }
                     }
                 });
@@ -1424,6 +1476,7 @@
             if (todayBtn && dashboardSectionForObserver) {
                 const todayBtnObserver = new IntersectionObserver(
                     ([entry]) => {
+                        todayBtn.classList.toggle('hidden', entry.isIntersecting);
                         todayBtn.classList.toggle('is-visible', !entry.isIntersecting);
                     },
                     { root: null, threshold: 0.1 }
