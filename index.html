@@ -912,8 +912,16 @@
                     accommodationItemEl.style.visibility = 'hidden';
                 }
 
-                const transportItems = transport.filter(t => t.date === date);
-                if (transportItems.length > 0) {
+// --- 修改開始 ---
+let transportItems = transport.filter(t => t.date === date);
+
+// 為了合併顯示返家航班的特別處理
+if (date === '2025-07-14') {
+    const nextDayTransport = transport.filter(t => t.date === '2025-07-15');
+    // 將隔天的航班資訊也加進來
+    transportItems = transportItems.concat(nextDayTransport);
+}
+// --- 修改結束 ---                if (transportItems.length > 0) {
                     const iconMap = { '航班': '✈️', '火車': '🚄', '巴士': '🚌' };
                     transportIconEl.textContent = iconMap[transportItems[0].type] || '➡️';
                     const transportHtml = transportItems.map(item => {
