@@ -1019,9 +1019,15 @@
                             return item.details.map(leg => {
                                 const depTime = new Date(leg.departure.time).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: leg.departure.tz });
                                 const arrTime = new Date(leg.arrival.time).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: leg.arrival.tz });
-                                const arrivalDateStr = new Date(leg.arrival.time).toISOString().split('T')[0];
-                                const departureDateStr = new Date(leg.departure.time).toISOString().split('T')[0];
-                                const dateIndicator = arrivalDateStr > departureDateStr ? ' (+1)' : '';
+                                
+                                // --- MODIFICATION START ---
+                                // Use Intl.DateTimeFormat to get the local YYYY-MM-DD date string for the airport
+                                const departureLocalDateStr = new Intl.DateTimeFormat('fr-CA', { year: 'numeric', month: '2-digit', day: '2-digit', timeZone: leg.departure.tz }).format(new Date(leg.departure.time));
+                                const arrivalLocalDateStr = new Intl.DateTimeFormat('fr-CA', { year: 'numeric', month: '2-digit', day: '2-digit', timeZone: leg.arrival.tz }).format(new Date(leg.arrival.time));
+                                
+                                const dateIndicator = arrivalLocalDateStr > departureLocalDateStr ? ' (+1)' : '';
+                                // --- MODIFICATION END ---
+
                                 return `<div class="mb-1">
                                     <p class="font-semibold">${leg.flightCode}</p>
                                     <p class="text-sm">${leg.departure.airport} (${depTime}) → ${leg.arrival.airport} (${arrTime}${dateIndicator})</p>
@@ -1383,9 +1389,13 @@
                                     const flightsHtml = item.details.map(leg => {
                                         const depTime = new Date(leg.departure.time).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: leg.departure.tz });
                                         const arrTime = new Date(leg.arrival.time).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: leg.arrival.tz });
-                                        const arrivalDateStr = new Date(leg.arrival.time).toISOString().split('T')[0];
-                                        const departureDateStr = new Date(leg.departure.time).toISOString().split('T')[0];
-                                        const dateIndicator = arrivalDateStr > departureDateStr ? ' <span class="text-xs text-red-500 font-semibold">(+1)</span>' : '';
+                                        
+                                        // --- MODIFICATION START ---
+                                        const departureLocalDateStr = new Intl.DateTimeFormat('fr-CA', { year: 'numeric', month: '2-digit', day: '2-digit', timeZone: leg.departure.tz }).format(new Date(leg.departure.time));
+                                        const arrivalLocalDateStr = new Intl.DateTimeFormat('fr-CA', { year: 'numeric', month: '2-digit', day: '2-digit', timeZone: leg.arrival.tz }).format(new Date(leg.arrival.time));
+                                        const dateIndicator = arrivalLocalDateStr > departureLocalDateStr ? ' <span class="text-xs text-red-500 font-semibold">(+1)</span>' : '';
+                                        // --- MODIFICATION END ---
+
                                         return `<div class="text-gray-700">
                                             <div class="font-semibold text-gray-800">${leg.flightCode}</div>
                                             <div class="text-sm pl-2 mt-1">🛫 ${leg.departure.airport} &nbsp; <strong>${depTime}</strong></div>
