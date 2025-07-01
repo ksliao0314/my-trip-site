@@ -182,13 +182,15 @@
         
         /* --- Full Screen Card Logic --- */
         #status-dashboard-section {
-            height: calc(100vh - var(--nav-h));
-        }
-        @supports (height: 100svh) {
-            #status-dashboard-section {
-                height: calc(100svh - var(--nav-h));
-            }
-        }
+    /* 在計算中再減去 4rem 的底部間距 */
+    height: calc(100vh - var(--nav-h) - 4rem); 
+}
+@supports (height: 100svh) {
+    #status-dashboard-section {
+        /* 同樣應用於支援 svh 的瀏覽器 */
+        height: calc(100svh - var(--nav-h) - 4rem);
+    }
+}
         
         #status-card-content {
             overflow-y: auto; 
