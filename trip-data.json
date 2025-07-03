@@ -3,7 +3,7 @@
     "totalDays": 13,
     "tripStartDate": "2025-07-02",
     "tripEndDate": "2025-07-16",
-    "dataVersion": "20250703-07"
+    "dataVersion": "20250703-08"
   },
   "timePhases": [
     {
@@ -118,7 +118,8 @@
         ]},
         { "name": "🥂 法式／歐陸料理", "items": [
           { "name": "經典法式小酒館", "desc": "L’Express 是體驗道地法式小館氛圍的好去處。", "places": [{ "name": "L’Express", "link": "https://maps.apple.com/?q=L’Express+Montreal" }] },
-          { "name": "爵士音樂＋法餐", "desc": "Modavie Bistro 結合現場爵士樂與美味法餐。", "places": [{ "name": "Modavie Bistro", "link": "https://maps.apple.com/?q=Modavie" }] }
+          { "name": "爵士音樂＋法餐", "desc": "Modavie Bistro 結合現場爵士樂與美味法餐。", "places": [{ "name": "Modavie Bistro", "link": "https://maps.apple.com/?q=Modavie" }] },
+          { "name": "經典牛排館", "desc": "Gibby's 在充滿歷史感的石牆建築中提供高品質的牛排與海鮮。", "places": [{ "name": "Gibby's", "link": "https://maps.apple.com/?q=Gibbys" }] }
         ]},
         { "name": "🍰 甜點／法式糕點", "items": [
           { "name": "可麗露", "desc": "法式甜點，可麗露是 ÔFauria 的招牌。", "places": [{ "name": "ÔFauria", "link": "https://maps.apple.com/?q=ÔFauria" }] },
@@ -234,7 +235,7 @@
       "dayGroup": 1,
       "cityTarget": "montreal-section",
       "weatherCity": "montreal",
-      "title": "蒙特婁半日遊｜教堂・市集・港邊漫步",
+      "title": "蒙特婁美食與舊城探索日",
       "subTitle": "Day 2｜7月3日（週四）",
       "isTravelDay": false,
       "theme": {
@@ -242,12 +243,14 @@
         "title": "法式風情之日",
         "description": "漫步在舊城的石板路上，感受北美小巴黎的獨特魅力。從莊嚴的聖母大教堂到熱鬧的舊港，今天將沉浸在濃厚的法式氛圍中。"
       },
-      "tags": ["#哥德式教堂", "#舊港漫步", "#法式風情"],
+      "tags": ["#道地貝果", "#經典牛排", "#舊港漫步"],
       "activities": [
-        { "title": "☀️ 08:30 – 12:00｜舊城早晨巡禮", "items": ["<strong>🏛️ <a href='https://maps.apple.com/?q=Notre-Dame+Basilica+of+Montreal' target='_blank' class='hover:underline'>諾特丹聖母大教堂</a>：</strong>蒙特婁最具代表性的哥德式教堂。若有英文導覽團（$15 CAD左右）可預約參加。建議停留 40–60 分鐘。", "<strong>🏙️ <a href='https://maps.apple.com/?q=Place+d'Armes,Montreal' target='_blank' class='hover:underline'>Place d’Armes 廣場</a> → <a href='https://maps.apple.com/?q=Rue+Saint-Paul,Montreal' target='_blank' class='hover:underline'>Rue Saint-Paul 步行街</a>：</strong>充滿法式殖民建築與街頭藝人，適合拍照、買紀念品。"] },
-        { "title": "🧺 12:00 – 13:30｜午餐 + 市集小吃", "items": ["<strong><a href='https://maps.apple.com/?q=Marché+Bonsecours,Montreal' target='_blank' class='hover:underline'>Marché Bonsecours（邦斯古爾市場）</a>：</strong>藝品、手工皂、地方食品伴手禮選擇豐富。", "<strong>或前往：</strong><a href='https://maps.apple.com/?q=Modavie,Montreal' target='_blank' class='hover:underline'>Modavie Bistro</a>（音樂法餐）或 <a href='https://maps.apple.com/?q=Tommy+Café,Montreal' target='_blank' class='hover:underline'>Tommy Café</a>（人氣咖啡店）。"] },
-        { "title": "🛍️ 13:30 – 15:30｜舊港區港邊散步 + 摩天輪體驗", "items": ["沿 <a href='https://maps.apple.com/?q=Old+Port+of+Montreal' target='_blank' class='hover:underline'>Vieux-Port de Montréal</a> 河岸漫步，若天氣良好可搭乘 🎡 <a href='https://maps.apple.com/?q=La+Grande+Roue+de+Montréal' target='_blank' class='hover:underline'>La Grande Roue 蒙特婁摩天輪</a>（$25 CAD 左右）。"] },
-        { "title": "🧳 15:30 – 17:00｜飯店小憩", "items": ["回飯店稍作休息，或前往超市（如 IGA、Metro）補給。"] }
+        { "title": "🥯 09:00 – 10:30｜早餐：貝果名店探訪", "items": ["從飯店出發，搭乘地鐵或計程車前往貝果名店 <a href='https://maps.apple.com/?q=St-Viateur+Bagel' target='_blank' class='hover:underline'>St-Viateur Bagel</a>。", "品嚐剛出爐、熱騰騰的蒙特婁特色貝果，開啟美好的一天。"] },
+        { "title": "🏛️ 10:30 – 12:30｜舊城核心區巡禮", "items": ["返回舊城區，從 <a href='https://maps.apple.com/?q=Place+d'Armes,Montreal' target='_blank' class='hover:underline'>Place d’Armes 廣場</a> 開始，欣賞周邊歷史建築。", "參觀蒙特婁最具代表性的哥德式教堂 <a href='https://maps.apple.com/?q=Notre-Dame+Basilica+of+Montreal' target='_blank' class='hover:underline'>諾特丹聖母大教堂</a>。"] },
+        { "title": "🥩 12:30 – 14:00｜午餐：經典石牆牛排館", "items": ["步行至位於舊港區的 <a href='https://maps.apple.com/?q=Gibbys' target='_blank' class='hover:underline'>Gibby's</a>，在充滿歷史氛圍的石牆建築中享用美味的牛排午餐。建議可提前預約。"] },
+        { "title": "🚶‍♀️ 14:00 – 16:30｜午後：舊港漫步時光", "items": ["午餐後，沿著 <a href='https://maps.apple.com/?q=Old+Port+of+Montreal' target='_blank' class='hover:underline'>Vieux-Port de Montréal</a> 河岸悠閒漫步。", "探索 <a href='https://maps.apple.com/?q=Marché+Bonsecours,Montreal' target='_blank' class='hover:underline'>Marché Bonsecours（邦斯古爾市場）</a>，或搭乘 🎡 <a href='https://maps.apple.com/?q=La+Grande+Roue+de+Montréal' target='_blank' class='hover:underline'>La Grande Roue 摩天輪</a>。"] },
+        { "title": "🏨 16:30 – 18:00｜返回飯店休息", "items": ["結束下午的行程後，返回飯店稍作休息，為晚間的活動做準備。"] },
+        { "title": "🌃 18:00 onwards｜夜晚：自由時光或 AURA 燈光秀", "items": ["晚餐可輕鬆解決，或探索其他美食。", "<strong>強烈推薦：</strong>返回<a href='https://maps.apple.com/?q=Notre-Dame+Basilica+of+Montreal' target='_blank' class='hover:underline'>諾特丹聖母大教堂</a>，欣賞晚間的 <a href='https://www.aurabasiliquemontreal.com/en' target='_blank' class='hover:underline'>AURA 燈光秀</a>，體驗沉浸式的視覺與聽覺饗宴（需另外購票）。"] }
       ],
       "infoBox": { "title": "⭐ 蒙特婁實用資訊", "items": ["💳 地鐵使用 STM 系統，一日票或 OPUS 卡皆可。", "🗣 雖以法語為主，但觀光區英文通用，用「Bonjour / Merci」開場更有禮。", "👟 鞋子請選擇適合步行的，舊城區石板路段多。", "🌡️ 七月天氣約 22–27°C，日夜溫差稍大，建議攜帶薄外套。"] }
     },
@@ -263,7 +266,7 @@
       "tags": ["#巴士旅程", "#古城初探", "#世界遺產"],
       "activities": [
         { "title": "🚌 08:30 – 11:45｜搭乘巴士前往魁北克市", "items": ["搭乘 <strong>Orléans Express</strong> 從蒙特婁出發，預計中午前抵達魁北克市。", "抵達車站：<a href='https://maps.apple.com/?q=Gare+du+Palais,Quebec' target='_blank' class='hover:underline'>Gare du Palais</a>，位於舊城區北側。"] },
-        { "title": "🏨 12:00 – 13:30｜入住飯店 → 午餐", "items": ["抵達後先至飯店辦理入住或寄放行李。", "午餐建議：<a href='https://maps.apple.com/?q=Le+Chic+Shack,Quebec' target='_blank' class='hover:underline'>Le Chic Shack</a>（漢堡＋奶昔）或 <a href='https://maps.apple.com/?q=Buffet+de+l’Antiquaire,Quebec' target='_blank' class='hover:underline'>Buffet de l’Antiquaire</a>（魁北克家常菜）。"] },
+        { "title": "� 12:00 – 13:30｜入住飯店 → 午餐", "items": ["抵達後先至飯店辦理入住或寄放行李。", "午餐建議：<a href='https://maps.apple.com/?q=Le+Chic+Shack,Quebec' target='_blank' class='hover:underline'>Le Chic Shack</a>（漢堡＋奶昔）或 <a href='https://maps.apple.com/?q=Buffet+de+l’Antiquaire,Quebec' target='_blank' class='hover:underline'>Buffet de l’Antiquaire</a>（魁北克家常菜）。"] },
         { "title": "🚶‍♀️ 14:00 – 17:30｜上城區初探路線", "items": ["步行路線：<a href='https://maps.apple.com/?q=Hotel+Manoir+Victoria,Quebec' target='_blank' class='hover:underline'>Hotel Manoir Victoria</a> → <a href='https://maps.apple.com/?q=Dufferin+Terrace,Quebec' target='_blank' class='hover:underline'>杜費林露台</a> → <a href='https://maps.apple.com/?q=Porte+Saint-Louis,Quebec' target='_blank' class='hover:underline'>聖路易門/古城牆</a> → <a href='https://maps.apple.com/?q=Hôtel+du+Parlement,Quebec' target='_blank' class='hover:underline'>魁北克省議會</a>。"] },
         { "title": "🌃 18:00 – 20:30｜晚餐＋夜景散步", "items": ["<strong>餐廳建議：</strong><a href='https://maps.apple.com/?q=Aux+Anciens+Canadiens,Quebec' target='_blank' class='hover:underline'>Aux Anciens Canadiens</a> (17世紀老宅法餐)。", "飯後可再回到 Dufferin Terrace 拍攝夜景，芳堤娜城堡夜間打燈效果極佳。"] }
       ],
