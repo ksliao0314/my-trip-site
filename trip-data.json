@@ -3,7 +3,7 @@
     "totalDays": 13,
     "tripStartDate": "2025-07-02",
     "tripEndDate": "2025-07-16",
-    "dataVersion": "20250703-03"
+    "dataVersion": "20250703-04"
   },
   "timePhases": [
     {
@@ -81,25 +81,19 @@
         { "flightCode": "加航", "departure": { "airport": "多倫多 (YYZ)", "time": "2025-07-08T22:35:00Z", "tz": "America/Toronto" }, "arrival": { "airport": "芝加哥 (ORD)", "time": "2025-07-09T00:29:00Z", "tz": "America/Chicago" } }
       ]
     },
-   {
+    {
       "date": "2025-07-14",
       "type": "航班",
       "details": [
         { 
           "flightCode": "日航 JL009", 
           "departure": { "airport": "芝加哥 (ORD)", "time": "2025-07-14T06:30:00Z", "tz": "America/Chicago" }, 
-          "arrival": { "airport": "東京羽田 (HND)", "time": "2025-07-15T09:20:00Z", "tz": "Asia/Tokyo" } 
-        }
-      ]
-    },
-    {
-      "date": "2025-07-15",
-      "type": "航班",
-      "details": [
+          "arrival": { "airport": "東京羽田 (HND)", "time": "2025-07-14T19:20:00Z", "tz": "Asia/Tokyo" } 
+        },
         { 
           "flightCode": "日航 JL097", 
-          "departure": { "airport": "東京羽田 (HND)", "time": "2025-07-15T12:55:00Z", "tz": "Asia/Tokyo" }, 
-          "arrival": { "airport": "台北松山 (TSA)", "time": "2025-07-15T15:35:00Z", "tz": "Asia/Taipei" } 
+          "departure": { "airport": "東京羽田 (HND)", "time": "2025-07-14T23:55:00Z", "tz": "Asia/Tokyo" }, 
+          "arrival": { "airport": "台北松山 (TSA)", "time": "2025-07-15T03:35:00Z", "tz": "Asia/Taipei" } 
         }
       ]
     },
@@ -335,7 +329,7 @@
         { "title": "🌊 09:00 – 12:00｜經典瀑布體驗", "items": ["<strong><a href='https://www.niagaraparks.com/visit/attractions/niagara-city-cruises/' target='_blank' class='hover:underline'>Voyage to the Falls 船票體驗</a>：</strong>近距離感受瀑布水勢，建議線上預約上午場。", "<strong><a href='https://www.niagaraparks.com/visit/attractions/journey-behind-the-falls/' target='_blank' class='hover:underline'>Journey Behind the Falls</a>：</strong>進入瀑布後方岩壁隧道觀賞水柱傾瀉。"] },
         { "title": "🍽️ 12:30 – 14:00｜午餐建議", "items": ["<a href='https://maps.apple.com/?q=Queen+Victoria+Place+Restaurant,Niagara+Falls' target='_blank' class='hover:underline'>Queen Victoria Place Restaurant</a>（景觀+當地食材）或 Table Rock Centre 美食廣場。"] },
         { "title": "🦋 14:00 – 17:00｜自然景點探索", "items": ["搭乘 <strong>WEGO 巴士</strong> 前往 <a href='https://www.niagaraparks.com/visit/attractions/butterfly-conservatory/' target='_blank' class='hover:underline'>Butterfly Conservatory</a> (蝴蝶園) 或 <a href='https://www.niagaraparks.com/visit/attractions/white-water-walk/' target='_blank' class='hover:underline'>White Water Walk</a> (激流步道)。"] },
-        { "title": "� 18:00 – 21:30｜晚餐 + 夜景 + 煙火", "items": ["<strong>夜間活動：</strong>約 21:00 起瀑布打燈，21:45～22:00 季節性煙火秀（如天氣良好）。", "建議提早至 <a href='https://maps.apple.com/?q=Table+Rock+Welcome+Centre,Niagara+Falls' target='_blank'>Table Rock</a> 或 <a href='https://maps.apple.com/?q=Queen+Victoria+Park,Niagara+Falls' target='_blank'>Queen Victoria Park</a> 卡位拍照。"] }
+        { "title": "🍷 18:00 – 21:30｜晚餐 + 夜景 + 煙火", "items": ["<strong>夜間活動：</strong>約 21:00 起瀑布打燈，21:45～22:00 季節性煙火秀（如天氣良好）。", "建議提早至 <a href='https://maps.apple.com/?q=Table+Rock+Welcome+Centre,Niagara+Falls' target='_blank'>Table Rock</a> 或 <a href='https://maps.apple.com/?q=Queen+Victoria+Park,Niagara+Falls' target='_blank'>Queen Victoria Park</a> 卡位拍照。"] }
       ],
       "infoBox": { "title": "⭐ 瀑布實用資訊", "items": ["🧥 參加瀑布船與後方通道活動務必攜帶雨衣（現場也會提供）。", "🎫 建議提前線上購買 <a href='https://www.niagaraparks.com/visit/attractions/adventure-pass-classic' target='_blank' class='hover:underline'>Niagara Pass</a>（含票+WEGO車）避免現場排隊。", "📷 相機建議使用防水袋，手機請準備擦拭布。", "☀️ 七月氣溫約 25–29°C，日曬強烈建議塗防曬。"] }
     },
