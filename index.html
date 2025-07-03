@@ -1028,7 +1028,7 @@
                                 const arrTime = new Date(leg.arrival.time).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: leg.arrival.tz });
                                 
                                 // --- MODIFICATION START ---
-                                // Use Intl.DateTimeFormat to get the local YYYY-MM-DD date string for the airport
+                                // Use Intl.DateTimeFormat to get the localiado-MM-DD date string for the airport
                                 const departureLocalDateStr = new Intl.DateTimeFormat('fr-CA', { year: 'numeric', month: '2-digit', day: '2-digit', timeZone: leg.departure.tz }).format(new Date(leg.departure.time));
                                 const arrivalLocalDateStr = new Intl.DateTimeFormat('fr-CA', { year: 'numeric', month: '2-digit', day: '2-digit', timeZone: leg.arrival.tz }).format(new Date(leg.arrival.time));
                                 
@@ -1072,7 +1072,8 @@
 
         document.addEventListener('DOMContentLoaded', async () => {
             try {
-                const response = await fetch('trip-data.json');
+                // --- FIX: Use absolute path for robustness ---
+                const response = await fetch('/trip-data.json');
                 if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
                 const data = await response.json();
                 
@@ -1096,7 +1097,7 @@
             } catch (error) {
                 console.error("無法載入行程資料:", error);
                 const container = document.getElementById('itinerary-container');
-                if (container) container.innerHTML = `<p class="text-center text-red-600 font-bold">行程資料載入失敗，請檢查 trip-data.json 檔案。</p>`;
+                if (container) container.innerHTML = `<p class="text-center text-red-600 font-bold">行程資料載入失敗，請檢查 trip-data.json 檔案並確認網路連線。</p>`;
             }
         });
 
