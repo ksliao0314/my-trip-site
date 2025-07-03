@@ -3,7 +3,7 @@
     "totalDays": 13,
     "tripStartDate": "2025-07-02",
     "tripEndDate": "2025-07-16",
-    "dataVersion": "20250703-09"
+    "dataVersion": "20250703-10"
   },
   "timePhases": [
     {
@@ -65,7 +65,7 @@
       ]
     },
     { "date": "2025-07-02", "type": "巴士", "details": "747 Express Bus" },
-    { "date": "2025-07-04", "type": "巴士", "details": "Orléans Express (蒙特婁 08:30 → 魁北克市 11:45)" },
+    { "date": "2025-07-04", "type": "巴士", "details": "Orléans Express (蒙特婁 09:00 → 魁北克市 12:00)" },
     {
       "date": "2025-07-06",
       "type": "航班",
