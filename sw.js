@@ -11,7 +11,7 @@ workbox.core.clientsClaim();
 const APP_SHELL_ASSETS = [
   { url: 'index.html', revision: '20250703-02' }, // HTML主檔案
   { url: 'manifest.json', revision: '20250702-01' }, // PWA 設定檔
-  { url: 'trip-data.json', revision: '20250703-02' }, // 核心行程資料
+  { url: 'trip-data.json', revision: '20250703-03' }, // 核心行程資料
   // --- 快取所有應用程式圖示，確保離線時圖示能正常顯示 ---
   { url: 'apple-touch-icon.png', revision: null },
   { url: 'favicon.ico', revision: null },
