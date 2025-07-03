@@ -5,16 +5,24 @@ importScripts('https://storage.googleapis.com/workbox-cdn/releases/6.5.4/workbox
 workbox.core.skipWaiting();
 workbox.core.clientsClaim();
 
-// 預先快取核心靜態資源 (Precaching)
+// --- 增強離線功能：定義所有App Shell核心資源 ---
+// 這些是確保應用程式基本外觀與功能可以離線運作的檔案。
+const APP_SHELL_ASSETS = [
+  { url: '/index.html', revision: '20250703-01' }, // HTML主檔案
+  { url: '/manifest.json', revision: '20250702-01' }, // PWA 設定檔
+  { url: '/trip-data.json', revision: '20250702-02' }, // 核心行程資料
+  // --- 新增：快取所有應用程式圖示，確保離線時圖示能正常顯示 ---
+  { url: '/apple-touch-icon.png', revision: null },
+  { url: '/favicon.ico', revision: null },
+  { url: '/favicon.svg', revision: null },
+  { url: '/favicon-96x96.png', revision: null },
+  { url: '/web-app-manifest-192x192.png', revision: null },
+  { url: '/web-app-manifest-512x512.png', revision: null },
+];
+
+// 預先快取所有定義好的核心資源 (Precaching)
 // 這些檔案會在 Service Worker 安裝時就被下載並快取起來
-workbox.precaching.precacheAndRoute([
-  { url: '/index.html', revision: '20250702-02' }, // 每次更新 index.html 時，請修改 revision
-  { url: '/manifest.json', revision: '20250702-01' },
-  { url: '/trip-data.json', revision: '20250702-02' }, // 新增：預先快取 trip-data.json，請隨資料更新此 revision
-  // 您可以將 CSS 和 JS 檔案存在本地，然後在這裡加入快取
-  // { url: '/style.css', revision: 'xxxx' },
-  // { url: '/main.js', revision: 'xxxx' },
-]);
+workbox.precaching.precacheAndRoute(APP_SHELL_ASSETS);
 
 // --------------------------------------------------
 // 運行時快取策略 (Runtime Caching Strategies)
