@@ -8,7 +8,7 @@ workbox.core.clientsClaim();
 // 預先快取核心靜態資源 (Precaching)
 // 這些檔案會在 Service Worker 安裝時就被下載並快取起來
 workbox.precaching.precacheAndRoute([
-  { url: '/index.html', revision: '20250702-01' }, // 每次更新 index.html 時，請修改 revision
+  { url: '/index.html', revision: '20250702-02' }, // 每次更新 index.html 時，請修改 revision
   { url: '/manifest.json', revision: '20250702-01' },
   { url: '/trip-data.json', revision: '20250702-02' }, // 新增：預先快取 trip-data.json，請隨資料更新此 revision
   // 您可以將 CSS 和 JS 檔案存在本地，然後在這裡加入快取
