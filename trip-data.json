@@ -3,7 +3,7 @@
     "totalDays": 13,
     "tripStartDate": "2025-07-02",
     "tripEndDate": "2025-07-16",
-    "dataVersion": "20250703-02"
+    "dataVersion": "20250703-03"
   },
   "timePhases": [
     {
@@ -14,30 +14,30 @@
     },
     {
       "startUTC": "2025-07-02T21:00:00Z",
-      "endUTC": "2025-07-06T17:00:00Z",
+      "endUTC": "2025-07-06T09:20:00Z",
       "timezone": "America/Montreal",
       "label": "蒙特婁 / 魁北克"
     },
     {
-      "startUTC": "2025-07-06T17:00:00Z",
-      "endUTC": "2025-07-06T18:30:00Z",
+      "startUTC": "2025-07-06T09:20:00Z",
+      "endUTC": "2025-07-06T10:58:00Z",
       "type": "flight",
       "label": "飛行中 (YQB → YYZ)"
     },
     {
-      "startUTC": "2025-07-06T18:30:00Z",
-      "endUTC": "2025-07-08T19:00:00Z",
+      "startUTC": "2025-07-06T10:58:00Z",
+      "endUTC": "2025-07-08T22:35:00Z",
       "timezone": "America/Toronto",
       "label": "尼加拉瀑布"
     },
     {
-      "startUTC": "2025-07-08T19:00:00Z",
-      "endUTC": "2025-07-08T21:00:00Z",
+      "startUTC": "2025-07-08T22:35:00Z",
+      "endUTC": "2025-07-09T00:29:00Z",
       "type": "flight",
       "label": "飛行中 (YYZ → ORD)"
     },
     {
-      "startUTC": "2025-07-08T21:00:00Z",
+      "startUTC": "2025-07-09T00:29:00Z",
       "endUTC": "2025-07-14T06:30:00Z",
       "timezone": "America/Chicago",
       "label": "芝加哥"
@@ -70,14 +70,15 @@
       "date": "2025-07-06",
       "type": "航班",
       "details": [
-        { "flightCode": "加航 AC7959", "departure": { "airport": "魁北克 (YQB)", "time": "2025-07-06T17:00:00Z", "tz": "America/Toronto" }, "arrival": { "airport": "多倫多 (YYZ)", "time": "2025-07-06T18:30:00Z", "tz": "America/Toronto" } }
+        { "flightCode": "加航", "departure": { "airport": "魁北克 (YQB)", "time": "2025-07-06T09:20:00Z", "tz": "America/Toronto" }, "arrival": { "airport": "多倫多 (YYZ)", "time": "2025-07-06T10:58:00Z", "tz": "America/Toronto" } }
       ]
     },
+    { "date": "2025-07-06", "type": "巴士/包車", "details": "多倫多市區 → 尼加拉瀑布" },
     {
       "date": "2025-07-08",
       "type": "航班",
       "details": [
-        { "flightCode": "加航 AC515", "departure": { "airport": "多倫多 (YYZ)", "time": "2025-07-08T19:00:00Z", "tz": "America/Toronto" }, "arrival": { "airport": "芝加哥 (ORD)", "time": "2025-07-08T20:00:00Z", "tz": "America/Chicago" } }
+        { "flightCode": "加航", "departure": { "airport": "多倫多 (YYZ)", "time": "2025-07-08T22:35:00Z", "tz": "America/Toronto" }, "arrival": { "airport": "芝加哥 (ORD)", "time": "2025-07-09T00:29:00Z", "tz": "America/Chicago" } }
       ]
     },
    {
@@ -87,7 +88,7 @@
         { 
           "flightCode": "日航 JL009", 
           "departure": { "airport": "芝加哥 (ORD)", "time": "2025-07-14T06:30:00Z", "tz": "America/Chicago" }, 
-          "arrival": { "airport": "東京羽田 (HND)", "time": "2025-07-14T19:20:00Z", "tz": "Asia/Tokyo" } 
+          "arrival": { "airport": "東京羽田 (HND)", "time": "2025-07-15T09:20:00Z", "tz": "Asia/Tokyo" } 
         }
       ]
     },
@@ -97,8 +98,8 @@
       "details": [
         { 
           "flightCode": "日航 JL097", 
-          "departure": { "airport": "東京羽田 (HND)", "time": "2025-07-14T23:55:00Z", "tz": "Asia/Tokyo" }, 
-          "arrival": { "airport": "台北松山 (TSA)", "time": "2025-07-15T03:35:00Z", "tz": "Asia/Taipei" } 
+          "departure": { "airport": "東京羽田 (HND)", "time": "2025-07-15T12:55:00Z", "tz": "Asia/Tokyo" }, 
+          "arrival": { "airport": "台北松山 (TSA)", "time": "2025-07-15T15:35:00Z", "tz": "Asia/Taipei" } 
         }
       ]
     },
@@ -175,7 +176,7 @@
           { "name": "經典菜色＋瀑布景", "desc": "Queen Victoria Place Restaurant 結合美食與美景。", "places": [{ "name": "Queen Victoria Place Restaurant", "link": "https://maps.apple.com/?q=Queen+Victoria+Place+Restaurant" }] },
           { "name": "創意漢堡", "desc": "The Works Gourmet Burger Bistro 提供多樣化的漢堡選擇。", "places": [{ "name": "The Works Gourmet Burger Bistro", "link": "https://maps.apple.com/?q=The+Works+Gourmet+Burger+Bistro+Niagara" }] }
         ]},
-        { "name": "� 甜點／冰品", "items": [
+        { "name": "🍦 甜點／冰品", "items": [
           { "name": "楓糖炸麵餅", "desc": "BeaverTails 是加拿大必嚐的國民甜點。", "places": [{ "name": "BeaverTails", "link": "https://maps.apple.com/?q=BeaverTails+Niagara+Falls" }] }
         ]}
       ]
@@ -228,7 +229,7 @@
       "activities": [
         { "title": "✈️ 航班資訊與抵達安排", "items": ["<strong>航班 BR198：</strong>台北松山(TSA) 09:00 起飛 → 東京成田(NRT) 13:25 抵達。", "<strong>航班 AC6：</strong>東京成田(NRT) 17:35 起飛 → 蒙特婁(YUL) 17:00（同日）抵達。", "※ 因時差關係，會是“時光倒流”的感覺，但實際飛行時間約 12 小時。"] },
         { "title": "🛂 抵達蒙特婁機場（YUL）", "items": ["<strong>預計通關 + 行李提領時間：</strong>約 60–90 分鐘。", "<strong>建議完成入境後先購買：</strong>📱 SIM 卡（推薦：Bell / Fido 櫃台）、🚇 STM 交通票券（單程票 or OPUS 3日卡）。"] },
-        { "title": "🚕 前往市區飯店", "items": ["<strong>747 Express Bus (24小時營運)：</strong>費用 CA$11，行程約 45–60 分鐘，可直接用信用卡刷進站。", "<strong>Uber／Taxi：</strong>約 CA$45–55，車程約 30–40 分鐘。", "<strong>飯店建議地點：</strong><a href='https://maps.apple.com/?q=Vieux-Montréal' target='_blank' class='hover:underline'>Vieux-Montréal（舊城區）</a>或 <a href='https://maps.apple.com/?q=Berri-UQAM' target='_blank' class='hover:underline'>Berri-UQAM／Quartier Latin</a>。"] },
+        { "title": "🚕 前往市區飯店", "items": ["<strong>747 Express Bus (24小時營運)：</strong>費用 CA$11，行程約 45–60 分鐘，可直接用信用卡刷進站。", "<strong>Uber／Taxi：</strong>約 CA$45–55，車程約 30–40 分鐘。"] },
         { "title": "🌇 19:00–21:00 飯店安頓＋簡單夜間散步", "items": ["<strong>夕陽夜景路線：</strong>沿<a href='https://maps.apple.com/?q=Old+Port+of+Montreal' target='_blank' class='hover:underline'>舊港</a>慢行至 <a href='https://maps.apple.com/?q=La+Grande+Roue+de+Montréal' target='_blank' class='hover:underline'>La Grande Roue 摩天輪區</a>，看聖勞倫斯河夜景。", "<strong>輕食建議：</strong><a href='https://maps.apple.com/?q=Olive+et+Gourmando' target='_blank' class='hover:underline'>Olive et Gourmando</a> 或 <a href='https://maps.apple.com/?q=Maison+Christian+Faure' target='_blank' class='hover:underline'>Maison Christian Faure</a>（甜點塔派）。"] }
       ],
       "reminder": { "title": "🌙 睡前提醒", "items": ["🧴 建議泡澡放鬆，避免時差影響過大。", "🕓 盡量調整作息至當地時間，避免太早入睡。", "📦 可順便打開行李，準備第二天城市探索用物（行動網路、地鐵卡、備用雨具）。"] }
@@ -252,7 +253,7 @@
         { "title": "☀️ 08:30 – 12:00｜舊城早晨巡禮", "items": ["<strong>🏛️ <a href='https://maps.apple.com/?q=Notre-Dame+Basilica+of+Montreal' target='_blank' class='hover:underline'>諾特丹聖母大教堂</a>：</strong>蒙特婁最具代表性的哥德式教堂。若有英文導覽團（$15 CAD左右）可預約參加。建議停留 40–60 分鐘。", "<strong>🏙️ <a href='https://maps.apple.com/?q=Place+d'Armes,Montreal' target='_blank' class='hover:underline'>Place d’Armes 廣場</a> → <a href='https://maps.apple.com/?q=Rue+Saint-Paul,Montreal' target='_blank' class='hover:underline'>Rue Saint-Paul 步行街</a>：</strong>充滿法式殖民建築與街頭藝人，適合拍照、買紀念品。"] },
         { "title": "🧺 12:00 – 13:30｜午餐 + 市集小吃", "items": ["<strong><a href='https://maps.apple.com/?q=Marché+Bonsecours,Montreal' target='_blank' class='hover:underline'>Marché Bonsecours（邦斯古爾市場）</a>：</strong>藝品、手工皂、地方食品伴手禮選擇豐富。", "<strong>或前往：</strong><a href='https://maps.apple.com/?q=Modavie,Montreal' target='_blank' class='hover:underline'>Modavie Bistro</a>（音樂法餐）或 <a href='https://maps.apple.com/?q=Tommy+Café,Montreal' target='_blank' class='hover:underline'>Tommy Café</a>（人氣咖啡店）。"] },
         { "title": "🛍️ 13:30 – 15:30｜舊港區港邊散步 + 摩天輪體驗", "items": ["沿 <a href='https://maps.apple.com/?q=Old+Port+of+Montreal' target='_blank' class='hover:underline'>Vieux-Port de Montréal</a> 河岸漫步，若天氣良好可搭乘 🎡 <a href='https://maps.apple.com/?q=La+Grande+Roue+de+Montréal' target='_blank' class='hover:underline'>La Grande Roue 蒙特婁摩天輪</a>（$25 CAD 左右）。"] },
-        { "title": "🧳 15:30 – 17:00｜飯店小憩・整理行李", "items": ["回飯店稍作休息，或前往超市（如 IGA、Metro）補給。", "整理翌日轉往魁北克的行李（建議提前預訂 VIA Rail 火車）。"] }
+        { "title": "🧳 15:30 – 17:00｜飯店小憩", "items": ["回飯店稍作休息，或前往超市（如 IGA、Metro）補給。"] }
       ],
       "infoBox": { "title": "⭐ 蒙特婁實用資訊", "items": ["💳 地鐵使用 STM 系統，一日票或 OPUS 卡皆可。", "🗣 雖以法語為主，但觀光區英文通用，用「Bonjour / Merci」開場更有禮。", "👟 鞋子請選擇適合步行的，舊城區石板路段多。", "🌡️ 七月天氣約 22–27°C，日夜溫差稍大，建議攜帶薄外套。"] }
     },
@@ -303,15 +304,16 @@
       "dayGroup": 5,
       "cityTarget": "niagara-section",
       "weatherCity": "niagara",
-      "title": "魁北克市 → 尼加拉瀑布｜悠閒出發 + 抵達觀景",
+      "title": "魁北克 → 多倫多市區 → 尼加拉瀑布",
       "subTitle": "Day 5｜7月6日（週日）",
       "isTravelDay": true,
-      "tags": ["#國內航班", "#機場轉乘", "#瀑布夜景"],
+      "tags": ["#國內航班", "#多倫多快閃", "#聖羅倫斯市場", "#瀑布夜景"],
       "activities": [
-        { "title": "☕ 08:30 – 10:30｜早餐與最後散步", "items": ["<strong>推薦早餐地點：</strong><a href='https://maps.apple.com/?q=Le+Cochon+Dingue,Quebec' target='_blank' class='hover:underline'>Le Cochon Dingue</a> 或 <a href='https://maps.apple.com/?q=La+Maison+Smith,Quebec' target='_blank' class='hover:underline'>La Maison Smith</a>。", "可選擇短距離散步（如 Place Royale 再訪、沿芳堤娜城堡拍照收尾）。"] },
-        { "title": "✈️ 11:00 – 14:30｜退房 → 前往機場 → 搭乘中午航班", "items": ["建議搭乘航班如 Air Canada AC7959（13:00 YQB → 14:30 YYZ）或類似班次。", "從舊城至機場約 20–30 分鐘計程車程。"] },
-        { "title": "🚌 15:30 – 17:30｜轉乘至尼加拉瀑布", "items": ["<strong>包車：</strong>約 1.5 小時直達飯店。", "<strong>大眾運輸：</strong>YYZ 機場搭 UP Express 至 Union Station，轉 GO Transit 火車/巴士至 Niagara Falls (總程約 2.5–3 小時)。"] },
-        { "title": "🌇 18:30 – 20:30｜瀑布前散步 + 景觀晚餐", "items": ["入住瀑布景觀飯店後，可前往 <a href='https://maps.apple.com/?q=Table+Rock+Welcome+Centre' target='_blank'>Table Rock Centre</a>，觀察黃昏瀑布光影。", "<strong>晚餐建議：</strong><a href='https://maps.apple.com/?q=Skylon+Tower,Niagara+Falls' target='_blank' class='hover:underline'>Skylon Tower 旋轉餐廳</a> 或 <a href='https://maps.apple.com/?q=The+Keg+Steakhouse,Niagara+Falls' target='_blank' class='hover:underline'>The Keg Steakhouse</a>（靠窗位）。"] }
+        { "title": "✈️ 03:00 – 07:00｜清晨出發與飛行", "items": ["清晨退房，搭乘計程車前往魁北克機場 (YQB)。", "搭乘 05:20 起飛的航班，預計 06:58 抵達多倫多 (YYZ)。"] },
+        { "title": "🚆 07:30 – 09:00｜前往多倫多市區與行李寄放", "items": ["搭乘 <strong>UP Express</strong> 機場快線 (約 25 分鐘) 前往市中心的 <a href='https://maps.apple.com/?q=Union+Station,Toronto' target='_blank'>Union Station</a>。", "可將大件行李寄放在車站附近的行李寄存服務 (如 BagsAway)。"] },
+        { "title": "🏙️ 09:00 – 14:30｜多倫多市區半日快閃", "items": ["<strong>路線建議：</strong><a href='https://maps.apple.com/?q=St.+Lawrence+Market' target='_blank'>聖羅倫斯市場</a> (體驗在地市集氛圍、享用早午餐) → 步行至 <a href='https://maps.apple.com/?q=Distillery+District,Toronto' target='_blank'>古釀酒廠區</a> (紅磚維多利亞式建築群，充滿藝術小店與咖啡館)。", "<strong>午餐建議：</strong>在聖羅倫斯市場品嚐 Peameal Bacon on a Bun，或在古釀酒廠區找間餐廳用餐。"] },
+        { "title": "🚌 15:00 – 16:30｜前往尼加拉瀑布", "items": ["返回 Union Station 取回行李，搭乘預約好的巴士 (如 Megabus) 或包車前往尼加拉瀑布 (車程約 1.5 - 2 小時)。"] },
+        { "title": "🌃 17:00 – 20:30｜抵達瀑布區 + 景觀晚餐", "items": ["抵達飯店辦理入住後，稍作休息。", "晚餐可選擇 <a href='https://maps.apple.com/?q=The+Keg+Steakhouse,Niagara+Falls' target='_blank' class='hover:underline'>The Keg Steakhouse</a> 等瀑布景觀餐廳，欣賞七彩燈光下的瀑布。"] }
       ]
     },
     {
@@ -330,10 +332,10 @@
       },
       "tags": ["#經典體驗", "#自然奇觀", "#夜間煙火"],
       "activities": [
-        { "title": "🌊 09:00 – 12:00｜經典瀑布三合一體驗", "items": ["<strong><a href='https://www.niagaraparks.com/visit/attractions/niagara-city-cruises/' target='_blank' class='hover:underline'>Voyage to the Falls 船票體驗</a>：</strong>近距離感受瀑布水勢，建議線上預約上午場。", "<strong><a href='https://www.niagaraparks.com/visit/attractions/journey-behind-the-falls/' target='_blank' class='hover:underline'>Journey Behind the Falls</a>：</strong>進入瀑布後方岩壁隧道觀賞水柱傾瀉。", "<strong><a href='https://www.niagaraparks.com/visit/attractions/niagaras-fury/' target='_blank' class='hover:underline'>Niagara’s Fury 4D 劇場</a>（備選）：</strong>觀看瀑布形成歷史的沉浸式體驗。"] },
+        { "title": "🌊 09:00 – 12:00｜經典瀑布體驗", "items": ["<strong><a href='https://www.niagaraparks.com/visit/attractions/niagara-city-cruises/' target='_blank' class='hover:underline'>Voyage to the Falls 船票體驗</a>：</strong>近距離感受瀑布水勢，建議線上預約上午場。", "<strong><a href='https://www.niagaraparks.com/visit/attractions/journey-behind-the-falls/' target='_blank' class='hover:underline'>Journey Behind the Falls</a>：</strong>進入瀑布後方岩壁隧道觀賞水柱傾瀉。"] },
         { "title": "🍽️ 12:30 – 14:00｜午餐建議", "items": ["<a href='https://maps.apple.com/?q=Queen+Victoria+Place+Restaurant,Niagara+Falls' target='_blank' class='hover:underline'>Queen Victoria Place Restaurant</a>（景觀+當地食材）或 Table Rock Centre 美食廣場。"] },
-        { "title": "🦋 14:00 – 17:00｜自然景點探索", "items": ["搭乘 <strong>WEGO 巴士</strong>（建議購買 Niagara Pass）前往：<a href='https://www.niagaraparks.com/visit/attractions/butterfly-conservatory/' target='_blank' class='hover:underline'>Butterfly Conservatory</a>（蝴蝶園）或 <a href='https://www.niagaraparks.com/visit/attractions/white-water-walk/' target='_blank' class='hover:underline'>White Water Walk</a>（激流步道）。"] },
-        { "title": "🍷 18:00 – 21:30｜晚餐 + 夜景 + 煙火", "items": ["<strong>夜間活動：</strong>約 21:00 起瀑布打燈，21:45～22:00 季節性煙火秀（如天氣良好）。", "建議提早至 <a href='https://maps.apple.com/?q=Table+Rock+Welcome+Centre,Niagara+Falls' target='_blank'>Table Rock</a> 或 <a href='https://maps.apple.com/?q=Queen+Victoria+Park,Niagara+Falls' target='_blank'>Queen Victoria Park</a> 卡位拍照。"] }
+        { "title": "🦋 14:00 – 17:00｜自然景點探索", "items": ["搭乘 <strong>WEGO 巴士</strong> 前往 <a href='https://www.niagaraparks.com/visit/attractions/butterfly-conservatory/' target='_blank' class='hover:underline'>Butterfly Conservatory</a> (蝴蝶園) 或 <a href='https://www.niagaraparks.com/visit/attractions/white-water-walk/' target='_blank' class='hover:underline'>White Water Walk</a> (激流步道)。"] },
+        { "title": "� 18:00 – 21:30｜晚餐 + 夜景 + 煙火", "items": ["<strong>夜間活動：</strong>約 21:00 起瀑布打燈，21:45～22:00 季節性煙火秀（如天氣良好）。", "建議提早至 <a href='https://maps.apple.com/?q=Table+Rock+Welcome+Centre,Niagara+Falls' target='_blank'>Table Rock</a> 或 <a href='https://maps.apple.com/?q=Queen+Victoria+Park,Niagara+Falls' target='_blank'>Queen Victoria Park</a> 卡位拍照。"] }
       ],
       "infoBox": { "title": "⭐ 瀑布實用資訊", "items": ["🧥 參加瀑布船與後方通道活動務必攜帶雨衣（現場也會提供）。", "🎫 建議提前線上購買 <a href='https://www.niagaraparks.com/visit/attractions/adventure-pass-classic' target='_blank' class='hover:underline'>Niagara Pass</a>（含票+WEGO車）避免現場排隊。", "📷 相機建議使用防水袋，手機請準備擦拭布。", "☀️ 七月氣溫約 25–29°C，日曬強烈建議塗防曬。"] }
     },
@@ -343,16 +345,17 @@
       "dayGroup": 7,
       "cityTarget": "chicago-section",
       "weatherCity": "chicago",
-      "title": "尼加拉瀑布 → 芝加哥｜輕鬆轉移 + 河畔夜色",
+      "title": "尼加拉瀑布 → 芝加哥｜跨國飛行",
       "subTitle": "Day 7｜7月8日（二）",
       "isTravelDay": true,
       "tags": ["#跨國飛行", "#入境美國", "#芝加哥初印象"],
       "activities": [
-        { "title": "🧳 08:30 – 10:00｜悠閒早餐 + 退房整備", "items": ["建議睡到自然醒，於飯店內或瀑布區附近享用早餐。", "約 10:00 前退房、整裝前往多倫多機場。"] },
-        { "title": "🚐 10:00 – 12:00｜前往多倫多皮爾遜機場（YYZ）", "items": ["<strong>（時間已提早）</strong>建議包車直達機場，預留充足時間應對路況與美國海關預先清關。"] },
-        { "title": "🌇 18:30 – 21:00｜芝加哥河畔散步 + Deep Dish 晚餐", "items": ["入住飯店後，可沿 <a href='https://maps.apple.com/?q=Chicago+Riverwalk' target='_blank' class='hover:underline'>Chicago Riverwalk</a> 散步至 <a href='https://maps.apple.com/?q=DuSable+Bridge,Chicago' target='_blank' class='hover:underline'>DuSable Bridge</a>。", "<strong>晚餐建議：</strong><a href='https://maps.apple.com/?q=Lou+Malnati's,Chicago' target='_blank' class='hover:underline'>Lou Malnati’s</a> 或 <a href='https://maps.apple.com/?q=Giordano's,Chicago' target='_blank' class='hover:underline'>Giordano’s</a>（芝加哥風味深盤披薩）。"] }
+        { "title": "☕ 09:00 – 12:00｜悠閒早午餐與最後巡禮", "items": ["在尼加拉瀑布區享用悠閒的早午餐。", "可以再次到瀑布邊緣步道散步，或購買紀念品。"] },
+        { "title": "🚐 13:00 – 16:00｜退房並前往多倫多機場 (YYZ)", "items": ["中午退房後，搭乘預約包車前往多倫多機場。", "預留充足時間辦理登機與美國海關預先清關手續。"] },
+        { "title": "✈️ 18:35 – 19:29｜搭機飛往芝加哥 (ORD)", "items": ["搭乘傍晚航班前往芝加哥。", "抵達後搭乘地鐵 Blue Line 或計程車前往市區飯店辦理入住。"] },
+        { "title": "🌃 21:30 onwards｜飯店安頓與宵夜", "items": ["安頓後，若體力許可，可至飯店附近便利商店購買宵夜或飲料。"] }
       ],
-      "reminder": { "title": "🛏️ 睡前提醒", "items": ["明日為建築巡禮與湖濱遊覽日，可自由決定早或晚出發。", "若體力充沛，夜間可短暫前往 <a href='https://maps.apple.com/?q=Millennium+Park,Chicago' target='_blank'>Millennium Park</a> 看夜色中的 The Bean。"] }
+      "reminder": { "title": "🛏️ 睡前提醒", "items": ["明日為建築巡禮與湖濱遊覽日，可自由決定早或晚出發。"] }
     },
     {
       "day": 8,
@@ -416,7 +419,7 @@
       "activities": [
         { "title": "☀️ 09:00 – 12:00｜自由行程：購物 or 市區散步", "items": ["<strong>購物：</strong>前往 <a href='https://maps.apple.com/?q=The+Magnificent+Mile,Chicago' target='_blank' class='hover:underline'>Michigan Avenue (Magnificent Mile)</a>，<a href='https://maps.apple.com/?q=Nordstrom,chicago' target='_blank'>Nordstrom</a>, <a href='https://maps.apple.com/?q=Macy's,chicago' target='_blank'>Macy’s</a>, <a href='https://maps.apple.com/?q=Uniqlo,chicago' target='_blank'>Uniqlo</a> 等品牌集中。", "<strong>散步：</strong>選擇放鬆慢行 <a href='https://maps.apple.com/?q=Millennium+Park,Chicago' target='_blank' class='hover:underline'>Millennium Park</a> → <a href='https://maps.apple.com/?q=Maggie+Daley+Park,Chicago' target='_blank' class='hover:underline'>Maggie Daley Park</a> 綠地。", "<strong>藝術：</strong>參觀<a href='https://mcachicago.org/' target='_blank' class='hover:underline'>芝加哥當代藝術館（MCA）</a>，小而精緻。"] },
         { "title": "🍽️ 12:30 – 14:00｜午餐建議", "items": ["<a href='https://maps.apple.com/?q=Beatrix,Chicago' target='_blank' class='hover:underline'>Beatrix</a>（輕食系健康料理）或 <a href='https://maps.apple.com/?q=The+Purple+Pig,Chicago' target='_blank' class='hover:underline'>The Purple Pig</a>（人氣地中海小酒館）。"] },
-        { "title": "🐟 14:30 – 17:00｜Shedd Aquarium（水族館）選項", "items": ["前往<a href='https.apple.com/?q=Shedd+Aquarium,Chicago' target='_blank' class='hover:underline'>Shedd Aquarium</a>，特展：白鯨、海豚、企鵝、亞馬遜熱帶館區。", "若不參觀水族館，也可回飯店休息或繼續購物。"] },
+        { "title": "🐟 14:30 – 17:00｜Shedd Aquarium（水族館）選項", "items": ["前往<a href='https://maps.apple.com/?q=Shedd+Aquarium,Chicago' target='_blank' class='hover:underline'>Shedd Aquarium</a>，特展：白鯨、海豚、企鵝、亞馬遜熱帶館區。", "若不參觀水族館，也可回飯店休息或繼續購物。"] },
         { "title": "🍽️ 18:00 – 20:30｜最後晚餐收尾", "items": ["<strong>推薦：</strong><a href='https://maps.apple.com/?q=The+Dearborn,Chicago' target='_blank' class='hover:underline'>The Dearborn</a>（現代美式餐酒館）或 <a href='https://maps.apple.com/?q=Cindy's+Rooftop,Chicago' target='_blank' class='hover:underline'>Cindy’s Rooftop</a>（觀景餐廳）。"] }
       ]
     },
