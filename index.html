@@ -1072,8 +1072,8 @@
 
         document.addEventListener('DOMContentLoaded', async () => {
             try {
-                // --- FIX: Use absolute path for robustness ---
-                const response = await fetch('/trip-data.json');
+                // --- FIX: Use relative path for robustness ---
+                const response = await fetch('trip-data.json');
                 if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
                 const data = await response.json();
                 
