@@ -12,11 +12,11 @@
     <meta name="theme-color" content="#1D3557">
     <link rel="manifest" href="manifest.json">
     
-    <!-- Favicon Links -->
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
-    <link rel="icon" href="/favicon.ico">
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <!-- Favicon Links (使用相對路徑) -->
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
+    <link rel="icon" href="favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
 
 
     <script src="https://cdn.tailwindcss.com"></script>
@@ -494,7 +494,7 @@
     <div id="mobile-menu-panel" class="hidden">
         <div class="p-4 space-y-2">
              <a href="#status-dashboard-section" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">📋 行程要覽</a>
-             <a href="#tip-calculator-section" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">🧮 小費計算機</a>
+             <a href="#tip-calculator-section" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">� 小費計算機</a>
              <a href="#links-dashboard" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">🔗 常用連結</a>
              <!-- START: 新增的行動版重新整理按鈕 -->
              <button id="mobile-refresh-btn" class="w-full text-left mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">🔄 下載最新行程</button>
@@ -714,7 +714,8 @@
         // --- Service Worker 註冊 ---
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/sw.js')
+                // 使用相對路徑以確保在子目錄下也能正常運作
+                navigator.serviceWorker.register('sw.js')
                     .then(registration => {
                         console.log('ServiceWorker 註冊成功，範圍：', registration.scope);
                         registration.addEventListener('updatefound', () => {
@@ -1111,40 +1112,41 @@
 
         let currentDisplayDate;
 
-        // --- START: 新增的更新檢查函數 ---
+        // --- START: 更新後的更新檢查函數 ---
         function checkForUpdates() {
-            if ('serviceWorker' in navigator) {
-                navigator.serviceWorker.getRegistration().then(reg => {
-                    if (!reg) {
-                        console.log('沒有 Service Worker 註冊。');
-                        showToast('目前無法檢查更新。');
-                        return;
-                    }
-
-                    showToast('正在檢查最新行程...');
-
-                    reg.update().then(() => {
-                        if (reg.installing) {
-                            console.log('Service Worker 正在安裝新版本。');
-                        } else if (reg.waiting) {
-                            console.log('有新的 Service Worker 正在等待啟用。');
-                            const updateBar = document.getElementById('update-notification');
-                            if (updateBar) updateBar.style.display = 'block';
-                            showToast('發現新行程！點擊「立即更新」以載入。');
-                        } else {
-                            console.log('目前已是最新版本。');
-                            showToast('您的行程已是最新版本！');
-                        }
-                    }).catch(error => {
-                        console.error('Service Worker 更新失敗:', error);
-                        showToast('檢查更新時發生錯誤。');
-                    });
-                });
-            } else {
-                showToast('您的瀏覽器不支援此功能。');
+            if (!('serviceWorker' in navigator)) {
+                showToast('您的瀏覽器不支援離線功能。');
+                return;
             }
+
+            // 使用 navigator.serviceWorker.ready 確保 Service Worker 已啟用
+            navigator.serviceWorker.ready.then(registration => {
+                showToast('正在檢查最新行程...');
+
+                // 直接在已啟用的 registration 上呼叫 update
+                registration.update().then(() => {
+                    if (registration.installing) {
+                        console.log('Service Worker 正在安裝新版本。');
+                    } else if (registration.waiting) {
+                        console.log('有新的 Service Worker 正在等待啟用。');
+                        const updateBar = document.getElementById('update-notification');
+                        if (updateBar) updateBar.style.display = 'block';
+                        showToast('發現新行程！點擊「立即更新」以載入。');
+                    } else {
+                        console.log('目前已是最新版本。');
+                        showToast('您的行程已是最新版本！');
+                    }
+                }).catch(error => {
+                    console.error('Service Worker 更新檢查失敗:', error);
+                    showToast('檢查更新失敗，請確認網路連線。');
+                });
+            }).catch(error => {
+                // 如果 .ready 失敗，代表 Service Worker 尚未註冊或啟用失敗
+                console.error('Service Worker 未準備就緒:', error);
+                showToast('離線功能尚未啟用，請稍後再試或重新整理頁面。');
+            });
         }
-        // --- END: 新增的更新檢查函數 ---
+        // --- END: 更新後的更新檢查函數 ---
 
         document.addEventListener('DOMContentLoaded', async () => {
             try {
