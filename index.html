@@ -723,7 +723,14 @@
         }
         
         function scrollToToday(isAuto = false) {
-            const todayString = new Date().toISOString().split('T')[0];
+            // --- FIX START: Use local date instead of UTC ---
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            const todayString = `${year}-${month}-${day}`;
+            // --- FIX END ---
+            
             const dashboardSection = document.getElementById('status-dashboard-section');
 
             if (dashboardSection) {
@@ -1359,7 +1366,14 @@
                 if (!mainContainer || !showPastToggle || !showPastLabel) return;
                 
                 showPastToggle.checked = false;
-                const todayString = new Date().toISOString().split('T')[0];
+                
+                // --- FIX START: Use local date instead of UTC ---
+                const now = new Date();
+                const year = now.getFullYear();
+                const month = String(now.getMonth() + 1).padStart(2, '0');
+                const day = String(now.getDate()).padStart(2, '0');
+                const todayString = `${year}-${month}-${day}`;
+                // --- FIX END ---
                 
                 if (todayString < tripInfo.tripStartDate) {
                     showPastToggle.disabled = true;
@@ -1463,7 +1477,14 @@
             populateDayCardWeather(allWeatherData);
             initializeTripView();
 
-            const todayString = new Date().toISOString().split('T')[0];
+            // --- FIX START: Use local date instead of UTC ---
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            const todayString = `${year}-${month}-${day}`;
+            // --- FIX END ---
+
             const lastAvailableDate = itinerary[itinerary.length - 1].date;
 
             let initialDateToShow = tripInfo.tripStartDate;
