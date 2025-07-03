@@ -3,7 +3,7 @@
     "totalDays": 13,
     "tripStartDate": "2025-07-02",
     "tripEndDate": "2025-07-16",
-    "dataVersion": "20250702-02"
+    "dataVersion": "20250703-02"
   },
   "timePhases": [
     {
@@ -65,7 +65,7 @@
       ]
     },
     { "date": "2025-07-02", "type": "巴士", "details": "747 Express Bus" },
-    { "date": "2025-07-04", "type": "火車", "details": "VIA Rail (蒙特婁 → 魁北克市)" },
+    { "date": "2025-07-04", "type": "巴士", "details": "Orléans Express (蒙特婁 08:30 → 魁北克市 11:45)" },
     {
       "date": "2025-07-06",
       "type": "航班",
@@ -122,7 +122,6 @@
           { "name": "Poutine", "desc": "肉汁起司薯條的發源地，La Banquise 是名店。", "places": [{ "name": "La Banquise", "link": "https://maps.apple.com/?q=La+Banquise" }] }
         ]},
         { "name": "🥂 法式／歐陸料理", "items": [
-          { "name": "戶外花園法式餐", "desc": "Jardin Nelson 提供美好的戶外用餐體驗。", "places": [{ "name": "Jardin Nelson", "link": "https://maps.apple.com/?q=Jardin+Nelson" }] },
           { "name": "經典法式小酒館", "desc": "L’Express 是體驗道地法式小館氛圍的好去處。", "places": [{ "name": "L’Express", "link": "https://maps.apple.com/?q=L’Express+Montreal" }] },
           { "name": "爵士音樂＋法餐", "desc": "Modavie Bistro 結合現場爵士樂與美味法餐。", "places": [{ "name": "Modavie Bistro", "link": "https://maps.apple.com/?q=Modavie" }] }
         ]},
@@ -176,9 +175,8 @@
           { "name": "經典菜色＋瀑布景", "desc": "Queen Victoria Place Restaurant 結合美食與美景。", "places": [{ "name": "Queen Victoria Place Restaurant", "link": "https://maps.apple.com/?q=Queen+Victoria+Place+Restaurant" }] },
           { "name": "創意漢堡", "desc": "The Works Gourmet Burger Bistro 提供多樣化的漢堡選擇。", "places": [{ "name": "The Works Gourmet Burger Bistro", "link": "https://maps.apple.com/?q=The+Works+Gourmet+Burger+Bistro+Niagara" }] }
         ]},
-        { "name": "🍦 甜點／冰品", "items": [
-          { "name": "楓糖炸麵餅", "desc": "BeaverTails 是加拿大必嚐的國民甜點。", "places": [{ "name": "BeaverTails", "link": "https://maps.apple.com/?q=BeaverTails+Niagara+Falls" }] },
-          { "name": "浮誇系霜淇淋", "desc": "Sweet Jesus 以其創意十足的霜淇淋聞名。", "places": [{ "name": "Sweet Jesus", "link": "https://maps.apple.com/?q=Sweet+Jesus+Niagara+Falls" }] }
+        { "name": "� 甜點／冰品", "items": [
+          { "name": "楓糖炸麵餅", "desc": "BeaverTails 是加拿大必嚐的國民甜點。", "places": [{ "name": "BeaverTails", "link": "https://maps.apple.com/?q=BeaverTails+Niagara+Falls" }] }
         ]}
       ]
     },
@@ -211,7 +209,6 @@
           { "name": "地中海風味", "desc": "Ema 提供清新、健康的加州風格地中海料理。", "places": [{ "name": "Ema", "link": "https://maps.apple.com/?q=Ema" }] }
         ]},
         { "name": "🌆 景觀餐廳／湖濱夜景", "items": [
-          { "name": "海鮮＋湖景", "desc": "Riva Crabhouse @ Navy Pier 提供美味海鮮與絕佳湖景。", "places": [{ "name": "Riva Crabhouse @ Navy Pier", "link": "https://maps.apple.com/?q=Riva+Crabhouse" }] },
           { "name": "觀景＋雞尾酒", "desc": "360 Chicago 或 Skydeck 的高空酒吧是欣賞夜景的理想地點。", "places": [{ "name": "360 Chicago／Skydeck 餐廳", "link": "https://maps.apple.com/?q=360+CHICAGO" }] }
         ]}
       ]
@@ -265,13 +262,14 @@
       "dayGroup": 3,
       "cityTarget": "quebec-section",
       "weatherCity": "quebec",
-      "title": "蒙特婁 → 魁北克市｜VIA Rail 轉移・上城區初探",
+      "title": "蒙特婁 → 魁北克市｜巴士轉移・上城區初探",
       "subTitle": "Day 3｜7月4日（週五）",
       "isTravelDay": true,
-      "tags": ["#火車旅程", "#古城初探", "#世界遺產"],
+      "tags": ["#巴士旅程", "#古城初探", "#世界遺產"],
       "activities": [
-        { "title": " 12:00 – 13:30｜抵達魁北克市 → 入住飯店 → 午餐", "items": ["<strong>抵達站：</strong><a href='https://maps.apple.com/?q=Gare+du+Palais,Quebec' target='_blank' class='hover:underline'>Gare du Palais</a>，位於舊城區北側。", "<strong>午餐建議：</strong><a href='https://maps.apple.com/?q=Le+Chic+Shack,Quebec' target='_blank' class='hover:underline'>Le Chic Shack</a>（漢堡＋奶昔）或 <a href='https://maps.apple.com/?q=Buffet+de+l’Antiquaire,Quebec' target='_blank' class='hover:underline'>Buffet de l’Antiquaire</a>（魁北克家常菜）。"] },
-        { "title": " 14:00 – 17:30｜上城區初探路線", "items": ["<strong>步行路線：</strong><a href='https://maps.apple.com/?q=Hotel+Manoir+Victoria,Quebec' target='_blank' class='hover:underline'>Hotel Manoir Victoria</a> → <a href='https://maps.apple.com/?q=Dufferin+Terrace,Quebec' target='_blank' class='hover:underline'>杜費林露台</a> → <a href='https://maps.apple.com/?q=Porte+Saint-Louis,Quebec' target='_blank' class='hover:underline'>聖路易門/古城牆</a> → <a href='https://maps.apple.com/?q=Hôtel+du+Parlement,Quebec' target='_blank' class='hover:underline'>魁北克省議會</a>。"] },
+        { "title": "🚌 08:30 – 11:45｜搭乘巴士前往魁北克市", "items": ["搭乘 <strong>Orléans Express</strong> 從蒙特婁出發，預計中午前抵達魁北克市。", "抵達車站：<a href='https://maps.apple.com/?q=Gare+du+Palais,Quebec' target='_blank' class='hover:underline'>Gare du Palais</a>，位於舊城區北側。"] },
+        { "title": "🏨 12:00 – 13:30｜入住飯店 → 午餐", "items": ["抵達後先至飯店辦理入住或寄放行李。", "午餐建議：<a href='https://maps.apple.com/?q=Le+Chic+Shack,Quebec' target='_blank' class='hover:underline'>Le Chic Shack</a>（漢堡＋奶昔）或 <a href='https://maps.apple.com/?q=Buffet+de+l’Antiquaire,Quebec' target='_blank' class='hover:underline'>Buffet de l’Antiquaire</a>（魁北克家常菜）。"] },
+        { "title": "🚶‍♀️ 14:00 – 17:30｜上城區初探路線", "items": ["步行路線：<a href='https://maps.apple.com/?q=Hotel+Manoir+Victoria,Quebec' target='_blank' class='hover:underline'>Hotel Manoir Victoria</a> → <a href='https://maps.apple.com/?q=Dufferin+Terrace,Quebec' target='_blank' class='hover:underline'>杜費林露台</a> → <a href='https://maps.apple.com/?q=Porte+Saint-Louis,Quebec' target='_blank' class='hover:underline'>聖路易門/古城牆</a> → <a href='https://maps.apple.com/?q=Hôtel+du+Parlement,Quebec' target='_blank' class='hover:underline'>魁北克省議會</a>。"] },
         { "title": "🌃 18:00 – 20:30｜晚餐＋夜景散步", "items": ["<strong>餐廳建議：</strong><a href='https://maps.apple.com/?q=Aux+Anciens+Canadiens,Quebec' target='_blank' class='hover:underline'>Aux Anciens Canadiens</a> (17世紀老宅法餐)。", "飯後可再回到 Dufferin Terrace 拍攝夜景，芳堤娜城堡夜間打燈效果極佳。"] }
       ],
       "reminder": { "title": "🛏️ 睡前建議", "items": ["若隔天為重度步行日，建議今晚簡單伸展、早點休息。", "可於便利商店購買簡易點心或隔日早餐儲備。", "如有興趣參加翌日付費導覽 (如鬼怪夜遊、歷史導覽)，可今晚先預約。"] }
@@ -375,7 +373,7 @@
         { "title": "🛥️ 09:30 – 12:00｜芝加哥建築遊船 + 千禧公園", "items": ["<strong><a href='https://www.architecture.org/tours/chicago-architecture-foundation-center-river-cruise-aboard-chicago-s-first-lady/' target='_blank' class='hover:underline'>Chicago Architecture River Cruise</a>：</strong>建議預約 <a href='https://www.wendellaboats.com/' target='_blank'>Wendella</a> 或 <a href='https://www.cruisechicago.com/first-lady-cruises' target='_blank'>Chicago’s First Lady</a> 上午場。", "遊船後步行至 <a href='https://maps.apple.com/?q=Millennium+Park,Chicago' target='_blank' class='hover:underline'>Millennium Park</a> 拍攝 <a href='https://maps.apple.com/?q=Cloud+Gate,Chicago' target='_blank' class='hover:underline'>Cloud Gate (The Bean)</a>。"] },
         { "title": "🍽️ 12:30 – 14:00｜午餐建議", "items": ["<a href='https://maps.apple.com/?q=The+Purple+Pig,Chicago' target='_blank' class='hover:underline'>The Purple Pig</a>（地中海風味）或 <a href='https://maps.apple.com/?q=Beatrix,Chicago' target='_blank' class='hover:underline'>Beatrix</a>（人氣早午餐）。"] },
         { "title": "🎡 14:30 – 17:00｜海軍碼頭 Navy Pier + 湖畔活動", "items": ["登上 <a href='https://navypier.org/things-to-do/rides-attractions/centennial-wheel/' target='_blank' class='hover:underline'>Centennial Wheel 摩天輪</a>，俯瞰密西根湖與天際線。", "或前往<a href='https://mcachicago.org/' target='_blank' class='hover:underline'>當代藝術博物館（MCA）</a>。"] },
-        { "title": "🏙️ 18:00 – 21:00｜夜景體驗 + 高空酒吧或觀景塔", "items": ["<strong>選擇一：</strong><a href='https://360chicago.com/' target='_blank' class='hover:underline'>360 CHICAGO</a>（Hancock Tower），可選附酒吧門票。", "<strong>選擇二：</strong><a href='https://theskydeck.com/' target='_blank' class='hover:underline'>Skydeck Chicago</a>（Willis Tower），體驗懸空玻璃盒。", "<strong>晚餐：</strong><a href='https://www.signatureroom.com/' target='_blank' class='hover:underline'>The Signature Room</a>（Hancock Tower 95樓）或 <a href='https://maps.apple.com/?q=The+Gage,Chicago' target='_blank' class='hover:underline'>The Gage</a>。"] }
+        { "title": "🏙️ 18:00 – 21:00｜夜景體驗 + 高空酒吧或觀景塔", "items": ["<strong>選擇一：</strong><a href='https://360chicago.com/' target='_blank' class='hover:underline'>360 CHICAGO</a>（Hancock Tower），可選附酒吧門票。", "<strong>選擇二：</strong><a href='https://theskydeck.com/' target='_blank' class='hover:underline'>Skydeck Chicago</a>（Willis Tower），體驗懸空玻璃盒。", "<strong>晚餐：</strong><a href='https://maps.apple.com/?q=The+Gage,Chicago' target='_blank' class='hover:underline'>The Gage</a>。"] }
       ],
       "infoBox": { "title": "⭐ 芝加哥實用資訊", "items": ["🚇 地鐵系統 CTA 可使用 Ventra App 或現場購票。", "📶 網路不穩地點可使用 Starbucks / Target 等店內免費 Wi-Fi。", "💨 芝加哥有「風城」之稱，日夜溫差大且湖邊風強，務必攜帶防風外套。"] }
     },
