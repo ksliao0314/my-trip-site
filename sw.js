@@ -7,17 +7,18 @@ workbox.core.clientsClaim();
 
 // --- 增強離線功能：定義所有App Shell核心資源 ---
 // 這些是確保應用程式基本外觀與功能可以離線運作的檔案。
+// --- FIX: 使用相對路徑以增加彈性 ---
 const APP_SHELL_ASSETS = [
-  { url: '/index.html', revision: '20250703-01' }, // HTML主檔案
-  { url: '/manifest.json', revision: '20250702-01' }, // PWA 設定檔
-  { url: '/trip-data.json', revision: '20250702-02' }, // 核心行程資料
-  // --- 新增：快取所有應用程式圖示，確保離線時圖示能正常顯示 ---
-  { url: '/apple-touch-icon.png', revision: null },
-  { url: '/favicon.ico', revision: null },
-  { url: '/favicon.svg', revision: null },
-  { url: '/favicon-96x96.png', revision: null },
-  { url: '/web-app-manifest-192x192.png', revision: null },
-  { url: '/web-app-manifest-512x512.png', revision: null },
+  { url: 'index.html', revision: '20250703-02' }, // HTML主檔案
+  { url: 'manifest.json', revision: '20250702-01' }, // PWA 設定檔
+  { url: 'trip-data.json', revision: '20250702-02' }, // 核心行程資料
+  // --- 快取所有應用程式圖示，確保離線時圖示能正常顯示 ---
+  { url: 'apple-touch-icon.png', revision: null },
+  { url: 'favicon.ico', revision: null },
+  { url: 'favicon.svg', revision: null },
+  { url: 'favicon-96x96.png', revision: null },
+  { url: 'web-app-manifest-192x192.png', revision: null },
+  { url: 'web-app-manifest-512x512.png', revision: null },
 ];
 
 // 預先快取所有定義好的核心資源 (Precaching)
