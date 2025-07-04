@@ -3,7 +3,7 @@
     "totalDays": 13,
     "tripStartDate": "2025-07-02",
     "tripEndDate": "2025-07-16",
-    "dataVersion": "20250703-10"
+    "dataVersion": "20250704-01"
   },
   "timePhases": [
     {
@@ -65,7 +65,7 @@
       ]
     },
     { "date": "2025-07-02", "type": "巴士", "details": "747 Express Bus" },
-    { "date": "2025-07-04", "type": "巴士", "details": "Orléans Express (蒙特婁 09:00 → 魁北克市 12:00)" },
+    { "date": "2025-07-04", "type": "巴士", "details": "Orléans Express (蒙特婁 08:30 → 魁北克市 11:45)" },
     {
       "date": "2025-07-06",
       "type": "航班",
@@ -178,7 +178,7 @@
     "chicago": {
       "name": "芝加哥",
       "categories": [
-        { "name": "🍕 芝加哥深盤披薩", "items": [
+        { "name": "� 芝加哥深盤披薩", "items": [
           { "name": "起司飽滿", "desc": "Giordano’s 以其滿滿的起司內餡聞名。", "places": [{ "name": "Giordano’s", "link": "https://maps.apple.com/?q=Giordano’s" }] },
           { "name": "酥皮濃郁", "desc": "Lou Malnati’s 的奶油酥皮是其特色。", "places": [{ "name": "Lou Malnati’s", "link": "https://maps.apple.com/?q=Lou+Malnati’s+Pizzeria" }] },
           { "name": "焦香起司邊", "desc": "Pequod’s Pizza 的焦糖化起司邊是一大亮點。", "places": [{ "name": "Pequod’s Pizza", "link": "https://maps.apple.com/?q=Pequod’s+Pizza" }] }
@@ -237,6 +237,7 @@
       "title": "蒙特婁一日遊｜歷史、美食與文化",
       "subTitle": "Day 2｜7月3日（週四）",
       "isTravelDay": false,
+      "mapInfo": { "centerQuery": "Old Montreal, Montreal, QC", "zoom": 15 },
       "theme": {
         "icon": "⚜️",
         "title": "新法蘭西的探索",
@@ -278,7 +279,7 @@
       "isTravelDay": true,
       "tags": ["#巴士旅程", "#古城初探", "#世界遺產"],
       "activities": [
-        { "title": "🚌 09:00 – 12:00｜搭乘巴士前往魁北克市", "items": ["搭乘 <strong>Orléans Express</strong> 從蒙特婁出發，預計中午前抵達魁北克市。", "抵達車站：<a href='https://maps.apple.com/?q=Gare+du+Palais,Quebec' target='_blank' class='hover:underline'>Gare du Palais</a>，位於舊城區北側。"] },
+        { "title": "🚌 08:30 – 11:45｜搭乘巴士前往魁北克市", "items": ["搭乘 <strong>Orléans Express</strong> 從蒙特婁出發，預計中午前抵達魁北克市。", "抵達車站：<a href='https://maps.apple.com/?q=Gare+du+Palais,Quebec' target='_blank' class='hover:underline'>Gare du Palais</a>，位於舊城區北側。"] },
         { "title": "🏨 12:00 – 13:30｜入住飯店 → 午餐", "items": ["抵達後先至飯店辦理入住或寄放行李。", "午餐建議：<a href='https://maps.apple.com/?q=Le+Chic+Shack,Quebec' target='_blank' class='hover:underline'>Le Chic Shack</a>（漢堡＋奶昔）或 <a href='https://maps.apple.com/?q=Buffet+de+l’Antiquaire,Quebec' target='_blank' class='hover:underline'>Buffet de l’Antiquaire</a>（魁北克家常菜）。"] },
         { "title": "🚶‍♀️ 14:00 – 17:30｜上城區初探路線", "items": ["步行路線：<a href='https://maps.apple.com/?q=Hotel+Manoir+Victoria,Quebec' target='_blank' class='hover:underline'>Hotel Manoir Victoria</a> → <a href='https://maps.apple.com/?q=Dufferin+Terrace,Quebec' target='_blank' class='hover:underline'>杜費林露台</a> → <a href='https://maps.apple.com/?q=Porte+Saint-Louis,Quebec' target='_blank' class='hover:underline'>聖路易門/古城牆</a> → <a href='https://maps.apple.com/?q=Hôtel+du+Parlement,Quebec' target='_blank' class='hover:underline'>魁北克省議會</a>。"] },
         { "title": "🌃 18:00 – 20:30｜晚餐＋夜景散步", "items": ["<strong>餐廳建議：</strong><a href='https://maps.apple.com/?q=Aux+Anciens+Canadiens,Quebec' target='_blank' class='hover:underline'>Aux Anciens Canadiens</a> (17世紀老宅法餐)。", "飯後可再回到 Dufferin Terrace 拍攝夜景，芳堤娜城堡夜間打燈效果極佳。"] }
@@ -294,6 +295,7 @@
       "title": "魁北克市深度遊｜下城、博物館與觀景台",
       "subTitle": "Day 4｜7月5日（週六）",
       "isTravelDay": false,
+      "mapInfo": { "centerQuery": "Old Quebec, Quebec City, QC", "zoom": 16 },
       "theme": {
         "icon": "🏰",
         "title": "古城探索之日",
@@ -335,6 +337,7 @@
       "title": "尼加拉瀑布一日體驗｜觀瀑船、煙火、自然景點",
       "subTitle": "Day 6｜7月7日（一）",
       "isTravelDay": false,
+      "mapInfo": { "centerQuery": "Niagara Falls, ON, Canada", "zoom": 14 },
       "theme": {
         "icon": "🌊",
         "title": "自然震撼之日",
@@ -376,6 +379,7 @@
       "title": "芝加哥建築日｜建築遊船 + 公園藝術 + 湖畔黃昏",
       "subTitle": "Day 8｜7月9日（三）",
       "isTravelDay": false,
+      "mapInfo": { "centerQuery": "Millennium Park, Chicago, IL", "zoom": 15 },
       "theme": {
         "icon": "🏙️",
         "title": "建築巡禮之日",
@@ -399,6 +403,7 @@
       "title": "芝加哥博物館與夜遊河畔日",
       "subTitle": "Day 9｜7月10日（週四）",
       "isTravelDay": false,
+      "mapInfo": { "centerQuery": "Field Museum, Chicago, IL", "zoom": 15 },
       "theme": {
         "icon": "🦖",
         "title": "博物館奇妙日",
@@ -420,6 +425,7 @@
       "title": "芝加哥購物 or 館所自由日",
       "subTitle": "Day 10｜7月11日（週五）",
       "isTravelDay": false,
+      "mapInfo": { "centerQuery": "Magnificent Mile, Chicago, IL", "zoom": 15 },
       "theme": {
         "icon": "🛍️",
         "title": "都會漫遊之日",
@@ -442,6 +448,7 @@
       "title": "芝加哥藝術學院與文化日",
       "subTitle": "Day 11｜7月12日（六）",
       "isTravelDay": false,
+      "mapInfo": { "centerQuery": "Art Institute of Chicago, IL", "zoom": 16 },
       "theme": {
         "icon": "🎨",
         "title": "藝術沉浸之日",
@@ -463,6 +470,7 @@
       "title": "🧳 芝加哥收尾日 + 前往機場",
       "subTitle": "Day 12｜7月13日（日）",
       "isTravelDay": false,
+      "mapInfo": { "centerQuery": "Hilton Garden Inn Chicago Downtown Magnificent Mile", "zoom": 16 },
       "theme": {
         "icon": "🧳",
         "title": "回憶打包之日",
