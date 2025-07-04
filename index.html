@@ -192,11 +192,13 @@
         .action-btn {
             width: 100%;
             font-weight: 600;
-            padding: 0.75rem 1.5rem;
+            padding: 0.75rem 1rem; /* 稍微減少 padding 以容納三個按鈕 */
             border-radius: 0.5rem;
             box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
             transition: all 0.2s ease-in-out;
             flex-grow: 1;
+            text-align: center;
+            white-space: nowrap; /* 防止文字換行 */
         }
         .action-btn:hover {
             transform: translateY(-2px);
@@ -215,6 +217,17 @@
             border: 1px solid var(--c-border);
         }
         #foodie-list-btn:hover {
+            background-color: var(--c-accent);
+            color: var(--c-primary);
+            border-color: var(--c-accent);
+        }
+        /* 新增地圖按鈕樣式 */
+        #view-map-btn {
+            background-color: var(--c-bg-accent-light);
+            color: var(--c-secondary);
+            border: 1px solid var(--c-border);
+        }
+        #view-map-btn:hover {
             background-color: var(--c-accent);
             color: var(--c-primary);
             border-color: var(--c-accent);
@@ -494,7 +507,7 @@
     <div id="mobile-menu-panel" class="hidden">
         <div class="p-4 space-y-2">
              <a href="#status-dashboard-section" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">📋 行程要覽</a>
-             <a href="#tip-calculator-section" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">� 小費計算機</a>
+             <a href="#tip-calculator-section" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">🧮 小費計算機</a>
              <a href="#links-dashboard" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">🔗 常用連結</a>
              <!-- START: 新增的行動版重新整理按鈕 -->
              <button id="mobile-refresh-btn" class="w-full text-left mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">🔄 下載最新行程</button>
@@ -592,6 +605,9 @@
                  <!-- Action Area -->
                  <div id="action-area">
                     <button id="foodie-list-btn" class="action-btn" style="display: none;">🍽️ 美食清單</button>
+                    <!-- START: 新增地圖按鈕 -->
+                    <button id="view-map-btn" class="action-btn" style="display: none;">📍 本日地圖</button>
+                    <!-- END: 新增地圖按鈕 -->
                     <button id="view-details-btn" class="action-btn">詳細行程</button>
                 </div>
             </div>
@@ -709,6 +725,29 @@
             </div>
         </div>
     </div>
+
+    <!-- START: Map Modal 新增的地圖彈窗 -->
+    <div id="map-modal" class="modal-overlay no-print hidden">
+        <div class="modal-container" style="max-width: 800px; width: 95%; height: 90vh;">
+            <div class="modal-header">
+                <h2 id="map-modal-title" class="text-2xl font-bold text-gray-900">本日地圖總覽</h2>
+                <button class="modal-close-btn">&times;</button>
+            </div>
+            <div class="modal-body" style="padding: 0; margin-top: 1rem;">
+                <iframe
+                  id="map-iframe"
+                  width="100%"
+                  height="100%"
+                  style="border:0;"
+                  loading="lazy"
+                  allowfullscreen
+                  referrerpolicy="no-referrer-when-downgrade"
+                  src="">
+                </iframe>
+            </div>
+        </div>
+    </div>
+    <!-- END: Map Modal -->
     
     <script>
         // --- Service Worker 註冊 ---
@@ -879,6 +918,9 @@
             const daySlider = document.getElementById('day-slider');
             const viewDetailsBtn = document.getElementById('view-details-btn');
             const foodieListBtn = document.getElementById('foodie-list-btn');
+            // START: 宣告地圖按鈕
+            const viewMapBtn = document.getElementById('view-map-btn');
+            // END: 宣告地圖按鈕
             
             // 天氣相關元素
             const weatherItemEl = document.getElementById('status-weather-item');
@@ -932,6 +974,7 @@
                     if(daySlider) daySlider.value = 1;
                     if(viewDetailsBtn) viewDetailsBtn.style.display = 'none';
                     if(foodieListBtn) foodieListBtn.style.display = 'none';
+                    if(viewMapBtn) viewMapBtn.style.display = 'none'; // 新增：隱藏地圖按鈕
                     weatherItemEl.style.display = 'none';
                     accommodationItemEl.style.display = 'none';
                     transportItemEl.style.display = 'none';
@@ -1069,13 +1112,10 @@
                                 const depTime = new Date(leg.departure.time).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: leg.departure.tz });
                                 const arrTime = new Date(leg.arrival.time).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: leg.arrival.tz });
                                 
-                                // --- MODIFICATION START ---
-                                // Use Intl.DateTimeFormat to get the localiado-MM-DD date string for the airport
                                 const departureLocalDateStr = new Intl.DateTimeFormat('fr-CA', { year: 'numeric', month: '2-digit', day: '2-digit', timeZone: leg.departure.tz }).format(new Date(leg.departure.time));
                                 const arrivalLocalDateStr = new Intl.DateTimeFormat('fr-CA', { year: 'numeric', month: '2-digit', day: '2-digit', timeZone: leg.arrival.tz }).format(new Date(leg.arrival.time));
                                 
                                 const dateIndicator = arrivalLocalDateStr > departureLocalDateStr ? ' (+1)' : '';
-                                // --- MODIFICATION END ---
 
                                 return `<div class="mb-1">
                                     <p class="font-semibold">${leg.flightCode}</p>
@@ -1092,13 +1132,39 @@
                     transportItemEl.style.display = 'none';
                 }
                 
-                // Update Action Area
+                // --- START: Action Area 更新邏輯 ---
+                // 美食清單按鈕
                 if (foodieListBtn && data.foodie && data.foodie[cityKey]) {
                     foodieListBtn.style.display = 'block';
                     foodieListBtn.onclick = () => window.openFoodieModal(cityKey);
                 } else if (foodieListBtn) {
                     foodieListBtn.style.display = 'none';
                 }
+                
+                // 地圖按鈕
+                const YOUR_GOOGLE_MAPS_API_KEY = 'AIzaSyCR5rC1OVHVr1ZShDFd147VZkpVZml1qf8'; // 使用您提供的金鑰
+                if (viewMapBtn && targetDayData.mapInfo && !targetDayData.isTravelDay) {
+                    viewMapBtn.style.display = 'block';
+                    viewMapBtn.onclick = () => {
+                        const mapModal = document.getElementById('map-modal');
+                        const mapIframe = document.getElementById('map-iframe');
+                        const mapModalTitle = document.getElementById('map-modal-title');
+                        
+                        if (mapIframe) {
+                            const { centerQuery, zoom } = targetDayData.mapInfo;
+                            const mapUrl = `https://www.google.com/maps/embed/v1/search?key=${YOUR_GOOGLE_MAPS_API_KEY}&q=${encodeURIComponent(centerQuery)}&zoom=${zoom}`;
+                            mapIframe.src = mapUrl;
+                        }
+                        if (mapModalTitle) {
+                           mapModalTitle.textContent = `${targetDayData.title} 地圖總覽`;
+                        }
+                        
+                        openModal(mapModal);
+                    };
+                } else if (viewMapBtn) {
+                    viewMapBtn.style.display = 'none';
+                }
+                // --- END: Action Area 更新邏輯 ---
             }; 
 
             if (direction === 1) { 
@@ -1119,11 +1185,9 @@
                 return;
             }
 
-            // 使用 navigator.serviceWorker.ready 確保 Service Worker 已啟用
             navigator.serviceWorker.ready.then(registration => {
                 showToast('正在檢查最新行程...');
 
-                // 直接在已啟用的 registration 上呼叫 update
                 registration.update().then(() => {
                     if (registration.installing) {
                         console.log('Service Worker 正在安裝新版本。');
@@ -1141,7 +1205,6 @@
                     showToast('檢查更新失敗，請確認網路連線。');
                 });
             }).catch(error => {
-                // 如果 .ready 失敗，代表 Service Worker 尚未註冊或啟用失敗
                 console.error('Service Worker 未準備就緒:', error);
                 showToast('離線功能尚未啟用，請稍後再試或重新整理頁面。');
             });
@@ -1150,7 +1213,6 @@
 
         document.addEventListener('DOMContentLoaded', async () => {
             try {
-                // --- FIX: Use relative path for robustness ---
                 const response = await fetch('trip-data.json');
                 if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
                 const data = await response.json();
@@ -1353,6 +1415,9 @@
             const foodieModal = document.getElementById('foodie-modal');
             const citySelectModal = document.getElementById('city-select-modal');
             const statusCityBtn = document.getElementById('status-city-btn');
+            // START: 取得地圖 Modal 元素
+            const mapModal = document.getElementById('map-modal');
+            // END: 取得地圖 Modal 元素
 
             function openModal(modal) {
                 if (!modal) return;
@@ -1367,7 +1432,14 @@
                 if (!modal) return;
                 modal.classList.remove('active');
                 document.body.classList.remove('modal-open');
-                setTimeout(() => modal.classList.add('hidden'), 300);
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                    // 清空 iframe src 以停止地圖載入，節省資源
+                    if (modal.id === 'map-modal') {
+                        const iframe = modal.querySelector('iframe');
+                        if (iframe) iframe.src = '';
+                    }
+                }, 300);
             }
             
             // Foodie Modal
@@ -1436,6 +1508,13 @@
                 citySelectModal.querySelectorAll('.modal-close-btn').forEach(btn => btn.addEventListener('click', () => closeModal(citySelectModal)));
                 citySelectModal.addEventListener('click', e => (e.target === citySelectModal) && closeModal(citySelectModal));
             }
+            
+            // START: 新增地圖 Modal 的關閉邏輯
+            if (mapModal) {
+                mapModal.querySelectorAll('.modal-close-btn').forEach(btn => btn.addEventListener('click', () => closeModal(mapModal)));
+                mapModal.addEventListener('click', e => (e.target === mapModal) && closeModal(mapModal));
+            }
+            // END: 新增地圖 Modal 的關閉邏輯
 
 
             function initializeTripView() {
@@ -1446,13 +1525,11 @@
                 
                 showPastToggle.checked = false;
                 
-                // --- FIX START: Use local date instead of UTC ---
                 const now = new Date();
                 const year = now.getFullYear();
                 const month = String(now.getMonth() + 1).padStart(2, '0');
                 const day = String(now.getDate()).padStart(2, '0');
                 const todayString = `${year}-${month}-${day}`;
-                // --- FIX END ---
                 
                 if (todayString < tripInfo.tripStartDate) {
                     showPastToggle.disabled = true;
@@ -1483,11 +1560,9 @@
                                         const depTime = new Date(leg.departure.time).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: leg.departure.tz });
                                         const arrTime = new Date(leg.arrival.time).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: leg.arrival.tz });
                                         
-                                        // --- MODIFICATION START ---
                                         const departureLocalDateStr = new Intl.DateTimeFormat('fr-CA', { year: 'numeric', month: '2-digit', day: '2-digit', timeZone: leg.departure.tz }).format(new Date(leg.departure.time));
                                         const arrivalLocalDateStr = new Intl.DateTimeFormat('fr-CA', { year: 'numeric', month: '2-digit', day: '2-digit', timeZone: leg.arrival.tz }).format(new Date(leg.arrival.time));
                                         const dateIndicator = arrivalLocalDateStr > departureLocalDateStr ? ' <span class="text-xs text-red-500 font-semibold">(+1)</span>' : '';
-                                        // --- MODIFICATION END ---
 
                                         return `<div class="text-gray-700">
                                             <div class="font-semibold text-gray-800">${leg.flightCode}</div>
@@ -1556,13 +1631,11 @@
             populateDayCardWeather(allWeatherData);
             initializeTripView();
 
-            // --- FIX START: Use local date instead of UTC ---
             const now = new Date();
             const year = now.getFullYear();
             const month = String(now.getMonth() + 1).padStart(2, '0');
             const day = String(now.getDate()).padStart(2, '0');
             const todayString = `${year}-${month}-${day}`;
-            // --- FIX END ---
 
             const lastAvailableDate = itinerary[itinerary.length - 1].date;
 
