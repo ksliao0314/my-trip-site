@@ -3,7 +3,7 @@
     "totalDays": 13,
     "tripStartDate": "2025-07-02",
     "tripEndDate": "2025-07-16",
-    "dataVersion": "20250703-10"
+    "dataVersion": "20250704-04"
   },
   "timePhases": [
     {
@@ -65,7 +65,7 @@
       ]
     },
     { "date": "2025-07-02", "type": "巴士", "details": "747 Express Bus" },
-    { "date": "2025-07-04", "type": "巴士", "details": "Orléans Express (蒙特婁 09:00 → 魁北克市 12:00)" },
+    { "date": "2025-07-04", "type": "巴士", "details": "Orléans Express (蒙特婁 09:00 → 魁北克市 12:00)。乘車地點：<a href='https://maps.apple.com/?q=Gare+d'autocars+de+Montréal' target='_blank'>Gare d'autocars de Montréal (1717, Rue Berri)</a>" },
     {
       "date": "2025-07-06",
       "type": "航班",
@@ -107,7 +107,7 @@
     "montreal": {
       "name": "蒙特婁",
       "categories": [
-        { "name": "🥯 道地加拿大料理", "items": [
+        { "name": "� 道地加拿大料理", "items": [
           { "name": "蒙特婁貝果", "desc": "必吃的特色貝果，推薦 St-Viateur 或 Fairmount。", "places": [
             { "name": "St-Viateur Bagel", "link": "https://maps.apple.com/?q=St-Viateur+Bagel" },
             { "name": "Fairmount Bagel", "link": "https://maps.apple.com/?q=Fairmount+Bagel" }
@@ -273,15 +273,16 @@
       "dayGroup": 3,
       "cityTarget": "quebec-section",
       "weatherCity": "quebec",
-      "title": "蒙特婁 → 魁北克市｜巴士轉移・上城區初探",
+      "title": "蒙特婁 → 魁北克市｜上城區初探",
       "subTitle": "Day 3｜7月4日（週五）",
       "isTravelDay": true,
       "tags": ["#巴士旅程", "#古城初探", "#世界遺產"],
       "activities": [
-        { "title": "🚌 09:00 – 12:00｜搭乘巴士前往魁北克市", "items": ["搭乘 <strong>Orléans Express</strong> 從蒙特婁出發，預計中午前抵達魁北克市。", "抵達車站：<a href='https://maps.apple.com/?q=Gare+du+Palais,Quebec' target='_blank' class='hover:underline'>Gare du Palais</a>，位於舊城區北側。"] },
-        { "title": "🏨 12:00 – 13:30｜入住飯店 → 午餐", "items": ["抵達後先至飯店辦理入住或寄放行李。", "午餐建議：<a href='https://maps.apple.com/?q=Le+Chic+Shack,Quebec' target='_blank' class='hover:underline'>Le Chic Shack</a>（漢堡＋奶昔）或 <a href='https://maps.apple.com/?q=Buffet+de+l’Antiquaire,Quebec' target='_blank' class='hover:underline'>Buffet de l’Antiquaire</a>（魁北克家常菜）。"] },
-        { "title": "🚶‍♀️ 14:00 – 17:30｜上城區初探路線", "items": ["步行路線：<a href='https://maps.apple.com/?q=Hotel+Manoir+Victoria,Quebec' target='_blank' class='hover:underline'>Hotel Manoir Victoria</a> → <a href='https://maps.apple.com/?q=Dufferin+Terrace,Quebec' target='_blank' class='hover:underline'>杜費林露台</a> → <a href='https://maps.apple.com/?q=Porte+Saint-Louis,Quebec' target='_blank' class='hover:underline'>聖路易門/古城牆</a> → <a href='https://maps.apple.com/?q=Hôtel+du+Parlement,Quebec' target='_blank' class='hover:underline'>魁北克省議會</a>。"] },
-        { "title": "🌃 18:00 – 20:30｜晚餐＋夜景散步", "items": ["<strong>餐廳建議：</strong><a href='https://maps.apple.com/?q=Aux+Anciens+Canadiens,Quebec' target='_blank' class='hover:underline'>Aux Anciens Canadiens</a> (17世紀老宅法餐)。", "飯後可再回到 Dufferin Terrace 拍攝夜景，芳堤娜城堡夜間打燈效果極佳。"] }
+        { "title": "🚌 08:00 – 12:00｜飯店退房，搭乘巴士前往魁北克市", "items": ["上午於蒙特婁飯店退房後，自行前往巴士站。", "搭乘 <strong>09:00</strong> 的 <strong>Orléans Express</strong> 從 <a href='https://maps.apple.com/?q=Gare+d'autocars+de+Montréal' target='_blank'>蒙特婁巴士站 (Gare d'autocars)</a> 出發，預計 <strong>12:00</strong> 抵達魁北克市 <a href='https://maps.apple.com/?q=Gare+du+Palais,Quebec' target='_blank'>Gare du Palais 車站</a>。"] },
+        { "title": "🏨 12:00 – 13:30｜前往飯店、入住與午餐", "items": ["從車站步行或搭計程車前往 <a href='https://maps.apple.com/?q=Hotel+Manoir+Victoria,Quebec' target='_blank' class='hover:underline'>Hotel Manoir Victoria</a> 辦理入住或寄放行李（步行約15-20分鐘，有微上坡）。", "午餐建議：<a href='https://maps.apple.com/?q=Le+Chic+Shack,Quebec' target='_blank' class='hover:underline'>Le Chic Shack</a>（漢堡＋奶昔）或 <a href='https://maps.apple.com/?q=Buffet+de+l’Antiquaire,Quebec' target='_blank' class='hover:underline'>Buffet de l’Antiquaire</a>（魁北克家常菜）。"] },
+        { "title": "🚶‍♀️ 13:30 – 16:30｜上城區順時針散步路線", "items": ["從飯店出發，依序遊覽：<a href='https://maps.apple.com/?q=Hôtel+du+Parlement+du+Québec' target='_blank'>省議會</a>與<a href='https://maps.apple.com/?q=Fontaine+de+Tourny' target='_blank'>圖爾尼噴泉</a> → <a href='https://maps.apple.com/?q=Grande+Allée,Quebec' target='_blank'>格蘭林蔭大道</a> → <a href='https://maps.apple.com/?q=Porte+Saint-Louis' target='_blank'>聖路易門</a> → 沿<a href='https://maps.apple.com/?q=Rue+Saint-Louis,Quebec' target='_blank'>聖路易街</a>前行 → <a href='https://maps.apple.com/?q=Château+Frontenac' target='_blank'>芳堤娜城堡</a> → <a href='https://maps.apple.com/?q=Dufferin+Terrace,Quebec' target='_blank'>杜費林露台</a> → <a href='https://maps.apple.com/?q=Place+d'Armes,Quebec' target='_blank'>芳堤娜廣場</a>與<a href='https://maps.apple.com/?q=Cathedral+of+the+Holy+Trinity,Quebec' target='_blank'>聖三一教堂</a> → 沿<a href='https://maps.apple.com/?q=Rue+Saint-Jean,Quebec' target='_blank'>聖讓街</a>返回飯店，途中可逛街或喝咖啡。"] },
+        { "title": "🍽️ 17:30 – 19:00｜晚餐時間", "items": ["晚餐建議預約 <a href='https://maps.apple.com/?q=Aux+Anciens+Canadiens,Quebec' target='_blank' class='hover:underline'>Aux Anciens Canadiens</a>，在17世紀老宅中體驗傳統法式料理，鄰近芳堤娜城堡，氣氛絕佳。"]},
+        { "title": "🌃 19:00 – 20:30｜夜間散步與夜拍", "items": ["飯後可再回到 <a href='https://maps.apple.com/?q=Dufferin+Terrace,Quebec' target='_blank'>杜費林露台</a>，帶著腳架拍攝芳堤娜城堡與聖羅倫斯河的璀璨夜色。"] }
       ],
       "reminder": { "title": "🛏️ 睡前建議", "items": ["若隔天為重度步行日，建議今晚簡單伸展、早點休息。", "可於便利商店購買簡易點心或隔日早餐儲備。", "如有興趣參加翌日付費導覽 (如鬼怪夜遊、歷史導覽)，可今晚先預約。"] }
     },
@@ -291,7 +292,7 @@
       "dayGroup": 3,
       "cityTarget": "quebec-section",
       "weatherCity": "quebec",
-      "title": "魁北克市深度遊｜下城、博物館與觀景台",
+      "title": "魁北克市深度遊｜下城、博物館與平原",
       "subTitle": "Day 4｜7月5日（週六）",
       "isTravelDay": false,
       "theme": {
@@ -301,10 +302,10 @@
       },
       "tags": ["#小尚普蘭街", "#文明博物館", "#亞伯拉罕平原"],
       "activities": [
-        { "title": "☀️ 08:30 – 12:00｜下城區漫步 + 文明博物館", "items": ["搭乘<a href='https://maps.apple.com/?q=Funiculaire+du+Vieux-Québec' target='_blank' class='hover:underline'>登山纜車</a>或走<a href='https://maps.apple.com/?q=Escalier+Casse-Cou,Quebec' target='_blank'>斷頭階梯</a>前往下城。", "探索<a href='https://maps.apple.com/?q=Rue+du+Petit-Champlain,Quebec' target='_blank' class='hover:underline'>小尚普蘭街</a>與<a href='https://maps.apple.com/?q=Place+Royale,Quebec' target='_blank' class='hover:underline'>Place Royale 廣場</a>。", "<strong>10:30 – 12:00：</strong>參觀<a href='https://www.mcq.org/en/' target='_blank' class='hover:underline'>文明博物館 Musée de la civilisation</a> (建議預留 1.5 小時)。"] },
-        { "title": "🍽 12:00 – 13:30｜午餐時間", "items": ["<strong>推薦餐廳：</strong><a href='https://maps.apple.com/?q=Le+Lapin+Sauté,Quebec' target='_blank' class='hover:underline'>Le Lapin Sauté</a> (兔肉料理) 或 <a href='https://maps.apple.com/?q=Cochon+Dingue,Quebec' target='_blank' class='hover:underline'>Cochon Dingue</a> (人氣早午餐)。"] },
-        { "title": "🌳 14:00 – 17:00｜亞伯拉罕平原 + 城牆巡禮", "items": ["沿<a href='https://maps.apple.com/?q=Promenade+des+Gouverneurs,Quebec+City' target='_blank' class='hover:underline'>總督步道</a>進入<a href='https://maps.apple.com/?q=Plains+of+Abraham,Quebec' target='_blank' class='hover:underline'>亞伯拉罕平原</a>。", "可參觀<a href='https://www.ccbn-nbc.gc.ca/en/plains-of-abraham/plains-of-abraham-museum/' target='_blank' class='hover:underline'>平原博物館</a>，或在<a href='https://maps.apple.com/?q=Artillery+Park,Quebec' target='_blank' class='hover:underline'>城牆(Artillery Park)</a>上散步。", "<strong>備選：</strong><a href='https://www.observatoire-capitale.com/en/' target='_blank' class='hover:underline'>Observatoire de la Capitale</a>（觀景台）俯瞰古城全景。"] },
-        { "title": "🍷 18:00 – 20:30｜晚餐與夜景收尾", "items": ["<strong>晚餐建議：</strong><a href='https://maps.apple.com/?q=Chez+Boulay+–+Bistro+Boréal,Quebec' target='_blank' class='hover:underline'>Chez Boulay – Bistro Boréal</a>（北方林地創意料理）。", "飯後可再次至 Dufferin Terrace 或 Place d’Armes 散步，感受古城夜間氛圍。"] }
+        { "title": "☀️ 09:00 – 12:00｜下城區漫步 + 文明博物館", "items": ["搭乘<a href='https://maps.apple.com/?q=Funiculaire+du+Vieux-Québec' target='_blank' class='hover:underline'>登山纜車</a>或走<a href='https://maps.apple.com/?q=Escalier+Casse-Cou,Quebec' target='_blank'>斷頭階梯</a>前往下城。", "探索<a href='https://maps.apple.com/?q=Rue+du+Petit-Champlain,Quebec' target='_blank' class='hover:underline'>小尚普蘭街</a>與<a href='https://maps.apple.com/?q=Place+Royale,Quebec' target='_blank' class='hover:underline'>皇家廣場</a>，感受歐洲小鎮風情。", "<strong>10:30 – 12:00：</strong>參觀<a href='https://www.mcq.org/en/' target='_blank' class='hover:underline'>文明博物館 (Musée de la civilisation)</a>，建議預留 1.5 小時。"] },
+        { "title": "🍽️ 12:00 – 13:30｜午餐時間 (無兔肉選項)", "items": ["推薦餐廳：<a href='https://maps.apple.com/?q=Cochon+Dingue,Quebec' target='_blank' class='hover:underline'>Cochon Dingue</a> (經典魁北克家常料理) 或 <a href='https://maps.apple.com/?q=Bistro+L'Orygine' target='_blank' class='hover:underline'>Bistro L'Orygine</a> (健康自然風格，食材新鮮)。"] },
+        { "title": "🌳 14:00 – 17:00｜亞伯拉罕平原 + 城牆巡禮", "items": ["返回上城區後，沿<a href='https://maps.apple.com/?q=Promenade+des+Gouverneurs,Quebec+City' target='_blank' class='hover:underline'>總督步道</a>進入歷史悠久的<a href='https://maps.apple.com/?q=Plains+of+Abraham,Quebec' target='_blank' class='hover:underline'>亞伯拉罕平原</a>。", "可參觀<a href='https://www.ccbn-nbc.gc.ca/en/plains-of-abraham/plains-of-abraham-museum/' target='_blank' class='hover:underline'>平原博物館</a>，或在<a href='https://maps.apple.com/?q=Artillery+Park+National+Historic+Site' target='_blank' class='hover:underline'>火炮公園 (Artillery Park)</a>段的城牆上散步。", "<strong>備選：</strong><a href='https://www.observatoire-capitale.com/en/' target='_blank' class='hover:underline'>Observatoire de la Capitale</a>（觀景台）俯瞰古城全景。"] },
+        { "title": "🍷 17:30 – 19:00｜晚餐與夜景收尾", "items": ["晚餐建議預約 <a href='https://maps.apple.com/?q=Chez+Boulay+–+Bistro+Boréal,Quebec' target='_blank' class='hover:underline'>Chez Boulay – Bistro Boréal</a>，品嚐使用在地食材的北方林地創意料理。", "飯後可再次至 <a href='https://maps.apple.com/?q=Dufferin+Terrace,Quebec' target='_blank'>Dufferin Terrace</a> 或 <a href='https://maps.apple.com/?q=Place+d'Armes,Quebec' target='_blank'>Place d’Armes</a> 散步，感受古城寧靜的夜間氛圍。"] }
       ],
       "infoBox": { "title": "⭐ 魁北克市實用資訊", "items": ["🗣 法語為主，但觀光區英文OK；標誌以法語為主。", "🚶‍♀️ 石板坡道多，建議穿防滑鞋、備手杖如有需要。", "💳 商店與餐廳普遍接受信用卡，小費建議 15–18%。", "🌤 白天氣溫約 22°C，夜間可降至 16°C，攜帶薄長袖外套。"] }
     },
