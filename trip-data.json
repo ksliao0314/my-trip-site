@@ -3,7 +3,7 @@
     "totalDays": 13,
     "tripStartDate": "2025-07-02",
     "tripEndDate": "2025-07-16",
-    "dataVersion": "20250704-04"
+    "dataVersion": "20250704-03"
   },
   "timePhases": [
     {
@@ -73,7 +73,8 @@
         { "flightCode": "加航", "departure": { "airport": "魁北克 (YQB)", "time": "2025-07-06T09:20:00Z", "tz": "America/Toronto" }, "arrival": { "airport": "多倫多 (YYZ)", "time": "2025-07-06T10:58:00Z", "tz": "America/Toronto" } }
       ]
     },
-    { "date": "2025-07-06", "type": "巴士/包車", "details": "多倫多市區 → 尼加拉瀑布" },
+    { "date": "2025-07-06", "type": "巴士", "details": "Megabus (多倫多 16:30 → 尼加拉瀑布 18:05)" },
+    { "date": "2025-07-08", "type": "巴士", "details": "Megabus (尼加拉瀑布 10:00 → 多倫多 12:00)" },
     {
       "date": "2025-07-08",
       "type": "航班",
@@ -107,7 +108,7 @@
     "montreal": {
       "name": "蒙特婁",
       "categories": [
-        { "name": "� 道地加拿大料理", "items": [
+        { "name": "🥯 道地加拿大料理", "items": [
           { "name": "蒙特婁貝果", "desc": "必吃的特色貝果，推薦 St-Viateur 或 Fairmount。", "places": [
             { "name": "St-Viateur Bagel", "link": "https://maps.apple.com/?q=St-Viateur+Bagel" },
             { "name": "Fairmount Bagel", "link": "https://maps.apple.com/?q=Fairmount+Bagel" }
@@ -315,16 +316,16 @@
       "dayGroup": 5,
       "cityTarget": "niagara-section",
       "weatherCity": "niagara",
-      "title": "魁北克 → 多倫多市區 → 尼加拉瀑布",
+      "title": "魁北克 → 多倫多 → 尼加拉瀑布",
       "subTitle": "Day 5｜7月6日（週日）",
       "isTravelDay": true,
-      "tags": ["#國內航班", "#多倫多快閃", "#聖羅倫斯市場", "#瀑布夜景"],
+      "tags": ["#國內航班", "#巴士移動", "#瀑布夜景"],
       "activities": [
-        { "title": "✈️ 03:00 – 07:00｜清晨出發與飛行", "items": ["清晨退房，搭乘計程車前往魁北克機場 (YQB)。", "搭乘 05:20 起飛的航班，預計 06:58 抵達多倫多 (YYZ)。"] },
-        { "title": "🚆 07:30 – 09:00｜前往多倫多市區與行李寄放", "items": ["搭乘 <strong>UP Express</strong> 機場快線 (約 25 分鐘) 前往市中心的 <a href='https://maps.apple.com/?q=Union+Station,Toronto' target='_blank'>Union Station</a>。", "可將大件行李寄放在車站附近的行李寄存服務 (如 BagsAway)。"] },
-        { "title": "🏙️ 09:00 – 14:30｜多倫多市區半日快閃", "items": ["<strong>路線建議：</strong><a href='https://maps.apple.com/?q=St.+Lawrence+Market' target='_blank'>聖羅倫斯市場</a> (體驗在地市集氛圍、享用早午餐) → 步行至 <a href='https://maps.apple.com/?q=Distillery+District,Toronto' target='_blank'>古釀酒廠區</a> (紅磚維多利亞式建築群，充滿藝術小店與咖啡館)。", "<strong>午餐建議：</strong>在聖羅倫斯市場品嚐 Peameal Bacon on a Bun，或在古釀酒廠區找間餐廳用餐。"] },
-        { "title": "🚌 15:00 – 16:30｜前往尼加拉瀑布", "items": ["返回 Union Station 取回行李，搭乘預約好的巴士 (如 Megabus) 或包車前往尼加拉瀑布 (車程約 1.5 - 2 小時)。"] },
-        { "title": "🌃 17:00 – 20:30｜抵達瀑布區 + 景觀晚餐", "items": ["抵達飯店辦理入住後，稍作休息。", "晚餐可選擇 <a href='https://maps.apple.com/?q=The+Keg+Steakhouse,Niagara+Falls' target='_blank' class='hover:underline'>The Keg Steakhouse</a> 等瀑布景觀餐廳，欣賞七彩燈光下的瀑布。"] }
+        { "title": "✈️ 03:00 – 07:00｜清晨退房與飛行", "items": ["凌晨退房，搭乘計程車前往魁北克機場 (YQB)。", "搭乘 05:20 起飛的航班，預計 06:58 抵達多倫多皮爾遜機場 (YYZ)。"] },
+        { "title": "🚆 07:30 – 09:00｜前往多倫多市中心與行李寄放", "items": ["搭乘 <strong>UP Express</strong> 機場快線 (約 25 分鐘) 前往市中心的 <a href='https://maps.apple.com/?q=Union+Station,Toronto' target='_blank'>Union Station</a>。", "使用車站附近的行李寄存服務 (如 BagsAway) 寄放大型行李。"] },
+        { "title": "🏙️ 09:00 – 15:15｜多倫多市區半日快閃", "items": ["<strong>推薦路線：</strong><a href='https://maps.apple.com/?q=St.+Lawrence+Market' target='_blank'>聖羅倫斯市場</a> (享用 Peameal Bacon on a Bun 早午餐) → 步行至 <a href='https://maps.apple.com/?q=Distillery+District,Toronto' target='_blank'>古釀酒廠區</a> (在特色餐廳或咖啡館享用午餐)。", "約 14:30-15:00 從古釀酒廠區步行或搭車返回市中心。"] },
+        { "title": "🚌 15:15 – 18:05｜取行李並搭乘巴士前往尼加拉瀑布", "items": ["返回 Union Station 附近領取行李。", "步行前往 <a href='https://maps.apple.com/?q=Union+Station+Bus+Terminal,+Toronto' target='_blank'>Union Station Bus Terminal (81 Bay St, 2F)</a>。", "建議於 16:00 前報到排隊，搭乘 <strong>16:30</strong> 出發的 Megabus。", "預計 <strong>18:05</strong> 抵達 <a href='https://maps.apple.com/?q=Niagara+Falls+Bus+Terminal' target='_blank'>Niagara Falls Bus Terminal</a>。"] },
+        { "title": "🏨 18:30 – 20:30｜抵達飯店與景觀晚餐", "items": ["抵達後步行或搭車前往 <a href='https://maps.apple.com/?q=Sheraton+Fallsview+Hotel' target='_blank'>Sheraton Fallsview Hotel</a> 辦理入住。", "晚餐建議：<a href='https://maps.apple.com/?q=The+Keg+Steakhouse,Niagara+Falls' target='_blank' class='hover:underline'>The Keg Steakhouse</a>，可欣賞瀑布夜景與燈光秀。"] }
       ]
     },
     {
@@ -345,7 +346,7 @@
       "activities": [
         { "title": "🌊 09:00 – 12:00｜經典瀑布體驗", "items": ["<strong><a href='https://www.niagaraparks.com/visit/attractions/niagara-city-cruises/' target='_blank' class='hover:underline'>Voyage to the Falls 船票體驗</a>：</strong>近距離感受瀑布水勢，建議線上預約上午場。", "<strong><a href='https://www.niagaraparks.com/visit/attractions/journey-behind-the-falls/' target='_blank' class='hover:underline'>Journey Behind the Falls</a>：</strong>進入瀑布後方岩壁隧道觀賞水柱傾瀉。"] },
         { "title": "🍽️ 12:30 – 14:00｜午餐建議", "items": ["<a href='https://maps.apple.com/?q=Queen+Victoria+Place+Restaurant,Niagara+Falls' target='_blank' class='hover:underline'>Queen Victoria Place Restaurant</a>（景觀+當地食材）或 Table Rock Centre 美食廣場。"] },
-        { "title": "🦋 14:00 – 17:00｜自然景點探索", "items": ["搭乘 <strong>WEGO 巴士</strong> 前往 <a href='https://www.niagaraparks.com/visit/attractions/butterfly-conservatory/' target='_blank' class='hover:underline'>Butterfly Conservatory</a> (蝴蝶園) 或 <a href='https://www.niagaraparks.com/visit/attractions/white-water-walk/' target='_blank' class='hover:underline'>White Water Walk</a> (激流步道)。"] },
+        { "title": "� 14:00 – 17:00｜自然景點探索", "items": ["搭乘 <strong>WEGO 巴士</strong> 前往 <a href='https://www.niagaraparks.com/visit/attractions/butterfly-conservatory/' target='_blank' class='hover:underline'>Butterfly Conservatory</a> (蝴蝶園) 或 <a href='https://www.niagaraparks.com/visit/attractions/white-water-walk/' target='_blank' class='hover:underline'>White Water Walk</a> (激流步道)。"] },
         { "title": "🍷 18:00 – 21:30｜晚餐 + 夜景 + 煙火", "items": ["<strong>夜間活動：</strong>約 21:00 起瀑布打燈，21:45～22:00 季節性煙火秀（如天氣良好）。", "建議提早至 <a href='https://maps.apple.com/?q=Table+Rock+Welcome+Centre,Niagara+Falls' target='_blank'>Table Rock</a> 或 <a href='https://maps.apple.com/?q=Queen+Victoria+Park,Niagara+Falls' target='_blank'>Queen Victoria Park</a> 卡位拍照。"] }
       ],
       "infoBox": { "title": "⭐ 瀑布實用資訊", "items": ["🧥 參加瀑布船與後方通道活動務必攜帶雨衣（現場也會提供）。", "🎫 建議提前線上購買 <a href='https://www.niagaraparks.com/visit/attractions/adventure-pass-classic' target='_blank' class='hover:underline'>Niagara Pass</a>（含票+WEGO車）避免現場排隊。", "📷 相機建議使用防水袋，手機請準備擦拭布。", "☀️ 七月氣溫約 25–29°C，日曬強烈建議塗防曬。"] }
@@ -356,15 +357,14 @@
       "dayGroup": 7,
       "cityTarget": "chicago-section",
       "weatherCity": "chicago",
-      "title": "尼加拉瀑布 → 芝加哥｜跨國飛行",
+      "title": "尼加拉瀑布 → 多倫多 → 芝加哥",
       "subTitle": "Day 7｜7月8日（二）",
       "isTravelDay": true,
-      "tags": ["#跨國飛行", "#入境美國", "#芝加哥初印象"],
+      "tags": ["#巴士移動", "#跨國飛行", "#入境美國"],
       "activities": [
-        { "title": "☕ 09:00 – 12:00｜悠閒早午餐與最後巡禮", "items": ["在尼加拉瀑布區享用悠閒的早午餐。", "可以再次到瀑布邊緣步道散步，或購買紀念品。"] },
-        { "title": "🚐 13:00 – 16:00｜退房並前往多倫多機場 (YYZ)", "items": ["中午退房後，搭乘預約包車前往多倫多機場。", "預留充足時間辦理登機與美國海關預先清關手續。"] },
-        { "title": "✈️ 18:35 – 19:29｜搭機飛往芝加哥 (ORD)", "items": ["搭乘傍晚航班前往芝加哥。", "抵達後搭乘地鐵 Blue Line 或計程車前往市區飯店辦理入住。"] },
-        { "title": "🌃 21:30 onwards｜飯店安頓與宵夜", "items": ["安頓後，若體力許可，可至飯店附近便利商店購買宵夜或飲料。"] }
+        { "title": "🚌 07:30 – 12:00｜退房並搭乘巴士前往多倫多", "items": ["建議 07:30 起床，整理行李並辦理退房。", "搭乘 Uber 或飯店叫車前往 <a href='https://maps.apple.com/?q=Niagara+Falls+Bus+Terminal' target='_blank'>Niagara Falls Bus Terminal (4555 Erie Ave)</a>。", "搭乘 <strong>10:00</strong> 出發的 Megabus，預計 <strong>12:00</strong> 抵達多倫多 <a href='https://maps.apple.com/?q=Union+Station+Bus+Terminal,+Toronto' target='_blank'>Union Station Bus Terminal</a>。"] },
+        { "title": "✈️ 12:00 – 19:29｜前往機場、報到與飛行", "items": ["抵達多倫多後，搭乘 Uber/Lyft (建議) 或 UP Express 前往多倫多皮爾遜機場 (YYZ)。", "於 YYZ 機場辦理報到、行李託運與<strong>美國海關預先清關 (Pre-clearance)</strong>，請預留充足時間。", "搭乘 <strong>18:35</strong> 起飛的航班，預計 <strong>19:29</strong> 抵達芝加哥 O'Hare 國際機場 (ORD)。"] },
+        { "title": "🏨 20:00 – 21:30｜前往芝加哥市中心飯店", "items": ["抵達芝加哥後，可搭乘地鐵 <strong>Blue Line</strong> 或 Uber/Lyft 前往市中心飯店。", "辦理入住後，可至周邊便利店或超市補充飲水與零食，為明日行程做準備。"] }
       ],
       "reminder": { "title": "🛏️ 睡前提醒", "items": ["明日為建築巡禮與湖濱遊覽日，可自由決定早或晚出發。"] }
     },
