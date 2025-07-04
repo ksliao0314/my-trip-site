@@ -3,7 +3,7 @@
     "totalDays": 13,
     "tripStartDate": "2025-07-02",
     "tripEndDate": "2025-07-16",
-    "dataVersion": "20250704-05"
+    "dataVersion": "20250705-01"
   },
   "timePhases": [
     {
@@ -284,8 +284,7 @@
         { "title": "🚶‍♀️ 13:30 – 16:30｜上城區順時針散步路線", "items": ["從飯店出發，依序遊覽：<a href='https://maps.apple.com/?q=Hôtel+du+Parlement+du+Québec' target='_blank'>省議會</a>與<a href='https://maps.apple.com/?q=Fontaine+de+Tourny' target='_blank'>圖爾尼噴泉</a> → <a href='https://maps.apple.com/?q=Grande+Allée,Quebec' target='_blank'>格蘭林蔭大道</a> → <a href='https://maps.apple.com/?q=Porte+Saint-Louis' target='_blank'>聖路易門</a> → 沿<a href='https://maps.apple.com/?q=Rue+Saint-Louis,Quebec' target='_blank'>聖路易街</a>前行 → <a href='https://maps.apple.com/?q=Château+Frontenac' target='_blank'>芳堤娜城堡</a> → <a href='https://maps.apple.com/?q=Dufferin+Terrace,Quebec' target='_blank'>杜費林露台</a> → <a href='https://maps.apple.com/?q=Place+d'Armes,Quebec' target='_blank'>芳堤娜廣場</a>與<a href='https://maps.apple.com/?q=Cathedral+of+the+Holy+Trinity,Quebec' target='_blank'>聖三一教堂</a> → 沿<a href='https://maps.apple.com/?q=Rue+Saint-Jean,Quebec' target='_blank'>聖讓街</a>返回飯店，途中可逛街或喝咖啡。"] },
         { "title": "🍽️ 17:30 – 19:00｜晚餐時間", "items": ["晚餐建議預約 <a href='https://maps.apple.com/?q=Aux+Anciens+Canadiens,Quebec' target='_blank' class='hover:underline'>Aux Anciens Canadiens</a>，在17世紀老宅中體驗傳統法式料理，鄰近芳堤娜城堡，氣氛絕佳。"]},
         { "title": "🌃 19:00 – 20:30｜夜間散步與夜拍", "items": ["飯後可再回到 <a href='https://maps.apple.com/?q=Dufferin+Terrace,Quebec' target='_blank'>杜費林露台</a>，帶著腳架拍攝芳堤娜城堡與聖羅倫斯河的璀璨夜色。"] }
-      ],
-      "reminder": { "title": "🛏️ 睡前建議", "items": ["若隔天為重度步行日，建議今晚簡單伸展、早點休息。", "可於便利商店購買簡易點心或隔日早餐儲備。", "如有興趣參加翌日付費導覽 (如鬼怪夜遊、歷史導覽)，可今晚先預約。"] }
+      ]
     },
     {
       "day": 4,
@@ -293,22 +292,23 @@
       "dayGroup": 3,
       "cityTarget": "quebec-section",
       "weatherCity": "quebec",
-      "title": "魁北克市深度遊｜下城、博物館與平原",
-      "subTitle": "Day 4｜7月5日（週六）",
+      "title": "魁北克近郊與河岸一日遊",
+      "subTitle": "Day 4｜7月5日（六）",
       "isTravelDay": false,
       "theme": {
-        "icon": "🏰",
-        "title": "古城探索之日",
-        "description": "深入探索這座世界遺產的上下城區。從充滿藝術氣息的小尚普蘭街，到見證歷史的文明博物館，感受魁北克市的靈魂。"
+        "icon": "🌊",
+        "title": "瀑布與渡輪之日",
+        "description": "從壯麗的蒙莫朗西瀑布出發，搭乘渡輪從對岸眺望古城天際線，感受魁北克市的水岸魅力。"
       },
-      "tags": ["#小尚普蘭街", "#文明博物館", "#亞伯拉罕平原"],
+      "tags": ["#蒙莫朗西瀑布", "#渡輪體驗", "#舊港市集", "#打包日"],
       "activities": [
-        { "title": "☀️ 09:00 – 12:00｜下城區漫步 + 文明博物館", "items": ["搭乘<a href='https://maps.apple.com/?q=Funiculaire+du+Vieux-Québec' target='_blank' class='hover:underline'>登山纜車</a>或走<a href='https://maps.apple.com/?q=Escalier+Casse-Cou,Quebec' target='_blank'>斷頭階梯</a>前往下城。", "探索<a href='https://maps.apple.com/?q=Rue+du+Petit-Champlain,Quebec' target='_blank' class='hover:underline'>小尚普蘭街</a>與<a href='https://maps.apple.com/?q=Place+Royale,Quebec' target='_blank' class='hover:underline'>皇家廣場</a>，感受歐洲小鎮風情。", "<strong>10:30 – 12:00：</strong>參觀<a href='https://www.mcq.org/en/' target='_blank' class='hover:underline'>文明博物館 (Musée de la civilisation)</a>，建議預留 1.5 小時。"] },
-        { "title": "🍽️ 12:00 – 13:30｜午餐時間 (無兔肉選項)", "items": ["推薦餐廳：<a href='https://maps.apple.com/?q=Cochon+Dingue,Quebec' target='_blank' class='hover:underline'>Cochon Dingue</a> (經典魁北克家常料理) 或 <a href='https://maps.apple.com/?q=Bistro+L'Orygine' target='_blank' class='hover:underline'>Bistro L'Orygine</a> (健康自然風格，食材新鮮)。"] },
-        { "title": "🌳 14:00 – 17:00｜亞伯拉罕平原 + 城牆巡禮", "items": ["返回上城區後，沿<a href='https://maps.apple.com/?q=Promenade+des+Gouverneurs,Quebec+City' target='_blank' class='hover:underline'>總督步道</a>進入歷史悠久的<a href='https://maps.apple.com/?q=Plains+of+Abraham,Quebec' target='_blank' class='hover:underline'>亞伯拉罕平原</a>。", "可參觀<a href='https://www.ccbn-nbc.gc.ca/en/plains-of-abraham/plains-of-abraham-museum/' target='_blank' class='hover:underline'>平原博物館</a>，或在<a href='https://maps.apple.com/?q=Artillery+Park+National+Historic+Site' target='_blank' class='hover:underline'>火炮公園 (Artillery Park)</a>段的城牆上散步。", "<strong>備選：</strong><a href='https://www.observatoire-capitale.com/en/' target='_blank' class='hover:underline'>Observatoire de la Capitale</a>（觀景台）俯瞰古城全景。"] },
-        { "title": "🍷 17:30 – 19:00｜晚餐與夜景收尾", "items": ["晚餐建議預約 <a href='https://maps.apple.com/?q=Chez+Boulay+–+Bistro+Boréal,Quebec' target='_blank' class='hover:underline'>Chez Boulay – Bistro Boréal</a>，品嚐使用在地食材的北方林地創意料理。", "飯後可再次至 <a href='https://maps.apple.com/?q=Dufferin+Terrace,Quebec' target='_blank'>Dufferin Terrace</a> 或 <a href='https://maps.apple.com/?q=Place+d'Armes,Quebec' target='_blank'>Place d’Armes</a> 散步，感受古城寧靜的夜間氛圍。"] }
+        { "title": "☀️ 08:00–11:30｜蒙莫朗西瀑布 (Montmorency Falls)", "items": ["從飯店步行至 <a href='https://maps.apple.com/?q=Honoré-Mercier+Saint-Jean,Quebec' target='_blank'>Honoré-Mercier / Saint-Jean 站牌</a> 搭乘 RTC 800 公車 (往 Terminus Beauport 方向)。", "建議從「Chutes-Montmorency」站下車，步行至<a href='https://maps.apple.com/?q=Parc+de+la+Chute-Montmorency' target='_blank'>纜車站</a>搭纜車上山，再走吊橋體驗瀑布頂端景觀。", "約 11:00 搭 800 公車原路返回市區。"] },
+        { "title": "🍴 12:00–13:15｜舊港市集 (Marché du Vieux-Port) + 午餐", "items": ["下公車後步行約 10-15 分鐘即可抵達<a href='https://maps.apple.com/?q=Marché+du+Vieux-Port+de+Québec' target='_blank'>舊港市集</a>。", "午餐可選擇市集內的熟食攤，或港邊的 <a href='https://maps.apple.com/?q=Café+du+Monde,Quebec' target='_blank'>Café du Monde</a> 景觀餐廳。"] },
+        { "title": "🚢 13:30–15:00｜魁北克–萊維斯渡輪 (Ferry to Lévis)", "items": ["從市集步行至<a href='https://maps.apple.com/?q=Traverse+Québec-Lévis' target='_blank'>魁北克渡輪碼頭</a>。", "搭乘渡輪至對岸萊維斯，前往 <a href='https://maps.apple.com/?q=Terrasse+de+Lévis' target='_blank'>Terrasse de Lévis</a> 觀景台眺望魁北克城全景，拍照後搭原船返回。"] },
+        { "title": "🏘 15:30–17:30｜小尚普蘭街 & 皇家廣場", "items": ["返回後，漫步於<a href='https://maps.apple.com/?q=Rue+du+Petit-Champlain,Quebec' target='_blank'>小尚普蘭街</a>與<a href='https://maps.apple.com/?q=Place+Royale,Quebec' target='_blank'>皇家廣場</a>，感受下城歷史街區的魅力，可在此採購紀念品或喝杯咖啡。", "結束後可搭乘<a href='https://maps.apple.com/?q=Funiculaire+du+Vieux-Québec' target='_blank'>纜車</a>或走樓梯返回上城區。"] },
+        { "title": "🍽️ 17:45–19:00｜早晚餐（簡餐）", "items": ["因應隔日早起，建議簡單用餐。可選擇 <a href='https://maps.apple.com/?q=Le+Lapin+Sauté' target='_blank'>Le Lapin Sauté</a>、<a href='https://maps.apple.com/?q=Bistro+L'Orygine' target='_blank'>Bistro L’Orygine</a> (建議預約)，或在<a href='https://maps.apple.com/?q=Rue+Saint-Jean,Quebec' target='_blank'>聖讓街</a>附近外帶。"] }
       ],
-      "infoBox": { "title": "⭐ 魁北克市實用資訊", "items": ["🗣 法語為主，但觀光區英文OK；標誌以法語為主。", "🚶‍♀️ 石板坡道多，建議穿防滑鞋、備手杖如有需要。", "💳 商店與餐廳普遍接受信用卡，小費建議 15–18%。", "🌤 白天氣溫約 22°C，夜間可降至 16°C，攜帶薄長袖外套。"] }
+      "reminder": { "title": "🧳 睡前重要提醒", "items": ["<strong>隔日需於凌晨 03:00 從飯店出發前往機場！</strong>", "請務必於今晚 21:00 前返回飯店，將所有行李打包整理完畢。", "設定好多個鬧鐘，並與櫃台確認預約的計程車或Uber。"] }
     },
     {
       "day": 5,
@@ -346,7 +346,7 @@
       "activities": [
         { "title": "🌊 09:00 – 12:00｜經典瀑布體驗", "items": ["<strong><a href='https://www.niagaraparks.com/visit/attractions/niagara-city-cruises/' target='_blank' class='hover:underline'>Voyage to the Falls 船票體驗</a>：</strong>近距離感受瀑布水勢，建議線上預約上午場。", "<strong><a href='https://www.niagaraparks.com/visit/attractions/journey-behind-the-falls/' target='_blank' class='hover:underline'>Journey Behind the Falls</a>：</strong>進入瀑布後方岩壁隧道觀賞水柱傾瀉。"] },
         { "title": "🍽️ 12:30 – 14:00｜午餐建議", "items": ["<a href='https://maps.apple.com/?q=Queen+Victoria+Place+Restaurant,Niagara+Falls' target='_blank' class='hover:underline'>Queen Victoria Place Restaurant</a>（景觀+當地食材）或 Table Rock Centre 美食廣場。"] },
-        { "title": "� 14:00 – 17:00｜自然景點探索", "items": ["搭乘 <strong>WEGO 巴士</strong> 前往 <a href='https://www.niagaraparks.com/visit/attractions/butterfly-conservatory/' target='_blank' class='hover:underline'>Butterfly Conservatory</a> (蝴蝶園) 或 <a href='https://www.niagaraparks.com/visit/attractions/white-water-walk/' target='_blank' class='hover:underline'>White Water Walk</a> (激流步道)。"] },
+        { "title": "🦋 14:00 – 17:00｜自然景點探索", "items": ["搭乘 <strong>WEGO 巴士</strong> 前往 <a href='https://www.niagaraparks.com/visit/attractions/butterfly-conservatory/' target='_blank' class='hover:underline'>Butterfly Conservatory</a> (蝴蝶園) 或 <a href='https://www.niagaraparks.com/visit/attractions/white-water-walk/' target='_blank' class='hover:underline'>White Water Walk</a> (激流步道)。"] },
         { "title": "🍷 18:00 – 21:30｜晚餐 + 夜景 + 煙火", "items": ["<strong>夜間活動：</strong>約 21:00 起瀑布打燈，21:45～22:00 季節性煙火秀（如天氣良好）。", "建議提早至 <a href='https://maps.apple.com/?q=Table+Rock+Welcome+Centre,Niagara+Falls' target='_blank'>Table Rock</a> 或 <a href='https://maps.apple.com/?q=Queen+Victoria+Park,Niagara+Falls' target='_blank'>Queen Victoria Park</a> 卡位拍照。"] }
       ],
       "infoBox": { "title": "⭐ 瀑布實用資訊", "items": ["🧥 參加瀑布船與後方通道活動務必攜帶雨衣（現場也會提供）。", "🎫 建議提前線上購買 <a href='https://www.niagaraparks.com/visit/attractions/adventure-pass-classic' target='_blank' class='hover:underline'>Niagara Pass</a>（含票+WEGO車）避免現場排隊。", "📷 相機建議使用防水袋，手機請準備擦拭布。", "☀️ 七月氣溫約 25–29°C，日曬強烈建議塗防曬。"] }
@@ -365,8 +365,7 @@
         { "title": "🚌 07:30 – 12:00｜退房並搭乘巴士前往多倫多", "items": ["建議 07:30 起床，整理行李並辦理退房。", "搭乘 Uber 或飯店叫車前往 <a href='https://maps.apple.com/?q=Niagara+Falls+Bus+Terminal' target='_blank'>Niagara Falls Bus Terminal (4555 Erie Ave)</a>。", "搭乘 <strong>10:00</strong> 出發的 Megabus，預計 <strong>12:00</strong> 抵達多倫多 <a href='https://maps.apple.com/?q=Union+Station+Bus+Terminal,+Toronto' target='_blank'>Union Station Bus Terminal</a>。"] },
         { "title": "✈️ 12:00 – 19:29｜前往機場、報到與飛行", "items": ["抵達多倫多後，搭乘 Uber/Lyft (建議) 或 UP Express 前往多倫多皮爾遜機場 (YYZ)。", "於 YYZ 機場辦理報到、行李託運與<strong>美國海關預先清關 (Pre-clearance)</strong>，請預留充足時間。", "搭乘 <strong>18:35</strong> 起飛的航班，預計 <strong>19:29</strong> 抵達芝加哥 O'Hare 國際機場 (ORD)。"] },
         { "title": "🏨 20:00 – 21:30｜前往芝加哥市中心飯店", "items": ["抵達芝加哥後，可搭乘地鐵 <strong>Blue Line</strong> 或 Uber/Lyft 前往市中心飯店。", "辦理入住後，可至周邊便利店或超市補充飲水與零食，為明日行程做準備。"] }
-      ],
-      "reminder": { "title": "🛏️ 睡前提醒", "items": ["明日為建築巡禮與湖濱遊覽日，可自由決定早或晚出發。"] }
+      ]
     },
     {
       "day": 8,
@@ -386,7 +385,7 @@
       "activities": [
         { "title": "🛥️ 09:30 – 12:00｜芝加哥建築遊船 + 千禧公園", "items": ["<strong><a href='https://www.architecture.org/tours/chicago-architecture-foundation-center-river-cruise-aboard-chicago-s-first-lady/' target='_blank' class='hover:underline'>Chicago Architecture River Cruise</a>：</strong>建議預約 <a href='https://www.wendellaboats.com/' target='_blank'>Wendella</a> 或 <a href='https://www.cruisechicago.com/first-lady-cruises' target='_blank'>Chicago’s First Lady</a> 上午場。", "遊船後步行至 <a href='https://maps.apple.com/?q=Millennium+Park,Chicago' target='_blank' class='hover:underline'>Millennium Park</a> 拍攝 <a href='https://maps.apple.com/?q=Cloud+Gate,Chicago' target='_blank' class='hover:underline'>Cloud Gate (The Bean)</a>。"] },
         { "title": "🍽️ 12:30 – 14:00｜午餐建議", "items": ["<a href='https://maps.apple.com/?q=The+Purple+Pig,Chicago' target='_blank' class='hover:underline'>The Purple Pig</a>（地中海風味）或 <a href='https://maps.apple.com/?q=Beatrix,Chicago' target='_blank' class='hover:underline'>Beatrix</a>（人氣早午餐）。"] },
-        { "title": "🎡 14:30 – 17:00｜海軍碼頭 Navy Pier + 湖畔活動", "items": ["登上 <a href='https://navypier.org/things-to-do/rides-attractions/centennial-wheel/' target='_blank' class='hover:underline'>Centennial Wheel 摩天輪</a>，俯瞰密西根湖與天際線。", "或前往<a href='https://mcachicago.org/' target='_blank' class='hover:underline'>當代藝術博物館（MCA）</a>。"] },
+        { "title": "🎡 14:30 – 17:00｜海軍碼頭 Navy Pier + 湖畔活動", "items": ["登上 <a href='https.navypier.org/things-to-do/rides-attractions/centennial-wheel/' target='_blank' class='hover:underline'>Centennial Wheel 摩天輪</a>，俯瞰密西根湖與天際線。", "或前往<a href='https://mcachicago.org/' target='_blank' class='hover:underline'>當代藝術博物館（MCA）</a>。"] },
         { "title": "🏙️ 18:00 – 21:00｜夜景體驗 + 高空酒吧或觀景塔", "items": ["<strong>選擇一：</strong><a href='https://360chicago.com/' target='_blank' class='hover:underline'>360 CHICAGO</a>（Hancock Tower），可選附酒吧門票。", "<strong>選擇二：</strong><a href='https://theskydeck.com/' target='_blank' class='hover:underline'>Skydeck Chicago</a>（Willis Tower），體驗懸空玻璃盒。", "<strong>晚餐：</strong><a href='https://maps.apple.com/?q=The+Gage,Chicago' target='_blank' class='hover:underline'>The Gage</a>。"] }
       ],
       "infoBox": { "title": "⭐ 芝加哥實用資訊", "items": ["🚇 地鐵系統 CTA 可使用 Ventra App 或現場購票。", "📶 網路不穩地點可使用 Starbucks / Target 等店內免費 Wi-Fi。", "💨 芝加哥有「風城」之稱，日夜溫差大且湖邊風強，務必攜帶防風外套。"] }
