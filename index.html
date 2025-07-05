@@ -1319,9 +1319,9 @@
                     const dateString = now.toLocaleDateString('zh-TW', { timeZone: 'Asia/Taipei', month: '2-digit', day: '2-digit' });
                     const dayOfWeekString = now.toLocaleDateString('zh-TW', { timeZone: 'Asia/Taipei', weekday: 'short' });
                     const timeString = now.toLocaleTimeString('en-GB', { timeZone: 'Asia/Taipei', hour: '2-digit', minute: '2-digit', hour12: false });
-                    taipeiTimeEl.textContent = `🇹🇼 台北 ${dateString}(${dayOfWeekString}) ${timeString}`;
+                    taipeiTimeEl.textContent = ` ⛰️台北 ${dateString}(${dayOfWeekString}) ${timeString}`;
                 } catch(e) {
-                    taipeiTimeEl.textContent = `🇹🇼 台北時間 --:--`;
+                    taipeiTimeEl.textContent = `⛰️ 台北時間 --:--`;
                 }
             }
             
