@@ -3,7 +3,7 @@
     "totalDays": 13,
     "tripStartDate": "2025-07-02",
     "tripEndDate": "2025-07-16",
-    "dataVersion": "20250705-01"
+    "dataVersion": "20250705-02"
   },
   "timePhases": [
     {
@@ -344,9 +344,14 @@
       },
       "tags": ["#經典體驗", "#自然奇觀", "#夜間煙火"],
       "activities": [
-        { "title": "🌊 09:00 – 12:00｜經典瀑布體驗", "items": ["<strong><a href='https://www.niagaraparks.com/visit/attractions/niagara-city-cruises/' target='_blank' class='hover:underline'>Voyage to the Falls 船票體驗</a>：</strong>近距離感受瀑布水勢，建議線上預約上午場。", "<strong><a href='https://www.niagaraparks.com/visit/attractions/journey-behind-the-falls/' target='_blank' class='hover:underline'>Journey Behind the Falls</a>：</strong>進入瀑布後方岩壁隧道觀賞水柱傾瀉。"] },
+        { "title": "🌊 09:00 – 12:00｜經典瀑布體驗", "items": [
+            "<strong>08:30 – 09:00 | Voyage to the Falls 觀瀑船體驗：</strong>前往 <a href='https://maps.apple.com/?q=Niagara+City+Cruises' target='_blank'>Niagara City Cruises 登船點 (5920 Niagara Pkwy)</a>。建議提早 15-30 分鐘報到，以便選擇上層較佳視野。",
+            "<strong>Journey Behind the Falls (瀑布後方探險)：</strong>入口位於 <a href='https://maps.apple.com/?q=Table+Rock+Welcome+Centre' target='_blank'>Table Rock Welcome Centre</a> 內部，可直接持套票入場。"
+        ]},
         { "title": "🍽️ 12:30 – 14:00｜午餐建議", "items": ["<a href='https://maps.apple.com/?q=Queen+Victoria+Place+Restaurant,Niagara+Falls' target='_blank' class='hover:underline'>Queen Victoria Place Restaurant</a>（景觀+當地食材）或 Table Rock Centre 美食廣場。"] },
-        { "title": "🦋 14:00 – 17:00｜自然景點探索", "items": ["搭乘 <strong>WEGO 巴士</strong> 前往 <a href='https://www.niagaraparks.com/visit/attractions/butterfly-conservatory/' target='_blank' class='hover:underline'>Butterfly Conservatory</a> (蝴蝶園) 或 <a href='https://www.niagaraparks.com/visit/attractions/white-water-walk/' target='_blank' class='hover:underline'>White Water Walk</a> (激流步道)。"] },
+        { "title": "🦋 14:00 – 17:00｜自然景點探索", "items": [
+            "<strong>White Water Walk (白水步道)：</strong>從瀑布區搭乘 WeGo 綠線公車 (約 10 分鐘) 前往 <a href='https://maps.apple.com/?q=White+Water+Walk' target='_blank'>White Water Walk (4330 River Rd)</a>。夏季開放時間約為每日 10:00–17:00，建議 16:30 前入場。"
+        ]},
         { "title": "🍷 18:00 – 21:30｜晚餐 + 夜景 + 煙火", "items": ["<strong>夜間活動：</strong>約 21:00 起瀑布打燈，21:45～22:00 季節性煙火秀（如天氣良好）。", "建議提早至 <a href='https://maps.apple.com/?q=Table+Rock+Welcome+Centre,Niagara+Falls' target='_blank'>Table Rock</a> 或 <a href='https://maps.apple.com/?q=Queen+Victoria+Park,Niagara+Falls' target='_blank'>Queen Victoria Park</a> 卡位拍照。"] }
       ],
       "infoBox": { "title": "⭐ 瀑布實用資訊", "items": ["🧥 參加瀑布船與後方通道活動務必攜帶雨衣（現場也會提供）。", "🎫 建議提前線上購買 <a href='https://www.niagaraparks.com/visit/attractions/adventure-pass-classic' target='_blank' class='hover:underline'>Niagara Pass</a>（含票+WEGO車）避免現場排隊。", "📷 相機建議使用防水袋，手機請準備擦拭布。", "☀️ 七月氣溫約 25–29°C，日曬強烈建議塗防曬。"] }
@@ -385,7 +390,7 @@
       "activities": [
         { "title": "🛥️ 09:30 – 12:00｜芝加哥建築遊船 + 千禧公園", "items": ["<strong><a href='https://www.architecture.org/tours/chicago-architecture-foundation-center-river-cruise-aboard-chicago-s-first-lady/' target='_blank' class='hover:underline'>Chicago Architecture River Cruise</a>：</strong>建議預約 <a href='https://www.wendellaboats.com/' target='_blank'>Wendella</a> 或 <a href='https://www.cruisechicago.com/first-lady-cruises' target='_blank'>Chicago’s First Lady</a> 上午場。", "遊船後步行至 <a href='https://maps.apple.com/?q=Millennium+Park,Chicago' target='_blank' class='hover:underline'>Millennium Park</a> 拍攝 <a href='https://maps.apple.com/?q=Cloud+Gate,Chicago' target='_blank' class='hover:underline'>Cloud Gate (The Bean)</a>。"] },
         { "title": "🍽️ 12:30 – 14:00｜午餐建議", "items": ["<a href='https://maps.apple.com/?q=The+Purple+Pig,Chicago' target='_blank' class='hover:underline'>The Purple Pig</a>（地中海風味）或 <a href='https://maps.apple.com/?q=Beatrix,Chicago' target='_blank' class='hover:underline'>Beatrix</a>（人氣早午餐）。"] },
-        { "title": "🎡 14:30 – 17:00｜海軍碼頭 Navy Pier + 湖畔活動", "items": ["登上 <a href='https.navypier.org/things-to-do/rides-attractions/centennial-wheel/' target='_blank' class='hover:underline'>Centennial Wheel 摩天輪</a>，俯瞰密西根湖與天際線。", "或前往<a href='https://mcachicago.org/' target='_blank' class='hover:underline'>當代藝術博物館（MCA）</a>。"] },
+        { "title": "🎡 14:30 – 17:00｜海軍碼頭 Navy Pier + 湖畔活動", "items": ["登上 <a href='https://navypier.org/things-to-do/rides-attractions/centennial-wheel/' target='_blank' class='hover:underline'>Centennial Wheel 摩天輪</a>，俯瞰密西根湖與天際線。", "或前往<a href='https://mcachicago.org/' target='_blank' class='hover:underline'>當代藝術博物館（MCA）</a>。"] },
         { "title": "🏙️ 18:00 – 21:00｜夜景體驗 + 高空酒吧或觀景塔", "items": ["<strong>選擇一：</strong><a href='https://360chicago.com/' target='_blank' class='hover:underline'>360 CHICAGO</a>（Hancock Tower），可選附酒吧門票。", "<strong>選擇二：</strong><a href='https://theskydeck.com/' target='_blank' class='hover:underline'>Skydeck Chicago</a>（Willis Tower），體驗懸空玻璃盒。", "<strong>晚餐：</strong><a href='https://maps.apple.com/?q=The+Gage,Chicago' target='_blank' class='hover:underline'>The Gage</a>。"] }
       ],
       "infoBox": { "title": "⭐ 芝加哥實用資訊", "items": ["🚇 地鐵系統 CTA 可使用 Ventra App 或現場購票。", "📶 網路不穩地點可使用 Starbucks / Target 等店內免費 Wi-Fi。", "💨 芝加哥有「風城」之稱，日夜溫差大且湖邊風強，務必攜帶防風外套。"] }
