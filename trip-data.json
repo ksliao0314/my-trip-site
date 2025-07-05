@@ -3,7 +3,7 @@
     "totalDays": 13,
     "tripStartDate": "2025-07-02",
     "tripEndDate": "2025-07-16",
-    "dataVersion": "20250705-02"
+    "dataVersion": "20250706-01"
   },
   "timePhases": [
     {
@@ -321,7 +321,7 @@
       "isTravelDay": true,
       "tags": ["#國內航班", "#巴士移動", "#瀑布夜景"],
       "activities": [
-        { "title": "✈️ 03:00 – 07:00｜清晨退房與飛行", "items": ["凌晨退房，搭乘計程車前往魁北克機場 (YQB)。", "搭乘 05:20 起飛的航班，預計 06:58 抵達多倫多皮爾遜機場 (YYZ)。"] },
+        { "title": "✈️ 03:40 – 07:00｜清晨退房與飛行", "items": ["<strong>已預約 Uber 於 03:40 從飯店出發前往機場。</strong>", "搭乘 05:20 起飛的航班，預計 06:58 抵達多倫多皮爾遜機場 (YYZ)。"] },
         { "title": "🚆 07:30 – 09:00｜前往多倫多市中心與行李寄放", "items": ["搭乘 <strong>UP Express</strong> 機場快線 (約 25 分鐘) 前往市中心的 <a href='https://maps.apple.com/?q=Union+Station,Toronto' target='_blank'>Union Station</a>。", "使用車站附近的行李寄存服務 (如 BagsAway) 寄放大型行李。"] },
         { "title": "🏙️ 09:00 – 15:15｜多倫多市區半日快閃", "items": ["<strong>推薦路線：</strong><a href='https://maps.apple.com/?q=St.+Lawrence+Market' target='_blank'>聖羅倫斯市場</a> (享用 Peameal Bacon on a Bun 早午餐) → 步行至 <a href='https://maps.apple.com/?q=Distillery+District,Toronto' target='_blank'>古釀酒廠區</a> (在特色餐廳或咖啡館享用午餐)。", "約 14:30-15:00 從古釀酒廠區步行或搭車返回市中心。"] },
         { "title": "🚌 15:15 – 18:05｜取行李並搭乘巴士前往尼加拉瀑布", "items": ["返回 Union Station 附近領取行李。", "步行前往 <a href='https://maps.apple.com/?q=Union+Station+Bus+Terminal,+Toronto' target='_blank'>Union Station Bus Terminal (81 Bay St, 2F)</a>。", "建議於 16:00 前報到排隊，搭乘 <strong>16:30</strong> 出發的 Megabus。", "預計 <strong>18:05</strong> 抵達 <a href='https://maps.apple.com/?q=Niagara+Falls+Bus+Terminal' target='_blank'>Niagara Falls Bus Terminal</a>。"] },
@@ -345,7 +345,7 @@
       "tags": ["#經典體驗", "#自然奇觀", "#夜間煙火"],
       "activities": [
         { "title": "🌊 09:00 – 12:00｜經典瀑布體驗", "items": [
-            "<strong>08:30 – 09:00 | Voyage to the Falls 觀瀑船體驗：</strong>前往 <a href='https://maps.apple.com/?q=Niagara+City+Cruises' target='_blank'>Niagara City Cruises 登船點 (5920 Niagara Pkwy)</a>。建議提早 15-30 分鐘報到，以便選擇上層較佳視野。",
+            "<strong>09:00 – 09:30 | Voyage to the Falls 觀瀑船體驗：</strong>前往 <a href='https://maps.apple.com/?q=Niagara+City+Cruises' target='_blank'>Niagara City Cruises 登船點 (5920 Niagara Pkwy)</a>。建議提早 15-30 分鐘報到，以便選擇上層較佳視野。",
             "<strong>Journey Behind the Falls (瀑布後方探險)：</strong>入口位於 <a href='https://maps.apple.com/?q=Table+Rock+Welcome+Centre' target='_blank'>Table Rock Welcome Centre</a> 內部，可直接持套票入場。"
         ]},
         { "title": "🍽️ 12:30 – 14:00｜午餐建議", "items": ["<a href='https://maps.apple.com/?q=Queen+Victoria+Place+Restaurant,Niagara+Falls' target='_blank' class='hover:underline'>Queen Victoria Place Restaurant</a>（景觀+當地食材）或 Table Rock Centre 美食廣場。"] },
