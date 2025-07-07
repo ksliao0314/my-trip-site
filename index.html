@@ -1098,11 +1098,29 @@
                     accommodationItemEl.style.display = 'none';
                 }
 
-                let transportItems = transport.filter(t => t.date === date);
-                if (date === '2025-07-14') {
-                    const nextDayTransport = transport.filter(t => t.date === '2025-07-15');
-                    transportItems = transportItems.concat(nextDayTransport);
-                }
+                // 改進的交通項目篩選邏輯：考慮跨日航班的抵達時間
+                let transportItems = transport.filter(t => {
+                    // 基本篩選：date 欄位匹配
+                    if (t.date === date) return true;
+                    
+                    // 特殊處理：如果是航班且有詳細資訊，檢查抵達時間
+                    if (t.type === '航班' && Array.isArray(t.details)) {
+                        return t.details.some(leg => {
+                            // 計算抵達時間在目標時區的本地日期
+                            const arrivalLocalDateStr = new Intl.DateTimeFormat('fr-CA', { 
+                                year: 'numeric', 
+                                month: '2-digit', 
+                                day: '2-digit', 
+                                timeZone: leg.arrival.tz 
+                            }).format(new Date(leg.arrival.time));
+                            
+                            // 如果抵達日期匹配目標日期，則包含此航班
+                            return arrivalLocalDateStr === date;
+                        });
+                    }
+                    
+                    return false;
+                });
 
                 if (transportItems.length > 0) {
                     const iconMap = { '航班': '✈️', '火車': '🚄', '巴士': '🚌', '機場接送': '🚖' };
@@ -1519,7 +1537,29 @@
 
                         if (hotelInfoHTML) dayContentContainer.insertAdjacentHTML('afterbegin', `<div class="info-block accommodation-info p-4 bg-gray-50 rounded-lg border-l-4 border-indigo-400"><h4 class="font-bold text-lg text-indigo-800 flex items-center mb-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor"><path d="M19 9.5A2.5 2.5 0 0016.5 7H3.5A2.5 2.5 0 001 9.5v7A2.5 2.5 0 003.5 19h13a2.5 2.5 0 002.5-2.5v-7zM6 13a1 1 0 11-2 0 1 1 0 012 0zm3 0a1 1 0 11-2 0 1 1 0 012 0z" /><path d="M3.5 4A1.5 1.5 0 002 5.5v1A1.5 1.5 0 003.5 8h13A1.5 1.5 0 0018 6.5v-1A1.5 1.5 0 0016.5 4h-13z" /></svg>住宿資訊</h4>${hotelInfoHTML}</div>`);
                         
-                        const transportItems = transportData.filter(t => t.date === dateStr);
+                        // 改進的交通項目篩選邏輯：考慮跨日航班的抵達時間
+                        const transportItems = transportData.filter(t => {
+                            // 基本篩選：date 欄位匹配
+                            if (t.date === dateStr) return true;
+                            
+                            // 特殊處理：如果是航班且有詳細資訊，檢查抵達時間
+                            if (t.type === '航班' && Array.isArray(t.details)) {
+                                return t.details.some(leg => {
+                                    // 計算抵達時間在目標時區的本地日期
+                                    const arrivalLocalDateStr = new Intl.DateTimeFormat('fr-CA', { 
+                                        year: 'numeric', 
+                                        month: '2-digit', 
+                                        day: '2-digit', 
+                                        timeZone: leg.arrival.tz 
+                                    }).format(new Date(leg.arrival.time));
+                                    
+                                    // 如果抵達日期匹配目標日期，則包含此航班
+                                    return arrivalLocalDateStr === dateStr;
+                                });
+                            }
+                            
+                            return false;
+                        });
                         if (transportItems.length > 0) {
                              const transportListHTML = transportItems.map(item => {
                                 if (item.type === '航班' && Array.isArray(item.details)) {
