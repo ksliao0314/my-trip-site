@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no">
-    <title>F&S飛翔旅行 | 加拿大東岸 & 芝加哥探索之旅</title>
+    <title>F&amp;S Trip</title>
     
     <!-- PWA Manifest and Theme Color -->
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -494,7 +494,7 @@
     <div id="mobile-menu-panel" class="hidden">
         <div class="p-4 space-y-2">
              <a href="#status-dashboard-section" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">📋 行程要覽</a>
-             <a href="#tip-calculator-section" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">� 小費計算機</a>
+             <a href="#tip-calculator-section" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">💰 小費計算機</a>
              <a href="#links-dashboard" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">🔗 常用連結</a>
              <!-- START: 新增的行動版重新整理按鈕 -->
              <button id="mobile-refresh-btn" class="w-full text-left mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">🔄 下載最新行程</button>
@@ -620,7 +620,9 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-end">
                     <div>
                         <label for="bill-amount" class="block text-sm font-medium text-gray-700">帳單金額 (CAD/USD)</label>
-                        <input type="number" id="bill-amount" placeholder="例如 85.50" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                        <!-- START: 修改小費計算機輸入欄位 -->
+                        <input type="number" inputmode="decimal" id="bill-amount" placeholder="例如 85.50" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                        <!-- END: 修改小費計算機輸入欄位 -->
                     </div>
                     <div>
                         <label for="tip-rate" class="block text-sm font-medium text-gray-700">小費比例 (%)</label>
@@ -851,22 +853,64 @@
             return '祝您有美好的一天！';
         }
 
+        // --- START: 修改天氣請求邏輯 ---
         async function fetchAllWeatherData(itinerary) {
             if (!navigator.onLine && !navigator.serviceWorker.controller) {
                 console.log("目前處於離線狀態，無法取得天氣資訊。");
                 return {};
             }
-            const uniqueCities = [...new Set(itinerary.map(day => day.weatherCity).filter(Boolean))];
-            const promises = uniqueCities.map(city => {
+
+            const today = new Date();
+            today.setHours(0, 0, 0, 0); // 將時間設定為當天零點以便比較
+
+            const uniqueCityDateRequests = [...new Set(itinerary.filter(day => day.weatherCity).map(day => JSON.stringify({ city: day.weatherCity, date: day.date })))].map(JSON.parse);
+
+            const promises = uniqueCityDateRequests.map(async ({ city, date }) => {
                 const { lat, lon } = cityCoordinates[city];
-                const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=auto`;
-                return fetch(url).then(res => res.ok ? res.json() : Promise.reject(`API error for ${city}`))
-                                 .then(data => ({ city, data }))
-                                 .catch(error => { console.error(`無法取得 ${city} 的天氣資訊:`, error); return null; });
+                const requestDate = new Date(date);
+                let url;
+
+                if (requestDate < today) {
+                    // 日期在今天之前，使用歷史天氣 API
+                    url = `https://archive-api.open-meteo.com/v1/archive?latitude=${lat}&longitude=${lon}&start_date=${date}&end_date=${date}&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=auto`;
+                } else {
+                    // 日期是今天或未來，使用天氣預報 API
+                    url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=auto`;
+                }
+
+                try {
+                    const res = await fetch(url);
+                    if (!res.ok) throw new Error(`API error for ${city} on ${date}`);
+                    const data = await res.json();
+                    
+                    // 將結果包裝成與原格式一致，方便後續處理
+                    return { city, date, data: data.daily };
+                } catch (error) {
+                    console.error(`無法取得 ${city} 在 ${date} 的天氣資訊:`, error);
+                    return null;
+                }
             });
+
             const results = await Promise.all(promises);
-            return results.filter(r => r).reduce((acc, {city, data}) => ({ ...acc, [city]: data.daily }), {});
+            
+            // 將結果重新組合成以城市為鍵值的物件
+            const allWeatherData = {};
+            results.filter(r => r).forEach(({ city, date, data }) => {
+                if (!allWeatherData[city]) {
+                    allWeatherData[city] = { time: [], temperature_2m_max: [], temperature_2m_min: [], weather_code: [] };
+                }
+                const dateIndex = allWeatherData[city].time.indexOf(date);
+                if (dateIndex === -1 && data && data.time) { // 確保 data 和 data.time 存在
+                    allWeatherData[city].time.push(data.time[0]);
+                    allWeatherData[city].temperature_2m_max.push(data.temperature_2m_max[0]);
+                    allWeatherData[city].temperature_2m_min.push(data.temperature_2m_min[0]);
+                    allWeatherData[city].weather_code.push(data.weather_code[0]);
+                }
+            });
+            
+            return allWeatherData;
         }
+        // --- END: 修改天氣請求邏輯 ---
         
         function updateStatusDashboard(date, data, allWeatherData, direction = 0) {
             const { itinerary, hotels, transport, tripInfo } = data;
@@ -1008,7 +1052,7 @@
                 const cityWeather = allWeatherData ? allWeatherData[cityKey] : undefined;
                 if (cityKey) {
                     weatherItemEl.style.display = 'flex';
-                    if (cityWeather) { 
+                    if (cityWeather && cityWeather.time) { 
                         const dayIndex = cityWeather.time.indexOf(date);
                         if (dayIndex !== -1) {
                             const tempMax = Math.round(cityWeather.temperature_2m_max[dayIndex]);
@@ -1019,7 +1063,7 @@
                             weatherReminderEl.textContent = getWeatherReminder(code);
                         } else { 
                             weatherIconEl.textContent = '❓';
-                            weatherTempEl.textContent = '無預報';
+                            weatherTempEl.textContent = '無資料';
                             weatherReminderEl.textContent = '無法取得本日天氣資訊。';
                         }
                     } else { 
@@ -1336,13 +1380,13 @@
                     const date = dayEl.dataset.date;
                     const city = dayEl.dataset.weatherCity;
                     const weatherDisplay = dayEl.querySelector('.weather-display');
-                    if (city && allWeatherData[city] && weatherDisplay) {
+                    if (city && allWeatherData[city] && weatherDisplay && allWeatherData[city].time) {
                         const dayIndex = allWeatherData[city].time.indexOf(date);
                         if (dayIndex !== -1) {
                             const temp = Math.round(allWeatherData[city].temperature_2m_max[dayIndex]);
                             const icon = getWeatherIcon(allWeatherData[city].weather_code[dayIndex]);
                             weatherDisplay.innerHTML = `${icon} ${temp}°C`;
-                        } else { weatherDisplay.textContent = '無預報'; }
+                        } else { weatherDisplay.textContent = '無資料'; }
                     } else if (weatherDisplay) { 
                         weatherDisplay.textContent = 'N/A'; 
                     }
