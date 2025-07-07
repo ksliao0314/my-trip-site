@@ -13,7 +13,7 @@ workbox.core.clientsClaim();
 const APP_SHELL_ASSETS = [
   { url: '/my-trip-site/index.html', revision: '20250707-04' }, // HTML主檔案 - 更新版本以解決天氣錯誤
   { url: '/my-trip-site/manifest.json', revision: '20250702-01' }, // PWA 設定檔
-  { url: '/my-trip-site/trip-data.json', revision: '20250707-04' }, // 核心行程資料
+  { url: '/my-trip-site/trip-data.json', revision: '20250707-05' }, // 核心行程資料
   // --- 快取所有應用程式圖示 ---
   { url: '/my-trip-site/apple-touch-icon.png', revision: null },
   { url: '/my-trip-site/favicon.ico', revision: null },
