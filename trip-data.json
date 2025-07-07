@@ -3,7 +3,7 @@
     "totalDays": 13,
     "tripStartDate": "2025-07-02",
     "tripEndDate": "2025-07-16",
-    "dataVersion": "20250706-01"
+    "dataVersion": "20250707-02"
   },
   "timePhases": [
     {
@@ -89,12 +89,12 @@
         { 
           "flightCode": "日航 JL009", 
           "departure": { "airport": "芝加哥 (ORD)", "time": "2025-07-14T06:30:00Z", "tz": "America/Chicago" }, 
-          "arrival": { "airport": "東京羽田 (HND)", "time": "2025-07-15T09:20:00Z", "tz": "Asia/Tokyo" } 
+          "arrival": { "airport": "東京羽田 (HND)", "time": "2025-07-14T19:20:00Z", "tz": "Asia/Tokyo" } 
         },
         { 
           "flightCode": "日航 JL097", 
-          "departure": { "airport": "東京羽田 (HND)", "time": "2025-07-15T12:55:00Z", "tz": "Asia/Tokyo" }, 
-          "arrival": { "airport": "台北松山 (TSA)", "time": "2025-07-15T15:35:00Z", "tz": "Asia/Taipei" } 
+          "departure": { "airport": "東京羽田 (HND)", "time": "2025-07-14T23:55:00Z", "tz": "Asia/Tokyo" }, 
+          "arrival": { "airport": "台北松山 (TSA)", "time": "2025-07-15T03:35:00Z", "tz": "Asia/Taipei" } 
         }
       ]
     },
@@ -146,7 +146,7 @@
           { "name": "創意漢堡＋薯條", "desc": "Le Chic Shack 提供美味的創意漢堡。", "places": [{ "name": "Le Chic Shack", "link": "https://maps.apple.com/?q=Le+Chic+Shack" }] },
           { "name": "經典魁北克早午餐", "desc": "Buffet de l’Antiquaire 是體驗當地早午餐的好去處。", "places": [{ "name": "Buffet de l’Antiquaire", "link": "https://maps.apple.com/?q=Buffet+de+l’Antiquaire" }] }
         ]},
-        { "name": "🐇 主題風味料理", "items": [
+        { "name": "� 主題風味料理", "items": [
           { "name": "兔肉主題餐廳", "desc": "Le Lapin Sauté 以各種兔肉料理聞名。", "places": [{ "name": "Le Lapin Sauté", "link": "https://maps.apple.com/?q=Le+Lapin+Sauté" }] },
           { "name": "多分店創意早午餐", "desc": "Cochon Dingue 是受歡迎的連鎖早午餐店。", "places": [{ "name": "Cochon Dingue", "link": "https://maps.apple.com/?q=Cochon+Dingue" }] }
         ]},
