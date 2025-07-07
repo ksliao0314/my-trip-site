@@ -11,16 +11,16 @@ workbox.core.clientsClaim();
 // 這確保了應用程式的基本外觀與功能可以完全離線運作。
 // revision: null 表示我們手動管理版本，若為 null，Workbox 會在 URL 變更時才更新。
 const APP_SHELL_ASSETS = [
-  { url: 'index.html', revision: '20250707-04' }, // HTML主檔案 - 更新版本以解決天氣錯誤
-  { url: 'manifest.json', revision: '20250702-01' }, // PWA 設定檔
-  { url: 'trip-data.json', revision: '20250707-04' }, // 核心行程資料
+  { url: '/my-trip-site/index.html', revision: '20250707-04' }, // HTML主檔案 - 更新版本以解決天氣錯誤
+  { url: '/my-trip-site/manifest.json', revision: '20250702-01' }, // PWA 設定檔
+  { url: '/my-trip-site/trip-data.json', revision: '20250707-04' }, // 核心行程資料
   // --- 快取所有應用程式圖示 ---
-  { url: 'apple-touch-icon.png', revision: null },
-  { url: 'favicon.ico', revision: null },
-  { url: 'favicon.svg', revision: null },
-  { url: 'favicon-96x96.png', revision: null },
-  { url: 'web-app-manifest-192x192.png', revision: null },
-  { url: 'web-app-manifest-512x512.png', revision: null },
+  { url: '/my-trip-site/apple-touch-icon.png', revision: null },
+  { url: '/my-trip-site/favicon.ico', revision: null },
+  { url: '/my-trip-site/favicon.svg', revision: null },
+  { url: '/my-trip-site/favicon-96x96.png', revision: null },
+  { url: '/my-trip-site/web-app-manifest-192x192.png', revision: null },
+  { url: '/my-trip-site/web-app-manifest-512x512.png', revision: null },
 ];
 workbox.precaching.precacheAndRoute(APP_SHELL_ASSETS);
 
@@ -106,7 +106,7 @@ workbox.routing.registerRoute(
 // --- 導航備援 (Navigation Fallback) ---
 // 當使用者離線或伺服器無法回應時，針對頁面導航請求提供一個備用的 HTML 頁面。
 // 這確保了使用者總能看到應用程式的介面，而不是瀏覽器的錯誤頁面。
-const handler = workbox.precaching.createHandlerBoundToURL('/index.html');
+const handler = workbox.precaching.createHandlerBoundToURL('/my-trip-site/index.html');
 const navigationRoute = new workbox.routing.NavigationRoute(handler);
 workbox.routing.registerRoute(navigationRoute);
 
