@@ -18,6 +18,7 @@
     <link rel="icon" href="favicon.ico">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
 
+    <link rel="stylesheet" href="style.css">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -445,39 +446,39 @@
 <body class="text-gray-800 leading-relaxed">
 
     <!-- Sticky Navigation Bar -->
-    <nav id="main-nav" class="sticky-nav no-print">
+    <nav id="main-nav" class="sticky-nav no-print" aria-label="主導覽列">
         <div class="container mx-auto max-w-6xl px-4">
             <div class="flex justify-between items-center py-2 md:py-3">
-                <a href="#" class="font-bold text-base md:text-lg text-indigo-700">F&amp;S Trip</a>
+                <a href="#" class="font-bold text-base md:text-lg text-indigo-700" aria-label="回到首頁">F&amp;S Trip</a>
                 
                 <div class="hidden md:flex items-center space-x-6 text-sm font-medium text-gray-600">
-                    <a href="#status-dashboard-section" class="nav-link flex items-center">
+                    <a href="#status-dashboard-section" class="nav-link flex items-center" aria-label="跳至行程要覽">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1.5" viewBox="0 0 20 20" fill="currentColor"><path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" /><path fill-rule="evenodd" d="M4 5a2 2 0 012-2h8a2 2 0 012 2v10a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd" /></svg>
                         行程要覽
                     </a>
-                    <a href="#tip-calculator-section" class="nav-link flex items-center">
+                    <a href="#tip-calculator-section" class="nav-link flex items-center" aria-label="跳至小費計算">
                          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1.5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V4a2 2 0 00-2-2H6zm1 2a1 1 0 00-1 1v1a1 1 0 001 1h6a1 1 0 001-1V5a1 1 0 00-1-1H7zm-1 4a1 1 0 011-1h6a1 1 0 011 1v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-1zm1 3a1 1 0 00-1 1v1a1 1 0 001 1h6a1 1 0 001-1v-1a1 1 0 00-1-1H7z" clip-rule="evenodd" /></svg>
                         小費計算
                     </a>
-                    <a href="#links-dashboard" class="nav-link flex items-center">
+                    <a href="#links-dashboard" class="nav-link flex items-center" aria-label="跳至常用連結">
                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1.5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0 1 1 0 00-1.414 1.414 4 4 0 005.656 0l3-3a4 4 0 00-5.656-5.656l-1.5 1.5a1 1 0 101.414 1.414l1.5-1.5a2 2 0 11-2.828-2.828l3-3z" clip-rule="evenodd" /></svg>
                         常用連結
                     </a>
                     <!-- START: 新增的重新整理按鈕 -->
-                    <button id="refresh-btn" title="下載最新行程" class="nav-utils p-2 rounded-full hover:bg-gray-200 transition-colors">
+                    <button id="refresh-btn" title="下載最新行程" class="nav-utils p-2 rounded-full hover:bg-gray-200 transition-colors" aria-label="下載最新行程">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 110 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.885-.666A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566z" clip-rule="evenodd" />
                         </svg>
                     </button>
                     <!-- END: 新增的重新整理按鈕 -->
-                     <button id="print-btn" class="no-print inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                     <button id="print-btn" class="no-print inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" aria-label="列印行程">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" /></svg>
                         列印行程
                     </button>
                 </div>
 
                 <div class="md:hidden">
-                    <button id="mobile-menu-btn" class="p-2 rounded-md text-gray-500 hover:text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+                    <button id="mobile-menu-btn" class="p-2 rounded-md text-gray-500 hover:text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500" aria-label="開啟行動選單">
                         <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
                         </svg>
@@ -488,28 +489,28 @@
     </nav>
 
     <!-- Mobile Menu Overlay -->
-    <div id="mobile-menu-overlay" class="hidden"></div>
+    <div id="mobile-menu-overlay" class="hidden" aria-hidden="true"></div>
 
     <!-- Mobile Menu Panel -->
-    <div id="mobile-menu-panel" class="hidden">
+    <div id="mobile-menu-panel" class="hidden" role="menu" aria-label="行動選單">
         <div class="p-4 space-y-2">
-             <a href="#status-dashboard-section" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">� 行程要覽</a>
-             <a href="#tip-calculator-section" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">💰 小費計算機</a>
-             <a href="#links-dashboard" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">🔗 常用連結</a>
+             <a href="#status-dashboard-section" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50" aria-label="行程要覽">行程要覽</a>
+             <a href="#tip-calculator-section" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50" aria-label="小費計算機">小費計算機</a>
+             <a href="#links-dashboard" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50" aria-label="常用連結">常用連結</a>
              <!-- START: 新增的行動版重新整理按鈕 -->
-             <button id="mobile-refresh-btn" class="w-full text-left mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">🔄 下載最新行程</button>
+             <button id="mobile-refresh-btn" class="w-full text-left mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50" aria-label="下載最新行程">下載最新行程</button>
              <!-- END: 新增的行動版重新整理按鈕 -->
-             <button id="mobile-print-btn" class="w-full text-left mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">📄 列印行程</button>
+             <button id="mobile-print-btn" class="w-full text-left mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50" aria-label="列印行程">列印行程</button>
         </div>
     </div>
 
     <!-- Main Container -->
     <div class="container mx-auto p-4 sm:p-6 md:p-8 max-w-6xl">
         
-        <section id="status-dashboard-section" class="mb-12 no-print flex flex-col">
+        <section id="status-dashboard-section" class="mb-12 no-print flex flex-col" aria-labelledby="status-dashboard-title">
             <div class="bg-white rounded-2xl shadow-lg p-5 md:p-6 ring-1 ring-gray-200 h-full flex flex-col relative overflow-hidden">
                 <!-- START: 新增下拉更新的結構 -->
-                <div id="pull-to-refresh-indicator" class="absolute top-0 left-0 right-0 flex justify-center items-center transition-all duration-300" style="height: 50px; transform: translateY(-50px); z-index: 10;">
+                <div id="pull-to-refresh-indicator" class="absolute top-0 left-0 right-0 flex justify-center items-center transition-all duration-300" style="height: 50px; transform: translateY(-50px); z-index: 10;" aria-hidden="true">
                     <div class="arrow-icon transition-transform duration-200">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                           <path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
@@ -523,7 +524,7 @@
                 </div>
                 <!-- END: 新增下拉更新的結構 -->
 
-                <div id="status-time-info" class="flex justify-between items-center text-xs text-gray-500 mb-4 pb-4 border-b border-gray-200 font-mono">
+                <div id="status-time-info" class="flex justify-between items-center text-xs text-gray-500 mb-4 pb-4 border-b border-gray-200 font-mono" aria-live="polite">
                     <span id="status-taipei-time"></span>
                     <span id="status-time-diff"></span>
                 </div>
@@ -547,7 +548,7 @@
                 </div>
 
 
-                <div id="status-card-content" class="space-y-4 mt-2 flex-grow" style="touch-action: pan-y;">
+                <div id="status-card-content" class="space-y-4 mt-2 flex-grow" style="touch-action: pan-y;" tabindex="0" aria-label="行程摘要內容">
                     <!-- Tier 3: Progress -->
                     <div>
                         <div class="flex justify-end items-baseline">
@@ -555,7 +556,7 @@
                         </div>
                         <div class="relative pt-2 pb-1">
                             <label for="day-slider" class="sr-only">行程日選擇拉桿</label>
-                            <input type="range" id="day-slider" min="1" max="13" value="1" class="w-full">
+                            <input type="range" id="day-slider" min="1" max="13" value="1" class="w-full" aria-label="選擇行程日" aria-valuemin="1" aria-valuemax="13" aria-valuenow="1" />
                         </div>
                     </div>
                 
@@ -591,8 +592,8 @@
 
                  <!-- Action Area -->
                  <div id="action-area">
-                    <button id="foodie-list-btn" class="action-btn" style="display: none;">🍽️ 美食清單</button>
-                    <button id="view-details-btn" class="action-btn">詳細行程</button>
+                    <button id="foodie-list-btn" class="action-btn" style="display: none;" aria-label="顯示美食清單">🍽️ 美食清單</button>
+                    <button id="view-details-btn" class="action-btn" aria-label="顯示詳細行程">詳細行程</button>
                 </div>
             </div>
         </section>
@@ -601,18 +602,18 @@
             <label for="show-past-toggle" class="flex items-center cursor-pointer text-sm font-medium text-gray-700">
                 <span class="mr-3">顯示過去行程</span>
                 <div class="relative">
-                    <input type="checkbox" id="show-past-toggle" class="sr-only peer">
-                    <div class="block bg-gray-200 w-10 h-6 rounded-full peer-checked:bg-indigo-300 transition-colors"></div>
-                    <div class="dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-transform peer-checked:translate-x-full"></div>
+                    <input type="checkbox" id="show-past-toggle" class="sr-only peer" aria-label="顯示過去行程切換">
+                    <div class="block bg-gray-200 w-10 h-6 rounded-full peer-checked:bg-indigo-300 transition-colors" aria-hidden="true"></div>
+                    <div class="dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-transform peer-checked:translate-x-full" aria-hidden="true"></div>
                 </div>
             </label>
         </div>
 
-        <main class="space-y-8">
+        <main class="space-y-8" id="main-content" tabindex="-1">
             <div id="itinerary-container" class="space-y-8"></div>
 
-            <div id="tip-calculator-section" class="trip-card bg-white rounded-2xl shadow-lg p-6 md:p-8 ring-1 ring-gray-200">
-                <h2 class="text-2xl font-bold text-gray-900 mb-4 flex items-center">
+            <div id="tip-calculator-section" class="trip-card bg-white rounded-2xl shadow-lg p-6 md:p-8 ring-1 ring-gray-200" aria-labelledby="tip-calculator-title">
+                <h2 id="tip-calculator-title" class="text-2xl font-bold text-gray-900 mb-4 flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M9 7h6m0 10v-3.251l-4.71-4.71a1 1 0 00-1.415 0L3 16.251V21h4.75L12 17.25m0 0l6-6m-6 6l-3-3" /></svg>
                     小費計算機 (Tip Calculator)
@@ -620,13 +621,11 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-end">
                     <div>
                         <label for="bill-amount" class="block text-sm font-medium text-gray-700">帳單金額 (CAD/USD)</label>
-                        <!-- START: 修改小費計算機輸入欄位 -->
-                        <input type="number" inputmode="decimal" id="bill-amount" placeholder="例如 85.50" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                        <!-- END: 修改小費計算機輸入欄位 -->
+                        <input type="number" inputmode="decimal" id="bill-amount" placeholder="例如 85.50" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" aria-label="輸入帳單金額">
                     </div>
                     <div>
                         <label for="tip-rate" class="block text-sm font-medium text-gray-700">小費比例 (%)</label>
-                        <select id="tip-rate" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                        <select id="tip-rate" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" aria-label="選擇小費比例">
                             <option value="15">15% (標準)</option>
                             <option value="18" selected>18% (推薦)</option>
                             <option value="20">20% (優質服務)</option>
@@ -635,17 +634,17 @@
                     </div>
                     <div class="text-center bg-indigo-50 p-4 rounded-lg mt-4 md:mt-0">
                         <label class="block text-sm font-medium text-gray-700">小費金額</label>
-                        <p id="tip-result" class="text-xl font-bold text-indigo-700">-</p>
+                        <p id="tip-result" class="text-xl font-bold text-indigo-700" aria-live="polite">-</p>
                     </div>
                      <div class="text-center bg-green-50 p-4 rounded-lg mt-4 md:mt-0">
                         <label class="block text-sm font-medium text-gray-700">含小費總額</label>
-                        <p id="total-result" class="text-xl font-bold text-green-700">-</p>
+                        <p id="total-result" class="text-xl font-bold text-green-700" aria-live="polite">-</p>
                     </div>
                 </div>
             </div>
 
-            <div id="links-dashboard" class="trip-card bg-white rounded-2xl shadow-lg p-6 md:p-8 ring-1 ring-gray-200">
-                 <h2 class="text-2xl sm:text-3xl font-bold mb-6 text-gray-900 flex items-center">
+            <div id="links-dashboard" class="trip-card bg-white rounded-2xl shadow-lg p-6 md:p-8 ring-1 ring-gray-200" aria-labelledby="links-dashboard-title">
+                 <h2 id="links-dashboard-title" class="text-2xl sm:text-3xl font-bold mb-6 text-gray-900 flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 mr-3 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                     實用連結儀表板
                 </h2>
@@ -663,34 +662,34 @@
             </div>
         </main>
         
-        <footer class="text-center mt-16 py-8">
+        <footer class="text-center mt-16 py-8" aria-label="頁尾">
             <p class="text-gray-500">祝您旅途愉快！Bon Voyage!</p>
         </footer>
     </div>
     
-    <div id="toast-notification" class="no-print hidden opacity-0 fixed bottom-24 right-4 bg-gray-800 text-white px-5 py-3 rounded-lg shadow-xl transition-all duration-300 z-[100]">
+    <div id="toast-notification" class="no-print hidden opacity-0 fixed bottom-24 right-4 bg-gray-800 text-white px-5 py-3 rounded-lg shadow-xl transition-all duration-300 z-[100]" role="status" aria-live="polite">
         <p id="toast-message"></p>
     </div>
 
-    <div id="update-notification" class="no-print hidden">
+    <div id="update-notification" class="no-print hidden" role="status" aria-live="polite">
         <div class="bg-indigo-600 text-white rounded-lg shadow-lg p-4 flex items-center justify-between">
             <p class="font-semibold">網站有新內容可更新。</p>
-            <button id="reload-button" class="ml-4 px-4 py-2 bg-white text-indigo-600 font-bold rounded-md hover:bg-indigo-100 transition-colors">立即更新</button>
+            <button id="reload-button" class="ml-4 px-4 py-2 bg-white text-indigo-600 font-bold rounded-md hover:bg-indigo-100 transition-colors" aria-label="立即更新">立即更新</button>
         </div>
     </div>
 
     <div class="no-print fixed bottom-4 right-4 z-50">
-        <button id="today-btn" class="bg-amber-500 text-white font-semibold px-4 py-3 rounded-full shadow-lg hover:bg-amber-600 transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-400 hidden">
+        <button id="today-btn" class="bg-amber-500 text-white font-semibold px-4 py-3 rounded-full shadow-lg hover:bg-amber-600 transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-400 hidden" aria-label="回到今日行程">
             行程要覽
         </button>
     </div>
 
     <!-- Foodie Modal -->
-    <div id="foodie-modal" class="modal-overlay no-print hidden">
+    <div id="foodie-modal" class="modal-overlay no-print hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title">
         <div class="modal-container">
             <div class="modal-header">
                 <h2 id="modal-title" class="text-2xl font-bold text-gray-900">美食指南</h2>
-                <button class="modal-close-btn">&times;</button>
+                <button class="modal-close-btn" aria-label="關閉美食指南">&times;</button>
             </div>
             <div class="modal-body">
                 <div id="modal-tabs" class="modal-tabs"></div>
@@ -700,1100 +699,17 @@
     </div>
     
     <!-- City Select Modal -->
-    <div id="city-select-modal" class="modal-overlay no-print hidden">
+    <div id="city-select-modal" class="modal-overlay no-print hidden" role="dialog" aria-modal="true" aria-labelledby="city-select-title">
         <div class="modal-container">
             <div class="modal-header">
-                <h2 class="text-2xl font-bold text-gray-900">快速跳轉至城市</h2>
-                <button class="modal-close-btn">&times;</button>
+                <h2 id="city-select-title" class="text-2xl font-bold text-gray-900">快速跳轉至城市</h2>
+                <button class="modal-close-btn" aria-label="關閉城市選單">&times;</button>
             </div>
             <div id="city-select-list" class="modal-body mt-4 space-y-3">
                 <!-- Cities will be populated by JS -->
             </div>
         </div>
     </div>
-    
-    <script>
-        // --- Service Worker 註冊 ---
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                // 使用相對路徑以確保在子目錄下也能正常運作
-                navigator.serviceWorker.register('sw.js')
-                    .then(registration => {
-                        console.log('ServiceWorker 註冊成功，範圍：', registration.scope);
-                        registration.addEventListener('updatefound', () => {
-                            const newWorker = registration.installing;
-                            newWorker.addEventListener('statechange', () => {
-                                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                                    const updateBar = document.getElementById('update-notification');
-                                    if (updateBar) updateBar.style.display = 'block';
-                                }
-                            });
-                        });
-                    }).catch(error => console.log('ServiceWorker 註冊失敗：', error));
-            });
-
-            let refreshing;
-            navigator.serviceWorker.addEventListener('controllerchange', () => {
-                if (refreshing) return;
-                window.location.reload();
-                refreshing = true;
-            });
-
-            const reloadButton = document.getElementById('reload-button');
-            if(reloadButton) {
-                reloadButton.addEventListener('click', () => {
-                    navigator.serviceWorker.getRegistration().then(reg => {
-                        if (reg && reg.waiting) {
-                            reg.waiting.postMessage({ type: 'SKIP_WAITING' });
-                        }
-                    });
-                });
-            }
-        }
-
-        // --- 全域函式 ---
-        let toastTimeout;
-        function showToast(message) {
-            const toastEl = document.getElementById('toast-notification');
-            const toastMessageEl = document.getElementById('toast-message');
-            if (!toastEl || !toastMessageEl) return;
-            toastMessageEl.textContent = message;
-            toastEl.classList.remove('hidden', 'opacity-0');
-            clearTimeout(toastTimeout);
-            toastTimeout = setTimeout(() => {
-                toastEl.classList.add('opacity-0');
-                setTimeout(() => toastEl.classList.add('hidden'), 300);
-            }, 3000);
-        }
-        
-        function scrollToToday(isAuto = false) {
-            // --- FIX START: Use local date instead of UTC ---
-            const now = new Date();
-            const year = now.getFullYear();
-            const month = String(now.getMonth() + 1).padStart(2, '0');
-            const day = String(now.getDate()).padStart(2, '0');
-            const todayString = `${year}-${month}-${day}`;
-            // --- FIX END ---
-            
-            const dashboardSection = document.getElementById('status-dashboard-section');
-
-            if (dashboardSection) {
-                 const mainNav = document.getElementById('main-nav');
-                 const offset = mainNav ? mainNav.offsetHeight : 60;
-                 const bodyRect = document.body.getBoundingClientRect().top;
-                 const elementRect = dashboardSection.getBoundingClientRect().top;
-                 const elementPosition = elementRect - bodyRect;
-                 const offsetPosition = elementPosition - offset;
-                 window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
-            }
-
-            const tripData = window.tripData; 
-            const allWeatherData = window.allWeatherData;
-            if (tripData && typeof updateStatusDashboard === 'function') {
-                const isTripActive = todayString >= tripData.tripInfo.tripStartDate && todayString < tripData.tripInfo.tripEndDate;
-                currentDisplayDate = isTripActive ? todayString : tripData.tripInfo.tripStartDate;
-                updateStatusDashboard(currentDisplayDate, tripData, allWeatherData);
-            }
-        }
-        
-        function renderItinerary(itineraryData, container) {
-            if (!itineraryData || !container) return;
-            let htmlContent = '';
-            const renderedCitySections = new Set(); 
-
-            itineraryData.forEach(day => {
-                let sectionIdAttr = '';
-                if (day.cityTarget && !renderedCitySections.has(day.cityTarget)) {
-                    sectionIdAttr = `id="${day.cityTarget}"`;
-                    renderedCitySections.add(day.cityTarget);
-                }
-                
-                const tagsHtml = day.tags.map(tag => `<span class="tag">${tag}</span>`).join('');
-                const activitiesHtml = day.activities.map(activity => `<div class="activity-block"><h4 class="font-bold text-lg text-blue-800">${activity.title}</h4><ul class="list-disc list-inside mt-2 text-gray-700 space-y-1">${activity.items.map(item => `<li>${item}</li>`).join('')}</ul></div>`).join('');
-                let reminderHtml = day.reminder ? `<div class="mt-4 p-4 bg-amber-100/60 rounded-lg border-l-4 border-amber-400"><h4 class="font-bold text-amber-800 flex items-center mb-2">${day.reminder.title}</h4><ul class="list-disc list-inside mt-2 text-amber-900/80 space-y-1">${day.reminder.items.map(item => `<li>${item}</li>`).join('')}</ul></div>` : '';
-                let infoBoxHtml = day.infoBox ? `<div class="mt-4 p-4 bg-teal-100/60 rounded-lg border-l-4 border-teal-400"><h4 class="font-bold text-teal-800 flex items-center mb-2">${day.infoBox.title}</h4><ul class="list-disc list-inside mt-2 text-teal-900/80 space-y-1">${day.infoBox.items.map(item => `<li>${item}</li>`).join('')}</ul></div>` : '';
-                
-                htmlContent += `<div class="trip-card-wrapper" ${sectionIdAttr} data-day="${day.day}" data-date="${day.date}" data-day-group="${day.dayGroup}" data-city-target="${day.cityTarget}" data-weather-city="${day.weatherCity}">
-                    <details class="trip-card bg-white rounded-2xl shadow-lg ring-1 ring-gray-200 overflow-hidden" ${day.day === 1 ? 'open' : ''}>
-                        <summary class="${day.isTravelDay ? 'summary-travel-day' : ''} flex justify-between items-center">
-                            <div>
-                                <p class="text-sm font-medium ${day.isTravelDay ? 'text-amber-700' : 'text-indigo-600'}">${day.subTitle}</p>
-                                <h3 id="day${day.day}" class="text-xl sm:text-2xl font-bold mt-1 text-gray-900">${day.title}</h3>
-                            </div>
-                            <div class="flex items-center space-x-3 sm:space-x-4">
-                                <div class="weather-display flex-shrink-0 text-right"></div>
-                                <div class="summary-arrow flex-shrink-0">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" /></svg>
-                                </div>
-                            </div>
-                        </summary>
-                        <div class="p-4 sm:p-6 border-t border-gray-200">
-                            <div class="my-3 flex flex-wrap justify-between items-start gap-2">
-                                <div>${tagsHtml}</div>
-                            </div>
-                            <div class="space-y-6">${activitiesHtml}${infoBoxHtml}${reminderHtml}</div>
-                        </div>
-                    </details>
-                </div>`;
-            });
-            container.innerHTML = htmlContent;
-        }
-
-        const cityCoordinates = { montreal: { lat: 45.50, lon: -73.57 }, quebec: { lat: 46.81, lon: -71.21 }, niagara: { lat: 43.09, lon: -79.08 }, chicago: { lat: 41.88, lon: -87.63 } };
-        function getWeatherIcon(code) {
-            const icons = { 0: '☀️', 1: '🌤️', 2: '⛅️', 3: '☁️', 45: '🌫️', 48: '🌫️', 51: '🌦️', 53: '🌦️', 55: '🌦️', 61: '🌧️', 63: '🌧️', 65: '🌧️', 66: '🌧️', 67: '🌧️', 71: '🌨️', 73: '🌨️', 75: '🌨️', 77: '🌨️', 80: '🌧️', 81: '🌧️', 82: '暴雨', 85: '🌨️', 86: '🌨️', 95: '⛈️', 96: '⛈️', 99: '⛈️' };
-            return icons[code] || '🌡️';
-        }
-        function getWeatherReminder(code) {
-            if ([51, 53, 55, 61, 63, 65, 80, 81, 82, 95, 96, 99].includes(code)) return '今日有雨，記得帶傘！';
-            if ([71, 73, 75, 77, 85, 86].includes(code)) return '可能會下雪，注意保暖！';
-            if ([0, 1].includes(code)) return '天氣晴朗，注意防曬！';
-            if ([2, 3].includes(code)) return '多雲天氣，適合出遊。';
-            if ([45, 48].includes(code)) return '有霧，行車請注意安全。';
-            return '祝您有美好的一天！';
-        }
-
-        // --- START: 修改天氣請求邏輯 ---
-        async function fetchAllWeatherData(itinerary) {
-            if (!navigator.onLine && !navigator.serviceWorker.controller) {
-                console.log("目前處於離線狀態，無法取得天氣資訊。");
-                return {};
-            }
-
-            const today = new Date();
-            today.setHours(0, 0, 0, 0); // 將時間設定為當天零點以便比較
-
-            const uniqueCityDateRequests = [...new Set(itinerary.filter(day => day.weatherCity).map(day => JSON.stringify({ city: day.weatherCity, date: day.date })))].map(JSON.parse);
-
-            const promises = uniqueCityDateRequests.map(async ({ city, date }) => {
-                const { lat, lon } = cityCoordinates[city];
-                const requestDate = new Date(date);
-                let url;
-
-                if (requestDate < today) {
-                    // 日期在今天之前，使用歷史天氣 API
-                    url = `https://archive-api.open-meteo.com/v1/archive?latitude=${lat}&longitude=${lon}&start_date=${date}&end_date=${date}&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=auto`;
-                } else {
-                    // 日期是今天或未來，使用天氣預報 API
-                    url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=auto`;
-                }
-
-                try {
-                    const res = await fetch(url);
-                    if (!res.ok) throw new Error(`API error for ${city} on ${date}`);
-                    const data = await res.json();
-                    
-                    // 將結果包裝成與原格式一致，方便後續處理
-                    return { city, date, data: data.daily };
-                } catch (error) {
-                    console.error(`無法取得 ${city} 在 ${date} 的天氣資訊:`, error);
-                    return null;
-                }
-            });
-
-            const results = await Promise.all(promises);
-            
-            // 將結果重新組合成以城市為鍵值的物件
-            const allWeatherData = {};
-            results.filter(r => r).forEach(({ city, date, data }) => {
-                if (!allWeatherData[city]) {
-                    allWeatherData[city] = { time: [], temperature_2m_max: [], temperature_2m_min: [], weather_code: [] };
-                }
-                const dateIndex = allWeatherData[city].time.indexOf(date);
-                if (dateIndex === -1 && data && data.time) { // 確保 data 和 data.time 存在
-                    allWeatherData[city].time.push(data.time[0]);
-                    allWeatherData[city].temperature_2m_max.push(data.temperature_2m_max[0]);
-                    allWeatherData[city].temperature_2m_min.push(data.temperature_2m_min[0]);
-                    allWeatherData[city].weather_code.push(data.weather_code[0]);
-                }
-            });
-            
-            return allWeatherData;
-        }
-        // --- END: 修改天氣請求邏輯 ---
-        
-        function updateStatusDashboard(date, data, allWeatherData, direction = 0) {
-            const { itinerary, hotels, transport, tripInfo } = data;
-            const targetDayData = itinerary.find(d => d.date === date);
-
-            const statusCardContentEl = document.getElementById('status-card-content');
-            const statusDateEl = document.getElementById('status-date');
-            const statusCityNameEl = document.getElementById('status-city-name');
-            const progressTextEl = document.getElementById('status-progress-text');
-            const daySlider = document.getElementById('day-slider');
-            const viewDetailsBtn = document.getElementById('view-details-btn');
-            const foodieListBtn = document.getElementById('foodie-list-btn');
-            
-            // 天氣相關元素
-            const weatherItemEl = document.getElementById('status-weather-item');
-            const weatherIconEl = document.getElementById('status-weather-icon');
-            const weatherTempEl = document.getElementById('status-weather-temp');
-            const weatherReminderEl = document.getElementById('status-weather-reminder');
-            
-            // 住宿與交通元素
-            const accommodationItemEl = document.getElementById('status-accommodation-item');
-            const accommodationContentEl = document.getElementById('status-accommodation-content');
-            const transportItemEl = document.getElementById('status-transport-item');
-            const transportContentEl = document.getElementById('status-transport-content');
-            const transportIconEl = document.getElementById('status-transport-icon');
-            
-            // 新增：每日主題元素
-            const themeItemEl = document.getElementById('status-theme-item');
-            const themeIconEl = document.getElementById('status-theme-icon');
-            const themeTitleEl = document.getElementById('status-theme-title');
-            const themeDescriptionEl = document.getElementById('status-theme-description');
-
-            const travelDayIndicatorEl = document.getElementById('status-travel-day-indicator');
-            const timeInfoEl = document.getElementById('status-time-info');
-            const timeDiffEl = document.getElementById('status-time-diff');
-            const paginationDotsContainer = document.getElementById('status-pagination-dots');
-
-            const applyAnimation = (outClass, inClass, callback) => {
-                statusCardContentEl.classList.remove('slide-in-left', 'slide-in-right', 'slide-out-left', 'slide-out-right');
-                statusCardContentEl.classList.add(outClass);
-
-                const handleOutAnimationEnd = () => {
-                    statusCardContentEl.removeEventListener('animationend', handleOutAnimationEnd);
-                    statusCardContentEl.classList.remove(outClass);
-                    callback(); 
-
-                    statusCardContentEl.classList.add(inClass);
-                    const handleInAnimationEnd = () => {
-                        statusCardContentEl.removeEventListener('animationend', handleInAnimationEnd);
-                        statusCardContentEl.classList.remove(inClass);
-                    };
-                    statusCardContentEl.addEventListener('animationend', handleInAnimationEnd);
-                };
-                statusCardContentEl.addEventListener('animationend', handleOutAnimationEnd);
-            };
-
-            const updateContent = () => {
-                if (!targetDayData) {
-                    if(timeInfoEl) timeInfoEl.style.display = 'none';
-                    statusDateEl.textContent = '旅程已結束';
-                    if (statusCityNameEl) statusCityNameEl.textContent = '期待下次旅行！';
-                    progressTextEl.textContent = '-';
-                    if(daySlider) daySlider.value = 1;
-                    if(viewDetailsBtn) viewDetailsBtn.style.display = 'none';
-                    if(foodieListBtn) foodieListBtn.style.display = 'none';
-                    weatherItemEl.style.display = 'none';
-                    accommodationItemEl.style.display = 'none';
-                    transportItemEl.style.display = 'none';
-                    themeItemEl.style.display = 'none'; // 新增：隱藏主題區塊
-                    if (travelDayIndicatorEl) travelDayIndicatorEl.style.display = 'none';
-                    if (paginationDotsContainer) paginationDotsContainer.innerHTML = '';
-                    return;
-                }
-
-                if(timeInfoEl) timeInfoEl.style.display = 'flex';
-                if(viewDetailsBtn) viewDetailsBtn.style.display = 'block';
-                
-                const isMergedLastDay = targetDayData.subTitle.includes('~');
-                if (isMergedLastDay) {
-                    const parts = targetDayData.subTitle.split('｜');
-                    const datePart = parts[1].trim();
-                    statusDateEl.innerHTML = datePart.replace('~', '<br class="sm:hidden">~ ');
-                } else {
-                    const [year, month, day] = date.split('-').map(Number);
-                    const dateObj = new Date(Date.UTC(year, month - 1, day));
-                    const dayOfWeek = dateObj.toLocaleDateString('zh-TW', { weekday: 'long', timeZone: 'UTC' });
-                    const datePart = `${month}月${day}日`;
-                    statusDateEl.textContent = `${datePart} (${dayOfWeek.replace('星期','週')})`;
-                }
-                
-                const cityKey = targetDayData.weatherCity;
-                const cityMap = { montreal: '蒙特婁', quebec: '魁北克市', niagara: '尼加拉瀑布', chicago: '芝加哥', '': '飛行途中' };
-                if (statusCityNameEl) statusCityNameEl.textContent = cityMap[cityKey] || '移動中';
-                
-                if (travelDayIndicatorEl) {
-                    travelDayIndicatorEl.style.display = targetDayData.isTravelDay ? 'inline-block' : 'none';
-                }
-                
-                progressTextEl.textContent = `Day ${targetDayData.day} / ${tripInfo.totalDays}`;
-                
-                if (daySlider) {
-                    daySlider.value = targetDayData.day;
-                    const progress = ((targetDayData.day - daySlider.min) / (daySlider.max - daySlider.min)) * 100;
-                    daySlider.style.setProperty('--progress-width', `${progress}%`);
-                }
-
-                if (paginationDotsContainer) {
-                    let dotsHtml = '';
-                    for (let i = 0; i < tripInfo.totalDays; i++) {
-                        const dotDay = i + 1;
-                        const isActive = dotDay === targetDayData.day;
-                        dotsHtml += `<div class="pagination-dot ${isActive ? 'active' : ''}" data-day="${dotDay}"></div>`;
-                    }
-                    paginationDotsContainer.innerHTML = dotsHtml;
-                }
-
-                if (timeDiffEl) {
-                    const cityTimezoneMap = { montreal: -12, quebec: -12, niagara: -12, chicago: -13 };
-                    const localTzKey = targetDayData.weatherCity;
-                    let diffText = '✈️ 飛行中';
-                    if (cityTimezoneMap[localTzKey]) {
-                        const diff = cityTimezoneMap[localTzKey];
-                        const sign = diff > 0 ? '+' : '';
-                        diffText = `與台灣時差 ${sign}${diff} 小時`;
-                    }
-                    timeDiffEl.textContent = diffText;
-                }
-
-                // --- 更新邏輯：每日主題 ---
-                if (targetDayData.theme && !targetDayData.isTravelDay) {
-                    themeItemEl.style.display = 'flex';
-                    themeIconEl.textContent = targetDayData.theme.icon;
-                    themeTitleEl.textContent = targetDayData.theme.title;
-                    themeDescriptionEl.textContent = targetDayData.theme.description;
-                } else {
-                    themeItemEl.style.display = 'none';
-                }
-
-                const cityWeather = allWeatherData ? allWeatherData[cityKey] : undefined;
-                if (cityKey) {
-                    weatherItemEl.style.display = 'flex';
-                    if (cityWeather && cityWeather.time) { 
-                        const dayIndex = cityWeather.time.indexOf(date);
-                        if (dayIndex !== -1) {
-                            const tempMax = Math.round(cityWeather.temperature_2m_max[dayIndex]);
-                            const tempMin = Math.round(cityWeather.temperature_2m_min[dayIndex]);
-                            const code = cityWeather.weather_code[dayIndex];
-                            weatherIconEl.textContent = getWeatherIcon(code);
-                            weatherTempEl.textContent = `${tempMin}°C / ${tempMax}°C`;
-                            weatherReminderEl.textContent = getWeatherReminder(code);
-                        } else { 
-                            weatherIconEl.textContent = '❓';
-                            weatherTempEl.textContent = '無預報';
-                            weatherReminderEl.textContent = '無法取得本日天氣資訊。';
-                        }
-                    } else { 
-                        weatherIconEl.textContent = '⏳';
-                        weatherTempEl.textContent = '--°C / --°C';
-                        weatherReminderEl.textContent = '正在載入天氣資訊...';
-                    }
-                } else {
-                    weatherItemEl.style.display = 'none';
-                }
-
-                const checkingIn = hotels.find(h => h.checkIn === date);
-                const checkingOut = hotels.find(h => h.checkOut === date);
-                const stayingAt = hotels.find(h => date >= h.checkIn && date < h.checkOut);
-                let hotelHtml = '';
-                if (checkingOut) {
-                    hotelHtml += `<div><span class="font-semibold text-red-600">[退房]</span> <a href="${checkingOut.mapLink}" target="_blank" class="hover:underline">${checkingOut.name}</a></div><div class="text-sm text-gray-600 pl-1">最晚退房：${checkingOut.checkOutTime}</div>`;
-                }
-                if (checkingIn) {
-                    const marginTop = checkingOut ? 'mt-2' : '';
-                    hotelHtml += `<div class="${marginTop}"><span class="font-semibold text-green-600">[入住]</span> <a href="${checkingIn.mapLink}" target="_blank" class="hover:underline">${checkingIn.name}</a></div><div class="text-sm text-gray-600 pl-1">最早入住：${checkingIn.checkInTime}</div>`;
-                }
-                if (!checkingIn && !checkingOut && stayingAt) {
-                     hotelHtml = `<p>住宿於 <a href="${stayingAt.mapLink}" target="_blank" class="hover:underline">${stayingAt.name}</a></p>`;
-                }
-                
-                if (hotelHtml) {
-                    accommodationContentEl.innerHTML = hotelHtml;
-                    accommodationItemEl.style.display = 'flex';
-                } else {
-                    accommodationContentEl.innerHTML = '';
-                    accommodationItemEl.style.display = 'none';
-                }
-
-                let transportItems = transport.filter(t => t.date === date);
-                if (date === '2025-07-14') {
-                    const nextDayTransport = transport.filter(t => t.date === '2025-07-15');
-                    transportItems = transportItems.concat(nextDayTransport);
-                }
-
-                if (transportItems.length > 0) {
-                    const iconMap = { '航班': '✈️', '火車': '🚄', '巴士': '🚌', '機場接送': '🚖' };
-                    transportIconEl.textContent = iconMap[transportItems[0].type] || '➡️';
-                    const transportHtml = transportItems.map(item => {
-                        if (item.type === '航班' && Array.isArray(item.details)) {
-                            return item.details.map(leg => {
-                                const depTime = new Date(leg.departure.time).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: leg.departure.tz });
-                                const arrTime = new Date(leg.arrival.time).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: leg.arrival.tz });
-                                
-                                // --- MODIFICATION START ---
-                                // Use Intl.DateTimeFormat to get the localiado-MM-DD date string for the airport
-                                const departureLocalDateStr = new Intl.DateTimeFormat('fr-CA', { year: 'numeric', month: '2-digit', day: '2-digit', timeZone: leg.departure.tz }).format(new Date(leg.departure.time));
-                                const arrivalLocalDateStr = new Intl.DateTimeFormat('fr-CA', { year: 'numeric', month: '2-digit', day: '2-digit', timeZone: leg.arrival.tz }).format(new Date(leg.arrival.time));
-                                
-                                const dateIndicator = arrivalLocalDateStr > departureLocalDateStr ? ' (+1)' : '';
-                                // --- MODIFICATION END ---
-
-                                return `<div class="mb-1">
-                                    <p class="font-semibold">${leg.flightCode}</p>
-                                    <p class="text-sm">${leg.departure.airport} (${depTime}) → ${leg.arrival.airport} (${arrTime}${dateIndicator})</p>
-                                </div>`;
-                            }).join('');
-                        }
-                        return `<p>${item.details}</p>`;
-                    }).join('<div class="my-2 border-t border-dashed border-gray-300"></div>');
-                    transportContentEl.innerHTML = transportHtml;
-                    transportItemEl.style.display = 'flex';
-                } else {
-                    transportContentEl.innerHTML = '';
-                    transportItemEl.style.display = 'none';
-                }
-                
-                // Update Action Area
-                if (foodieListBtn && data.foodie && data.foodie[cityKey]) {
-                    foodieListBtn.style.display = 'block';
-                    foodieListBtn.onclick = () => window.openFoodieModal(cityKey);
-                } else if (foodieListBtn) {
-                    foodieListBtn.style.display = 'none';
-                }
-            }; 
-
-            if (direction === 1) { 
-                applyAnimation('slide-out-left', 'slide-in-right', updateContent);
-            } else if (direction === -1) {
-                applyAnimation('slide-out-right', 'slide-in-left', updateContent);
-            } else { 
-                updateContent();
-            }
-        }
-
-        let currentDisplayDate;
-
-        // --- START: 更新後的更新檢查函數 ---
-        function checkForUpdates() {
-            if (!('serviceWorker' in navigator)) {
-                showToast('您的瀏覽器不支援離線功能。');
-                return;
-            }
-
-            // 使用 navigator.serviceWorker.ready 確保 Service Worker 已啟用
-            navigator.serviceWorker.ready.then(registration => {
-                showToast('正在檢查最新行程...');
-
-                // 直接在已啟用的 registration 上呼叫 update
-                registration.update().then(() => {
-                    if (registration.installing) {
-                        console.log('Service Worker 正在安裝新版本。');
-                    } else if (registration.waiting) {
-                        console.log('有新的 Service Worker 正在等待啟用。');
-                        const updateBar = document.getElementById('update-notification');
-                        if (updateBar) updateBar.style.display = 'block';
-                        showToast('發現新行程！點擊「立即更新」以載入。');
-                    } else {
-                        console.log('目前已是最新版本。');
-                        showToast('您的行程已是最新版本！');
-                    }
-                }).catch(error => {
-                    console.error('Service Worker 更新檢查失敗:', error);
-                    showToast('檢查更新失敗，請確認網路連線。');
-                });
-            }).catch(error => {
-                // 如果 .ready 失敗，代表 Service Worker 尚未註冊或啟用失敗
-                console.error('Service Worker 未準備就緒:', error);
-                showToast('離線功能尚未啟用，請稍後再試或重新整理頁面。');
-            });
-        }
-        // --- END: 更新後的更新檢查函數 ---
-
-        document.addEventListener('DOMContentLoaded', async () => {
-            try {
-                // --- FIX: Use relative path for robustness ---
-                const response = await fetch('trip-data.json');
-                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-                const data = await response.json();
-                
-                const itineraryContainer = document.getElementById('itinerary-container');
-                renderItinerary(data.itinerary, itineraryContainer);
-                
-                initializeApp(data, null); 
-
-                fetchAllWeatherData(data.itinerary)
-                    .then(allWeatherData => {
-                        window.allWeatherData = allWeatherData; 
-                        populateDayCardWeather(allWeatherData);
-                        updateStatusDashboard(currentDisplayDate, data, allWeatherData);
-                    })
-                    .catch(weatherError => {
-                        console.error("Weather data fetch failed:", weatherError);
-                        populateDayCardWeather({}); 
-                        updateStatusDashboard(currentDisplayDate, data, {});
-                    });
-
-            } catch (error) {
-                console.error("無法載入行程資料:", error);
-                const container = document.getElementById('itinerary-container');
-                if (container) container.innerHTML = `<p class="text-center text-red-600 font-bold">行程資料載入失敗，請檢查 trip-data.json 檔案並確認網路連線。</p>`;
-            }
-        });
-
-        function initializeApp(data, allWeatherData) { 
-            window.tripData = data;
-            const { hotels: hotelData, transport: transportData, foodie: foodieData, tripInfo, itinerary } = data;
-            
-            function updateNavHeightVar() {
-                const nav = document.getElementById('main-nav');
-                const navHeight = nav ? nav.offsetHeight : 68;
-                document.documentElement.style.setProperty('--nav-h', `${navHeight}px`);
-            }
-            window.addEventListener('resize', updateNavHeightVar);
-            updateNavHeightVar();
-
-            const paginationDotsContainer = document.getElementById('status-pagination-dots');
-            const daySlider = document.getElementById('day-slider');
-
-            if(daySlider) {
-                daySlider.max = tripInfo.totalDays;
-                daySlider.addEventListener('input', () => {
-                    const targetDay = parseInt(daySlider.value);
-                    const targetDayData = data.itinerary[targetDay - 1];
-                    if (targetDayData) {
-                        currentDisplayDate = targetDayData.date;
-                        updateStatusDashboard(currentDisplayDate, data, window.allWeatherData, 0); 
-                    }
-                });
-            }
-
-            const mainNav = document.getElementById('main-nav');
-            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-            const mobileMenuPanel = document.getElementById('mobile-menu-panel');
-            const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
-            
-            if (mobileMenuBtn && mobileMenuPanel && mobileMenuOverlay) { 
-                const toggleMenu = () => {
-                    const isOpen = !mobileMenuPanel.classList.contains('is-open');
-                    mobileMenuPanel.classList.toggle('is-open', isOpen);
-                    mobileMenuPanel.classList.toggle('hidden', !isOpen);
-                    mobileMenuOverlay.classList.toggle('is-open', isOpen);
-                    mobileMenuOverlay.classList.toggle('hidden', !isOpen);
-                    document.body.classList.toggle('modal-open', isOpen);
-                };
-
-                mobileMenuBtn.addEventListener('click', (e) => {
-                    e.stopPropagation(); 
-                    toggleMenu();
-                });
-
-                mobileMenuOverlay.addEventListener('click', toggleMenu);
-
-                document.querySelectorAll('.mobile-nav-link').forEach(link => {
-                    link.addEventListener('click', toggleMenu);
-                });
-            }
-
-            window.addEventListener('scroll', () => mainNav.classList.toggle('scrolled', window.scrollY > 0));
-
-            const tripCards = document.querySelectorAll('.trip-card');
-            const cardObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) entry.target.classList.add('is-visible');
-                });
-            }, { threshold: 0.1 });
-            tripCards.forEach(card => cardObserver.observe(card));
-
-            function handleNavigation(hash) {
-                if (!hash || hash === '#') return;
-                try {
-                    const targetElement = document.querySelector(hash);
-                    if (!targetElement) return;
-                    
-                    targetElement.scrollIntoView({ behavior: 'smooth' });
-
-                    const details = targetElement.closest('details');
-                    if (details && !details.open) details.open = true;
-                } catch (e) { console.error("Navigation error:", e); }
-            }
-            
-            document.querySelectorAll('a[href^="#"], .nav-utils, .mobile-nav-link').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    if(this.getAttribute('href')?.startsWith('#')) {
-                       e.preventDefault();
-                    }
-                    const hash = this.getAttribute('href');
-                    if (hash) handleNavigation(hash);
-                    if (history.pushState && hash) {
-                        history.pushState(null, null, hash);
-                    } else if (hash) {
-                        location.hash = hash;
-                    }
-                });
-            });
-
-            if (window.location.hash) setTimeout(() => handleNavigation(window.location.hash), 100);
-            
-            function triggerPrint() {
-                const allDetails = document.querySelectorAll('#itinerary-container details');
-                const originallyOpen = new WeakMap();
-                allDetails.forEach(detail => { 
-                    originallyOpen.set(detail, detail.open); 
-                    detail.open = true; 
-                });
-
-                setTimeout(() => { 
-                    window.print(); 
-                    allDetails.forEach(detail => {
-                        detail.open = originallyOpen.get(detail);
-                    });
-                }, 100);
-            }
-            document.getElementById('print-btn')?.addEventListener('click', triggerPrint);
-            document.getElementById('mobile-print-btn')?.addEventListener('click', triggerPrint);
-
-            const billInput = document.getElementById('bill-amount');
-            const tipSelect = document.getElementById('tip-rate');
-            const tipResultEl = document.getElementById('tip-result');
-            const totalResultEl = document.getElementById('total-result');
-            function calculateTip() {
-                const bill = parseFloat(billInput.value);
-                const tipPercent = parseFloat(tipSelect.value);
-                if (!isNaN(bill) && bill > 0 && !isNaN(tipPercent)) {
-                    const tip = bill * (tipPercent / 100);
-                    const total = bill + tip;
-                    if(tipResultEl) tipResultEl.textContent = `$${tip.toFixed(2)}`;
-                    if(totalResultEl) totalResultEl.textContent = `$${total.toFixed(2)}`;
-                } else {
-                    if(tipResultEl) tipResultEl.textContent = '-';
-                    if(totalResultEl) totalResultEl.textContent = '-';
-                }
-            }
-            if (billInput) billInput.addEventListener('input', calculateTip);
-            if (tipSelect) tipSelect.addEventListener('change', calculateTip);
-
-            function updateLiveTaipeiTime() {
-                const taipeiTimeEl = document.getElementById('status-taipei-time');
-                if (!taipeiTimeEl) return;
-                try {
-                    const now = new Date();
-                    const dateString = now.toLocaleDateString('zh-TW', { timeZone: 'Asia/Taipei', month: '2-digit', day: '2-digit' });
-                    const dayOfWeekString = now.toLocaleDateString('zh-TW', { timeZone: 'Asia/Taipei', weekday: 'short' });
-                    const timeString = now.toLocaleTimeString('en-GB', { timeZone: 'Asia/Taipei', hour: '2-digit', minute: '2-digit', hour12: false });
-                    taipeiTimeEl.textContent = ` 🧋 台北 ${dateString}(${dayOfWeekString}) ${timeString}`;
-                } catch(e) {
-                    taipeiTimeEl.textContent = `🧋 台北時間 --:--`;
-                }
-            }
-            
-            function populateDayCardWeather(allWeatherData) {
-                const weatherDisplays = document.querySelectorAll('.weather-display');
-                if (!allWeatherData) { 
-                    weatherDisplays.forEach(el => { el.innerHTML = '...'; });
-                    return;
-                }
-
-                document.querySelectorAll('[data-weather-city]').forEach(dayEl => {
-                    const date = dayEl.dataset.date;
-                    const city = dayEl.dataset.weatherCity;
-                    const weatherDisplay = dayEl.querySelector('.weather-display');
-                    if (city && allWeatherData[city] && weatherDisplay && allWeatherData[city].time) {
-                        const dayIndex = allWeatherData[city].time.indexOf(date);
-                        if (dayIndex !== -1) {
-                            const temp = Math.round(allWeatherData[city].temperature_2m_max[dayIndex]);
-                            const icon = getWeatherIcon(allWeatherData[city].weather_code[dayIndex]);
-                            weatherDisplay.innerHTML = `${icon} ${temp}°C`;
-                        } else { weatherDisplay.textContent = '無資料'; }
-                    } else if (weatherDisplay) { 
-                        weatherDisplay.textContent = 'N/A'; 
-                    }
-                });
-            }
-
-            // --- Modal Logic ---
-            const foodieModal = document.getElementById('foodie-modal');
-            const citySelectModal = document.getElementById('city-select-modal');
-            const statusCityBtn = document.getElementById('status-city-btn');
-
-            function openModal(modal) {
-                if (!modal) return;
-                modal.classList.remove('hidden');
-                setTimeout(() => {
-                    modal.classList.add('active');
-                    document.body.classList.add('modal-open');
-                }, 10);
-            }
-
-            function closeModal(modal) {
-                if (!modal) return;
-                modal.classList.remove('active');
-                document.body.classList.remove('modal-open');
-                setTimeout(() => modal.classList.add('hidden'), 300);
-            }
-            
-            // Foodie Modal
-            if (foodieModal) {
-                const modalTabs = foodieModal.querySelector('#modal-tabs');
-                const modalContent = foodieModal.querySelector('#modal-content');
-                
-                window.openFoodieModal = (activeCityKey) => {
-                    let tabsHTML = '';
-                    Object.keys(foodieData).forEach(cityKey => tabsHTML += `<button class="modal-tab" data-city="${cityKey}">${foodieData[cityKey].name}</button>`);
-                    modalTabs.innerHTML = tabsHTML;
-                    modalTabs.querySelectorAll('.modal-tab').forEach(tab => tab.addEventListener('click', () => switchFoodieTab(tab.dataset.city)));
-                    switchFoodieTab(activeCityKey);
-                    openModal(foodieModal);
-                };
-
-                function switchFoodieTab(cityKey) {
-                    const cityData = foodieData[cityKey];
-                    if (!cityData) return;
-                    modalTabs.querySelectorAll('.modal-tab').forEach(tab => tab.classList.toggle('active', tab.dataset.city === cityKey));
-                    let contentHTML = '';
-                    cityData.categories.forEach(category => {
-                        contentHTML += `<div class="mb-4"><h3 class="text-lg font-bold text-gray-800 border-b-2 border-indigo-200 pb-1 mb-2">${category.name}</h3><div class="space-y-3">`;
-                        category.items.forEach(item => {
-                            const placesHTML = item.places.map(p => `<a href="${p.link}" target="_blank" class="hover:underline">${p.name}</a>`).join('、');
-                            contentHTML += `<div><p class="font-semibold text-gray-700">${item.name}</p><p class="text-sm text-gray-500">${item.desc}</p><p class="text-sm text-gray-700">推薦：${placesHTML}</p></div>`;
-                        });
-                        contentHTML += '</div></div>';
-                    });
-                    modalContent.innerHTML = contentHTML;
-                }
-                
-                foodieModal.querySelectorAll('.modal-close-btn').forEach(btn => btn.addEventListener('click', () => closeModal(foodieModal)));
-                foodieModal.addEventListener('click', e => (e.target === foodieModal) && closeModal(foodieModal));
-            }
-
-            // City Select Modal
-            if (citySelectModal && statusCityBtn) {
-                const cityListContainer = citySelectModal.querySelector('#city-select-list');
-                const cityMap = { montreal: '蒙特婁', quebec: '魁北克市', niagara: '尼加拉瀑布', chicago: '芝加哥' };
-
-                statusCityBtn.addEventListener('click', () => {
-                    const uniqueCities = [...new Set(itinerary.map(day => day.weatherCity).filter(Boolean))];
-                    
-                    cityListContainer.innerHTML = ''; // Clear previous list
-                    
-                    uniqueCities.forEach(cityKey => {
-                        const button = document.createElement('button');
-                        button.className = 'city-select-item';
-                        button.textContent = cityMap[cityKey] || cityKey;
-                        button.dataset.cityKey = cityKey;
-                        button.addEventListener('click', () => {
-                            const firstDayInCity = itinerary.find(d => d.weatherCity === cityKey);
-                            if (firstDayInCity) {
-                                currentDisplayDate = firstDayInCity.date;
-                                updateStatusDashboard(currentDisplayDate, data, window.allWeatherData);
-                            }
-                            closeModal(citySelectModal);
-                        });
-                        cityListContainer.appendChild(button);
-                    });
-                    
-                    openModal(citySelectModal);
-                });
-
-                citySelectModal.querySelectorAll('.modal-close-btn').forEach(btn => btn.addEventListener('click', () => closeModal(citySelectModal)));
-                citySelectModal.addEventListener('click', e => (e.target === citySelectModal) && closeModal(citySelectModal));
-            }
-
-
-            function initializeTripView() {
-                const showPastToggle = document.getElementById('show-past-toggle');
-                const showPastLabel = showPastToggle ? showPastToggle.closest('label') : null;
-                const mainContainer = document.querySelector('main.space-y-8');
-                if (!mainContainer || !showPastToggle || !showPastLabel) return;
-                
-                showPastToggle.checked = false;
-                
-                // --- FIX START: Use local date instead of UTC ---
-                const now = new Date();
-                const year = now.getFullYear();
-                const month = String(now.getMonth() + 1).padStart(2, '0');
-                const day = String(now.getDate()).padStart(2, '0');
-                const todayString = `${year}-${month}-${day}`;
-                // --- FIX END ---
-                
-                if (todayString < tripInfo.tripStartDate) {
-                    showPastToggle.disabled = true;
-                    showPastLabel.classList.add('opacity-50', 'cursor-not-allowed');
-                }
-
-                document.querySelectorAll('[data-date]').forEach(el => {
-                    const dateStr = el.dataset.date;
-                    if (!dateStr) return;
-                    
-                    const dayContentContainer = el.querySelector('.p-4.sm\\:p-6 .space-y-6'); 
-                    if (dayContentContainer) {
-                        const checkingOut = hotelData.find(h => h.checkOut === dateStr);
-                        const checkingIn = hotelData.find(h => h.checkIn === dateStr);
-                        const stayingAt = hotelData.find(h => dateStr >= h.checkIn && dateStr < h.checkOut);
-                        let hotelInfoHTML = '';
-                        if (checkingOut) hotelInfoHTML += `<p class="text-gray-700">今日退房：<a href="${checkingOut.mapLink}" target="_blank" class="font-semibold hover:underline">${checkingOut.name}</a> <span class="text-sm text-gray-500">(${checkingOut.checkOutTime}須退房)</span></p>`;
-                        if (checkingIn) hotelInfoHTML += `<p class="text-gray-700 mt-1">今日入住：<a href="${checkingIn.mapLink}" target="_blank" class="font-semibold hover:underline">${checkingIn.name}</a> <span class="text-sm text-gray-500">(${checkingIn.checkInTime}可入住)</span></p>`;
-                        else if (!checkingOut && stayingAt) hotelInfoHTML += `<p class="text-gray-700">今晚入住：<a href="${stayingAt.mapLink}" target="_blank" class="font-semibold hover:underline">${stayingAt.name}</a></p>`;
-
-                        if (hotelInfoHTML) dayContentContainer.insertAdjacentHTML('afterbegin', `<div class="info-block accommodation-info p-4 bg-gray-50 rounded-lg border-l-4 border-indigo-400"><h4 class="font-bold text-lg text-indigo-800 flex items-center mb-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor"><path d="M19 9.5A2.5 2.5 0 0016.5 7H3.5A2.5 2.5 0 001 9.5v7A2.5 2.5 0 003.5 19h13a2.5 2.5 0 002.5-2.5v-7zM6 13a1 1 0 11-2 0 1 1 0 012 0zm3 0a1 1 0 11-2 0 1 1 0 012 0z" /><path d="M3.5 4A1.5 1.5 0 002 5.5v1A1.5 1.5 0 003.5 8h13A1.5 1.5 0 0018 6.5v-1A1.5 1.5 0 0016.5 4h-13z" /></svg>住宿資訊</h4>${hotelInfoHTML}</div>`);
-                        
-                        const transportItems = transportData.filter(t => t.date === dateStr);
-                        if (transportItems.length > 0) {
-                             const transportListHTML = transportItems.map(item => {
-                                if (item.type === '航班' && Array.isArray(item.details)) {
-                                    const flightsHtml = item.details.map(leg => {
-                                        const depTime = new Date(leg.departure.time).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: leg.departure.tz });
-                                        const arrTime = new Date(leg.arrival.time).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: leg.arrival.tz });
-                                        
-                                        // --- MODIFICATION START ---
-                                        const departureLocalDateStr = new Intl.DateTimeFormat('fr-CA', { year: 'numeric', month: '2-digit', day: '2-digit', timeZone: leg.departure.tz }).format(new Date(leg.departure.time));
-                                        const arrivalLocalDateStr = new Intl.DateTimeFormat('fr-CA', { year: 'numeric', month: '2-digit', day: '2-digit', timeZone: leg.arrival.tz }).format(new Date(leg.arrival.time));
-                                        const dateIndicator = arrivalLocalDateStr > departureLocalDateStr ? ' <span class="text-xs text-red-500 font-semibold">(+1)</span>' : '';
-                                        // --- MODIFICATION END ---
-
-                                        return `<div class="text-gray-700">
-                                            <div class="font-semibold text-gray-800">${leg.flightCode}</div>
-                                            <div class="text-sm pl-2 mt-1">🛫 ${leg.departure.airport} &nbsp; <strong>${depTime}</strong></div>
-                                            <div class="text-sm pl-2">🛬 ${leg.arrival.airport} &nbsp; <strong>${arrTime}</strong>${dateIndicator}</div>
-                                        </div>`;
-                                    }).join('<div class="my-2 border-t border-dashed border-gray-300"></div>');
-                                    return `<li>${flightsHtml}</li>`;
-                                }
-                                return `<li class="text-gray-700">${item.type}：${item.details}</li>`;
-                            }).join('');
-
-                            dayContentContainer.insertAdjacentHTML('afterbegin', `<div class="info-block transportation-info p-4 bg-blue-50 rounded-lg border-l-4 border-blue-400"><h4 class="font-bold text-lg text-blue-800 flex items-center mb-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 3a1 1 0 00-1.447-.894L8.763 6H5a3 3 0 000 6h.085l1.558 2.336A1 1 0 008 15.5V17a1 1 0 001 1h2a1 1 0 001-1v-1.5a1 1 0 00-.237-.664L9.915 12H15a3 3 0 000-6h-3.763L16.553 3.894A1 1 0 0018 3zM5 9a1 1 0 100-2 1 1 0 000 2zm10-2a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" /></svg>本日交通</h4><ul class="list-none space-y-2">${transportListHTML}</ul></div>`);
-                        }
-                        
-                        const tagContainer = el.querySelector('.my-3');
-                        const cityKey = el.dataset.weatherCity;
-                        if (tagContainer && cityKey && foodieData[cityKey] && !tagContainer.querySelector('.foodie-btn-wrapper')) {
-                            const foodieButton = document.createElement('button');
-                            foodieButton.className = "foodie-btn bg-amber-100 text-amber-800 text-xs font-semibold px-3 py-1 rounded-full hover:bg-amber-200 transition-colors";
-                            foodieButton.innerHTML = "🍽️ 美食清單";
-                            foodieButton.onclick = e => { e.stopPropagation(); window.openFoodieModal(cityKey); };
-                            const wrapper = document.createElement('div');
-                            wrapper.className = "foodie-btn-wrapper flex-shrink-0";
-                            wrapper.appendChild(foodieButton);
-                            tagContainer.appendChild(wrapper);
-                        }
-                    }
-                    
-                    if (dateStr < todayString) {
-                        el.classList.add('day-past');
-                        if (el.querySelector('details')) el.querySelector('details').open = false;
-                    } else if (dateStr === todayString) {
-                        const summaryElement = el.querySelector('summary');
-                        if (summaryElement) {
-                            summaryElement.classList.add('summary-today');
-                            const h3 = summaryElement.querySelector('h3');
-                            if(h3 && !h3.querySelector('.today-marker')) h3.insertAdjacentHTML('beforeend', ' <span class="today-marker text-base font-medium text-green-600">(今日行程)</span>');
-                        }
-                    }
-                });
-                
-                const updateVisibility = () => mainContainer.classList.toggle('show-past', showPastToggle.checked);
-                showPastToggle.addEventListener('change', updateVisibility);
-                updateVisibility();
-            }
-            
-            const navLinks = document.querySelectorAll('.nav-link');
-            const sections = document.querySelectorAll('section[id], .trip-card-wrapper[id]');
-            const sectionObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const id = entry.target.getAttribute('id');
-                        navLinks.forEach(link => {
-                            link.classList.toggle('nav-link-active', link.getAttribute('href') === `#${id}`);
-                        });
-                    }
-                });
-            }, { rootMargin: "-50% 0px -50% 0px" });
-            sections.forEach(section => sectionObserver.observe(section));
-
-
-            updateLiveTaipeiTime();
-            setInterval(updateLiveTaipeiTime, 1000); 
-
-            populateDayCardWeather(allWeatherData);
-            initializeTripView();
-
-            // --- FIX START: Use local date instead of UTC ---
-            const now = new Date();
-            const year = now.getFullYear();
-            const month = String(now.getMonth() + 1).padStart(2, '0');
-            const day = String(now.getDate()).padStart(2, '0');
-            const todayString = `${year}-${month}-${day}`;
-            // --- FIX END ---
-
-            const lastAvailableDate = itinerary[itinerary.length - 1].date;
-
-            let initialDateToShow = tripInfo.tripStartDate;
-            if (todayString >= tripInfo.tripStartDate && todayString <= tripInfo.tripEndDate) {
-                if (itinerary.find(d => d.date === todayString)) {
-                    initialDateToShow = todayString;
-                } else if (todayString > lastAvailableDate) {
-                    initialDateToShow = lastAvailableDate;
-                }
-            } else if (todayString > tripInfo.tripEndDate) {
-                initialDateToShow = lastAvailableDate;
-            }
-
-            currentDisplayDate = initialDateToShow;
-            updateStatusDashboard(currentDisplayDate, data, allWeatherData);
-
-            const statusCard = document.getElementById('status-card-content');
-            let touchStartX = 0;
-            let touchEndX = 0;
-            let isSliderInteraction = false; 
-            const swipeThreshold = 50; 
-
-            statusCard.addEventListener('touchstart', (event) => {
-                if (event.target.id === 'day-slider') {
-                    isSliderInteraction = true;
-                    return; 
-                }
-                isSliderInteraction = false;
-                touchStartX = event.changedTouches[0].screenX;
-            }, { passive: true });
-
-            statusCard.addEventListener('touchend', (event) => {
-                if (isSliderInteraction) {
-                    isSliderInteraction = false;
-                    return;
-                }
-                touchEndX = event.changedTouches[0].screenX;
-                handleSwipe();
-            }, { passive: true });
-
-            function handleSwipe() {
-                const swipeDistance = touchEndX - touchStartX;
-                if (Math.abs(swipeDistance) < swipeThreshold) return; 
-
-                if (swipeDistance < 0) { // Swipe Left
-                    const [year, month, day] = currentDisplayDate.split('-').map(Number);
-                    const currentDateObj = new Date(Date.UTC(year, month - 1, day));
-                    currentDateObj.setUTCDate(currentDateObj.getUTCDate() + 1);
-                    const newDate = currentDateObj.toISOString().split('T')[0];
-                     if (newDate <= lastAvailableDate) { 
-                        currentDisplayDate = newDate;
-                        updateStatusDashboard(currentDisplayDate, data, window.allWeatherData, 1);
-                    }
-                } else { // Swipe Right
-                    const [year, month, day] = currentDisplayDate.split('-').map(Number);
-                    const currentDateObj = new Date(Date.UTC(year, month - 1, day));
-                    currentDateObj.setUTCDate(currentDateObj.getUTCDate() - 1);
-                    const newDate = currentDateObj.toISOString().split('T')[0];
-                    if (newDate >= tripInfo.tripStartDate) {
-                        currentDisplayDate = newDate;
-                        updateStatusDashboard(currentDisplayDate, data, window.allWeatherData, -1); 
-                    }
-                }
-            }
-
-            if (paginationDotsContainer) {
-                paginationDotsContainer.addEventListener('click', (event) => {
-                    const clickedDot = event.target.closest('.pagination-dot');
-                    if (clickedDot) {
-                        const targetDay = parseInt(clickedDot.dataset.day);
-                        const targetDate = data.itinerary[targetDay - 1].date;
-                        
-                        const currentDayData = data.itinerary.find(d => d.date === currentDisplayDate);
-                        const currentDay = currentDayData ? currentDayData.day : 0;
-                        let direction = 0;
-                        if (targetDay > currentDay) { direction = 1; } 
-                        else if (targetDay < currentDay) { direction = -1; }
-
-                        currentDisplayDate = targetDate;
-                        updateStatusDashboard(currentDisplayDate, data, window.allWeatherData, direction);
-                    }
-                });
-            }
-
-            document.getElementById('view-details-btn').addEventListener('click', () => {
-                const dayData = data.itinerary.find(d => d.date === currentDisplayDate);
-                if (!dayData) return;
-
-                const wrapper = document.querySelector(`.trip-card-wrapper[data-day="${dayData.day}"]`);
-                if (!wrapper) return;
-
-                const details = wrapper.querySelector('details');
-                const card = details?.closest('.trip-card');
-
-                card?.classList.add('is-visible', 'no-trans');
-                if (details && !details.open) {
-                    details.open = true;
-                }
-
-                wrapper.scrollIntoView({ behavior: 'smooth' });
-
-                setTimeout(() => {
-                    card?.classList.remove('no-trans');
-                }, 1000); 
-            });
-            
-            const todayBtn = document.getElementById('today-btn');
-            const dashboardSectionForObserver = document.getElementById('status-dashboard-section');
-
-            if (todayBtn && dashboardSectionForObserver) {
-                const todayBtnObserver = new IntersectionObserver(
-                    ([entry]) => {
-                        todayBtn.classList.toggle('hidden', entry.isIntersecting);
-                        todayBtn.classList.toggle('is-visible', !entry.isIntersecting);
-                    },
-                    { root: null, threshold: 0.1 }
-                );
-                todayBtnObserver.observe(dashboardSectionForObserver);
-            }
-            
-            todayBtn.addEventListener('click', () => {
-                scrollToToday();
-            });
-
-            // --- START: 新增的更新事件監聽 ---
-            document.getElementById('refresh-btn')?.addEventListener('click', checkForUpdates);
-            document.getElementById('mobile-refresh-btn')?.addEventListener('click', checkForUpdates);
-
-            const pullIndicator = document.getElementById('pull-to-refresh-indicator');
-            const dashboard = document.getElementById('status-dashboard-section');
-            const arrowIcon = pullIndicator.querySelector('.arrow-icon');
-            const spinnerIcon = pullIndicator.querySelector('.spinner-icon');
-
-            let startY = 0;
-            let pullDistance = 0;
-            const PULL_THRESHOLD = 80;
-
-            dashboard.addEventListener('touchstart', (e) => {
-                if (document.querySelector('#status-card-content').scrollTop === 0) {
-                    startY = e.touches[0].pageY;
-                }
-            }, { passive: true });
-
-            dashboard.addEventListener('touchmove', (e) => {
-                if (startY === 0) return;
-                const currentY = e.touches[0].pageY;
-                pullDistance = currentY - startY;
-
-                if (pullDistance > 0) {
-                    e.preventDefault();
-                    pullIndicator.style.transform = `translateY(${-50 + pullDistance / 2}px)`;
-                    if (pullDistance > PULL_THRESHOLD) {
-                        arrowIcon.style.transform = 'rotate(180deg)';
-                    } else {
-                        arrowIcon.style.transform = 'rotate(0deg)';
-                    }
-                }
-            }, { passive: false });
-
-            dashboard.addEventListener('touchend', () => {
-                if (pullDistance > PULL_THRESHOLD) {
-                    arrowIcon.style.display = 'none';
-                    spinnerIcon.classList.remove('hidden');
-                    pullIndicator.style.transform = `translateY(10px)`;
-                    
-                    checkForUpdates();
-
-                    setTimeout(() => {
-                        pullIndicator.style.transform = 'translateY(-50px)';
-                        startY = 0;
-                        pullDistance = 0;
-                        setTimeout(() => {
-                            arrowIcon.style.display = 'block';
-                            arrowIcon.style.transform = 'rotate(0deg)';
-                            spinnerIcon.classList.add('hidden');
-                        }, 300);
-                    }, 2000);
-
-                } else if (pullDistance > 0) {
-                    pullIndicator.style.transform = 'translateY(-50px)';
-                    startY = 0;
-                    pullDistance = 0;
-                }
-            });
-            // --- END: 新增的更新事件監聽 ---
-        }
-    </script>
 </body>
+<script type="module" src="scripts/main.js"></script>
 </html>
