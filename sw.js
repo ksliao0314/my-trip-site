@@ -11,7 +11,7 @@ workbox.core.clientsClaim();
 // 這確保了應用程式的基本外觀與功能可以完全離線運作。
 // revision: null 表示我們手動管理版本，若為 null，Workbox 會在 URL 變更時才更新。
 const APP_SHELL_ASSETS = [
-  { url: 'index.html', revision: '20250707-02' }, // HTML主檔案 - 更新版本以解決天氣錯誤
+  { url: 'index.html', revision: '20250707-03' }, // HTML主檔案 - 更新版本以解決天氣錯誤
   { url: 'manifest.json', revision: '20250702-01' }, // PWA 設定檔
   { url: 'trip-data.json', revision: '20250707-06' }, // 核心行程資料
   // --- 快取所有應用程式圖示 ---
