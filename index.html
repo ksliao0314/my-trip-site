@@ -499,6 +499,9 @@
              <!-- START: 新增的行動版重新整理按鈕 -->
              <button id="mobile-refresh-btn" class="w-full text-left mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">🔄 下載最新行程</button>
              <!-- END: 新增的行動版重新整理按鈕 -->
+             <!-- START: 新增的天氣快取清除按鈕 -->
+             <button id="mobile-clear-weather-cache-btn" class="w-full text-left mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">🌤️ 重新取得天氣資料</button>
+             <!-- END: 新增的天氣快取清除按鈕 -->
              <button id="mobile-print-btn" class="w-full text-left mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">📄 列印行程</button>
         </div>
     </div>
@@ -853,7 +856,7 @@
             return '祝您有美好的一天！';
         }
 
-        // --- START: 修改天氣請求邏輯 ---
+        // --- START: 改進的天氣請求邏輯，包含快取機制 ---
         async function fetchAllWeatherData(itinerary) {
             if (!navigator.onLine && !navigator.serviceWorker.controller) {
                 console.log("目前處於離線狀態，無法取得天氣資訊。");
@@ -863,9 +866,57 @@
             const today = new Date();
             today.setHours(0, 0, 0, 0); // 將時間設定為當天零點以便比較
 
-            const uniqueCityDateRequests = [...new Set(itinerary.filter(day => day.weatherCity).map(day => JSON.stringify({ city: day.weatherCity, date: day.date })))].map(JSON.parse);
+            // 檢查本地快取
+            const cachedWeatherData = localStorage.getItem('weatherDataCache');
+            let existingData = {};
+            let cacheTimestamp = 0;
+            
+            if (cachedWeatherData) {
+                try {
+                    const parsed = JSON.parse(cachedWeatherData);
+                    existingData = parsed.data || {};
+                    cacheTimestamp = parsed.timestamp || 0;
+                } catch (e) {
+                    console.warn('天氣快取資料解析失敗，將重新取得');
+                }
+            }
 
-            const promises = uniqueCityDateRequests.map(async ({ city, date }) => {
+            // 檢查快取是否仍然有效（24小時內）
+            const cacheAge = Date.now() - cacheTimestamp;
+            const cacheValid = cacheAge < 24 * 60 * 60 * 1000; // 24小時
+
+            // 分離過去日期和未來日期
+            const pastDates = [];
+            const futureDates = [];
+            
+            itinerary.filter(day => day.weatherCity).forEach(day => {
+                const requestDate = new Date(day.date);
+                if (requestDate < today) {
+                    pastDates.push({ city: day.weatherCity, date: day.date });
+                } else {
+                    futureDates.push({ city: day.weatherCity, date: day.date });
+                }
+            });
+
+            // 對於過去日期，如果快取中有資料且有效，直接使用
+            const pastDatesToFetch = pastDates.filter(({ city, date }) => {
+                if (!cacheValid) return true;
+                if (!existingData[city] || !existingData[city].time) return true;
+                return !existingData[city].time.includes(date);
+            });
+
+            // 對於未來日期，總是重新取得（因為預報會更新）
+            const allDatesToFetch = [...pastDatesToFetch, ...futureDates];
+            
+            // 如果沒有需要重新取得的資料，直接返回快取
+            if (allDatesToFetch.length === 0 && cacheValid) {
+                console.log('使用快取的天氣資料');
+                return existingData;
+            }
+
+            console.log(`需要重新取得 ${allDatesToFetch.length} 筆天氣資料`);
+
+            const promises = allDatesToFetch.map(async ({ city, date }) => {
                 const { lat, lon } = cityCoordinates[city];
                 const requestDate = new Date(date);
                 let url;
@@ -883,7 +934,6 @@
                     if (!res.ok) throw new Error(`API error for ${city} on ${date}`);
                     const data = await res.json();
                     
-                    // 將結果包裝成與原格式一致，方便後續處理
                     return { city, date, data: data.daily };
                 } catch (error) {
                     console.error(`無法取得 ${city} 在 ${date} 的天氣資訊:`, error);
@@ -893,24 +943,38 @@
 
             const results = await Promise.all(promises);
             
-            // 將結果重新組合成以城市為鍵值的物件
-            const allWeatherData = {};
+            // 合併新資料和現有快取資料
+            const allWeatherData = { ...existingData };
+            
             results.filter(r => r).forEach(({ city, date, data }) => {
                 if (!allWeatherData[city]) {
                     allWeatherData[city] = { time: [], temperature_2m_max: [], temperature_2m_min: [], weather_code: [] };
                 }
+                
+                // 檢查是否已存在該日期的資料
                 const dateIndex = allWeatherData[city].time.indexOf(date);
-                if (dateIndex === -1 && data && data.time) { // 確保 data 和 data.time 存在
+                if (dateIndex === -1 && data && data.time) {
                     allWeatherData[city].time.push(data.time[0]);
                     allWeatherData[city].temperature_2m_max.push(data.temperature_2m_max[0]);
                     allWeatherData[city].temperature_2m_min.push(data.temperature_2m_min[0]);
                     allWeatherData[city].weather_code.push(data.weather_code[0]);
                 }
             });
+
+            // 儲存到本地快取
+            try {
+                localStorage.setItem('weatherDataCache', JSON.stringify({
+                    data: allWeatherData,
+                    timestamp: Date.now()
+                }));
+                console.log('天氣資料已儲存到本地快取');
+            } catch (e) {
+                console.warn('無法儲存天氣資料到本地快取:', e);
+            }
             
             return allWeatherData;
         }
-        // --- END: 修改天氣請求邏輯 ---
+        // --- END: 改進的天氣請求邏輯，包含快取機制 ---
         
         function updateStatusDashboard(date, data, allWeatherData, direction = 0) {
             const { itinerary, hotels, transport, tripInfo } = data;
@@ -1174,41 +1238,68 @@
 
         let currentDisplayDate;
 
-        // --- START: 更新後的更新檢查函數 ---
-        function checkForUpdates() {
-            if (!('serviceWorker' in navigator)) {
-                showToast('您的瀏覽器不支援離線功能。');
-                return;
-            }
+                    // --- START: 更新後的更新檢查函數 ---
+            function checkForUpdates() {
+                if (!('serviceWorker' in navigator)) {
+                    showToast('您的瀏覽器不支援離線功能。');
+                    return;
+                }
 
-            // 使用 navigator.serviceWorker.ready 確保 Service Worker 已啟用
-            navigator.serviceWorker.ready.then(registration => {
-                showToast('正在檢查最新行程...');
+                // 使用 navigator.serviceWorker.ready 確保 Service Worker 已啟用
+                navigator.serviceWorker.ready.then(registration => {
+                    showToast('正在檢查最新行程...');
 
-                // 直接在已啟用的 registration 上呼叫 update
-                registration.update().then(() => {
-                    if (registration.installing) {
-                        console.log('Service Worker 正在安裝新版本。');
-                    } else if (registration.waiting) {
-                        console.log('有新的 Service Worker 正在等待啟用。');
-                        const updateBar = document.getElementById('update-notification');
-                        if (updateBar) updateBar.style.display = 'block';
-                        showToast('發現新行程！點擊「立即更新」以載入。');
-                    } else {
-                        console.log('目前已是最新版本。');
-                        showToast('您的行程已是最新版本！');
-                    }
+                    // 直接在已啟用的 registration 上呼叫 update
+                    registration.update().then(() => {
+                        if (registration.installing) {
+                            console.log('Service Worker 正在安裝新版本。');
+                        } else if (registration.waiting) {
+                            console.log('有新的 Service Worker 正在等待啟用。');
+                            const updateBar = document.getElementById('update-notification');
+                            if (updateBar) updateBar.style.display = 'block';
+                            showToast('發現新行程！點擊「立即更新」以載入。');
+                        } else {
+                            console.log('目前已是最新版本。');
+                            showToast('您的行程已是最新版本！');
+                        }
+                    }).catch(error => {
+                        console.error('Service Worker 更新檢查失敗:', error);
+                        showToast('檢查更新失敗，請確認網路連線。');
+                    });
                 }).catch(error => {
-                    console.error('Service Worker 更新檢查失敗:', error);
-                    showToast('檢查更新失敗，請確認網路連線。');
+                    // 如果 .ready 失敗，代表 Service Worker 尚未註冊或啟用失敗
+                    console.error('Service Worker 未準備就緒:', error);
+                    showToast('離線功能尚未啟用，請稍後再試或重新整理頁面。');
                 });
-            }).catch(error => {
-                // 如果 .ready 失敗，代表 Service Worker 尚未註冊或啟用失敗
-                console.error('Service Worker 未準備就緒:', error);
-                showToast('離線功能尚未啟用，請稍後再試或重新整理頁面。');
-            });
-        }
-        // --- END: 更新後的更新檢查函數 ---
+            }
+            // --- END: 更新後的更新檢查函數 ---
+
+            // --- START: 天氣快取清除函數 ---
+            function clearWeatherCache() {
+                try {
+                    localStorage.removeItem('weatherDataCache');
+                    showToast('天氣快取已清除，將重新取得最新資料');
+                    
+                    // 重新取得天氣資料
+                    if (window.tripData) {
+                        fetchAllWeatherData(window.tripData.itinerary)
+                            .then(allWeatherData => {
+                                window.allWeatherData = allWeatherData;
+                                populateDayCardWeather(allWeatherData);
+                                updateStatusDashboard(currentDisplayDate, window.tripData, allWeatherData);
+                                showToast('天氣資料已更新完成');
+                            })
+                            .catch(weatherError => {
+                                console.error("Weather data fetch failed:", weatherError);
+                                showToast('天氣資料更新失敗，請檢查網路連線');
+                            });
+                    }
+                } catch (e) {
+                    console.error('清除天氣快取失敗:', e);
+                    showToast('清除快取失敗');
+                }
+            }
+            // --- END: 天氣快取清除函數 ---
 
         document.addEventListener('DOMContentLoaded', async () => {
             try {
@@ -1352,6 +1443,9 @@
             }
             document.getElementById('print-btn')?.addEventListener('click', triggerPrint);
             document.getElementById('mobile-print-btn')?.addEventListener('click', triggerPrint);
+            
+            // 天氣快取清除按鈕
+            document.getElementById('mobile-clear-weather-cache-btn')?.addEventListener('click', clearWeatherCache);
 
             const billInput = document.getElementById('bill-amount');
             const tipSelect = document.getElementById('tip-rate');
