@@ -9,7 +9,7 @@ workbox.core.clientsClaim();
 // 這些是確保應用程式基本外觀與功能可以離線運作的檔案。
 // --- FIX: 使用相對路徑以增加彈性 ---
 const APP_SHELL_ASSETS = [
-  { url: 'index.html', revision: '20250707-04' }, // HTML主檔案
+  { url: 'index.html', revision: '20250707-05' }, // HTML主檔案
   { url: 'manifest.json', revision: '20250702-01' }, // PWA 設定檔
   { url: 'trip-data.json', revision: '20250707-07' }, // 核心行程資料
   // --- 快取所有應用程式圖示，確保離線時圖示能正常顯示 ---
@@ -49,13 +49,13 @@ workbox.routing.registerRoute(
 // 2. 針對天氣 API 的快取策略 (NetworkFirst)
 // 優先嘗試從網路取得最新資料，如果失敗（例如離線），則從快取中讀取舊資料。
 workbox.routing.registerRoute(
-  ({ url }) => url.origin === 'https://api.open-meteo.com',
+  ({ url }) => url.origin === 'https://api.open-meteo.com' || url.origin === 'https://archive-api.open-meteo.com',
   new workbox.strategies.NetworkFirst({
     cacheName: 'weather-api-cache',
     plugins: [
       new workbox.expiration.ExpirationPlugin({
-        maxEntries: 10, // 最多快取 10 次 API 請求
-        maxAgeSeconds: 12 * 60 * 60, // 快取 12 小時
+        maxEntries: 20, // 增加快取項目數量，因為歷史天氣資料不會變動
+        maxAgeSeconds: 24 * 60 * 60, // 快取 24 小時
       }),
       new workbox.cacheableResponse.CacheableResponsePlugin({
         statuses: [0, 200],
