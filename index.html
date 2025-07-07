@@ -889,12 +889,20 @@
             const pastDates = [];
             const futureDates = [];
             
+            // 計算預報 API 的有效日期範圍（通常為未來 7-16 天）
+            const maxForecastDays = 16; // Open-Meteo 預報 API 的最大天數
+            const maxForecastDate = new Date(today);
+            maxForecastDate.setDate(today.getDate() + maxForecastDays);
+            
             itinerary.filter(day => day.weatherCity).forEach(day => {
                 const requestDate = new Date(day.date);
                 if (requestDate < today) {
                     pastDates.push({ city: day.weatherCity, date: day.date });
-                } else {
+                } else if (requestDate <= maxForecastDate) {
                     futureDates.push({ city: day.weatherCity, date: day.date });
+                } else {
+                    // 超出預報範圍的日期，暫時跳過
+                    console.log(`跳過 ${day.date} 的天氣預報，超出 API 範圍`);
                 }
             });
 
@@ -926,7 +934,7 @@
                     url = `https://archive-api.open-meteo.com/v1/archive?latitude=${lat}&longitude=${lon}&start_date=${date}&end_date=${date}&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=auto`;
                 } else {
                     // 日期是今天或未來，使用天氣預報 API
-                    url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=auto`;
+                    url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&start_date=${date}&end_date=${date}&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=auto`;
                 }
 
                 try {
@@ -1313,6 +1321,8 @@
                 
                 initializeApp(data, null); 
 
+                window.tripData = data; // 儲存到全域變數
+                
                 fetchAllWeatherData(data.itinerary)
                     .then(allWeatherData => {
                         window.allWeatherData = allWeatherData; 
@@ -1446,6 +1456,49 @@
             
             // 天氣快取清除按鈕
             document.getElementById('mobile-clear-weather-cache-btn')?.addEventListener('click', clearWeatherCache);
+            
+            // 強制清除所有快取（包括瀏覽器快取）
+            function forceClearAllCache() {
+                try {
+                    // 清除 localStorage
+                    localStorage.clear();
+                    
+                    // 清除 sessionStorage
+                    sessionStorage.clear();
+                    
+                    // 嘗試清除 Service Worker 快取
+                    if ('caches' in window) {
+                        caches.keys().then(names => {
+                            names.forEach(name => {
+                                caches.delete(name);
+                            });
+                        });
+                    }
+                    
+                    showToast('所有快取已清除，請重新整理頁面');
+                    
+                    // 延遲重新整理頁面
+                    setTimeout(() => {
+                        window.location.reload(true);
+                    }, 1000);
+                } catch (e) {
+                    console.error('清除快取失敗:', e);
+                    showToast('清除快取失敗');
+                }
+            }
+            
+            // 添加強制清除快取按鈕（僅在開發模式）
+            if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+                const forceClearBtn = document.createElement('button');
+                forceClearBtn.textContent = '🗑️ 強制清除所有快取';
+                forceClearBtn.className = 'w-full text-left mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50';
+                forceClearBtn.onclick = forceClearAllCache;
+                
+                const mobileMenu = document.getElementById('mobile-menu-panel');
+                if (mobileMenu) {
+                    mobileMenu.appendChild(forceClearBtn);
+                }
+            }
 
             const billInput = document.getElementById('bill-amount');
             const tipSelect = document.getElementById('tip-rate');
