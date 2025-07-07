@@ -96,6 +96,13 @@ workbox.routing.registerRoute(
   })
 );
 
+// 策略 4: 針對版本檢查檔案 (新增此段)
+// 使用 NetworkOnly 策略，確保總是取得最新的版本檔案，永遠不從快取讀取。
+workbox.routing.registerRoute(
+  ({url}) => url.pathname.endsWith('version.json'),
+  new workbox.strategies.NetworkOnly()
+);
+
 // --- 導航備援 (Navigation Fallback) ---
 // 當使用者離線或伺服器無法回應時，針對頁面導航請求提供一個備用的 HTML 頁面。
 // 這確保了使用者總能看到應用程式的介面，而不是瀏覽器的錯誤頁面。
