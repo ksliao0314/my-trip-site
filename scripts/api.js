@@ -61,4 +61,27 @@ export async function fetchAllWeatherData(itinerary) {
     console.error('載入天氣資料失敗:', err);
     return null;
   }
+}
+
+/**
+ * 檢查伺服器版本與本地版本，決定是否需要更新
+ * @param {string} localVersion - 目前本地 trip-data.json 的版本號
+ * @returns {Promise<{status: string, serverVersion?: string, localVersion?: string}>}
+ */
+export async function checkVersionAndUpdate(localVersion) {
+  try {
+    const res = await fetch('version.json', { cache: 'no-store' });
+    if (!res.ok) throw new Error('version.json 讀取失敗');
+    const data = await res.json();
+    const serverVersion = data.version;
+    if (!serverVersion) throw new Error('version.json 格式錯誤');
+    if (serverVersion > localVersion) {
+      return { status: 'update-available', serverVersion, localVersion };
+    } else {
+      return { status: 'up-to-date', serverVersion, localVersion };
+    }
+  } catch (err) {
+    console.error('檢查版本時發生錯誤:', err);
+    return { status: 'error', error: err.message };
+  }
 } 
