@@ -8,12 +8,12 @@
       "sizes": "96x96"
     },
     {
-      "src": "/web-app-manifest-192x192.png",
+      "src": "/my-trip-site/web-app-manifest-192x192.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "/web-app-manifest-512x512.png",
+      "src": "/my-trip-site/web-app-manifest-512x512.png",
       "type": "image/png",
       "sizes": "512x512"
     }
