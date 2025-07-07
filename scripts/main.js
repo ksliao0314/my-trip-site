@@ -1,64 +1,45 @@
-// api.js - 負責所有外部 API 的請求 
+// main.js - 應用程式主要進入點，僅負責初始化與流程調度
+import { state } from './state.js';
+import { fetchTripData, fetchAllWeatherData, checkVersionAndUpdate } from './api.js';
+import { renderItinerary, updateStatusDashboard, bindUIEventListeners, showToast } from './ui.js';
 
-export async function fetchTripData() {
+// 初始化流程
+// 1. 綁定 UI 事件 2. 載入資料 3. 渲染畫面
+
+document.addEventListener('DOMContentLoaded', async () => {
   try {
-    const response = await fetch('trip-data.json');
-    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-    return await response.json();
-  } catch (err) {
-    console.error('載入行程資料失敗:', err);
-    return null;
-  }
-}
+    bindUIEventListeners();
+    state.tripData = await fetchTripData();
+    const itineraryContainer = document.getElementById('itinerary-container');
+    renderItinerary(state.tripData.itinerary, itineraryContainer);
+    state.allWeatherData = await fetchAllWeatherData(state.tripData.itinerary);
+    // 這裡可根據需求呼叫 updateStatusDashboard 或其他初始化
 
-const cityCoordinates = {
-  montreal: { lat: 45.50, lon: -73.57 },
-  quebec: { lat: 46.81, lon: -71.21 },
-  niagara: { lat: 43.09, lon: -79.08 },
-  chicago: { lat: 41.88, lon: -87.63 }
-};
-
-export async function fetchAllWeatherData(itinerary) {
-  try {
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    const uniqueCityDateRequests = [...new Set(itinerary.filter(day => day.weatherCity).map(day => JSON.stringify({ city: day.weatherCity, date: day.date })))].map(JSON.parse);
-    const promises = uniqueCityDateRequests.map(async ({ city, date }) => {
-      const { lat, lon } = cityCoordinates[city];
-      const requestDate = new Date(date);
-      let url;
-      if (requestDate < today) {
-        url = `https://archive-api.open-meteo.com/v1/archive?latitude=${lat}&longitude=${lon}&start_date=${date}&end_date=${date}&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=auto`;
-      } else {
-        url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=auto`;
-      }
-      try {
-        const res = await fetch(url);
-        if (!res.ok) throw new Error(`API error for ${city} on ${date}`);
-        const data = await res.json();
-        return { city, date, data: data.daily };
-      } catch (error) {
-        console.error(`無法取得 ${city} 在 ${date} 的天氣資訊:`, error);
-        return null;
-      }
-    });
-    const results = await Promise.all(promises);
-    const allWeatherData = {};
-    results.filter(r => r).forEach(({ city, date, data }) => {
-      if (!allWeatherData[city]) {
-        allWeatherData[city] = { time: [], temperature_2m_max: [], temperature_2m_min: [], weather_code: [] };
-      }
-      const dateIndex = allWeatherData[city].time.indexOf(date);
-      if (dateIndex === -1 && data && data.time) {
-        allWeatherData[city].time.push(data.time[0]);
-        allWeatherData[city].temperature_2m_max.push(data.temperature_2m_max[0]);
-        allWeatherData[city].temperature_2m_min.push(data.temperature_2m_min[0]);
-        allWeatherData[city].weather_code.push(data.weather_code[0]);
-      }
-    });
-    return allWeatherData;
-  } catch (err) {
-    console.error('載入天氣資料失敗:', err);
-    return null;
+    // 綁定重新整理/檢查更新按鈕
+    const reloadBtn = document.getElementById('reload-button') || document.getElementById('refresh-btn');
+    if (reloadBtn) {
+      reloadBtn.addEventListener('click', async () => {
+        const localVersion = state.tripData?.tripInfo?.dataVersion || '';
+        const result = await checkVersionAndUpdate(localVersion);
+        if (result.status === 'update-available') {
+          showToast('有新版本，正在更新...');
+          // 觸發 Service Worker 更新
+          if (navigator.serviceWorker && navigator.serviceWorker.controller) {
+            navigator.serviceWorker.controller.postMessage({ type: 'SKIP_WAITING' });
+            setTimeout(() => window.location.reload(), 1200);
+          } else {
+            window.location.reload();
+          }
+        } else if (result.status === 'up-to-date') {
+          showToast('已是最新版本');
+        } else {
+          showToast('檢查更新失敗，請確認網路連線');
+        }
+      });
+    }
+  } catch (error) {
+    const container = document.getElementById('itinerary-container');
+    if (container) container.innerHTML = `<p class="text-center text-red-600 font-bold">行程資料載入失敗，請檢查 trip-data.json 檔案並確認網路連線。</p>`;
+    console.error(error);
   }
-} 
+}); 
