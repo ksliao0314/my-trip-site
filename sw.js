@@ -11,7 +11,7 @@ workbox.core.clientsClaim();
 // 這確保了應用程式的基本外觀與功能可以完全離線運作。
 // revision: null 表示我們手動管理版本，若為 null，Workbox 會在 URL 變更時才更新。
 const APP_SHELL_ASSETS = [
-  { url: 'index.html', revision: '20250707-01' }, // HTML主檔案
+  { url: 'index.html', revision: '20250707-02' }, // HTML主檔案 - 更新版本以解決天氣錯誤
   { url: 'manifest.json', revision: '20250702-01' }, // PWA 設定檔
   { url: 'trip-data.json', revision: '20250706-01' }, // 核心行程資料
   // --- 快取所有應用程式圖示 ---
@@ -55,7 +55,10 @@ workbox.routing.registerRoute(
       return new workbox.strategies.CacheFirst({
         cacheName: 'historical-weather-cache',
         plugins: [
-          // 歷史資料不會改變，因此不需要限制快取數量或時間
+          new workbox.expiration.ExpirationPlugin({
+            maxEntries: 50, // 快取最多50筆歷史天氣
+            maxAgeSeconds: 30 * 24 * 60 * 60, // 快取30天，防止錯誤快取永久存在
+          }),
           new workbox.cacheableResponse.CacheableResponsePlugin({ statuses: [0, 200] }),
         ],
       });
