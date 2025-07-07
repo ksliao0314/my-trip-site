@@ -55,7 +55,7 @@ workbox.routing.registerRoute(
       return new workbox.strategies.CacheFirst({
         cacheName: 'historical-weather-cache',
         plugins: [
-          new workbox.expiration.ExpirationPlugin({ maxEntries: 30 }),
+          // 歷史資料不會改變，因此不需要限制快取數量或時間
           new workbox.cacheableResponse.CacheableResponsePlugin({ statuses: [0, 200] }),
         ],
       });
