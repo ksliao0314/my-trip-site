@@ -899,9 +899,12 @@
                 return {};
             }
 
-            // 修正今天的日期計算
+            // 修正今天的日期計算 - 使用本地時區
             const now = new Date();
-            const today = new Date(now.getFullYear(), now.getMonth(), now.getDate()); // 使用本地日期，不考慮時區
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            const todayStr = `${year}-${month}-${day}`; // 使用本地日期字串
 
             // 檢查本地快取
             const cachedWeatherData = localStorage.getItem('weatherDataCache');
@@ -928,22 +931,49 @@
             
             // 計算預報 API 的有效日期範圍（通常為未來 7-16 天）
             const maxForecastDays = 16; // Open-Meteo 預報 API 的最大天數
-            const maxForecastDate = new Date(today);
-            maxForecastDate.setDate(today.getDate() + maxForecastDays);
+            const maxForecastDate = new Date(now);
+            maxForecastDate.setDate(now.getDate() + maxForecastDays);
+            const maxForecastDateStr = maxForecastDate.toISOString().split('T')[0];
+            
+                        // 定義各城市的時區
+            const cityTimezones = {
+                montreal: 'America/Montreal',
+                quebec: 'America/Montreal', 
+                niagara: 'America/Toronto',
+                chicago: 'America/Chicago'
+            };
             
             itinerary.filter(day => day.weatherCity).forEach(day => {
-                const requestDate = new Date(day.date);
-                // 修正日期比較：使用字串比較而不是 Date 物件比較
                 const requestDateStr = day.date;
-                const todayStr = today.toISOString().split('T')[0];
+                const cityTimezone = cityTimezones[day.weatherCity];
                 
-                if (requestDateStr < todayStr) {
-                    pastDates.push({ city: day.weatherCity, date: day.date });
-                } else if (requestDateStr <= maxForecastDate.toISOString().split('T')[0]) {
-                    futureDates.push({ city: day.weatherCity, date: day.date });
+                // 使用目標城市的當地時區來判斷日期是否為過去
+                if (cityTimezone) {
+                    // 獲取目標城市當前的當地日期
+                    const cityNow = new Date();
+                    const cityToday = new Intl.DateTimeFormat('fr-CA', { 
+                        year: 'numeric', 
+                        month: '2-digit', 
+                        day: '2-digit', 
+                        timeZone: cityTimezone 
+                    }).format(cityNow);
+                    
+                    if (requestDateStr < cityToday) {
+                        pastDates.push({ city: day.weatherCity, date: day.date });
+                    } else if (requestDateStr <= maxForecastDateStr) {
+                        futureDates.push({ city: day.weatherCity, date: day.date });
+                    } else {
+                        console.log(`跳過 ${day.date} 的天氣預報，超出 API 範圍`);
+                    }
                 } else {
-                    // 超出預報範圍的日期，暫時跳過
-                    console.log(`跳過 ${day.date} 的天氣預報，超出 API 範圍`);
+                    // 如果沒有指定時區，使用預設邏輯
+                    if (requestDateStr < todayStr) {
+                        pastDates.push({ city: day.weatherCity, date: day.date });
+                    } else if (requestDateStr <= maxForecastDateStr) {
+                        futureDates.push({ city: day.weatherCity, date: day.date });
+                    } else {
+                        console.log(`跳過 ${day.date} 的天氣預報，超出 API 範圍`);
+                    }
                 }
             });
 
@@ -963,18 +993,32 @@
 
             const promises = allDatesToFetch.map(async ({ city, date }) => {
                 const { lat, lon } = cityCoordinates[city];
-                const requestDate = new Date(date);
+                
+                // 定義各城市的時區
+                const cityTimezones = {
+                    montreal: 'America/Montreal',
+                    quebec: 'America/Montreal', 
+                    niagara: 'America/Toronto',
+                    chicago: 'America/Chicago'
+                };
+                const timezone = cityTimezones[city] || 'auto';
+                
                 let url;
 
-                // 修正日期比較：使用字串比較
-                const todayStr = today.toISOString().split('T')[0];
+                // 使用目標城市的當地時區來判斷是否為歷史日期
+                const cityToday = new Intl.DateTimeFormat('fr-CA', { 
+                    year: 'numeric', 
+                    month: '2-digit', 
+                    day: '2-digit', 
+                    timeZone: timezone 
+                }).format(new Date());
                 
-                if (date < todayStr) {
-                    // 日期在今天之前，使用歷史天氣 API
-                    url = `https://archive-api.open-meteo.com/v1/archive?latitude=${lat}&longitude=${lon}&start_date=${date}&end_date=${date}&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=auto`;
+                if (date < cityToday) {
+                    // 日期在今天之前，使用歷史天氣 API，指定目標城市時區
+                    url = `https://archive-api.open-meteo.com/v1/archive?latitude=${lat}&longitude=${lon}&start_date=${date}&end_date=${date}&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=${timezone}`;
                 } else {
-                    // 日期是今天或未來，使用天氣預報 API
-                    url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&start_date=${date}&end_date=${date}&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=auto`;
+                    // 日期是今天或未來，使用天氣預報 API，指定目標城市時區
+                    url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&start_date=${date}&end_date=${date}&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=${timezone}`;
                 }
 
                 try {
