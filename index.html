@@ -863,8 +863,9 @@
                 return {};
             }
 
-            const today = new Date();
-            today.setHours(0, 0, 0, 0); // 將時間設定為當天零點以便比較
+            // 修正今天的日期計算
+            const now = new Date();
+            const today = new Date(now.getFullYear(), now.getMonth(), now.getDate()); // 使用本地日期，不考慮時區
 
             // 檢查本地快取
             const cachedWeatherData = localStorage.getItem('weatherDataCache');
@@ -896,9 +897,13 @@
             
             itinerary.filter(day => day.weatherCity).forEach(day => {
                 const requestDate = new Date(day.date);
-                if (requestDate < today) {
+                // 修正日期比較：使用字串比較而不是 Date 物件比較
+                const requestDateStr = day.date;
+                const todayStr = today.toISOString().split('T')[0];
+                
+                if (requestDateStr < todayStr) {
                     pastDates.push({ city: day.weatherCity, date: day.date });
-                } else if (requestDate <= maxForecastDate) {
+                } else if (requestDateStr <= maxForecastDate.toISOString().split('T')[0]) {
                     futureDates.push({ city: day.weatherCity, date: day.date });
                 } else {
                     // 超出預報範圍的日期，暫時跳過
@@ -906,15 +911,8 @@
                 }
             });
 
-            // 對於過去日期，如果快取中有資料且有效，直接使用
-            const pastDatesToFetch = pastDates.filter(({ city, date }) => {
-                if (!cacheValid) return true;
-                if (!existingData[city] || !existingData[city].time) return true;
-                return !existingData[city].time.includes(date);
-            });
-
-            // 對於未來日期，總是重新取得（因為預報會更新）
-            const allDatesToFetch = [...pastDatesToFetch, ...futureDates];
+            // 簡化快取邏輯：暫時總是重新取得資料來測試
+            const allDatesToFetch = [...pastDates, ...futureDates];
             
             // 如果沒有需要重新取得的資料，直接返回快取
             if (allDatesToFetch.length === 0 && cacheValid) {
@@ -923,13 +921,19 @@
             }
 
             console.log(`需要重新取得 ${allDatesToFetch.length} 筆天氣資料`);
+            console.log('今天日期:', today.toISOString().split('T')[0]);
+            console.log('過去日期:', pastDates.map(d => d.date));
+            console.log('未來日期:', futureDates.map(d => d.date));
 
             const promises = allDatesToFetch.map(async ({ city, date }) => {
                 const { lat, lon } = cityCoordinates[city];
                 const requestDate = new Date(date);
                 let url;
 
-                if (requestDate < today) {
+                // 修正日期比較：使用字串比較
+                const todayStr = today.toISOString().split('T')[0];
+                
+                if (date < todayStr) {
                     // 日期在今天之前，使用歷史天氣 API
                     url = `https://archive-api.open-meteo.com/v1/archive?latitude=${lat}&longitude=${lon}&start_date=${date}&end_date=${date}&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=auto`;
                 } else {
@@ -962,14 +966,6 @@
                 // 檢查是否已存在該日期的資料
                 const dateIndex = allWeatherData[city].time.indexOf(date);
                 if (dateIndex === -1 && data && data.time && data.time.length > 0) {
-                    // 調試：記錄 API 返回的資料
-                    console.log(`天氣 API 返回資料 - ${city} ${date}:`, {
-                        time: data.time[0],
-                        tempMax: data.temperature_2m_max[0],
-                        tempMin: data.temperature_2m_min[0],
-                        weatherCode: data.weather_code[0]
-                    });
-                    
                     allWeatherData[city].time.push(data.time[0]);
                     allWeatherData[city].temperature_2m_max.push(data.temperature_2m_max[0]);
                     allWeatherData[city].temperature_2m_min.push(data.temperature_2m_min[0]);
