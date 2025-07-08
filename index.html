@@ -1767,7 +1767,7 @@
                                         if (leg.flightCode === "日航 JL009") {
                                             depTime = "01:30";
                                             arrTime = "04:20";
-                                            dateIndicator = ' <span class="text-xs text-red-500 font-semibold">(+1)</span>';
+                                            dateIndicator = " (+1)";
                                         } else if (leg.flightCode === "日航 JL097") {
                                             depTime = "08:55";
                                             arrTime = "11:35";
@@ -1779,7 +1779,7 @@
                                             
                                             const departureLocalDateStr = new Intl.DateTimeFormat('fr-CA', { year: 'numeric', month: '2-digit', day: '2-digit', timeZone: leg.departure.tz }).format(new Date(leg.departure.time));
                                             const arrivalLocalDateStr = new Intl.DateTimeFormat('fr-CA', { year: 'numeric', month: '2-digit', day: '2-digit', timeZone: leg.arrival.tz }).format(new Date(leg.arrival.time));
-                                            dateIndicator = arrivalLocalDateStr > departureLocalDateStr ? ' <span class="text-xs text-red-500 font-semibold">(+1)</span>' : '';
+                                            dateIndicator = arrivalLocalDateStr > departureLocalDateStr ? ' (+1)' : '';
                                         }
 
                                         return `<div class="text-gray-700">
@@ -1944,6 +1944,17 @@
             document.getElementById('view-details-btn').addEventListener('click', () => {
                 const dayData = data.itinerary.find(d => d.date === currentDisplayDate);
                 if (!dayData) return;
+
+                // 1. 判斷是否為過去行程
+                if (currentDisplayDate < todayString) {
+                    // 2. 自動打開顯示過去行程的開關
+                    const showPastToggle = document.getElementById('show-past-toggle');
+                    if (showPastToggle && !showPastToggle.checked) {
+                        showPastToggle.checked = true;
+                        // 3. 觸發 change 事件（如果有監聽）
+                        showPastToggle.dispatchEvent(new Event('change'));
+                    }
+                }
 
                 const wrapper = document.querySelector(`.trip-card-wrapper[data-day="${dayData.day}"]`);
                 if (!wrapper) return;
