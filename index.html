@@ -1001,10 +1001,10 @@
                     console.log(`API response for ${city} on ${date}:`, data.daily);
                     console.log(`API URL for ${city} on ${date}:`, url);
                     console.log(`Detailed API data for ${city} on ${date}:`, {
-                        time: data.daily.time,
-                        tempMax: data.daily.temperature_2m_max,
-                        tempMin: data.daily.temperature_2m_min,
-                        weatherCode: data.daily.weather_code
+                        time: data.daily.time[0],
+                        tempMax: data.daily.temperature_2m_max[0],
+                        tempMin: data.daily.temperature_2m_min[0],
+                        weatherCode: data.daily.weather_code[0]
                     });
                     return { city, date, data: data.daily };
                 } catch (error) {
