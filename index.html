@@ -1000,6 +1000,12 @@
                     
                     console.log(`API response for ${city} on ${date}:`, data.daily);
                     console.log(`API URL for ${city} on ${date}:`, url);
+                    console.log(`Detailed API data for ${city} on ${date}:`, {
+                        time: data.daily.time,
+                        tempMax: data.daily.temperature_2m_max,
+                        tempMin: data.daily.temperature_2m_min,
+                        weatherCode: data.daily.weather_code
+                    });
                     return { city, date, data: data.daily };
                 } catch (error) {
                     console.error(`無法取得 ${city} 在 ${date} 的天氣資訊:`, error);
