@@ -875,6 +875,8 @@
                         const temp = allWeatherData[city].temperature_2m_max[dayIndex];
                         const code = allWeatherData[city].weather_code[dayIndex];
                         
+                        console.log('溫度檢查:', { city, date, temp, code, tempType: typeof temp });
+                        
                         // 檢查溫度資料是否有效（不是 null 或 undefined）
                         if (temp !== null && temp !== undefined) {
                             const roundedTemp = Math.round(temp);
@@ -1190,6 +1192,8 @@
                             const tempMax = cityWeather.temperature_2m_max[dayIndex];
                             const tempMin = cityWeather.temperature_2m_min[dayIndex];
                             const code = cityWeather.weather_code[dayIndex];
+                            
+                            console.log('Status Dashboard 溫度檢查:', { city: cityKey, date, tempMax, tempMin, code, tempMaxType: typeof tempMax, tempMinType: typeof tempMin });
                             
                             // 檢查溫度資料是否有效（不是 null 或 undefined）
                             if (tempMax !== null && tempMax !== undefined && tempMin !== null && tempMin !== undefined) {
