@@ -429,6 +429,21 @@
             transform: translateY(0);
         }
         
+        /* 行動版小費計算機輸入優化 */
+        @media (max-width: 768px) {
+            #modal-bill-amount {
+                font-size: 16px !important; /* 防止 iOS 縮放 */
+                padding: 12px !important;
+            }
+            #modal-tip-rate {
+                font-size: 16px !important;
+                padding: 12px !important;
+            }
+            .modal-container {
+                transition: all 0.3s ease;
+            }
+        }
+        
         .bg-soft-blue { background-color: #76B6C4 !important; }
         .hover\:bg-soft-blue-hover:hover { background-color: #5FA2B0 !important; }
         .active\:bg-soft-blue-active:active { background-color: #4A8B9A !important; }
@@ -1763,9 +1778,17 @@
                         // 延遲聚焦，確保模態框完全打開
                         setTimeout(() => {
                             modalBillInput.focus();
-                            // 滾動到輸入框位置
-                            modalBillInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                        }, 300);
+                            // 強制觸發數字鍵盤
+                            modalBillInput.click();
+                            // 滾動到輸入框位置，確保不被鍵盤遮擋
+                            setTimeout(() => {
+                                modalBillInput.scrollIntoView({ 
+                                    behavior: 'smooth', 
+                                    block: 'center',
+                                    inline: 'center'
+                                });
+                            }, 100);
+                        }, 400);
                     } else {
                         modalBillInput.focus();
                     }
@@ -1776,22 +1799,38 @@
 
                 // 處理行動裝置鍵盤彈出時的視窗大小變化
                 let initialViewportHeight = window.innerHeight;
+                let keyboardVisible = false;
+                
                 window.addEventListener('resize', () => {
                     const currentHeight = window.innerHeight;
                     const heightDifference = initialViewportHeight - currentHeight;
                     
                     // 如果視窗高度減少超過150px，可能是鍵盤彈出
-                    if (heightDifference > 150) {
+                    if (heightDifference > 150 && !keyboardVisible) {
+                        keyboardVisible = true;
                         const modalContainer = tipCalculatorModal.querySelector('.modal-container');
                         if (modalContainer) {
-                            modalContainer.style.maxHeight = `${currentHeight * 0.8}px`;
-                            modalContainer.style.marginTop = '10vh';
+                            // 調整模態框位置和大小
+                            modalContainer.style.maxHeight = `${currentHeight * 0.7}px`;
+                            modalContainer.style.marginTop = '5vh';
+                            modalContainer.style.marginBottom = '5vh';
+                            // 確保輸入框在可見區域
+                            setTimeout(() => {
+                                modalBillInput.scrollIntoView({ 
+                                    behavior: 'smooth', 
+                                    block: 'center',
+                                    inline: 'center'
+                                });
+                            }, 200);
                         }
-                    } else {
+                    } else if (heightDifference <= 50 && keyboardVisible) {
+                        keyboardVisible = false;
                         const modalContainer = tipCalculatorModal.querySelector('.modal-container');
                         if (modalContainer) {
+                            // 恢復原始佈局
                             modalContainer.style.maxHeight = '';
                             modalContainer.style.marginTop = '';
+                            modalContainer.style.marginBottom = '';
                         }
                     }
                 });
