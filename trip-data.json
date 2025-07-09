@@ -238,7 +238,7 @@
       "isTravelDay": true,
       "tags": ["#轉機抵達", "#入境準備", "#時差適應"],
       "activities": [
-        { "title": "✈️ 航班資訊與抵達安排", "items": ["<strong>航班 BR198：</strong>台北松山(TSA) 09:00 起飛 → 東京成田(NRT) 13:25 抵達。", "<strong>航班 AC6：</strong>東京成田(NRT) 17:35 起飛 → 蒙特婁(YUL) 17:00（同日）抵達。", "※ 因時差關係，會是"時光倒流"的感覺，但實際飛行時間約 12 小時。"] },
+        { "title": "✈️ 航班資訊與抵達安排", "items": ["<strong>航班 BR198：</strong>台北松山(TSA) 09:00 起飛 → 東京成田(NRT) 13:25 抵達。", "<strong>航班 AC6：</strong>東京成田(NRT) 17:35 起飛 → 蒙特婁(YUL) 17:00（同日）抵達。", "※ 因時差關係，會是\"時光倒流\"的感覺，但實際飛行時間約 12 小時。"] },
         { "title": "🛂 抵達蒙特婁機場（YUL）", "items": ["<strong>預計通關 + 行李提領時間：</strong>約 60–90 分鐘。", "<strong>建議完成入境後先購買：</strong>📱 SIM 卡（推薦：Bell / Fido 櫃台）、🚇 STM 交通票券（單程票 or OPUS 3日卡）。"] },
         { "title": "🚕 前往市區飯店", "items": ["<strong>747 Express Bus (24小時營運)：</strong>費用 CA$11，行程約 45–60 分鐘，可直接用信用卡刷進站。", "<strong>Uber／Taxi：</strong>約 CA$45–55，車程約 30–40 分鐘。"] },
         { "title": "🌇 19:00–21:00 飯店安頓＋簡單夜間散步", "items": ["<strong>夕陽夜景路線：</strong>沿<a href='https://maps.apple.com/?q=Old+Port+of+Montreal' target='_blank' class='hover:underline'>舊港</a>慢行至 <a href='https://maps.apple.com/?q=La+Grande+Roue+de+Montréal' target='_blank' class='hover:underline'>La Grande Roue 摩天輪區</a>，看聖羅倫斯河夜景。", "<strong>輕食建議：</strong><a href='https://maps.apple.com/?q=Olive+et+Gourmando' target='_blank' class='hover:underline'>Olive et Gourmando</a> 或 <a href='https://maps.apple.com/?q=Maison+Christian+Faure' target='_blank' class='hover:underline'>Maison Christian Faure</a>（甜點塔派）。"] }
