@@ -113,12 +113,12 @@
             { "name": "St-Viateur Bagel", "link": "https://maps.apple.com/?q=St-Viateur+Bagel" },
             { "name": "Fairmount Bagel", "link": "https://maps.apple.com/?q=Fairmount+Bagel" }
           ] },
-          { "name": "煙燻肉三明治", "desc": "Schwartz’s Deli 是蒙特婁的代表性店家。", "places": [{ "name": "Schwartz’s Deli", "link": "https://maps.apple.com/?q=Schwartz’s+Deli" }] },
+          { "name": "煙燻肉三明治", "desc": "Schwartz's Deli 是蒙特婁的代表性店家。", "places": [{ "name": "Schwartz's Deli", "link": "https://maps.apple.com/?q=Schwartz's+Deli" }] },
           { "name": "布丁地獄", "desc": "傳統魁北克楓糖蛋糕。", "places": [{ "name": "La Binerie Mont-Royal", "link": "https://maps.apple.com/?q=La+Binerie+Mont-Royal" }] },
           { "name": "Poutine", "desc": "肉汁起司薯條的發源地，La Banquise 是名店。", "places": [{ "name": "La Banquise", "link": "https://maps.apple.com/?q=La+Banquise" }] }
         ]},
         { "name": "🥂 法式／歐陸料理", "items": [
-          { "name": "經典法式小酒館", "desc": "L’Express 是體驗道地法式小館氛圍的好去處。", "places": [{ "name": "L’Express", "link": "https://maps.apple.com/?q=L’Express+Montreal" }] },
+          { "name": "經典法式小酒館", "desc": "L'Express 是體驗道地法式小館氛圍的好去處。", "places": [{ "name": "L'Express", "link": "https://maps.apple.com/?q=L'Express+Montreal" }] },
           { "name": "爵士音樂＋法餐", "desc": "Modavie Bistro 結合現場爵士樂與美味法餐。", "places": [{ "name": "Modavie Bistro", "link": "https://maps.apple.com/?q=Modavie" }] }
         ]},
         { "name": "🍰 甜點／法式糕點", "items": [
@@ -144,7 +144,7 @@
         ]},
         { "name": "🍔 家常／高人氣餐館", "items": [
           { "name": "創意漢堡＋薯條", "desc": "Le Chic Shack 提供美味的創意漢堡。", "places": [{ "name": "Le Chic Shack", "link": "https://maps.apple.com/?q=Le+Chic+Shack" }] },
-          { "name": "經典魁北克早午餐", "desc": "Buffet de l’Antiquaire 是體驗當地早午餐的好去處。", "places": [{ "name": "Buffet de l’Antiquaire", "link": "https://maps.apple.com/?q=Buffet+de+l’Antiquaire" }] }
+          { "name": "經典魁北克早午餐", "desc": "Buffet de l'Antiquaire 是體驗當地早午餐的好去處。", "places": [{ "name": "Buffet de l'Antiquaire", "link": "https://maps.apple.com/?q=Buffet+de+l'Antiquaire" }] }
         ]},
         { "name": "🐇 主題風味料理", "items": [
           { "name": "兔肉主題餐廳", "desc": "Le Lapin Sauté 以各種兔肉料理聞名。", "places": [{ "name": "Le Lapin Sauté", "link": "https://maps.apple.com/?q=Le+Lapin+Sauté" }] },
@@ -180,9 +180,9 @@
       "name": "芝加哥",
       "categories": [
         { "name": "🍕 芝加哥深盤披薩", "items": [
-          { "name": "起司飽滿", "desc": "Giordano’s 以其滿滿的起司內餡聞名。", "places": [{ "name": "Giordano’s", "link": "https://maps.apple.com/?q=Giordano’s" }] },
-          { "name": "酥皮濃郁", "desc": "Lou Malnati’s 的奶油酥皮是其特色。", "places": [{ "name": "Lou Malnati’s", "link": "https://maps.apple.com/?q=Lou+Malnati’s+Pizzeria" }] },
-          { "name": "焦香起司邊", "desc": "Pequod’s Pizza 的焦糖化起司邊是一大亮點。", "places": [{ "name": "Pequod’s Pizza", "link": "https://maps.apple.com/?q=Pequod’s+Pizza" }] }
+          { "name": "起司飽滿", "desc": "Giordano's 以其滿滿的起司內餡聞名。", "places": [{ "name": "Giordano's", "link": "https://maps.apple.com/?q=Giordano's" }] },
+          { "name": "酥皮濃郁", "desc": "Lou Malnati's 的奶油酥皮是其特色。", "places": [{ "name": "Lou Malnati's", "link": "https://maps.apple.com/?q=Lou+Malnati's+Pizzeria" }] },
+          { "name": "焦香起司邊", "desc": "Pequod's Pizza 的焦糖化起司邊是一大亮點。", "places": [{ "name": "Pequod's Pizza", "link": "https://maps.apple.com/?q=Pequod's+Pizza" }] }
         ]},
         { "name": "🌭 芝加哥熱狗 (Hot Dogs)", "items": [
           { "name": "經典芝加哥熱狗", "desc": "不加番茄醬是道地吃法，配料豐富。", "places": [{ "name": "Portillo's Hot Dogs", "link": "https://maps.apple.com/?q=Portillo's+Hot+Dogs" }] }
@@ -203,7 +203,7 @@
         { "name": "🍳 早午餐／咖啡甜品", "items": [
           { "name": "人氣鬆餅店", "desc": "Wildberry Pancakes and Cafe 是芝加哥最受歡迎的鬆餅店之一。", "places": [{ "name": "Wildberry Pancakes and Cafe", "link": "https://maps.apple.com/?q=Wildberry+Pancakes+and+Cafe" }] },
           { "name": "輕盈健康早午餐", "desc": "Beatrix 提供健康且美味的早午餐選擇。", "places": [{ "name": "Beatrix", "link": "https://maps.apple.com/?q=Beatrix" }] },
-          { "name": "早午餐＋景觀", "desc": "Cindy’s Rooftop 享有千禧公園的壯麗景色。", "places": [{ "name": "Cindy’s Rooftop", "link": "https://maps.apple.com/?q=Cindy’s+Rooftop" }] },
+          { "name": "早午餐＋景觀", "desc": "Cindy's Rooftop 享有千禧公園的壯麗景色。", "places": [{ "name": "Cindy's Rooftop", "link": "https://maps.apple.com/?q=Cindy's+Rooftop" }] },
           { "name": "創意美式餐館", "desc": "名廚 Stephanie Izard 開設的創意餐館，早午餐極受歡迎。", "places": [{ "name": "Little Goat Diner", "link": "https://maps.apple.com/?q=Little+Goat+Diner" }] }
         ]},
         { "name": "🍷 Tapas／輕食類", "items": [
@@ -238,7 +238,7 @@
       "isTravelDay": true,
       "tags": ["#轉機抵達", "#入境準備", "#時差適應"],
       "activities": [
-        { "title": "✈️ 航班資訊與抵達安排", "items": ["<strong>航班 BR198：</strong>台北松山(TSA) 09:00 起飛 → 東京成田(NRT) 13:25 抵達。", "<strong>航班 AC6：</strong>東京成田(NRT) 17:35 起飛 → 蒙特婁(YUL) 17:00（同日）抵達。", "※ 因時差關係，會是“時光倒流”的感覺，但實際飛行時間約 12 小時。"] },
+        { "title": "✈️ 航班資訊與抵達安排", "items": ["<strong>航班 BR198：</strong>台北松山(TSA) 09:00 起飛 → 東京成田(NRT) 13:25 抵達。", "<strong>航班 AC6：</strong>東京成田(NRT) 17:35 起飛 → 蒙特婁(YUL) 17:00（同日）抵達。", "※ 因時差關係，會是"時光倒流"的感覺，但實際飛行時間約 12 小時。"] },
         { "title": "🛂 抵達蒙特婁機場（YUL）", "items": ["<strong>預計通關 + 行李提領時間：</strong>約 60–90 分鐘。", "<strong>建議完成入境後先購買：</strong>📱 SIM 卡（推薦：Bell / Fido 櫃台）、🚇 STM 交通票券（單程票 or OPUS 3日卡）。"] },
         { "title": "🚕 前往市區飯店", "items": ["<strong>747 Express Bus (24小時營運)：</strong>費用 CA$11，行程約 45–60 分鐘，可直接用信用卡刷進站。", "<strong>Uber／Taxi：</strong>約 CA$45–55，車程約 30–40 分鐘。"] },
         { "title": "🌇 19:00–21:00 飯店安頓＋簡單夜間散步", "items": ["<strong>夕陽夜景路線：</strong>沿<a href='https://maps.apple.com/?q=Old+Port+of+Montreal' target='_blank' class='hover:underline'>舊港</a>慢行至 <a href='https://maps.apple.com/?q=La+Grande+Roue+de+Montréal' target='_blank' class='hover:underline'>La Grande Roue 摩天輪區</a>，看聖羅倫斯河夜景。", "<strong>輕食建議：</strong><a href='https://maps.apple.com/?q=Olive+et+Gourmando' target='_blank' class='hover:underline'>Olive et Gourmando</a> 或 <a href='https://maps.apple.com/?q=Maison+Christian+Faure' target='_blank' class='hover:underline'>Maison Christian Faure</a>（甜點塔派）。"] }
@@ -296,7 +296,7 @@
       "tags": ["#巴士旅程", "#古城初探", "#世界遺產"],
       "activities": [
         { "title": "🚌 08:00 – 12:00｜飯店退房，搭乘巴士前往魁北克市", "items": ["上午於蒙特婁飯店退房後，自行前往巴士站。", "搭乘 <strong>09:00</strong> 的 <strong>Orléans Express</strong> 從 <a href='https://maps.apple.com/?q=Gare+d'autocars+de+Montréal' target='_blank'>蒙特婁巴士站 (Gare d'autocars)</a> 出發，預計 <strong>12:00</strong> 抵達魁北克市 <a href='https://maps.apple.com/?q=Gare+du+Palais,Quebec' target='_blank'>Gare du Palais 車站</a>。"] },
-        { "title": "🏨 12:00 – 13:30｜前往飯店、入住與午餐", "items": ["從車站步行或搭計程車前往 <a href='https://maps.apple.com/?q=Hotel+Manoir+Victoria,Quebec' target='_blank' class='hover:underline'>Hotel Manoir Victoria</a> 辦理入住或寄放行李（步行約15-20分鐘，有微上坡）。", "午餐建議：<a href='https://maps.apple.com/?q=Le+Chic+Shack,Quebec' target='_blank' class='hover:underline'>Le Chic Shack</a>（漢堡＋奶昔）或 <a href='https://maps.apple.com/?q=Buffet+de+l’Antiquaire,Quebec' target='_blank' class='hover:underline'>Buffet de l’Antiquaire</a>（魁北克家常菜）。"] },
+        { "title": "🏨 12:00 – 13:30｜前往飯店、入住與午餐", "items": ["從車站步行或搭計程車前往 <a href='https://maps.apple.com/?q=Hotel+Manoir+Victoria,Quebec' target='_blank' class='hover:underline'>Hotel Manoir Victoria</a> 辦理入住或寄放行李（步行約15-20分鐘，有微上坡）。", "午餐建議：<a href='https://maps.apple.com/?q=Le+Chic+Shack,Quebec' target='_blank' class='hover:underline'>Le Chic Shack</a>（漢堡＋奶昔）或 <a href='https://maps.apple.com/?q=Buffet+de+l'Antiquaire,Quebec' target='_blank' class='hover:underline'>Buffet de l'Antiquaire</a>（魁北克家常菜）。"] },
         { "title": "🚶‍♀️ 13:30 – 16:30｜上城區順時針散步路線", "items": ["從飯店出發，依序遊覽：<a href='https://maps.apple.com/?q=Hôtel+du+Parlement+du+Québec' target='_blank'>省議會</a>與<a href='https://maps.apple.com/?q=Fontaine+de+Tourny' target='_blank'>圖爾尼噴泉</a> → <a href='https://maps.apple.com/?q=Grande+Allée,Quebec' target='_blank'>格蘭林蔭大道</a> → <a href='https://maps.apple.com/?q=Porte+Saint-Louis' target='_blank'>聖路易門</a> → 沿<a href='https://maps.apple.com/?q=Rue+Saint-Louis,Quebec' target='_blank'>聖路易街</a>前行 → <a href='https://maps.apple.com/?q=Château+Frontenac' target='_blank'>芳堤娜城堡</a> → <a href='https://maps.apple.com/?q=Dufferin+Terrace,Quebec' target='_blank'>杜費林露台</a> → <a href='https://maps.apple.com/?q=Place+d'Armes,Quebec' target='_blank'>芳堤娜廣場</a>與<a href='https://maps.apple.com/?q=Cathedral+of+the+Holy+Trinity,Quebec' target='_blank'>聖三一教堂</a> → 沿<a href='https://maps.apple.com/?q=Rue+Saint-Jean,Quebec' target='_blank'>聖讓街</a>返回飯店，途中可逛街或喝咖啡。"] },
         { "title": "🍽️ 17:30 – 19:00｜晚餐時間", "items": ["晚餐建議預約 <a href='https://maps.apple.com/?q=Aux+Anciens+Canadiens,Quebec' target='_blank' class='hover:underline'>Aux Anciens Canadiens</a>，在17世紀老宅中體驗傳統法式料理，鄰近芳堤娜城堡，氣氛絕佳。"]},
         { "title": "🌃 19:00 – 20:30｜夜間散步與夜拍", "items": ["飯後可再回到 <a href='https://maps.apple.com/?q=Dufferin+Terrace,Quebec' target='_blank'>杜費林露台</a>，帶著腳架拍攝芳堤娜城堡與聖羅倫斯河的璀璨夜色。"] }
@@ -322,7 +322,7 @@
         { "title": "🍴 12:00–13:15｜舊港市集 (Marché du Vieux-Port) + 午餐", "items": ["下公車後步行約 10-15 分鐘即可抵達<a href='https://maps.apple.com/?q=Marché+du+Vieux-Port+de+Québec' target='_blank'>舊港市集</a>。", "午餐可選擇市集內的熟食攤，或港邊的 <a href='https://maps.apple.com/?q=Café+du+Monde,Quebec' target='_blank'>Café du Monde</a> 景觀餐廳。"] },
         { "title": "🚢 13:30–15:00｜魁北克–萊維斯渡輪 (Ferry to Lévis)", "items": ["從市集步行至<a href='https://maps.apple.com/?q=Traverse+Québec-Lévis' target='_blank'>魁北克渡輪碼頭</a>。", "搭乘渡輪至對岸萊維斯，前往 <a href='https://maps.apple.com/?q=Terrasse+de+Lévis' target='_blank'>Terrasse de Lévis</a> 觀景台眺望魁北克城全景，拍照後搭原船返回。"] },
         { "title": "🏘 15:30–17:30｜小尚普蘭街 & 皇家廣場", "items": ["返回後，漫步於<a href='https://maps.apple.com/?q=Rue+du+Petit-Champlain,Quebec' target='_blank'>小尚普蘭街</a>與<a href='https://maps.apple.com/?q=Place+Royale,Quebec' target='_blank'>皇家廣場</a>，感受下城歷史街區的魅力，可在此採購紀念品或喝杯咖啡。", "結束後可搭乘<a href='https://maps.apple.com/?q=Funiculaire+du+Vieux-Québec' target='_blank'>纜車</a>或走樓梯返回上城區。"] },
-        { "title": "🍽️ 17:45–19:00｜早晚餐（簡餐）", "items": ["因應隔日早起，建議簡單用餐。可選擇 <a href='https://maps.apple.com/?q=Le+Lapin+Sauté' target='_blank'>Le Lapin Sauté</a>、<a href='https://maps.apple.com/?q=Bistro+L'Orygine' target='_blank'>Bistro L’Orygine</a> (建議預約)，或在<a href='https://maps.apple.com/?q=Rue+Saint-Jean,Quebec' target='_blank'>聖讓街</a>附近外帶。"] }
+        { "title": "🍽️ 17:45–19:00｜早晚餐（簡餐）", "items": ["因應隔日早起，建議簡單用餐。可選擇 <a href='https://maps.apple.com/?q=Le+Lapin+Sauté' target='_blank'>Le Lapin Sauté</a>、<a href='https://maps.apple.com/?q=Bistro+L'Orygine' target='_blank'>Bistro L'Orygine</a> (建議預約)，或在<a href='https://maps.apple.com/?q=Rue+Saint-Jean,Quebec' target='_blank'>聖讓街</a>附近外帶。"] }
       ],
       "reminder": { "title": "🧳 睡前重要提醒", "items": ["<strong>隔日需於凌晨 03:00 從飯店出發前往機場！</strong>", "請務必於今晚 21:00 前返回飯店，將所有行李打包整理完畢。", "設定好多個鬧鐘，並與櫃台確認預約的計程車或Uber。"] }
     },
@@ -394,30 +394,8 @@
       "dayGroup": 7,
       "cityTarget": "chicago-section",
       "weatherCity": "chicago",
-      "title": "芝加哥經典｜博物館與高空景觀",
-      "subTitle": "Day 8｜7月9日（三）",
-      "isTravelDay": false,
-      "theme": {
-        "icon": "🏛️",
-        "title": "城市經典巡禮",
-        "description": "從史前巨獸的世界，到摩天大樓的頂端，今天將全方位體驗芝加哥的經典魅力。"
-      },
-      "tags": ["#博物館日", "#經典美食", "#高空景觀"],
-      "activities": [
-        { "title": "🦖 09:00–12:00｜芝加哥自然歷史博物館（Field Museum）", "items": ["前往 <a href='https://maps.apple.com/?q=Field+Museum,Chicago' target='_blank'>Field Museum</a>，精選展覽：Sue 暴龍、古埃及展、原住民文化。", "建議租語音導覽，停留約 2–2.5 小時。"] },
-        { "title": "🍽️ 12:30–14:00｜午餐：芝加哥熱狗 or 深盤披薩", "items": ["熱狗推薦：<a href='https://maps.apple.com/?q=Portillo’s+Hot+Dogs' target='_blank'>Portillo’s Hot Dogs</a>。", "或選擇：<a href='https://maps.apple.com/?q=Lou+Malnati’s+Pizzeria' target='_blank'>Lou Malnati’s</a> / <a href='https://maps.apple.com/?q=Pequod’s+Pizza' target='_blank'>Pequod’s Pizza</a> 經典深盤披薩。"] },
-        { "title": "🌃 14:30–17:00｜360 CHICAGO 或 Skydeck 高空觀景台", "items": ["<a href='https://maps.apple.com/?q=360+CHICAGO' target='_blank'>360 CHICAGO</a> 或 <a href='https://maps.apple.com/?q=Skydeck+Chicago' target='_blank'>Skydeck</a>，根據天氣決定是否登塔，若雨勢較強也可改室內咖啡館休息。"] },
-        { "title": "🍽️ 18:00–20:00｜晚餐：The Dearborn（美式餐酒館）", "items": ["雨天晚間不建議室外活動，推薦此人氣高氣氛佳的 <a href='https://maps.apple.com/?q=The+Dearborn' target='_blank'>The Dearborn</a> 餐廳收尾。"] }
-      ]
-    },
-    {
-      "day": 9,
-      "date": "2025-07-10",
-      "dayGroup": 7,
-      "cityTarget": "chicago-section",
-      "weatherCity": "chicago",
       "title": "芝加哥建築巡禮｜遊船與湖畔風光",
-      "subTitle": "Day 9｜7月10日（四）",
+      "subTitle": "Day 8｜7月9日（三）",
       "isTravelDay": false,
       "theme": {
         "icon": "🏙️",
@@ -430,6 +408,28 @@
         { "title": "🍽️ 12:30–14:00｜午餐：義大利料理", "items": ["推薦：<a href='https://maps.apple.com/?q=Eataly+Chicago' target='_blank'>Eataly Chicago</a>（義式熟食與購物超市）或 <a href='https://maps.apple.com/?q=Quartino+Ristorante' target='_blank'>Quartino Ristorante</a>。"] },
         { "title": "🎡 14:30–17:00｜Navy Pier 湖畔活動", "items": ["前往 <a href='https://maps.apple.com/?q=Navy+Pier' target='_blank'>Navy Pier</a>，登上 <a href='https://maps.apple.com/?q=Centennial+Wheel' target='_blank'>Centennial Wheel 摩天輪</a>，或在湖畔散步／冰淇淋休憩。"] },
         { "title": "🍽️ 18:00–20:30｜晚餐：Maple & Ash（現代牛排）或 avec（創意小館）", "items": ["晚餐可選 <a href='https://maps.apple.com/?q=Maple+&+Ash' target='_blank'>Maple & Ash</a> 或 <a href='https://maps.apple.com/?q=avec+Restaurant' target='_blank'>avec</a>。", "若仍有體力可散步回飯店或小酌一杯。"] }
+      ]
+    },
+    {
+      "day": 9,
+      "date": "2025-07-10",
+      "dayGroup": 7,
+      "cityTarget": "chicago-section",
+      "weatherCity": "chicago",
+      "title": "芝加哥經典｜博物館與高空景觀",
+      "subTitle": "Day 9｜7月10日（四）",
+      "isTravelDay": false,
+      "theme": {
+        "icon": "🏛️",
+        "title": "城市經典巡禮",
+        "description": "從史前巨獸的世界，到摩天大樓的頂端，今天將全方位體驗芝加哥的經典魅力。"
+      },
+      "tags": ["#博物館日", "#經典美食", "#高空景觀"],
+      "activities": [
+        { "title": "🦖 09:00–12:00｜芝加哥自然歷史博物館（Field Museum）", "items": ["前往 <a href='https://maps.apple.com/?q=Field+Museum,Chicago' target='_blank'>Field Museum</a>，精選展覽：Sue 暴龍、古埃及展、原住民文化。", "建議租語音導覽，停留約 2–2.5 小時。"] },
+        { "title": "🍽️ 12:30–14:00｜午餐：芝加哥熱狗 or 深盤披薩", "items": ["熱狗推薦：<a href='https://maps.apple.com/?q=Portillo's+Hot+Dogs' target='_blank'>Portillo's Hot Dogs</a>。", "或選擇：<a href='https://maps.apple.com/?q=Lou+Malnati's+Pizzeria' target='_blank'>Lou Malnati's</a> / <a href='https://maps.apple.com/?q=Pequod's+Pizza' target='_blank'>Pequod's Pizza</a> 經典深盤披薩。"] },
+        { "title": "🌃 14:30–17:00｜360 CHICAGO 或 Skydeck 高空觀景台", "items": ["<a href='https://maps.apple.com/?q=360+CHICAGO' target='_blank'>360 CHICAGO</a> 或 <a href='https://maps.apple.com/?q=Skydeck+Chicago' target='_blank'>Skydeck</a>，根據天氣決定是否登塔，若雨勢較強也可改室內咖啡館休息。"] },
+        { "title": "🍽️ 18:00–20:00｜晚餐：The Dearborn（美式餐酒館）", "items": ["雨天晚間不建議室外活動，推薦此人氣高氣氛佳的 <a href='https://maps.apple.com/?q=The+Dearborn' target='_blank'>The Dearborn</a> 餐廳收尾。"] }
       ]
     },
     {
@@ -471,7 +471,7 @@
       "tags": ["#藝術巡禮", "#世界名畫", "#文化沉浸"],
       "activities": [
         { "title": "🎨 09:30–13:00｜芝加哥藝術學院（Art Institute of Chicago）", "items": ["前往 <a href='https://maps.apple.com/?q=Art+Institute+of+Chicago' target='_blank'>Art Institute of Chicago</a>，重要收藏：莫內、秀拉、Edward Hopper、Grant Wood。", "建議租借語音導覽深度參觀。"] },
-        { "title": "🍽️ 13:00–14:30｜午餐：Cindy’s Rooftop or The Gage", "items": ["晴朗可選景觀餐廳 <a href='https://maps.apple.com/?q=Cindy’s+Rooftop' target='_blank'>Cindy’s Rooftop</a>，雨天建議博物館對面的 <a href='https://maps.apple.com/?q=The+Gage' target='_blank'>The Gage</a>。"] },
+        { "title": "🍽️ 13:00–14:30｜午餐：Cindy's Rooftop or The Gage", "items": ["晴朗可選景觀餐廳 <a href='https://maps.apple.com/?q=Cindy's+Rooftop' target='_blank'>Cindy's Rooftop</a>，雨天建議博物館對面的 <a href='https://maps.apple.com/?q=The+Gage' target='_blank'>The Gage</a>。"] },
         { "title": "🛍️ 15:00–17:30｜The Shops at North Bridge or Cultural Center", "items": ["午後避雨安排：室內購物商場 <a href='https://maps.apple.com/?q=The+Shops+at+North+Bridge' target='_blank'>The Shops at North Bridge</a>、<a href='https://maps.apple.com/?q=Chicago+Cultural+Center' target='_blank'>芝加哥文化中心</a>、或 <a href='https://maps.apple.com/?q=River+North+Gallery+District' target='_blank'>River North 藝廊街區</a>。"] },
         { "title": "🍽️ 18:30–20:30｜晚餐：avec（River North）或 Wildfire（美式經典）", "items": ["可選擇 <a href='https://maps.apple.com/?q=avec+Restaurant+River+North' target='_blank'>avec (River North)</a> 或 <a href='https://maps.apple.com/?q=Wildfire+Chicago' target='_blank'>Wildfire</a>。", "夜晚小酌結尾也可選擇 <a href='https://maps.apple.com/?q=The+Berkshire+Room' target='_blank'>The Berkshire Room</a>、<a href='https://maps.apple.com/?q=The+Aviary' target='_blank'>The Aviary</a> 等特色酒吧。"] }
       ]
@@ -494,7 +494,7 @@
       "activities": [
         { "title": "☕ 09:00–12:00｜早午餐 + 散步拍照", "items": ["推薦：<a href='https://maps.apple.com/?q=Wildberry+Pancakes+and+Cafe' target='_blank'>Wildberry Pancakes</a> 或 <a href='https://maps.apple.com/?q=Little+Goat+Diner' target='_blank'>Little Goat Diner</a>。", "行程建議：<a href='https://maps.apple.com/?q=Chicago+Riverwalk' target='_blank'>Riverwalk</a> 再訪、或前往 <a href='https://maps.apple.com/?q=Grant+Park,Chicago' target='_blank'>Grant Park</a> 散步拍照。"] },
         { "title": "🎒 12:00–17:00｜整理行李 + 自由時間", "items": ["可向櫃檯寄存行李，安排最後紀念品採買（<a href='https://maps.apple.com/?q=Target' target='_blank'>Target</a>、<a href='https://maps.apple.com/?q=Nordstrom+Rack' target='_blank'>Nordstrom Rack</a>）。"] },
-        { "title": "🧳 18:00–21:00｜晚餐 + 前往機場", "items": ["晚餐可選飯店周邊簡單速食或 <a href='https://maps.apple.com/?q=Eataly+Chicago' target='_blank'>Eataly</a> 小吃。", "約 21:00 搭乘 Blue Line 地鐵前往 O’Hare（ORD）。"] }
+        { "title": "🧳 18:00–21:00｜晚餐 + 前往機場", "items": ["晚餐可選飯店周邊簡單速食或 <a href='https://maps.apple.com/?q=Eataly+Chicago' target='_blank'>Eataly</a> 小吃。", "約 21:00 搭乘 Blue Line 地鐵前往 O'Hare（ORD）。"] }
       ]
     },
     {
