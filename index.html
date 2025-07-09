@@ -455,10 +455,7 @@
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1.5" viewBox="0 0 20 20" fill="currentColor"><path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" /><path fill-rule="evenodd" d="M4 5a2 2 0 012-2h8a2 2 0 012 2v10a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd" /></svg>
                         行程要覽
                     </a>
-                    <a href="#tip-calculator-section" class="nav-link flex items-center">
-                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1.5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V4a2 2 0 00-2-2H6zm1 2a1 1 0 00-1 1v1a1 1 0 001 1h6a1 1 0 001-1V5a1 1 0 00-1-1H7zm-1 4a1 1 0 011-1h6a1 1 0 011 1v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-1zm1 3a1 1 0 00-1 1v1a1 1 0 001 1h6a1 1 0 001-1v-1a1 1 0 00-1-1H7z" clip-rule="evenodd" /></svg>
-                        小費計算
-                    </a>
+
                     <a href="#links-dashboard" class="nav-link flex items-center">
                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1.5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0 1 1 0 00-1.414 1.414 4 4 0 005.656 0l3-3a4 4 0 00-5.656-5.656l-1.5 1.5a1 1 0 101.414 1.414l1.5-1.5a2 2 0 11-2.828-2.828l3-3z" clip-rule="evenodd" /></svg>
                         常用連結
@@ -494,7 +491,7 @@
     <div id="mobile-menu-panel" class="hidden">
         <div class="p-4 space-y-2">
              <a href="#status-dashboard-section" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">� 行程要覽</a>
-             <a href="#tip-calculator-section" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">💰 小費計算機</a>
+
              <a href="#links-dashboard" class="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">🔗 常用連結</a>
              <!-- START: 新增的行動版重新整理按鈕 -->
              <button id="mobile-refresh-btn" class="w-full text-left mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-indigo-700 hover:bg-gray-50">🔄 下載最新行程</button>
@@ -614,38 +611,7 @@
         <main class="space-y-8">
             <div id="itinerary-container" class="space-y-8"></div>
 
-            <div id="tip-calculator-section" class="trip-card bg-white rounded-2xl shadow-lg p-6 md:p-8 ring-1 ring-gray-200">
-                <h2 class="text-2xl font-bold text-gray-900 mb-4 flex items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 7h6m0 10v-3.251l-4.71-4.71a1 1 0 00-1.415 0L3 16.251V21h4.75L12 17.25m0 0l6-6m-6 6l-3-3" /></svg>
-                    小費計算機 (Tip Calculator)
-                </h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-end">
-                    <div>
-                        <label for="bill-amount" class="block text-sm font-medium text-gray-700">帳單金額 (CAD/USD)</label>
-                        <!-- START: 修改小費計算機輸入欄位 -->
-                        <input type="number" inputmode="decimal" id="bill-amount" placeholder="例如 85.50" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                        <!-- END: 修改小費計算機輸入欄位 -->
-                    </div>
-                    <div>
-                        <label for="tip-rate" class="block text-sm font-medium text-gray-700">小費比例 (%)</label>
-                        <select id="tip-rate" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                            <option value="15">15% (標準)</option>
-                            <option value="18" selected>18% (推薦)</option>
-                            <option value="20">20% (優質服務)</option>
-                            <option value="10">10% (基本)</option>
-                        </select>
-                    </div>
-                    <div class="text-center bg-indigo-50 p-4 rounded-lg mt-4 md:mt-0">
-                        <label class="block text-sm font-medium text-gray-700">小費金額</label>
-                        <p id="tip-result" class="text-xl font-bold text-indigo-700">-</p>
-                    </div>
-                     <div class="text-center bg-green-50 p-4 rounded-lg mt-4 md:mt-0">
-                        <label class="block text-sm font-medium text-gray-700">含小費總額</label>
-                        <p id="total-result" class="text-xl font-bold text-green-700">-</p>
-                    </div>
-                </div>
-            </div>
+
 
             <div id="links-dashboard" class="trip-card bg-white rounded-2xl shadow-lg p-6 md:p-8 ring-1 ring-gray-200">
                  <h2 class="text-2xl sm:text-3xl font-bold mb-6 text-gray-900 flex items-center">
@@ -682,7 +648,12 @@
         </div>
     </div>
 
-    <div class="no-print fixed bottom-4 right-4 z-50">
+    <div class="no-print fixed bottom-4 right-4 z-50 space-y-3">
+        <button id="tip-calculator-btn" class="bg-indigo-600 text-white font-semibold px-4 py-3 rounded-full shadow-lg hover:bg-indigo-700 transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-400" title="小費計算機">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 7h6m0 10v-3.251l-4.71-4.71a1 1 0 00-1.415 0L3 16.251V21h4.75L12 17.25m0 0l6-6m-6 6l-3-3" />
+            </svg>
+        </button>
         <button id="today-btn" class="bg-amber-500 text-white font-semibold px-4 py-3 rounded-full shadow-lg hover:bg-amber-600 transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-400 hidden">
             行程要覽
         </button>
@@ -711,6 +682,48 @@
             </div>
             <div id="city-select-list" class="modal-body mt-4 space-y-3">
                 <!-- Cities will be populated by JS -->
+            </div>
+        </div>
+    </div>
+    
+    <!-- Tip Calculator Modal -->
+    <div id="tip-calculator-modal" class="modal-overlay no-print hidden">
+        <div class="modal-container max-w-md">
+            <div class="modal-header">
+                <h2 class="text-2xl font-bold text-gray-900 flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 7h6m0 10v-3.251l-4.71-4.71a1 1 0 00-1.415 0L3 16.251V21h4.75L12 17.25m0 0l6-6m-6 6l-3-3" />
+                    </svg>
+                    小費計算機 (Tip Calculator)
+                </h2>
+                <button class="modal-close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="grid grid-cols-1 gap-4">
+                    <div>
+                        <label for="modal-bill-amount" class="block text-sm font-medium text-gray-700">帳單金額 (CAD/USD)</label>
+                        <input type="number" inputmode="decimal" id="modal-bill-amount" placeholder="例如 85.50" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                    </div>
+                    <div>
+                        <label for="modal-tip-rate" class="block text-sm font-medium text-gray-700">小費比例 (%)</label>
+                        <select id="modal-tip-rate" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                            <option value="15">15% (標準)</option>
+                            <option value="18" selected>18% (推薦)</option>
+                            <option value="20">20% (優質服務)</option>
+                            <option value="10">10% (基本)</option>
+                        </select>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="text-center bg-indigo-50 p-4 rounded-lg">
+                            <label class="block text-sm font-medium text-gray-700">小費金額</label>
+                            <p id="modal-tip-result" class="text-xl font-bold text-indigo-700">-</p>
+                        </div>
+                        <div class="text-center bg-green-50 p-4 rounded-lg">
+                            <label class="block text-sm font-medium text-gray-700">含小費總額</label>
+                            <p id="modal-total-result" class="text-xl font-bold text-green-700">-</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -1591,25 +1604,7 @@
                 }
             }
 
-            const billInput = document.getElementById('bill-amount');
-            const tipSelect = document.getElementById('tip-rate');
-            const tipResultEl = document.getElementById('tip-result');
-            const totalResultEl = document.getElementById('total-result');
-            function calculateTip() {
-                const bill = parseFloat(billInput.value);
-                const tipPercent = parseFloat(tipSelect.value);
-                if (!isNaN(bill) && bill > 0 && !isNaN(tipPercent)) {
-                    const tip = bill * (tipPercent / 100);
-                    const total = bill + tip;
-                    if(tipResultEl) tipResultEl.textContent = `$${tip.toFixed(2)}`;
-                    if(totalResultEl) totalResultEl.textContent = `$${total.toFixed(2)}`;
-                } else {
-                    if(tipResultEl) tipResultEl.textContent = '-';
-                    if(totalResultEl) totalResultEl.textContent = '-';
-                }
-            }
-            if (billInput) billInput.addEventListener('input', calculateTip);
-            if (tipSelect) tipSelect.addEventListener('change', calculateTip);
+
 
             function updateLiveTaipeiTime() {
                 const taipeiTimeEl = document.getElementById('status-taipei-time');
@@ -1711,6 +1706,42 @@
 
                 citySelectModal.querySelectorAll('.modal-close-btn').forEach(btn => btn.addEventListener('click', () => closeModal(citySelectModal)));
                 citySelectModal.addEventListener('click', e => (e.target === citySelectModal) && closeModal(citySelectModal));
+            }
+
+            // Tip Calculator Modal
+            const tipCalculatorModal = document.getElementById('tip-calculator-modal');
+            const tipCalculatorBtn = document.getElementById('tip-calculator-btn');
+            
+            if (tipCalculatorModal && tipCalculatorBtn) {
+                const modalBillInput = tipCalculatorModal.querySelector('#modal-bill-amount');
+                const modalTipSelect = tipCalculatorModal.querySelector('#modal-tip-rate');
+                const modalTipResult = tipCalculatorModal.querySelector('#modal-tip-result');
+                const modalTotalResult = tipCalculatorModal.querySelector('#modal-total-result');
+
+                function calculateModalTip() {
+                    const bill = parseFloat(modalBillInput.value);
+                    const tipPercent = parseFloat(modalTipSelect.value);
+                    if (!isNaN(bill) && bill > 0 && !isNaN(tipPercent)) {
+                        const tip = bill * (tipPercent / 100);
+                        const total = bill + tip;
+                        modalTipResult.textContent = `$${tip.toFixed(2)}`;
+                        modalTotalResult.textContent = `$${total.toFixed(2)}`;
+                    } else {
+                        modalTipResult.textContent = '-';
+                        modalTotalResult.textContent = '-';
+                    }
+                }
+
+                tipCalculatorBtn.addEventListener('click', () => {
+                    openModal(tipCalculatorModal);
+                    modalBillInput.focus();
+                });
+
+                modalBillInput.addEventListener('input', calculateModalTip);
+                modalTipSelect.addEventListener('change', calculateModalTip);
+
+                tipCalculatorModal.querySelectorAll('.modal-close-btn').forEach(btn => btn.addEventListener('click', () => closeModal(tipCalculatorModal)));
+                tipCalculatorModal.addEventListener('click', e => (e.target === tipCalculatorModal) && closeModal(tipCalculatorModal));
             }
 
 
