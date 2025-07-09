@@ -999,6 +999,7 @@
                     const data = await res.json();
                     
                     console.log(`API response for ${city} on ${date}:`, data.daily);
+                    console.log(`API URL for ${city} on ${date}:`, url);
                     return { city, date, data: data.daily };
                 } catch (error) {
                     console.error(`無法取得 ${city} 在 ${date} 的天氣資訊:`, error);
@@ -1013,32 +1014,32 @@
                 const allWeatherData = { ...existingData };
                 
                 results.filter(r => r).forEach(({ city, date, data }) => {
-                if (!allWeatherData[city]) {
-                    allWeatherData[city] = { time: [], temperature_2m_max: [], temperature_2m_min: [], weather_code: [] };
+                    if (!allWeatherData[city]) {
+                        allWeatherData[city] = { time: [], temperature_2m_max: [], temperature_2m_min: [], weather_code: [] };
+                    }
+                    
+                    // 檢查是否已存在該日期的資料
+                    const dateIndex = allWeatherData[city].time.indexOf(date);
+                    if (dateIndex === -1 && data && data.time && data.time.length > 0) {
+                        allWeatherData[city].time.push(data.time[0]);
+                        allWeatherData[city].temperature_2m_max.push(data.temperature_2m_max[0]);
+                        allWeatherData[city].temperature_2m_min.push(data.temperature_2m_min[0]);
+                        allWeatherData[city].weather_code.push(data.weather_code[0]);
+                    }
+                });
+
+                // 儲存到本地快取
+                try {
+                    localStorage.setItem('weatherDataCache', JSON.stringify({
+                        data: allWeatherData,
+                        timestamp: Date.now()
+                    }));
+                    console.log('天氣資料已儲存到本地快取');
+                } catch (e) {
+                    console.warn('無法儲存天氣資料到本地快取:', e);
                 }
                 
-                // 檢查是否已存在該日期的資料
-                const dateIndex = allWeatherData[city].time.indexOf(date);
-                if (dateIndex === -1 && data && data.time && data.time.length > 0) {
-                    allWeatherData[city].time.push(data.time[0]);
-                    allWeatherData[city].temperature_2m_max.push(data.temperature_2m_max[0]);
-                    allWeatherData[city].temperature_2m_min.push(data.temperature_2m_min[0]);
-                    allWeatherData[city].weather_code.push(data.weather_code[0]);
-                }
-            });
-
-            // 儲存到本地快取
-            try {
-                localStorage.setItem('weatherDataCache', JSON.stringify({
-                    data: allWeatherData,
-                    timestamp: Date.now()
-                }));
-                console.log('天氣資料已儲存到本地快取');
-            } catch (e) {
-                console.warn('無法儲存天氣資料到本地快取:', e);
-            }
-            
-            return allWeatherData;
+                return allWeatherData;
             } catch (err) {
                 console.error('天氣資料合併失敗:', err);
                 throw err; // 讓上層 catch 知道真正原因
