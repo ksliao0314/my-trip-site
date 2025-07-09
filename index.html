@@ -1026,6 +1026,14 @@
                     
                     // 檢查是否已存在該日期的資料
                     const dateIndex = allWeatherData[city].time.indexOf(date);
+                    console.log(`Processing ${city} on ${date}:`, {
+                        dateIndex,
+                        hasData: !!data,
+                        hasTime: !!(data && data.time),
+                        timeLength: data?.time?.length,
+                        condition: dateIndex === -1 && data && data.time && data.time.length > 0
+                    });
+                    
                     if (dateIndex === -1 && data && data.time && data.time.length > 0) {
                         console.log(`Adding weather data for ${city} on ${date}:`, {
                             time: data.time[0],
