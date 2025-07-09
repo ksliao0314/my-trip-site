@@ -1774,32 +1774,24 @@
                     modalBillInput.value = '';
                     modalTipResult.textContent = '-';
                     modalTotalResult.textContent = '-';
-                    
                     // 重置小費比例為預設值
                     modalTipSelect.value = '18';
-                    
-                    openModal(tipCalculatorModal);
-                    
+
                     // 行動裝置鍵盤處理
                     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
                     if (isMobile) {
-                        // 立即聚焦並觸發鍵盤
-                        setTimeout(() => {
-                            modalBillInput.focus();
-                            // 強制觸發數字鍵盤
-                            modalBillInput.click();
-                            // 確保輸入框在可見區域
-                            setTimeout(() => {
-                                modalBillInput.scrollIntoView({ 
-                                    behavior: 'smooth', 
-                                    block: 'center',
-                                    inline: 'center'
-                                });
-                            }, 50);
-                        }, 200); // 減少延遲時間
+                        modalBillInput.focus();
                     } else {
                         modalBillInput.focus();
                     }
+                    openModal(tipCalculatorModal);
+                    setTimeout(() => {
+                        modalBillInput.scrollIntoView({ 
+                            behavior: 'smooth', 
+                            block: 'center',
+                            inline: 'center'
+                        });
+                    }, 100);
                 });
 
                 modalBillInput.addEventListener('input', calculateModalTip);
