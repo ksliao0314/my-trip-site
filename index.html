@@ -1027,10 +1027,19 @@
                     // 檢查是否已存在該日期的資料
                     const dateIndex = allWeatherData[city].time.indexOf(date);
                     if (dateIndex === -1 && data && data.time && data.time.length > 0) {
+                        console.log(`Adding weather data for ${city} on ${date}:`, {
+                            time: data.time[0],
+                            tempMax: data.temperature_2m_max[0],
+                            tempMin: data.temperature_2m_min[0],
+                            weatherCode: data.weather_code[0]
+                        });
+                        
                         allWeatherData[city].time.push(data.time[0]);
                         allWeatherData[city].temperature_2m_max.push(data.temperature_2m_max[0]);
                         allWeatherData[city].temperature_2m_min.push(data.temperature_2m_min[0]);
                         allWeatherData[city].weather_code.push(data.weather_code[0]);
+                        
+                        console.log(`After adding, ${city} data:`, allWeatherData[city]);
                     }
                 });
 
