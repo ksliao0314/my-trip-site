@@ -1393,28 +1393,10 @@
 
             // --- START: 天氣快取清除函數 ---
             function clearWeatherCache() {
-                try {
-                    localStorage.removeItem('weatherDataCache');
-                    showToast('天氣快取已清除，將重新取得最新資料');
-                    
-                    // 重新取得天氣資料
-                    if (window.tripData) {
-                        fetchAllWeatherData(window.tripData.itinerary)
-                            .then(allWeatherData => {
-                                window.allWeatherData = allWeatherData;
-                                populateDayCardWeather(allWeatherData);
-                                updateStatusDashboard(currentDisplayDate, window.tripData, allWeatherData);
-                                showToast('天氣資料已更新完成');
-                            })
-                            .catch(weatherError => {
-                                console.error("Weather data fetch failed:", weatherError);
-                                showToast('天氣資料更新失敗，請檢查網路連線');
-                            });
-                    }
-                } catch (e) {
-                    console.error('清除天氣快取失敗:', e);
-                    showToast('清除快取失敗');
-                }
+                localStorage.removeItem('weatherDataCache');
+                console.log('天氣快取已清除');
+                // 重新載入頁面以重新取得天氣資料
+                window.location.reload();
             }
             // --- END: 天氣快取清除函數 ---
 
