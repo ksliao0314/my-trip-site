@@ -9,7 +9,7 @@ workbox.core.clientsClaim();
 // 這些是確保應用程式基本外觀與功能可以離線運作的檔案。
 // --- FIX: 使用相對路徑以增加彈性 ---
 const APP_SHELL_ASSETS = [
-  { url: 'index.html', revision: '20250709-05' }, // HTML主檔案
+  { url: 'index.html', revision: '20250709-06' }, // HTML主檔案
   { url: 'manifest.json', revision: '20250702-01' }, // PWA 設定檔
   { url: 'trip-data.json', revision: '20250709-01' }, // 核心行程資料
   // --- 快取所有應用程式圖示，確保離線時圖示能正常顯示 ---
