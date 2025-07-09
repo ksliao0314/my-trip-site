@@ -1770,25 +1770,33 @@
                 }
 
                 tipCalculatorBtn.addEventListener('click', () => {
+                    // 清空輸入內容和計算結果
+                    modalBillInput.value = '';
+                    modalTipResult.textContent = '-';
+                    modalTotalResult.textContent = '-';
+                    
+                    // 重置小費比例為預設值
+                    modalTipSelect.value = '18';
+                    
                     openModal(tipCalculatorModal);
                     
                     // 行動裝置鍵盤處理
                     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
                     if (isMobile) {
-                        // 延遲聚焦，確保模態框完全打開
+                        // 立即聚焦並觸發鍵盤
                         setTimeout(() => {
                             modalBillInput.focus();
                             // 強制觸發數字鍵盤
                             modalBillInput.click();
-                            // 滾動到輸入框位置，確保不被鍵盤遮擋
+                            // 確保輸入框在可見區域
                             setTimeout(() => {
                                 modalBillInput.scrollIntoView({ 
                                     behavior: 'smooth', 
                                     block: 'center',
                                     inline: 'center'
                                 });
-                            }, 100);
-                        }, 400);
+                            }, 50);
+                        }, 200); // 減少延遲時間
                     } else {
                         modalBillInput.focus();
                     }
@@ -1796,6 +1804,8 @@
 
                 modalBillInput.addEventListener('input', calculateModalTip);
                 modalTipSelect.addEventListener('change', calculateModalTip);
+                
+
 
                 // 處理行動裝置鍵盤彈出時的視窗大小變化
                 let initialViewportHeight = window.innerHeight;
