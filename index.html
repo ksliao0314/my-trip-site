@@ -870,6 +870,7 @@
                 const weatherDisplay = dayEl.querySelector('.weather-display');
                 if (city && allWeatherData[city] && weatherDisplay && allWeatherData[city].time) {
                     const dayIndex = allWeatherData[city].time.indexOf(date);
+                    console.log('Debug weather:', { city, date, availableDates: allWeatherData[city].time, dayIndex });
                     if (dayIndex !== -1) {
                         const temp = allWeatherData[city].temperature_2m_max[dayIndex];
                         const code = allWeatherData[city].weather_code[dayIndex];
@@ -924,6 +925,7 @@
             // 檢查快取是否仍然有效（24小時內）
             const cacheAge = Date.now() - cacheTimestamp;
             const cacheValid = cacheAge < 24 * 60 * 60 * 1000; // 24小時
+            console.log('快取狀態:', { cacheAge, cacheValid, cacheTimestamp });
 
             // 分離過去日期和未來日期
             const pastDates = [];
@@ -948,19 +950,23 @@
                 }
             });
 
-            // 簡化快取邏輯：暫時總是重新取得資料來測試
+            // 強制重新取得資料來測試
             const allDatesToFetch = [...pastDates, ...futureDates];
             
-            // 如果沒有需要重新取得的資料，直接返回快取
-            if (allDatesToFetch.length === 0 && cacheValid) {
-                console.log('使用快取的天氣資料');
-                return existingData;
-            }
+            console.log('快取檢查:', { 
+                allDatesToFetchLength: allDatesToFetch.length, 
+                cacheValid, 
+                existingDataKeys: Object.keys(existingData) 
+            });
+            
+            // 強制重新取得所有資料
+            console.log('強制重新取得天氣資料');
 
             console.log(`需要重新取得 ${allDatesToFetch.length} 筆天氣資料`);
             console.log('今天日期:', todayStr);
             console.log('過去日期:', pastDates.map(d => d.date));
             console.log('未來日期:', futureDates.map(d => d.date));
+            console.log('所有要取得的日期:', allDatesToFetch.map(d => `${d.city}: ${d.date}`));
 
             const promises = allDatesToFetch.map(async ({ city, date }) => {
                 const { lat, lon } = cityCoordinates[city];
@@ -990,6 +996,7 @@
                     if (!res.ok) throw new Error(`API error for ${city} on ${date}`);
                     const data = await res.json();
                     
+                    console.log(`API response for ${city} on ${date}:`, data.daily);
                     return { city, date, data: data.daily };
                 } catch (error) {
                     console.error(`無法取得 ${city} 在 ${date} 的天氣資訊:`, error);
