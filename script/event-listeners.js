@@ -10,7 +10,10 @@ export function registerEventListeners(appState, data, allWeatherData) {
     // Service Worker 註冊與更新（已搬移）
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-            navigator.serviceWorker.register('sw.js')
+            // 暫時停用 Service Worker 註冊來測試
+            console.log('Service Worker 註冊已暫時停用');
+            /*
+            navigator.serviceWorker.register('./sw.js', { scope: './' })
                 .then(registration => {
                     registration.addEventListener('updatefound', () => {
                         const newWorker = registration.installing;
@@ -22,6 +25,7 @@ export function registerEventListeners(appState, data, allWeatherData) {
                         });
                     });
                 }).catch(error => { if (DEBUG) console.log('ServiceWorker 註冊失敗：', error); });
+            */
         });
         let refreshing;
         navigator.serviceWorker.addEventListener('controllerchange', () => {
