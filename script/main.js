@@ -6,6 +6,9 @@ import { fetchTripData, fetchAllWeatherData } from './api-service.js';
 import { renderItinerary, updateStatusDashboard, showToast } from './ui-render.js';
 import { registerEventListeners } from './event-listeners.js';
 
+// 開發模式標記
+const __DEV__ = typeof process !== 'undefined' && process.env && process.env.NODE_ENV !== 'production';
+
 // 移除 window 掛載
 // export 需要給 event-listeners.js 用的函式
 export { updateStatusDashboard };
@@ -36,6 +39,8 @@ export function scrollToToday() {
 }
 
 export function checkForUpdates() {
+    console.log('checkForUpdates 被呼叫'); // 除錯用
+    
     if (!('serviceWorker' in navigator)) {
         showToast('您的瀏覽器不支援離線功能。');
         return;
@@ -45,54 +50,74 @@ export function checkForUpdates() {
     
     // 先檢查 Service Worker 更新
     navigator.serviceWorker.ready.then(registration => {
+        console.log('Service Worker ready'); // 除錯用
         registration.update().then(() => {
+            console.log('registration.update() 完成'); // 除錯用
             // 檢查是否有新的 Service Worker 等待啟用
             if (registration.waiting) {
+                console.log('發現 waiting Service Worker'); // 除錯用
                 showToast('發現新版本！點擊「重新載入」按鈕更新行程。');
                 // 顯示更新通知條
                 const updateBar = document.getElementById('update-notification');
-                if (updateBar) updateBar.style.display = 'block';
+                if (updateBar) {
+                    updateBar.style.display = 'block';
+                    console.log('更新通知條已顯示'); // 除錯用
+                }
             } else {
+                console.log('沒有 waiting Service Worker，檢查 trip-data.json'); // 除錯用
                 // 檢查 trip-data.json 是否有更新
                 fetch('trip-data.json', { 
                     method: 'HEAD',
                     cache: 'no-cache' 
                 }).then(response => {
+                    console.log('trip-data.json HEAD 回應:', response.status); // 除錯用
                     if (response.ok) {
                         // 比較版本號（如果有的話）
                         const currentVersion = appState.tripData?.tripInfo?.dataVersion;
+                        console.log('當前版本:', currentVersion); // 除錯用
                         if (currentVersion) {
                             // 嘗試取得新版本的版本號
                             fetch('trip-data.json', { cache: 'no-cache' })
                                 .then(res => res.json())
                                 .then(newData => {
                                     const newVersion = newData.tripInfo?.dataVersion;
+                                    console.log('新版本:', newVersion); // 除錯用
                                     if (newVersion && newVersion !== currentVersion) {
                                         showToast(`發現新版本 ${newVersion}！請重新整理頁面更新行程。`);
                                         // 顯示更新通知條
                                         const updateBar = document.getElementById('update-notification');
-                                        if (updateBar) updateBar.style.display = 'block';
+                                        if (updateBar) {
+                                            updateBar.style.display = 'block';
+                                            console.log('更新通知條已顯示'); // 除錯用
+                                        }
                                     } else {
                                         showToast('您的行程已是最新版本！');
+                                        console.log('已是最新版本'); // 除錯用
                                     }
                                 })
-                                .catch(() => {
+                                .catch((error) => {
+                                    console.error('取得新版本資料失敗:', error); // 除錯用
                                     showToast('您的行程已是最新版本！');
                                 });
                         } else {
                             showToast('您的行程已是最新版本！');
+                            console.log('沒有版本號資訊'); // 除錯用
                         }
                     } else {
                         showToast('無法檢查更新，請確認網路連線。');
+                        console.error('trip-data.json HEAD 請求失敗:', response.status); // 除錯用
                     }
-                }).catch(() => {
+                }).catch((error) => {
+                    console.error('trip-data.json HEAD 請求錯誤:', error); // 除錯用
                     showToast('無法檢查更新，請確認網路連線。');
                 });
             }
         }).catch(error => {
+            console.error('registration.update() 失敗:', error); // 除錯用
             showToast('檢查更新失敗，請確認網路連線。');
         });
     }).catch(error => {
+        console.error('Service Worker ready 失敗:', error); // 除錯用
         showToast('離線功能尚未啟用，請稍後再試或重新整理頁面。');
     });
 }
