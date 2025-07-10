@@ -3,7 +3,7 @@
     "totalDays": 13,
     "tripStartDate": "2025-07-02",
     "tripEndDate": "2025-07-16",
-    "dataVersion": "20250709-01"
+    "dataVersion": "20250710-01"
   },
   "timePhases": [
     {
@@ -171,7 +171,7 @@
           { "name": "經典菜色＋瀑布景", "desc": "Queen Victoria Place Restaurant 結合美食與美景。", "places": [{ "name": "Queen Victoria Place Restaurant", "link": "https://maps.apple.com/?q=Queen+Victoria+Place+Restaurant" }] },
           { "name": "創意漢堡", "desc": "The Works Gourmet Burger Bistro 提供多樣化的漢堡選擇。", "places": [{ "name": "The Works Gourmet Burger Bistro", "link": "https://maps.apple.com/?q=The+Works+Gourmet+Burger+Bistro+Niagara" }] }
         ]},
-        { "name": "� 甜點／冰品", "items": [
+        { "name": "🍩 甜點／冰品", "items": [
           { "name": "楓糖炸麵餅", "desc": "BeaverTails 是加拿大必嚐的國民甜點。", "places": [{ "name": "BeaverTails", "link": "https://maps.apple.com/?q=BeaverTails+Niagara+Falls" }] }
         ]}
       ]
@@ -416,20 +416,20 @@
       "dayGroup": 7,
       "cityTarget": "chicago-section",
       "weatherCity": "chicago",
-      "title": "芝加哥經典｜博物館與高空景觀",
+      "title": "芝加哥經典｜科學探索與高空景觀",
       "subTitle": "Day 9｜7月10日（四）",
       "isTravelDay": false,
       "theme": {
-        "icon": "🏛️",
-        "title": "城市經典巡禮",
-        "description": "從史前巨獸的世界，到摩天大樓的頂端，今天將全方位體驗芝加哥的經典魅力。"
+        "icon": "🔬",
+        "title": "科學探索與城市之巔",
+        "description": "從互動科學的奧秘，到摩天大樓的頂端，今天將全方位體驗芝加哥的現代奇觀。"
       },
-      "tags": ["#博物館日", "#經典美食", "#高空景觀"],
+      "tags": ["#科學探索", "#經典美食", "#高空景觀"],
       "activities": [
-        { "title": "🦖 09:00–12:00｜芝加哥自然歷史博物館（Field Museum）", "items": ["前往 <a href='https://maps.apple.com/?q=Field+Museum,Chicago' target='_blank'>Field Museum</a>，精選展覽：Sue 暴龍、古埃及展、原住民文化。", "建議租語音導覽，停留約 2–2.5 小時。"] },
-        { "title": "🍽️ 12:30–14:00｜午餐：芝加哥熱狗 or 深盤披薩", "items": ["熱狗推薦：<a href='https://maps.apple.com/?q=Portillo's+Hot+Dogs' target='_blank'>Portillo's Hot Dogs</a>。", "或選擇：<a href='https://maps.apple.com/?q=Lou+Malnati's+Pizzeria' target='_blank'>Lou Malnati's</a> / <a href='https://maps.apple.com/?q=Pequod's+Pizza' target='_blank'>Pequod's Pizza</a> 經典深盤披薩。"] },
-        { "title": "🌃 14:30–17:00｜360 CHICAGO 或 Skydeck 高空觀景台", "items": ["<a href='https://maps.apple.com/?q=360+CHICAGO' target='_blank'>360 CHICAGO</a> 或 <a href='https://maps.apple.com/?q=Skydeck+Chicago' target='_blank'>Skydeck</a>，根據天氣決定是否登塔，若雨勢較強也可改室內咖啡館休息。"] },
-        { "title": "🍽️ 18:00–20:00｜晚餐：The Dearborn（美式餐酒館）", "items": ["雨天晚間不建議室外活動，推薦此人氣高氣氛佳的 <a href='https://maps.apple.com/?q=The+Dearborn' target='_blank'>The Dearborn</a> 餐廳收尾。"] }
+        { "title": "🔬 09:00–12:00｜芝加哥科學與工業博物館 (Museum of Science and Industry)", "items": ["前往 <a href='https://maps.apple.com/?q=Museum+of+Science+and+Industry,Chicago' target='_blank' class='hover:underline'>Museum of Science and Industry</a>，探索 U-505 潛艇、模擬煤礦坑道等互動展覽。", "建議停留約 2.5–3 小時。"] },
+        { "title": "🍽️ 12:30–14:00｜午餐：芝加哥熱狗 or 深盤披薩", "items": ["熱狗推薦：<a href='https://maps.apple.com/?q=Portillo%27s+Hot+Dogs' target='_blank' class='hover:underline'>Portillo's Hot Dogs</a>。", "或選擇：<a href='https://maps.apple.com/?q=Lou+Malnati%27s+Pizzeria' target='_blank' class='hover:underline'>Lou Malnati's Pizzeria</a> / <a href='https://maps.apple.com/?q=Pequod%27s+Pizza' target='_blank' class='hover:underline'>Pequod's Pizza</a>。"] },
+        { "title": "🌃 14:30–17:00｜360 CHICAGO 或 Skydeck 高空觀景台", "items": ["<a href='https://maps.apple.com/?q=360+CHICAGO' target='_blank' class='hover:underline'>360 CHICAGO</a> 或 <a href='https://maps.apple.com/?q=Skydeck+Chicago' target='_blank' class='hover:underline'>Skydeck</a>，根據天氣決定是否登塔，若雨勢較強也可改室內咖啡館休息。"] },
+        { "title": "🍽️ 18:00–20:00｜晚餐：The Dearborn（美式餐酒館）", "items": ["推薦此人氣高氣氛佳的 <a href='https://maps.apple.com/?q=The+Dearborn' target='_blank' class='hover:underline'>The Dearborn</a> 餐廳收尾。"] }
       ]
     },
     {
@@ -438,21 +438,25 @@
       "dayGroup": 10,
       "cityTarget": "chicago-section",
       "weatherCity": "chicago",
-      "title": "芝加哥自由日｜購物或水族館探索",
+      "title": "芝加哥自由日｜購物與自然史探索",
       "subTitle": "Day 10｜7月11日（五）",
       "isTravelDay": false,
       "theme": {
         "icon": "🛍️",
         "title": "都會漫遊之日",
-        "description": "今天是屬於您自己的芝加哥時光。無論是穿梭在精品店，或是在水族館探索海洋奧秘，隨心所欲地感受這座城市的活力。"
+        "description": "今天是屬於您自己的芝加哥時光。從早上的自由購物，到下午的自然史探索，隨心所欲地感受這座城市的活力。"
       },
-      "tags": ["#自由行程", "#水族館", "#彈性安排"],
+      "tags": ["#自由行程", "#博物館日", "#彈性安排"],
       "activities": [
-        { "title": "🛍️ 09:00–12:00｜Magnificent Mile 購物 or 城區慢行", "items": ["可逛 <a href='https://maps.apple.com/?q=Nordstrom,Chicago' target='_blank'>Nordstrom</a>、<a href='https://maps.apple.com/?q=Nike+Chicago' target='_blank'>Nike</a>、<a href='https://maps.apple.com/?q=Garrett+Popcorn+Shops' target='_blank'>Garrett 爆米花</a>。", "散步路線：<a href='https://maps.apple.com/?q=Millennium+Park,Chicago' target='_blank'>Millennium Park</a> → <a href='https://maps.apple.com/?q=Maggie+Daley+Park' target='_blank'>Maggie Daley Park</a> → <a href='https://maps.apple.com/?q=Lakefront+Trail,Chicago' target='_blank'>Lakefront Trail</a>。"] },
-        { "title": "🍽️ 12:30–14:00｜午餐：Beatrix（健康早午餐）或 Big Star（Taco）", "items": ["可選擇 <a href='https://maps.apple.com/?q=Beatrix' target='_blank'>Beatrix</a> 或 <a href='https://maps.apple.com/?q=Big+Star+Wicker+Park' target='_blank'>Big Star</a>。"] },
-        { "title": "🐟 14:30–17:00｜Shedd Aquarium or Chicago Riverwalk", "items": ["天氣好可在 <a href='https://maps.apple.com/?q=Chicago+Riverwalk' target='_blank'>Riverwalk</a> 散步喝飲料。", "若想參觀室內水族館，可至 <a href='https://maps.apple.com/?q=Shedd+Aquarium' target='_blank'>Shedd Aquarium</a> 觀賞海豚與亞馬遜展區。"] },
-        { "title": "🍽️ 18:30–20:30｜晚餐：RPM Steak 或 RPM Italian", "items": ["用一餐高品質料理收尾晴朗的一天，可選擇 <a href='https://maps.apple.com/?q=RPM+Steak' target='_blank'>RPM Steak</a> 或 <a href='https://maps.apple.com/?q=RPM+Italian' target='_blank'>RPM Italian</a>。"] }
-      ]
+        { "title": "🛍️ 09:00–12:00｜Magnificent Mile 購物 or 城區慢行", "items": ["可逛 <a href='https://maps.apple.com/?q=Nordstrom,Chicago' target='_blank' class='hover:underline'>Nordstrom</a>、<a href='https://maps.apple.com/?q=Nike+Chicago' target='_blank' class='hover:underline'>Nike</a>、<a href='https://maps.apple.com/?q=Garrett+Popcorn+Shops' target='_blank' class='hover:underline'>Garrett 爆米花</a>。"] },
+        { "title": "🍽️ 12:30–14:00｜午餐：Beatrix（健康早午餐）或 Big Star（Taco）", "items": ["可選擇 <a href='https://maps.apple.com/?q=Beatrix' target='_blank' class='hover:underline'>Beatrix</a> 或 <a href='https://maps.apple.com/?q=Big+Star+Wicker+Park' target='_blank' class='hover:underline'>Big Star</a>。"] },
+        { "title": "🦖 14:30–17:00｜菲爾德自然史博物館 (Field Museum of Natural History)", "items": ["前往 <a href='https://maps.apple.com/?q=Field+Museum,Chicago' target='_blank' class='hover:underline'>Field Museum</a>，精選展覽：Sue 暴龍、古埃及展、原住民文化。"] },
+        { "title": "🍽️ 18:30–20:30｜晚餐：RPM Steak 或 RPM Italian", "items": ["用一餐高品質料理收尾，可選擇 <a href='https://maps.apple.com/?q=RPM+Steak' target='_blank' class='hover:underline'>RPM Steak</a> 或 <a href='https://maps.apple.com/?q=RPM+Italian' target='_blank' class='hover:underline'>RPM Italian</a>。"] }
+      ],
+      "reminder": {
+        "title": "📝 備選方案",
+        "items": ["若逛完博物館仍有時間和體力，可考慮前往 <a href='https://maps.apple.com/?q=Shedd+Aquarium' target='_blank' class='hover:underline'>謝德水族館 (Shedd Aquarium)</a> 參觀。"]
+      }
     },
     {
       "day": 11,
@@ -460,20 +464,20 @@
       "dayGroup": 10,
       "cityTarget": "chicago-section",
       "weatherCity": "chicago",
-      "title": "芝加哥藝術日｜藝術學院與文化漫步",
+      "title": "芝加哥藝術日｜藝術學院與河畔漫步",
       "subTitle": "Day 11｜7月12日（六）",
       "isTravelDay": false,
       "theme": {
         "icon": "🎨",
         "title": "藝術沉浸之日",
-        "description": "準備好在世界級的藝術殿堂中度過一個下午。從印象派大師的筆觸到當代藝術的前衛，讓心靈接受一場美的洗禮。"
+        "description": "準備好在世界級的藝術殿堂中度過一個上午，午後則在芝加哥河畔感受城市的水岸魅力。"
       },
-      "tags": ["#藝術巡禮", "#世界名畫", "#文化沉浸"],
+      "tags": ["#藝術巡禮", "#世界名畫", "#河濱步道"],
       "activities": [
-        { "title": "🎨 09:30–13:00｜芝加哥藝術學院（Art Institute of Chicago）", "items": ["前往 <a href='https://maps.apple.com/?q=Art+Institute+of+Chicago' target='_blank'>Art Institute of Chicago</a>，重要收藏：莫內、秀拉、Edward Hopper、Grant Wood。", "建議租借語音導覽深度參觀。"] },
-        { "title": "🍽️ 13:00–14:30｜午餐：Cindy's Rooftop or The Gage", "items": ["晴朗可選景觀餐廳 <a href='https://maps.apple.com/?q=Cindy's+Rooftop' target='_blank'>Cindy's Rooftop</a>，雨天建議博物館對面的 <a href='https://maps.apple.com/?q=The+Gage' target='_blank'>The Gage</a>。"] },
-        { "title": "🛍️ 15:00–17:30｜The Shops at North Bridge or Cultural Center", "items": ["午後避雨安排：室內購物商場 <a href='https://maps.apple.com/?q=The+Shops+at+North+Bridge' target='_blank'>The Shops at North Bridge</a>、<a href='https://maps.apple.com/?q=Chicago+Cultural+Center' target='_blank'>芝加哥文化中心</a>、或 <a href='https://maps.apple.com/?q=River+North+Gallery+District' target='_blank'>River North 藝廊街區</a>。"] },
-        { "title": "🍽️ 18:30–20:30｜晚餐：avec（River North）或 Wildfire（美式經典）", "items": ["可選擇 <a href='https://maps.apple.com/?q=avec+Restaurant+River+North' target='_blank'>avec (River North)</a> 或 <a href='https://maps.apple.com/?q=Wildfire+Chicago' target='_blank'>Wildfire</a>。", "夜晚小酌結尾也可選擇 <a href='https://maps.apple.com/?q=The+Berkshire+Room' target='_blank'>The Berkshire Room</a>、<a href='https://maps.apple.com/?q=The+Aviary' target='_blank'>The Aviary</a> 等特色酒吧。"] }
+        { "title": "🎨 09:30–13:00｜芝加哥藝術學院（Art Institute of Chicago）", "items": ["前往 <a href='https://maps.apple.com/?q=Art+Institute+of+Chicago' target='_blank' class='hover:underline'>Art Institute of Chicago</a>，重要收藏：莫內、秀拉、Edward Hopper、Grant Wood。", "建議租借語音導覽深度參觀。"] },
+        { "title": "🍽️ 13:00–14:30｜午餐：Cindy's Rooftop or The Gage", "items": ["晴朗可選景觀餐廳 <a href='https://maps.apple.com/?q=Cindy%27s+Rooftop' target='_blank' class='hover:underline'>Cindy's Rooftop</a>，雨天建議博物館對面的 <a href='https://maps.apple.com/?q=The+Gage' target='_blank' class='hover:underline'>The Gage</a>。"] },
+        { "title": "🚶‍♀️ 15:00–17:30｜芝加哥河濱步道 (Chicago Riverwalk) & 文化中心", "items": ["參觀完藝術學院後，可直接步行至鄰近的 <a href='https://maps.apple.com/?q=Chicago+Riverwalk' target='_blank' class='hover:underline'>Chicago Riverwalk</a> 散步，感受河畔風光。", "若天氣不佳，可改至 <a href='https://maps.apple.com/?q=Chicago+Cultural+Center' target='_blank' class='hover:underline'>芝加哥文化中心</a> 參觀。"] },
+        { "title": "🍽️ 18:30–20:30｜晚餐：avec（River North）或 Wildfire（美式經典）", "items": ["可選擇 <a href='https://maps.apple.com/?q=avec+Restaurant+River+North' target='_blank' class='hover:underline'>avec (River North)</a> 或 <a href='https://maps.apple.com/?q=Wildfire+Chicago' target='_blank' class='hover:underline'>Wildfire</a>。", "夜晚小酌結尾也可選擇 <a href='https://maps.apple.com/?q=The+Berkshire+Room' target='_blank' class='hover:underline'>The Berkshire Room</a>、<a href='https://maps.apple.com/?q=The+Aviary' target='_blank' class='hover:underline'>The Aviary</a> 等特色酒吧。"] }
       ]
     },
     {
