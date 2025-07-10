@@ -1,11 +1,10 @@
 // 簡化的 Service Worker
 // 只處理核心功能，避免 404 錯誤
 
-const CACHE_NAME = 'trip-site-v20250711-02';
+const CACHE_NAME = 'trip-site-v20250711-03';
 const CACHE_FILES = [
   './index.html',
-  './manifest.json',
-  './trip-data.json'
+  './manifest.json'
 ];
 
 // 安裝時快取核心檔案
@@ -48,6 +47,12 @@ self.addEventListener('fetch', (event) => {
   
   // 只處理 GET 請求
   if (request.method !== 'GET') return;
+  
+  // 不干擾 trip-data.json 的載入，讓它直接從網路取得
+  if (request.url.includes('trip-data.json')) {
+    event.respondWith(fetch(request));
+    return;
+  }
   
   // 處理核心檔案
   if (CACHE_FILES.some(file => request.url.includes(file.replace('./', '')))) {
