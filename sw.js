@@ -9,9 +9,9 @@ workbox.core.clientsClaim();
 // 這些是確保應用程式基本外觀與功能可以離線運作的檔案。
 // --- FIX: 使用相對路徑以增加彈性 ---
 const APP_SHELL_ASSETS = [
-  { url: 'index.html', revision: '20250710-03' }, // HTML主檔案
+  { url: 'index.html', revision: '20250707-10' }, // HTML主檔案
   { url: 'manifest.json', revision: '20250702-01' }, // PWA 設定檔
-  { url: 'trip-data.json', revision: '20250710-02' }, // 核心行程資料
+  { url: 'trip-data.json', revision: '20250707-09' }, // 核心行程資料
   // --- 快取所有應用程式圖示，確保離線時圖示能正常顯示 ---
   { url: 'apple-touch-icon.png', revision: null },
   { url: 'favicon.ico', revision: null },
@@ -19,6 +19,13 @@ const APP_SHELL_ASSETS = [
   { url: 'favicon-96x96.png', revision: null },
   { url: 'web-app-manifest-192x192.png', revision: null },
   { url: 'web-app-manifest-512x512.png', revision: null },
+  // --- 快取所有主要 JS 模組 ---
+  { url: 'scripts/main.js', revision: null },
+  { url: 'scripts/ui-render.js', revision: null },
+  { url: 'scripts/api-service.js', revision: null },
+  { url: 'scripts/event-listeners.js', revision: null },
+  { url: 'scripts/config.js', revision: null },
+  { url: 'scripts/state.js', revision: null },
 ];
 
 // 預先快取所有定義好的核心資源 (Precaching)
@@ -48,14 +55,31 @@ workbox.routing.registerRoute(
 
 // 2. 針對天氣 API 的快取策略 (NetworkFirst)
 // 優先嘗試從網路取得最新資料，如果失敗（例如離線），則從快取中讀取舊資料。
+// 2.1 預報天氣快取策略（3天、64筆）
 workbox.routing.registerRoute(
-  ({ url }) => url.origin === 'https://api.open-meteo.com' || url.origin === 'https://archive-api.open-meteo.com',
+  ({ url }) => url.origin === 'https://api.open-meteo.com',
   new workbox.strategies.NetworkFirst({
-    cacheName: 'weather-api-cache',
+    cacheName: 'weather-forecast-cache',
     plugins: [
       new workbox.expiration.ExpirationPlugin({
-        maxEntries: 20, // 增加快取項目數量，因為歷史天氣資料不會變動
-        maxAgeSeconds: 24 * 60 * 60, // 快取 24 小時
+        maxEntries: 64,
+        maxAgeSeconds: 3 * 24 * 60 * 60, // 3天
+      }),
+      new workbox.cacheableResponse.CacheableResponsePlugin({
+        statuses: [0, 200],
+      }),
+    ],
+  })
+);
+// 2.2 歷史天氣快取策略（180天、64筆）
+workbox.routing.registerRoute(
+  ({ url }) => url.origin === 'https://archive-api.open-meteo.com',
+  new workbox.strategies.NetworkFirst({
+    cacheName: 'weather-archive-cache',
+    plugins: [
+      new workbox.expiration.ExpirationPlugin({
+        maxEntries: 64,
+        maxAgeSeconds: 180 * 24 * 60 * 60, // 180天
       }),
       new workbox.cacheableResponse.CacheableResponsePlugin({
         statuses: [0, 200],
