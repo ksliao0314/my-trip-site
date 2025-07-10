@@ -40,15 +40,54 @@ export function checkForUpdates() {
         showToast('您的瀏覽器不支援離線功能。');
         return;
     }
+
+    showToast('正在檢查最新行程...');
+    
+    // 先檢查 Service Worker 更新
     navigator.serviceWorker.ready.then(registration => {
-        showToast('正在檢查最新行程...');
         registration.update().then(() => {
-            if (registration.installing) {
-                showToast('Service Worker 正在安裝新版本。');
-            } else if (registration.waiting) {
-                showToast('有新的 Service Worker 正在等待啟用。請重新整理頁面。');
+            // 檢查是否有新的 Service Worker 等待啟用
+            if (registration.waiting) {
+                showToast('發現新版本！點擊「重新載入」按鈕更新行程。');
+                // 顯示更新通知條
+                const updateBar = document.getElementById('update-notification');
+                if (updateBar) updateBar.style.display = 'block';
             } else {
-                showToast('您的行程已是最新版本！');
+                // 檢查 trip-data.json 是否有更新
+                fetch('trip-data.json', { 
+                    method: 'HEAD',
+                    cache: 'no-cache' 
+                }).then(response => {
+                    if (response.ok) {
+                        // 比較版本號（如果有的話）
+                        const currentVersion = appState.tripData?.tripInfo?.dataVersion;
+                        if (currentVersion) {
+                            // 嘗試取得新版本的版本號
+                            fetch('trip-data.json', { cache: 'no-cache' })
+                                .then(res => res.json())
+                                .then(newData => {
+                                    const newVersion = newData.tripInfo?.dataVersion;
+                                    if (newVersion && newVersion !== currentVersion) {
+                                        showToast(`發現新版本 ${newVersion}！請重新整理頁面更新行程。`);
+                                        // 顯示更新通知條
+                                        const updateBar = document.getElementById('update-notification');
+                                        if (updateBar) updateBar.style.display = 'block';
+                                    } else {
+                                        showToast('您的行程已是最新版本！');
+                                    }
+                                })
+                                .catch(() => {
+                                    showToast('您的行程已是最新版本！');
+                                });
+                        } else {
+                            showToast('您的行程已是最新版本！');
+                        }
+                    } else {
+                        showToast('無法檢查更新，請確認網路連線。');
+                    }
+                }).catch(() => {
+                    showToast('無法檢查更新，請確認網路連線。');
+                });
             }
         }).catch(error => {
             showToast('檢查更新失敗，請確認網路連線。');
