@@ -766,6 +766,12 @@
     </div>
     
     <script>
+        window.appState = {
+            currentDisplayDate: null,
+            tripData: null,
+            allWeatherData: null
+        };
+
         // --- Service Worker 註冊 ---
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
@@ -840,12 +846,12 @@
                  window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
             }
 
-            const tripData = window.tripData; 
-            const allWeatherData = window.allWeatherData;
+            const tripData = window.appState.tripData; 
+            const allWeatherData = window.appState.allWeatherData;
             if (tripData && typeof updateStatusDashboard === 'function') {
                 const isTripActive = todayString >= tripData.tripInfo.tripStartDate && todayString < tripData.tripInfo.tripEndDate;
-                currentDisplayDate = isTripActive ? todayString : tripData.tripInfo.tripStartDate;
-                updateStatusDashboard(currentDisplayDate, tripData, allWeatherData);
+                window.appState.currentDisplayDate = isTripActive ? todayString : tripData.tripInfo.tripStartDate;
+                updateStatusDashboard(window.appState.currentDisplayDate, tripData, allWeatherData);
             }
         }
         
@@ -1403,52 +1409,50 @@
             }
         }
 
-        let currentDisplayDate;
+        // --- START: 更新後的更新檢查函數 ---
+        function checkForUpdates() {
+            if (!('serviceWorker' in navigator)) {
+                showToast('您的瀏覽器不支援離線功能。');
+                return;
+            }
 
-                    // --- START: 更新後的更新檢查函數 ---
-            function checkForUpdates() {
-                if (!('serviceWorker' in navigator)) {
-                    showToast('您的瀏覽器不支援離線功能。');
-                    return;
-                }
+            // 使用 navigator.serviceWorker.ready 確保 Service Worker 已啟用
+            navigator.serviceWorker.ready.then(registration => {
+                showToast('正在檢查最新行程...');
 
-                // 使用 navigator.serviceWorker.ready 確保 Service Worker 已啟用
-                navigator.serviceWorker.ready.then(registration => {
-                    showToast('正在檢查最新行程...');
-
-                    // 直接在已啟用的 registration 上呼叫 update
-                    registration.update().then(() => {
-                        if (registration.installing) {
-                            console.log('Service Worker 正在安裝新版本。');
-                        } else if (registration.waiting) {
-                            console.log('有新的 Service Worker 正在等待啟用。');
-                            const updateBar = document.getElementById('update-notification');
-                            if (updateBar) updateBar.style.display = 'block';
-                            showToast('發現新行程！點擊「立即更新」以載入。');
-                        } else {
-                            console.log('目前已是最新版本。');
-                            showToast('您的行程已是最新版本！');
-                        }
-                    }).catch(error => {
-                        console.error('Service Worker 更新檢查失敗:', error);
-                        showToast('檢查更新失敗，請確認網路連線。');
-                    });
+                // 直接在已啟用的 registration 上呼叫 update
+                registration.update().then(() => {
+                    if (registration.installing) {
+                        console.log('Service Worker 正在安裝新版本。');
+                    } else if (registration.waiting) {
+                        console.log('有新的 Service Worker 正在等待啟用。');
+                        const updateBar = document.getElementById('update-notification');
+                        if (updateBar) updateBar.style.display = 'block';
+                        showToast('發現新行程！點擊「立即更新」以載入。');
+                    } else {
+                        console.log('目前已是最新版本。');
+                        showToast('您的行程已是最新版本！');
+                    }
                 }).catch(error => {
-                    // 如果 .ready 失敗，代表 Service Worker 尚未註冊或啟用失敗
-                    console.error('Service Worker 未準備就緒:', error);
-                    showToast('離線功能尚未啟用，請稍後再試或重新整理頁面。');
+                    console.error('Service Worker 更新檢查失敗:', error);
+                    showToast('檢查更新失敗，請確認網路連線。');
                 });
-            }
-            // --- END: 更新後的更新檢查函數 ---
+            }).catch(error => {
+                // 如果 .ready 失敗，代表 Service Worker 尚未註冊或啟用失敗
+                console.error('Service Worker 未準備就緒:', error);
+                showToast('離線功能尚未啟用，請稍後再試或重新整理頁面。');
+            });
+        }
+        // --- END: 更新後的更新檢查函數 ---
 
-            // --- START: 天氣快取清除函數 ---
-            function clearWeatherCache() {
-                localStorage.removeItem('weatherDataCache');
-                console.log('天氣快取已清除');
-                // 重新載入頁面以重新取得天氣資料
-                window.location.reload();
-            }
-            // --- END: 天氣快取清除函數 ---
+        // --- START: 天氣快取清除函數 ---
+        function clearWeatherCache() {
+            localStorage.removeItem('weatherDataCache');
+            console.log('天氣快取已清除');
+            // 重新載入頁面以重新取得天氣資料
+            window.location.reload();
+        }
+        // --- END: 天氣快取清除函數 ---
 
         document.addEventListener('DOMContentLoaded', async () => {
             try {
@@ -1462,18 +1466,18 @@
                 
                 initializeApp(data, null); 
 
-                window.tripData = data; // 儲存到全域變數
+                window.appState.tripData = data; // 儲存到全域變數
                 
                 fetchAllWeatherData(data.itinerary)
                     .then(allWeatherData => {
-                        window.allWeatherData = allWeatherData; 
+                        window.appState.allWeatherData = allWeatherData; 
                         populateDayCardWeather(allWeatherData);
-                        updateStatusDashboard(currentDisplayDate, data, allWeatherData);
+                        updateStatusDashboard(window.appState.currentDisplayDate, data, allWeatherData);
                     })
                     .catch(weatherError => {
                         console.error("Weather data fetch failed:", weatherError);
                         populateDayCardWeather({}); 
-                        updateStatusDashboard(currentDisplayDate, data, {});
+                        updateStatusDashboard(window.appState.currentDisplayDate, data, {});
                     });
 
             } catch (error) {
@@ -1484,7 +1488,7 @@
         });
 
         function initializeApp(data, allWeatherData) { 
-            window.tripData = data;
+            window.appState.tripData = data;
             const { hotels: hotelData, transport: transportData, foodie: foodieData, tripInfo, itinerary } = data;
             
             function updateNavHeightVar() {
@@ -1504,8 +1508,8 @@
                     const targetDay = parseInt(daySlider.value);
                     const targetDayData = data.itinerary[targetDay - 1];
                     if (targetDayData) {
-                        currentDisplayDate = targetDayData.date;
-                        updateStatusDashboard(currentDisplayDate, data, window.allWeatherData, 0); 
+                        window.appState.currentDisplayDate = targetDayData.date;
+                        updateStatusDashboard(window.appState.currentDisplayDate, data, window.appState.allWeatherData, 0); 
                     }
                 });
             }
@@ -1730,8 +1734,8 @@
                         button.addEventListener('click', () => {
                             const firstDayInCity = itinerary.find(d => d.weatherCity === cityKey);
                             if (firstDayInCity) {
-                                currentDisplayDate = firstDayInCity.date;
-                                updateStatusDashboard(currentDisplayDate, data, window.allWeatherData);
+                                window.appState.currentDisplayDate = firstDayInCity.date;
+                                updateStatusDashboard(window.appState.currentDisplayDate, data, window.appState.allWeatherData);
                             }
                             closeModal(citySelectModal);
                         });
@@ -2015,8 +2019,8 @@
                 initialDateToShow = lastAvailableDate;
             }
 
-            currentDisplayDate = initialDateToShow;
-            updateStatusDashboard(currentDisplayDate, data, allWeatherData);
+            window.appState.currentDisplayDate = initialDateToShow;
+            updateStatusDashboard(window.appState.currentDisplayDate, data, allWeatherData);
 
             const statusCard = document.getElementById('status-card-content');
             let touchStartX = 0;
@@ -2047,22 +2051,22 @@
                 if (Math.abs(swipeDistance) < swipeThreshold) return; 
 
                 if (swipeDistance < 0) { // Swipe Left
-                    const [year, month, day] = currentDisplayDate.split('-').map(Number);
+                    const [year, month, day] = window.appState.currentDisplayDate.split('-').map(Number);
                     const currentDateObj = new Date(Date.UTC(year, month - 1, day));
                     currentDateObj.setUTCDate(currentDateObj.getUTCDate() + 1);
                     const newDate = currentDateObj.toISOString().split('T')[0];
                      if (newDate <= lastAvailableDate) { 
-                        currentDisplayDate = newDate;
-                        updateStatusDashboard(currentDisplayDate, data, window.allWeatherData, 1);
+                        window.appState.currentDisplayDate = newDate;
+                        updateStatusDashboard(window.appState.currentDisplayDate, data, window.appState.allWeatherData, 1);
                     }
                 } else { // Swipe Right
-                    const [year, month, day] = currentDisplayDate.split('-').map(Number);
+                    const [year, month, day] = window.appState.currentDisplayDate.split('-').map(Number);
                     const currentDateObj = new Date(Date.UTC(year, month - 1, day));
                     currentDateObj.setUTCDate(currentDateObj.getUTCDate() - 1);
                     const newDate = currentDateObj.toISOString().split('T')[0];
                     if (newDate >= tripInfo.tripStartDate) {
-                        currentDisplayDate = newDate;
-                        updateStatusDashboard(currentDisplayDate, data, window.allWeatherData, -1); 
+                        window.appState.currentDisplayDate = newDate;
+                        updateStatusDashboard(window.appState.currentDisplayDate, data, window.appState.allWeatherData, -1); 
                     }
                 }
             }
@@ -2074,24 +2078,24 @@
                         const targetDay = parseInt(clickedDot.dataset.day);
                         const targetDate = data.itinerary[targetDay - 1].date;
                         
-                        const currentDayData = data.itinerary.find(d => d.date === currentDisplayDate);
+                        const currentDayData = data.itinerary.find(d => d.date === window.appState.currentDisplayDate);
                         const currentDay = currentDayData ? currentDayData.day : 0;
                         let direction = 0;
                         if (targetDay > currentDay) { direction = 1; } 
                         else if (targetDay < currentDay) { direction = -1; }
 
-                        currentDisplayDate = targetDate;
-                        updateStatusDashboard(currentDisplayDate, data, window.allWeatherData, direction);
+                        window.appState.currentDisplayDate = targetDate;
+                        updateStatusDashboard(window.appState.currentDisplayDate, data, window.appState.allWeatherData, direction);
                     }
                 });
             }
 
             document.getElementById('view-details-btn').addEventListener('click', () => {
-                const dayData = data.itinerary.find(d => d.date === currentDisplayDate);
+                const dayData = data.itinerary.find(d => d.date === window.appState.currentDisplayDate);
                 if (!dayData) return;
 
                 // 1. 判斷是否為過去行程
-                if (currentDisplayDate < todayString) {
+                if (window.appState.currentDisplayDate < todayString) {
                     // 2. 自動打開顯示過去行程的開關
                     const showPastToggle = document.getElementById('show-past-toggle');
                     if (showPastToggle && !showPastToggle.checked) {
