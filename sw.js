@@ -9,23 +9,23 @@ workbox.core.clientsClaim();
 // 這些是確保應用程式基本外觀與功能可以離線運作的檔案。
 // --- FIX: 使用相對路徑以增加彈性 ---
 const APP_SHELL_ASSETS = [
-  { url: 'index.html', revision: '20250710-5' }, // HTML主檔案
-  { url: 'manifest.json', revision: '20250702-01' }, // PWA 設定檔
-  { url: 'trip-data.json', revision: '20250711-02' }, // 核心行程資料
+  { url: './index.html', revision: '20250711-02' }, // HTML主檔案
+  { url: './manifest.json', revision: '20250711-02' }, // PWA 設定檔
+  { url: './trip-data.json', revision: '20250711-02' }, // 核心行程資料
   // --- 快取所有應用程式圖示，確保離線時圖示能正常顯示 ---
-  { url: 'apple-touch-icon.png', revision: null },
-  { url: 'favicon.ico', revision: null },
-  { url: 'favicon.svg', revision: null },
-  { url: 'favicon-96x96.png', revision: null },
-  { url: 'web-app-manifest-192x192.png', revision: null },
-  { url: 'web-app-manifest-512x512.png', revision: null },
+  { url: './apple-touch-icon.png', revision: null },
+  { url: './favicon.ico', revision: null },
+  { url: './favicon.svg', revision: null },
+  { url: './favicon-96x96.png', revision: null },
+  { url: './web-app-manifest-192x192.png', revision: null },
+  { url: './web-app-manifest-512x512.png', revision: null },
   // --- 快取所有主要 JS 模組 ---
-  { url: 'scripts/main.js', revision: null },
-  { url: 'scripts/ui-render.js', revision: null },
-  { url: 'scripts/api-service.js', revision: null },
-  { url: 'scripts/event-listeners.js', revision: null },
-  { url: 'scripts/config.js', revision: null },
-  { url: 'scripts/state.js', revision: null },
+  { url: './scripts/main.js', revision: '20250711-02' },
+  { url: './scripts/ui-render.js', revision: '20250711-02' },
+  { url: './scripts/api-service.js', revision: '20250711-02' },
+  { url: './scripts/event-listeners.js', revision: '20250711-02' },
+  { url: './scripts/config.js', revision: '20250711-02' },
+  { url: './scripts/state.js', revision: '20250711-02' },
 ];
 
 // 預先快取所有定義好的核心資源 (Precaching)
