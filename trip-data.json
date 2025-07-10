@@ -3,7 +3,7 @@
     "totalDays": 13,
     "tripStartDate": "2025-07-02",
     "tripEndDate": "2025-07-16",
-    "dataVersion": "20250710-01"
+    "dataVersion": "20250710-02"
   },
   "timePhases": [
     {
@@ -385,7 +385,7 @@
       "activities": [
         { "title": "🚌 07:30 – 12:00｜退房並搭乘巴士前往多倫多", "items": ["建議 07:30 起床，整理行李並辦理退房。", "搭乘 Uber 或飯店叫車前往 <a href='https://maps.apple.com/?q=Niagara+Falls+Bus+Terminal' target='_blank'>Niagara Falls Bus Terminal (4555 Erie Ave)</a>。", "搭乘 <strong>10:00</strong> 出發的 Megabus，預計 <strong>12:00</strong> 抵達多倫多 <a href='https://maps.apple.com/?q=Union+Station+Bus+Terminal,+Toronto' target='_blank'>Union Station Bus Terminal</a>。"] },
         { "title": "✈️ 12:00 – 19:29｜前往機場、報到與飛行", "items": ["抵達多倫多後，搭乘 Uber/Lyft (建議) 或 UP Express 前往多倫多皮爾遜機場 (YYZ)。", "於 YYZ 機場辦理報到、行李託運與<strong>美國海關預先清關 (Pre-clearance)</strong>，請預留充足時間。", "搭乘 <strong>18:35</strong> 起飛的航班，預計 <strong>19:29</strong> 抵達芝加哥 O'Hare 國際機場 (ORD)。"] },
-        { "title": "🏨 20:00 – 21:30｜前往芝加哥市中心飯店", "items": ["抵達芝加哥後，可搭乘地鐵 <strong>Blue Line</strong> 或 Uber/Lyft 前往市中心飯店 <a href='https://maps.apple.com/?q=Hilton+Garden+Inn+Chicago+Downtown+Magnificent+Mile' target='_blank'>Hilton Garden Inn Chicago Downtown Magnificent Mile</a>。", "辦理入住後，可至周邊便利店或超市補充飲水與零食，為明日行程做準備。"] }
+        { "title": "� 20:00 – 21:30｜前往芝加哥市中心飯店", "items": ["抵達芝加哥後，可搭乘地鐵 <strong>Blue Line</strong> 或 Uber/Lyft 前往市中心飯店 <a href='https://maps.apple.com/?q=Hilton+Garden+Inn+Chicago+Downtown+Magnificent+Mile' target='_blank'>Hilton Garden Inn Chicago Downtown Magnificent Mile</a>。", "辦理入住後，可至周邊便利店或超市補充飲水與零食，為明日行程做準備。"] }
       ]
     },
     {
@@ -448,7 +448,7 @@
       },
       "tags": ["#自由行程", "#博物館日", "#彈性安排"],
       "activities": [
-        { "title": "🛍️ 09:00–12:00｜Magnificent Mile 購物 or 城區慢行", "items": ["可逛 <a href='https://maps.apple.com/?q=Nordstrom,Chicago' target='_blank' class='hover:underline'>Nordstrom</a>、<a href='https://maps.apple.com/?q=Nike+Chicago' target='_blank' class='hover:underline'>Nike</a>、<a href='https://maps.apple.com/?q=Garrett+Popcorn+Shops' target='_blank' class='hover:underline'>Garrett 爆米花</a>。"] },
+        { "title": "🛍️ 09:00–12:00｜Magnificent Mile 購物 or 城區慢行", "items": ["可逛 <a href='https://maps.apple.com/?q=Nordstrom,Chicago' target='_blank' class='hover:underline'>Nordstrom</a>、<a href='https://maps.apple.com/?q=Nike+Chicago' target='_blank' class='hover:underline'>Nike</a>、<a href='https://maps.apple.com/?q=Garrett+Popcorn+Shops' target='_blank' class='hover:underline'>Garrett 爆米花</a>。", "散步路線：<a href='https://maps.apple.com/?q=Millennium+Park,Chicago' target='_blank' class='hover:underline'>Millennium Park</a> → <a href='https://maps.apple.com/?q=Maggie+Daley+Park' target='_blank' class='hover:underline'>Maggie Daley Park</a> → <a href='https://maps.apple.com/?q=Lakefront+Trail,Chicago' target='_blank' class='hover:underline'>Lakefront Trail</a>。"] },
         { "title": "🍽️ 12:30–14:00｜午餐：Beatrix（健康早午餐）或 Big Star（Taco）", "items": ["可選擇 <a href='https://maps.apple.com/?q=Beatrix' target='_blank' class='hover:underline'>Beatrix</a> 或 <a href='https://maps.apple.com/?q=Big+Star+Wicker+Park' target='_blank' class='hover:underline'>Big Star</a>。"] },
         { "title": "🦖 14:30–17:00｜菲爾德自然史博物館 (Field Museum of Natural History)", "items": ["前往 <a href='https://maps.apple.com/?q=Field+Museum,Chicago' target='_blank' class='hover:underline'>Field Museum</a>，精選展覽：Sue 暴龍、古埃及展、原住民文化。"] },
         { "title": "🍽️ 18:30–20:30｜晚餐：RPM Steak 或 RPM Italian", "items": ["用一餐高品質料理收尾，可選擇 <a href='https://maps.apple.com/?q=RPM+Steak' target='_blank' class='hover:underline'>RPM Steak</a> 或 <a href='https://maps.apple.com/?q=RPM+Italian' target='_blank' class='hover:underline'>RPM Italian</a>。"] }
