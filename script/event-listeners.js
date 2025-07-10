@@ -208,6 +208,16 @@ export function registerEventListeners(appState, data, allWeatherData) {
         scrollToToday();
     });
 
+    // 下載最新行程按鈕（桌面版與行動版）
+    const refreshBtn = document.getElementById('refresh-btn');
+    const mobileRefreshBtn = document.getElementById('mobile-refresh-btn');
+    refreshBtn?.addEventListener('click', () => {
+        if (typeof checkForUpdates === 'function') checkForUpdates();
+    });
+    mobileRefreshBtn?.addEventListener('click', () => {
+        if (typeof checkForUpdates === 'function') checkForUpdates();
+    });
+
     // 下拉更新（Pull to Refresh）統一初始化
     initPullToRefresh({
         dashboardSelector: '#status-dashboard-section',
